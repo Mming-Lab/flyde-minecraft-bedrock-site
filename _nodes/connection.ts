@@ -9,7 +9,7 @@ export const Minecraft接続: CodeNode = {
   id: 'MinecraftConnect',
   displayName: 'Minecraft接続',
   inputs: {
-    ポート: { description: 'WebSocketポート番号（デフォルト: 8080）' },
+    ポート: { description: 'WebSocketポート番号（デフォルト: 8080）', mode: 'optional' },
   },
   outputs: {
     ワールド: {},

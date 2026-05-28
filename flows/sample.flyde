@@ -2,12 +2,62 @@
   "imports": {},
   "node": {
     "id": "SampleFlow",
-    "displayName": "サンプルフロー",
-    "description": "ここにフローを作成してください",
+    "displayName": "チャットエコーボット",
+    "description": "チャットで受け取ったメッセージをそのまま送信者に返す",
     "inputs": {},
     "outputs": {},
-    "instances": [],
-    "connections": [],
+    "instances": [
+      {
+        "type": "code",
+        "id": "mc-connect",
+        "nodeId": "MinecraftConnect",
+        "source": {
+          "type": "file",
+          "data": "../_nodes/index.ts"
+        },
+        "config": {},
+        "inputConfig": {},
+        "pos": { "x": 100, "y": 200 }
+      },
+      {
+        "type": "code",
+        "id": "chat-receive",
+        "nodeId": "OnPlayerChat",
+        "source": {
+          "type": "file",
+          "data": "../_nodes/index.ts"
+        },
+        "config": {},
+        "inputConfig": {},
+        "pos": { "x": 400, "y": 200 }
+      },
+      {
+        "type": "code",
+        "id": "send-message",
+        "nodeId": "SendMessage",
+        "source": {
+          "type": "file",
+          "data": "../_nodes/index.ts"
+        },
+        "config": {},
+        "inputConfig": {},
+        "pos": { "x": 700, "y": 200 }
+      }
+    ],
+    "connections": [
+      {
+        "from": { "insId": "mc-connect", "pinId": "ワールド" },
+        "to": { "insId": "chat-receive", "pinId": "ワールド" }
+      },
+      {
+        "from": { "insId": "chat-receive", "pinId": "送信者" },
+        "to": { "insId": "send-message", "pinId": "プレイヤー" }
+      },
+      {
+        "from": { "insId": "chat-receive", "pinId": "メッセージ" },
+        "to": { "insId": "send-message", "pinId": "メッセージ" }
+      }
+    ],
     "completionOutputs": [],
     "inputsPosition": {},
     "outputsPosition": {}
