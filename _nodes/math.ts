@@ -161,6 +161,42 @@ export const Y座標を補完: CodeNode = {
   },
 }
 
+export const ベクトルの長さ: CodeNode = {
+  id: 'Vector3Magnitude',
+  displayName: 'ベクトルの長さ',
+  menuDisplayName: '座標magnitude',
+  defaultStyle: STYLE,
+  inputs: {
+    座標: { description: '長さを求める座標 {x, y, z}' },
+  },
+  outputs: {
+    長さ: {},
+  },
+  run: ({ 座標 }, { 長さ }) => {
+    const v = 座標 as Vec3
+    長さ.next(Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z))
+  },
+}
+
+export const 単位ベクトル化: CodeNode = {
+  id: 'Vector3Normalize',
+  displayName: '単位ベクトル化',
+  menuDisplayName: '座標normalize',
+  defaultStyle: STYLE,
+  inputs: {
+    座標: { description: '正規化する座標 {x, y, z}' },
+  },
+  outputs: {
+    結果: {},
+  },
+  run: ({ 座標 }, { 結果 }) => {
+    const v = 座標 as Vec3
+    const mag = Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z)
+    if (mag === 0) { 結果.next({ x: 0, y: 0, z: 0 }); return }
+    結果.next({ x: v.x / mag, y: v.y / mag, z: v.z / mag })
+  },
+}
+
 export const 数値を範囲に収める: CodeNode = {
   id: 'ClampNumber',
   displayName: '数値を範囲に収める',
