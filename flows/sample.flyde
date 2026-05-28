@@ -42,6 +42,18 @@
         "config": {},
         "inputConfig": {},
         "pos": { "x": 700, "y": 200 }
+      },
+      {
+        "type": "code",
+        "id": "split-result",
+        "nodeId": "SplitResult",
+        "source": {
+          "type": "file",
+          "data": "../_nodes/index.ts"
+        },
+        "config": {},
+        "inputConfig": {},
+        "pos": { "x": 1000, "y": 200 }
       }
     ],
     "connections": [
@@ -56,6 +68,10 @@
       {
         "from": { "insId": "chat-receive", "pinId": "メッセージ" },
         "to": { "insId": "send-message", "pinId": "メッセージ" }
+      },
+      {
+        "from": { "insId": "send-message", "pinId": "Result" },
+        "to": { "insId": "split-result", "pinId": "Result" }
       }
     ],
     "completionOutputs": [],
