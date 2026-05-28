@@ -6,7 +6,9 @@ const STYLE = { color: '#25567D' } // events
 export const チャット受信: CodeNode = {
   id: 'OnPlayerChat',
   displayName: 'チャット受信',
+  menuDisplayName: 'ﾁｬｯﾄ受信',
   defaultStyle: STYLE,
+  completionOutputs: [],
   inputs: {
     ワールド: { description: 'Minecraft接続ノードのワールド出力' },
   },
@@ -28,7 +30,9 @@ export const チャット受信: CodeNode = {
 export const プレイヤー参加: CodeNode = {
   id: 'OnPlayerJoin',
   displayName: 'プレイヤー参加',
+  menuDisplayName: 'ﾌﾟﾚｲﾔｰ参加',
   defaultStyle: STYLE,
+  completionOutputs: [],
   inputs: {
     ワールド: { description: 'Minecraft接続ノードのワールド出力' },
   },
@@ -46,7 +50,9 @@ export const プレイヤー参加: CodeNode = {
 export const プレイヤー退出: CodeNode = {
   id: 'OnPlayerLeave',
   displayName: 'プレイヤー退出',
+  menuDisplayName: 'ﾌﾟﾚｲﾔ退出',
   defaultStyle: STYLE,
+  completionOutputs: [],
   inputs: {
     ワールド: { description: 'Minecraft接続ノードのワールド出力' },
   },
@@ -64,7 +70,9 @@ export const プレイヤー退出: CodeNode = {
 export const ブロック破壊: CodeNode = {
   id: 'OnBlockBroken',
   displayName: 'ブロック破壊',
+  menuDisplayName: 'ﾌﾞﾛｯｸ破壊',
   defaultStyle: STYLE,
+  completionOutputs: [],
   inputs: {
     ワールド: { description: 'Minecraft接続ノードのワールド出力' },
   },

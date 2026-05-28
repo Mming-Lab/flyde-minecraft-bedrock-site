@@ -1,81 +1,278 @@
-{
-  "imports": {},
-  "node": {
-    "id": "SampleFlow",
-    "displayName": "チャットエコーボット",
-    "description": "チャットで受け取ったメッセージをそのまま送信者に返す",
-    "inputs": {},
-    "outputs": {},
-    "instances": [
-      {
-        "type": "code",
-        "id": "mc-connect",
-        "nodeId": "MinecraftConnect",
-        "source": {
-          "type": "file",
-          "data": "../_nodes/index.ts"
-        },
-        "config": {},
-        "inputConfig": {},
-        "pos": { "x": 100, "y": 200 }
-      },
-      {
-        "type": "code",
-        "id": "chat-receive",
-        "nodeId": "OnPlayerChat",
-        "source": {
-          "type": "file",
-          "data": "../_nodes/index.ts"
-        },
-        "config": {},
-        "inputConfig": {},
-        "pos": { "x": 400, "y": 200 }
-      },
-      {
-        "type": "code",
-        "id": "send-message",
-        "nodeId": "SendMessage",
-        "source": {
-          "type": "file",
-          "data": "../_nodes/index.ts"
-        },
-        "config": {},
-        "inputConfig": {},
-        "pos": { "x": 700, "y": 200 }
-      },
-      {
-        "type": "code",
-        "id": "split-result",
-        "nodeId": "SplitResult",
-        "source": {
-          "type": "file",
-          "data": "../_nodes/index.ts"
-        },
-        "config": {},
-        "inputConfig": {},
-        "pos": { "x": 1000, "y": 200 }
-      }
-    ],
-    "connections": [
-      {
-        "from": { "insId": "mc-connect", "pinId": "ワールド" },
-        "to": { "insId": "chat-receive", "pinId": "ワールド" }
-      },
-      {
-        "from": { "insId": "chat-receive", "pinId": "送信者" },
-        "to": { "insId": "send-message", "pinId": "プレイヤー" }
-      },
-      {
-        "from": { "insId": "chat-receive", "pinId": "メッセージ" },
-        "to": { "insId": "send-message", "pinId": "メッセージ" }
-      },
-      {
-        "from": { "insId": "send-message", "pinId": "Result" },
-        "to": { "insId": "split-result", "pinId": "Result" }
-      }
-    ],
-    "completionOutputs": [],
-    "inputsPosition": {},
-    "outputsPosition": {}
-  }
-}
+imports: {}
+node:
+  instances:
+    - pos:
+        x: -68.36453437805176
+        y: -121.14311599731445
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 142.70824813842773
+        y: 20.844970703125
+      id: chat-receive
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 325.6486282348633
+        y: -27.972573280334473
+      id: create-ctx
+      inputConfig:
+        ワールド:
+          mode: sticky
+      nodeId: CreateContext
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+        プレイヤー:
+          type: dynamic
+          value: "{{プレイヤー}}"
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 242.84626960754395
+        y: 120.25080871582031
+      id: val-time
+      inputConfig: {}
+      nodeId: InlineValue
+      config:
+        value:
+          type: string
+          value: "0"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+      style:
+        color: "#C07800"
+    - pos:
+        x: 483.2690887451172
+        y: 100.61768245697021
+      id: set-time
+      inputConfig:
+        時刻:
+          mode: sticky
+      nodeId: SetTime
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+        時刻:
+          type: dynamic
+          value: "{{時刻}}"
+        コンテキスト:
+          type: dynamic
+          value: "{{コンテキスト}}"
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 391.2393264770508
+        y: 231.81199598312378
+      id: val-weather
+      inputConfig: {}
+      nodeId: InlineValue
+      config:
+        value:
+          type: string
+          value: clear
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+      style:
+        color: "#C07800"
+    - pos:
+        x: 642.4675109386444
+        y: 209.10425186157227
+      id: set-weather
+      inputConfig:
+        天気:
+          mode: sticky
+      nodeId: ChangeWeather
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+        天気:
+          type: dynamic
+          value: "{{天気}}"
+        コンテキスト:
+          type: dynamic
+          value: "{{コンテキスト}}"
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 591.3077430725098
+        y: 306.10053539276123
+      id: val-msg
+      inputConfig: {}
+      nodeId: InlineValue
+      config:
+        value:
+          type: string
+          value: 朝になって晴れにしたよ！
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+      style:
+        color: "#C07800"
+    - pos:
+        x: 824.266111433506
+        y: 280.48474884033203
+      id: send-msg
+      inputConfig:
+        メッセージ:
+          mode: sticky
+      nodeId: SendMessage
+      config:
+        プレイヤー:
+          type: dynamic
+          value: "{{プレイヤー}}"
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+        コンテキスト:
+          type: dynamic
+          value: "{{コンテキスト}}"
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 1020.3058185577393
+        y: 279.7391595840454
+      id: split
+      inputConfig: {}
+      nodeId: SplitResult
+      config:
+        Result:
+          type: dynamic
+          value: "{{Result}}"
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 1123.6572694778442
+        y: -92.70893669128418
+      id: send-err
+      inputConfig:
+        ワールド:
+          mode: sticky
+      nodeId: SendMessageAll
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+        テキスト:
+          type: dynamic
+          value: "{{テキスト}}"
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+  connections:
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: chat-receive
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: create-ctx
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: send-err
+        pinId: ワールド
+    - from:
+        insId: chat-receive
+        pinId: 送信者
+      to:
+        insId: create-ctx
+        pinId: プレイヤー
+    - from:
+        insId: create-ctx
+        pinId: Result
+      to:
+        insId: set-time
+        pinId: コンテキスト
+    - from:
+        insId: set-time
+        pinId: Result
+      to:
+        insId: set-weather
+        pinId: コンテキスト
+    - from:
+        insId: set-weather
+        pinId: Result
+      to:
+        insId: send-msg
+        pinId: コンテキスト
+    - from:
+        insId: val-time
+        pinId: value
+      to:
+        insId: set-time
+        pinId: 時刻
+    - from:
+        insId: val-weather
+        pinId: value
+      to:
+        insId: set-weather
+        pinId: 天気
+    - from:
+        insId: val-msg
+        pinId: value
+      to:
+        insId: send-msg
+        pinId: メッセージ
+    - from:
+        insId: send-msg
+        pinId: Result
+      to:
+        insId: split
+        pinId: Result
+    - from:
+        insId: split
+        pinId: 失敗
+      to:
+        insId: send-err
+        pinId: テキスト
+  id: SampleFlow
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: チャットを受け取ったら①夜明けに→②晴れに→③完了メッセージ
+    を順番に実行。どこかで失敗しても後続はスキップされ、最後の1箇所だけでエラーを全員に通知する（鉄道指向プログラミングのサンプル）

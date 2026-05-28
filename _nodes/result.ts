@@ -1,11 +1,31 @@
 import { CodeNode } from '@flyde/core'
-import type { Result } from './types/common'
+import type { Result, McContext } from './types/common'
+import { Ok } from './types/common'
 
 const STYLE = { color: '#767676' } // utility
+
+export const コンテキストを作る: CodeNode = {
+  id: 'CreateContext',
+  displayName: 'コンテキストを作る',
+  menuDisplayName: 'ｺﾝﾃｷｽﾄ作成',
+  defaultStyle: STYLE,
+  inputs: {
+    ワールド: { description: 'Minecraftワールド' },
+    プレイヤー: { description: 'プレイヤー' },
+  },
+  outputs: {
+    Result: {},
+  },
+  run: ({ ワールド, プレイヤー }, { Result: result }) => {
+    const ctx: McContext = { world: ワールド, player: プレイヤー }
+    result.next(Ok(ctx))
+  },
+}
 
 export const 結果で分岐: CodeNode = {
   id: 'SplitResult',
   displayName: '結果で分岐',
+  menuDisplayName: '結果で分岐',
   defaultStyle: STYLE,
   inputs: {
     Result: { description: 'Result型の値' },
@@ -27,6 +47,7 @@ export const 結果で分岐: CodeNode = {
 export const 成功を取り出す: CodeNode = {
   id: 'UnwrapOk',
   displayName: '成功を取り出す',
+  menuDisplayName: '成功取り出す',
   defaultStyle: STYLE,
   inputs: {
     Result: { description: 'Ok型のResult' },
@@ -45,6 +66,7 @@ export const 成功を取り出す: CodeNode = {
 export const エラーを取り出す: CodeNode = {
   id: 'UnwrapErr',
   displayName: 'エラーを取り出す',
+  menuDisplayName: 'ｴﾗｰ取出す',
   defaultStyle: STYLE,
   inputs: {
     Result: { description: 'Err型のResult' },
