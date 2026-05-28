@@ -11,16 +11,14 @@ export const Minecraft接続: CodeNode = {
   id: 'MinecraftConnect',
   displayName: 'Minecraft接続',
   defaultStyle: STYLE,
-  inputs: {
-    ポート: { description: 'WebSocketポート番号（デフォルト: 8080）', mode: 'optional' },
-  },
+  inputs: {},
   outputs: {
     ワールド: {},
     エラー: {},
   },
-  run: ({ ポート }, { ワールド, エラー }) => {
+  run: (_inputs, { ワールド, エラー }) => {
     try {
-      const server = getServer(ポート ?? 8080)
+      const server = getServer()
       server.on(ServerEvent.WorldAdd, (signal) => {
         ワールド.next(signal.world)
       })
