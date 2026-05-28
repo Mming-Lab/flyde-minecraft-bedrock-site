@@ -17,6 +17,10 @@ mc-flow-template/
 ├── CLAUDE.md              ← このファイル
 ├── package.json
 ├── tsconfig.json
+├── .claude/
+│   └── agents/
+│       ├── node-implementer.md  ← ノード実装エージェント
+│       └── doc-updater.md       ← 設計書更新エージェント
 ├── .vscode/
 │   └── settings.json      ← _nodes/ を VSCode エクスプローラーから非表示にする
 ├── _nodes/                ← ノードの実装（生徒は触らない）
