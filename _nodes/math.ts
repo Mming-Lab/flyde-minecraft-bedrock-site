@@ -6,6 +6,7 @@ import { CodeNode } from '@flyde/core'
 const STYLE = { color: '#107C10' } // math / green
 
 type Vec3 = { x: number; y: number; z: number }
+type Vec2 = { x: number; y: number }
 
 export const 座標を足す: CodeNode = {
   id: 'Vector3Add',
@@ -212,5 +213,136 @@ export const 数値を範囲に収める: CodeNode = {
   },
   run: ({ 値, 最小, 最大 }, { 結果 }) => {
     結果.next(Math.min(Math.max(Number(値), Number(最小)), Number(最大)))
+  },
+}
+
+// ── Vector2 演算（{x, y} ── 回転角・2D座標）──────────────────────────────
+
+export const 二次元座標を足す: CodeNode = {
+  id: 'Vector2Add',
+  displayName: '2D座標を足す',
+  menuDisplayName: '2D座標+',
+  defaultStyle: STYLE,
+  inputs: {
+    座標A: { description: 'ベース2D座標 {x, y}' },
+    座標B: { description: '加算する2D座標 {x, y}' },
+  },
+  outputs: { 結果: {} },
+  run: ({ 座標A, 座標B }, { 結果 }) => {
+    const a = 座標A as Vec2, b = 座標B as Vec2
+    結果.next({ x: a.x + (b.x ?? 0), y: a.y + (b.y ?? 0) })
+  },
+}
+
+export const 二次元座標を引く: CodeNode = {
+  id: 'Vector2Subtract',
+  displayName: '2D座標を引く',
+  menuDisplayName: '2D座標-',
+  defaultStyle: STYLE,
+  inputs: {
+    座標A: { description: 'ベース2D座標 {x, y}' },
+    座標B: { description: '減算する2D座標 {x, y}' },
+  },
+  outputs: { 結果: {} },
+  run: ({ 座標A, 座標B }, { 結果 }) => {
+    const a = 座標A as Vec2, b = 座標B as Vec2
+    結果.next({ x: a.x - (b.x ?? 0), y: a.y - (b.y ?? 0) })
+  },
+}
+
+export const 二次元座標をスケール: CodeNode = {
+  id: 'Vector2Scale',
+  displayName: '2D座標をスケール',
+  menuDisplayName: '2D座標×',
+  defaultStyle: STYLE,
+  inputs: {
+    座標: { description: 'スケールする2D座標 {x, y}' },
+    倍率: { description: 'スカラー倍率' },
+  },
+  outputs: { 結果: {} },
+  run: ({ 座標, 倍率 }, { 結果 }) => {
+    const v = 座標 as Vec2, s = Number(倍率)
+    結果.next({ x: v.x * s, y: v.y * s })
+  },
+}
+
+export const 二次元座標間の距離: CodeNode = {
+  id: 'Vector2Distance',
+  displayName: '2D座標間の距離',
+  menuDisplayName: '2D距離',
+  defaultStyle: STYLE,
+  inputs: {
+    座標A: { description: '始点 {x, y}' },
+    座標B: { description: '終点 {x, y}' },
+  },
+  outputs: { 距離: {} },
+  run: ({ 座標A, 座標B }, { 距離 }) => {
+    const a = 座標A as Vec2, b = 座標B as Vec2
+    const dx = a.x - b.x, dy = a.y - b.y
+    距離.next(Math.sqrt(dx * dx + dy * dy))
+  },
+}
+
+export const 二次元座標を切り捨て: CodeNode = {
+  id: 'Vector2Floor',
+  displayName: '2D座標を切り捨て',
+  menuDisplayName: '2D座標Floor',
+  defaultStyle: STYLE,
+  inputs: {
+    座標: { description: '切り捨てる2D座標 {x, y}' },
+  },
+  outputs: { 結果: {} },
+  run: ({ 座標 }, { 結果 }) => {
+    const v = 座標 as Vec2
+    結果.next({ x: Math.floor(v.x), y: Math.floor(v.y) })
+  },
+}
+
+export const 二次元座標を補間: CodeNode = {
+  id: 'Vector2Lerp',
+  displayName: '2D座標を補間',
+  menuDisplayName: '2D座標lerp',
+  defaultStyle: STYLE,
+  inputs: {
+    座標A: { description: '始点 {x, y}' },
+    座標B: { description: '終点 {x, y}' },
+    割合: { description: '0.0〜1.0（0.5で中点）' },
+  },
+  outputs: { 結果: {} },
+  run: ({ 座標A, 座標B, 割合 }, { 結果 }) => {
+    const a = 座標A as Vec2, b = 座標B as Vec2, t = Number(割合)
+    結果.next({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t })
+  },
+}
+
+export const 二次元ベクトルの長さ: CodeNode = {
+  id: 'Vector2Magnitude',
+  displayName: '2Dベクトルの長さ',
+  menuDisplayName: '2D magnitude',
+  defaultStyle: STYLE,
+  inputs: {
+    座標: { description: '長さを求める2D座標 {x, y}' },
+  },
+  outputs: { 長さ: {} },
+  run: ({ 座標 }, { 長さ }) => {
+    const v = 座標 as Vec2
+    長さ.next(Math.sqrt(v.x * v.x + v.y * v.y))
+  },
+}
+
+export const 二次元単位ベクトル化: CodeNode = {
+  id: 'Vector2Normalize',
+  displayName: '2D単位ベクトル化',
+  menuDisplayName: '2D normalize',
+  defaultStyle: STYLE,
+  inputs: {
+    座標: { description: '正規化する2D座標 {x, y}' },
+  },
+  outputs: { 結果: {} },
+  run: ({ 座標 }, { 結果 }) => {
+    const v = 座標 as Vec2
+    const mag = Math.sqrt(v.x * v.x + v.y * v.y)
+    if (mag === 0) { 結果.next({ x: 0, y: 0 }); return }
+    結果.next({ x: v.x / mag, y: v.y / mag })
   },
 }
