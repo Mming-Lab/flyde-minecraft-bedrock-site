@@ -1,45 +1,39 @@
 imports: {}
 node:
-  id: ChickenSpawnFlow
-  inputs: {}
-  outputs: {}
-  inputsPosition: {}
-  outputsPosition: {}
-  completionOutputs: []
-  description: チャットで「chicken」と入力するとプレイヤーの10ブロック上にニワトリを100羽召喚する
   instances:
-    - id: mc-connect
-      type: code
-      nodeId: MinecraftConnect
-      source:
-        type: file
-        data: "../_nodes/index.flyde.ts"
-      config: {}
-      inputConfig: {}
-      pos:
+    - pos:
         x: 100
         y: 300
-
-    - id: chat-listen
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
       type: code
-      nodeId: OnPlayerChat
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 380
+        y: 300
+      id: chat-listen
+      inputConfig: {}
+      nodeId: OnPlayerChat
       config:
         ワールド:
           type: dynamic
-      inputConfig: {}
-      pos:
-        x: 380
-        y: 300
-
-    - id: filter
       type: code
-      nodeId: PassIfMatch
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 665.5359039306641
+        y: 297.2621612548828
+      id: filter
+      inputConfig: {}
+      nodeId: PassIfMatch
       config:
         値:
           type: dynamic
@@ -47,32 +41,30 @@ node:
           type: dynamic
         キーワード:
           type: string
-          value: "chicken"
-      inputConfig: {}
-      pos:
-        x: 700
-        y: 300
-
-    - id: get-pos
+          value: chicken
       type: code
-      nodeId: GetPlayerLocation
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 937.9440002441406
+        y: 304.16915702819824
+      id: get-pos
+      inputConfig: {}
+      nodeId: GetPlayerLocation
       config:
         トリガー:
           type: dynamic
-      inputConfig: {}
-      pos:
-        x: 1000
-        y: 300
-
-    - id: add-y
       type: code
-      nodeId: Vector3Add
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 1194.8983154296875
+        y: 290.49734687805176
+      id: add-y
+      inputConfig: {}
+      nodeId: Vector3Add
       config:
         座標A:
           type: dynamic
@@ -82,46 +74,43 @@ node:
             x: 0
             y: 10
             z: 0
-      inputConfig: {}
-      pos:
-        x: 1300
-        y: 300
-
-    - id: repeat
       type: code
-      nodeId: Repeat
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 1443.8737182617188
+        y: 277.5671615600586
+      id: repeat
+      inputConfig: {}
+      nodeId: Repeat
       config:
         値:
           type: dynamic
         回数:
           type: number
           value: 100
-      inputConfig: {}
-      pos:
-        x: 1600
-        y: 300
-
-    - id: summon
       type: code
-      nodeId: RunCommand
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 1715.6474609375
+        y: 291.09373664855957
+      id: summon
+      inputConfig: {}
+      nodeId: RunCommand
       config:
         トリガー:
           type: boolean
           value: true
         コマンド:
           type: string
-          value: "summon chicken {{座標.x}} {{座標.y}} {{座標.z}}"
-      inputConfig: {}
-      pos:
-        x: 1900
-        y: 300
-
+          value: summon chicken {{座標.x}} {{座標.y}} {{座標.z}}
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
   connections:
     - from:
         insId: mc-connect
@@ -129,45 +118,46 @@ node:
       to:
         insId: chat-listen
         pinId: ワールド
-
     - from:
         insId: chat-listen
         pinId: 送信者名
       to:
         insId: filter
         pinId: 値
-
     - from:
         insId: chat-listen
         pinId: メッセージ
       to:
         insId: filter
         pinId: テキスト
-
     - from:
         insId: filter
         pinId: 値
       to:
         insId: get-pos
         pinId: トリガー
-
     - from:
         insId: get-pos
         pinId: 座標
       to:
         insId: add-y
         pinId: 座標A
-
     - from:
         insId: add-y
         pinId: 結果
       to:
         insId: repeat
         pinId: 値
-
     - from:
         insId: repeat
         pinId: 値
       to:
         insId: summon
         pinId: 座標
+  id: ChickenSpawnFlow
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: チャットで「chicken」と入力するとプレイヤーの10ブロック上にニワトリを100羽召喚する

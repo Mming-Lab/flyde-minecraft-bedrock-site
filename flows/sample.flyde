@@ -1,45 +1,39 @@
 imports: {}
 node:
-  id: SampleFlow
-  inputs: {}
-  outputs: {}
-  inputsPosition: {}
-  outputsPosition: {}
-  completionOutputs: []
-  description: チャット受信→昼夜判定→時刻切り替え（昼なら夜に、夜なら昼に）→晴れ→完了メッセージ
   instances:
-    - id: mc-connect
-      type: code
-      nodeId: MinecraftConnect
-      source:
-        type: file
-        data: "../_nodes/index.flyde.ts"
-      config: {}
+    - pos:
+        x: 119.86104464530945
+        y: 310.6242141723633
+      id: mc-connect
       inputConfig: {}
-      pos:
-        x: 100
-        y: 300
-
-    - id: chat-listen
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
       type: code
-      nodeId: OnPlayerChat
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 392.6510543823242
+        y: 300
+      id: chat-listen
+      inputConfig: {}
+      nodeId: OnPlayerChat
       config:
         ワールド:
           type: dynamic
-      inputConfig: {}
-      pos:
-        x: 380
-        y: 300
-
-    - id: filter
       type: code
-      nodeId: PassIfMatch
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 700
+        y: 299
+      id: filter
+      inputConfig: {}
+      nodeId: PassIfMatch
       config:
         値:
           type: dynamic
@@ -47,32 +41,30 @@ node:
           type: dynamic
         キーワード:
           type: string
-          value: "toggle"
-      inputConfig: {}
-      pos:
-        x: 700
-        y: 300
-
-    - id: daytime
+          value: toggle
       type: code
-      nodeId: IsDaytime
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 975.3529968261719
+        y: 301
+      id: daytime
+      inputConfig: {}
+      nodeId: IsDaytime
       config:
         トリガー:
           type: dynamic
-      inputConfig: {}
-      pos:
-        x: 1000
-        y: 300
-
-    - id: cond
       type: code
-      nodeId: Conditional
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 1300
+        y: 300
+      id: cond
+      inputConfig: {}
+      nodeId: Conditional
       config:
         条件:
           type: dynamic
@@ -82,62 +74,58 @@ node:
         偽:
           type: number
           value: 6000
-      inputConfig: {}
-      pos:
-        x: 1300
-        y: 300
-
-    - id: set-time
       type: code
-      nodeId: SetTimeOfDay
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 1599
+        y: 300
+      id: set-time
+      inputConfig: {}
+      nodeId: SetTimeOfDay
       config:
         トリガー:
           type: boolean
           value: true
         時刻:
           type: dynamic
-      inputConfig: {}
-      pos:
-        x: 1600
-        y: 300
-
-    - id: set-weather
       type: code
-      nodeId: SetWeather
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 1541.6286010742188
+        y: 551.458065032959
+      id: set-weather
+      inputConfig: {}
+      nodeId: SetWeather
       config:
         トリガー:
           type: dynamic
         天気:
           type: select
-          value: "Clear"
-      inputConfig: {}
-      pos:
-        x: 1900
-        y: 300
-
-    - id: send-msg
+          value: Clear
       type: code
-      nodeId: SendMessageAll
       source:
         type: file
-        data: "../_nodes/index.flyde.ts"
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 2200
+        y: 300
+      id: send-msg
+      inputConfig: {}
+      nodeId: SendMessageAll
       config:
         トリガー:
           type: dynamic
         メッセージ:
           type: string
-          value: "晴れ！昼夜が切り替わりました！"
-      inputConfig: {}
-      pos:
-        x: 2200
-        y: 300
-
+          value: 晴れ！昼夜が切り替わりました！
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
   connections:
     - from:
         insId: mc-connect
@@ -145,52 +133,58 @@ node:
       to:
         insId: chat-listen
         pinId: ワールド
-
     - from:
         insId: chat-listen
         pinId: 送信者名
       to:
         insId: filter
         pinId: 値
-
     - from:
         insId: chat-listen
         pinId: メッセージ
       to:
         insId: filter
         pinId: テキスト
-
     - from:
         insId: filter
         pinId: 値
       to:
         insId: daytime
         pinId: トリガー
-
     - from:
         insId: daytime
         pinId: 昼
       to:
         insId: cond
         pinId: 条件
-
     - from:
         insId: cond
         pinId: 結果
       to:
         insId: set-time
         pinId: 時刻
-
-    - from:
-        insId: set-time
-        pinId: 完了
-      to:
-        insId: set-weather
-        pinId: トリガー
-
     - from:
         insId: set-weather
         pinId: 完了
       to:
         insId: send-msg
         pinId: トリガー
+    - from:
+        insId: filter
+        pinId: 値
+      to:
+        insId: set-weather
+        pinId: トリガー
+    - from:
+        insId: set-time
+        pinId: 完了
+      to:
+        insId: send-msg
+        pinId: トリガー
+  id: SampleFlow
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: チャット受信→昼夜判定→時刻切り替え（昼なら夜に、夜なら昼に）→晴れ→完了メッセージ

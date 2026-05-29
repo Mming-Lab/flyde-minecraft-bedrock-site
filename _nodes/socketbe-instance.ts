@@ -46,3 +46,7 @@ export async function stopServer(): Promise<void> {
 // Flyde が別プロセスでフローを実行する場合、プロセス終了時にもポートを解放する
 process.once('SIGTERM', () => stopServer().finally(() => process.exit(0)))
 process.once('SIGINT',  () => stopServer().finally(() => process.exit(0)))
+
+// タブを閉じると fork() の IPC チャンネルが切断され disconnect イベントが発火する。
+// SIGTERM が来ない場合でもここでポートを解放してプロセスを終了する。
+process.once('disconnect', () => stopServer().finally(() => process.exit(0)))
