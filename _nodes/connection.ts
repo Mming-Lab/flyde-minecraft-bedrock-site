@@ -56,6 +56,22 @@ export const Minecraft接続: CodeNode = {
   },
 }
 
+export const Minecraft切断: CodeNode = {
+  id: 'MinecraftDisconnect',
+  displayName: 'Minecraft切断',
+  menuDisplayName: 'Minecraft切断',
+  defaultStyle: STYLE,
+  completionOutputs: [],
+  inputs: {
+    トリガー: { description: 'トリガー（例: チャットで「stop」と入力）' },
+  },
+  outputs: {},
+  run: async () => {
+    await stopServer()
+    process.exit(0)
+  },
+}
+
 export const MicroBit接続: CodeNode = {
   id: 'MicroBitConnect',
   displayName: 'micro:bit接続',
