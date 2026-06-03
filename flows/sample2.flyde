@@ -155,19 +155,34 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 1853.4709510171688
-        y: 412.0853814447199
+        x: 1900
+        y: 500
+      id: collect-summons
+      inputConfig: {}
+      displayName: 100羽完了待ち
+      nodeId: Collect
+      config:
+        strategy: count
+        count:
+          mode: static
+          value: 100
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 2120
+        y: 500
       id: MinecraftDisconnect-e3bofza9
       inputConfig: {}
       nodeId: MinecraftDisconnect
       config:
         トリガー:
           type: dynamic
-          value: "{{トリガー}}"
       type: code
       source:
         type: file
-        data: ..\_nodes\index.flyde.ts
+        data: ../_nodes/index.flyde.ts
   connections:
     - from:
         insId: mc-connect
@@ -232,6 +247,12 @@ node:
     - from:
         insId: summon
         pinId: 完了
+      to:
+        insId: collect-summons
+        pinId: value
+    - from:
+        insId: collect-summons
+        pinId: list
       to:
         insId: MinecraftDisconnect-e3bofza9
         pinId: トリガー

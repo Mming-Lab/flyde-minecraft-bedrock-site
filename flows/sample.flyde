@@ -2,8 +2,8 @@ imports: {}
 node:
   instances:
     - pos:
-        x: 324.9728424549103
-        y: 115.21867823600769
+        x: 276.9835693836212
+        y: 259.51261019706726
       id: mc-connect
       inputConfig: {}
       nodeId: MinecraftConnect
@@ -16,8 +16,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 530.426586151123
-        y: 213.76176404953003
+        x: 500.66015243530273
+        y: 247.65558385849
       id: chat-listen
       inputConfig: {}
       nodeId: OnPlayerChat
@@ -29,8 +29,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 704.36376953125
-        y: 309.5826771259308
+        x: 681.7502136230469
+        y: 259.97557377815247
       id: filter
       inputConfig: {}
       nodeId: Conditional
@@ -48,8 +48,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 866
-        y: 160
+        x: 883.3819580078125
+        y: 175.3326873779297
       id: daytime
       inputConfig: {}
       nodeId: IsDaytime
@@ -61,8 +61,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 1078.4629516601562
-        y: 73.53059005737305
+        x: 1077.436767578125
+        y: 116.52415466308594
       id: time-switch
       inputConfig: {}
       displayName: 昼夜コマンド
@@ -84,8 +84,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 1362.221450805664
-        y: 80
+        x: 1306.2139129638672
+        y: 131.8547134399414
       id: run-time
       inputConfig: {}
       displayName: 昼夜切り替え
@@ -101,8 +101,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 1075.3292846679688
-        y: 208.24940872192383
+        x: 1078.3798217773438
+        y: 205.17264938354492
       id: time-say-switch
       inputConfig: {}
       displayName: 昼夜メッセージ
@@ -124,8 +124,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 1352.8175964355469
-        y: 210.63662338256836
+        x: 1309.7996520996094
+        y: 213.71407318115234
       id: say-time
       inputConfig: {}
       displayName: 昼夜アナウンス
@@ -141,8 +141,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 866
-        y: 460
+        x: 877.1784973144531
+        y: 372.6032905578613
       id: get-weather
       inputConfig: {}
       nodeId: GetWeather
@@ -154,8 +154,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 1069.1241302490234
-        y: 349.50411891937256
+        x: 1080.406265258789
+        y: 296.3820791244507
       id: weather-cmd-switch
       inputConfig: {}
       displayName: 天気コマンド
@@ -178,8 +178,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 1348.7656860351562
-        y: 371.3487358093262
+        x: 1310.1073455810547
+        y: 318.35774421691895
       id: run-weather
       inputConfig: {}
       displayName: 天気切り替え
@@ -195,8 +195,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 1076.20556640625
-        y: 493.60930728912354
+        x: 1077.306655883789
+        y: 412.2863893508911
       id: weather-say-switch
       inputConfig: {}
       displayName: 天気メッセージ
@@ -219,8 +219,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 1352.4091796875
-        y: 517.3959150314331
+        x: 1311.7221069335938
+        y: 434.8030996322632
       id: say-weather
       inputConfig: {}
       displayName: 天気アナウンス
@@ -236,8 +236,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 1595.0809631347656
-        y: 292.99413108825684
+        x: 1535.1999816894531
+        y: 258.3832092285156
       id: collect-all
       inputConfig: {}
       displayName: 4つ完了待ち
@@ -252,8 +252,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 1774.4594116210938
-        y: 371.0355472564697
+        x: 1724.031982421875
+        y: 257.2792167663574
       id: disconnect
       inputConfig: {}
       nodeId: MinecraftDisconnect
