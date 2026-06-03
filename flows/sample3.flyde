@@ -1,0 +1,117 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 100
+        y: 0
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 380
+        y: 0
+      id: block-broken
+      inputConfig: {}
+      nodeId: OnBlockBroken
+      config:
+        ワールド:
+          type: dynamic
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 650
+        y: -140
+      id: get-player-name
+      inputConfig: {}
+      nodeId: GetFromPlayerSnapshot
+      config:
+        プレイヤー:
+          type: dynamic
+        項目:
+          type: select
+          value: name
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 650
+        y: 140
+      id: get-block-id
+      inputConfig: {}
+      nodeId: GetFromBlockType
+      config:
+        ブロック:
+          type: dynamic
+        項目:
+          type: select
+          value: id
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+    - pos:
+        x: 980
+        y: 0
+      id: say-cmd
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        トリガー:
+          type: boolean
+          value: true
+        コマンド:
+          type: string
+          value: "say {{プレイヤー名}} が {{ブロックID}} を壊した！"
+      type: code
+      source:
+        type: file
+        data: ../_nodes/index.flyde.ts
+  connections:
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: block-broken
+        pinId: ワールド
+    - from:
+        insId: block-broken
+        pinId: プレイヤー
+      to:
+        insId: get-player-name
+        pinId: プレイヤー
+    - from:
+        insId: block-broken
+        pinId: ブロック
+      to:
+        insId: get-block-id
+        pinId: ブロック
+    - from:
+        insId: get-player-name
+        pinId: 値
+      to:
+        insId: say-cmd
+        pinId: プレイヤー名
+    - from:
+        insId: get-block-id
+        pinId: 値
+      to:
+        insId: say-cmd
+        pinId: ブロックID
+  id: BlockBreakInfoFlow
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: ブロックを破壊すると、プレイヤー名とブロックIDをtransformsノードで取り出してチャットに表示するサンプル
