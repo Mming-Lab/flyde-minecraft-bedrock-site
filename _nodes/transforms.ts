@@ -279,6 +279,61 @@ export const ブロック情報取得: CodeNode = {
   }
 }
 
+export const スコアボード目標情報取得: CodeNode = {
+  id: 'GetFromScoreboardObjective',
+  displayName: 'スコアボード目標情報取得',
+  menuDisplayName: 'SB目標情報',
+  icon: 'shuffle',
+  defaultStyle: STYLE,
+  inputs: {
+    目標: { description: 'スコアボード目標追加・取得ノードの 目標 出力' },
+    項目: {
+      description: '取得する情報',
+      defaultValue: 'id',
+      editorType: 'select',
+      editorTypeData: {
+        options: [
+          { label: '目標ID (id)',       value: 'id' },
+          { label: '表示名 (displayName)', value: 'displayName' },
+        ]
+      }
+    }
+  },
+  outputs: { 値: {} },
+  run: ({ 目標, 項目 }, { 値 }) => {
+    値.next((目標 as any)[項目 as string])
+  }
+}
+
+export const モブ情報取得: CodeNode = {
+  id: 'GetFromMob',
+  displayName: 'モブ情報取得',
+  menuDisplayName: 'ﾓﾌﾞ情報',
+  icon: 'shuffle',
+  defaultStyle: STYLE,
+  inputs: {
+    O_ﾓﾌﾞ: { description: 'モブと交流イベントの O_ﾓﾌﾞ 出力' },
+    項目: {
+      description: '取得する情報',
+      defaultValue: 'type',
+      editorType: 'select',
+      editorTypeData: {
+        options: [
+          { label: '種別名 (type)',         value: 'type' },
+          { label: 'ID (identifier)',        value: 'identifier' },
+          { label: 'バリアント (variant)',   value: 'variant' },
+          { label: 'カラー (color)',         value: 'color' },
+          { label: 'カラー2 (color2)',       value: 'color2' },
+        ]
+      }
+    }
+  },
+  outputs: { 値: {} },
+  run: ({ O_ﾓﾌﾞ, 項目 }, { 値 }) => {
+    値.next((O_ﾓﾌﾞ as any)[項目 as string])
+  }
+}
+
 export const 村人情報取得: CodeNode = {
   id: 'GetFromVillager',
   displayName: '村人情報取得',

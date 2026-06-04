@@ -2,22 +2,22 @@ imports: {}
 node:
   instances:
     - pos:
-        x: -259
-        y: -132
+        x: -223
+        y: -158
       id: mc-connect
       inputConfig: {}
       nodeId: MinecraftConnect
       config:
         ポート:
-          type: dynamic
-          value: "{{ポート}}"
+          type: number
+          value: 8080
       type: code
       source:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: -40
-        y: -344
+        x: -13
+        y: -340
       id: block-broken
       inputConfig: {}
       nodeId: OnBlockBroken
@@ -29,8 +29,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 231
-        y: -281
+        x: 284
+        y: -256
       id: get-player-name
       inputConfig: {}
       displayName: プレイヤー情報から名前取得
@@ -46,8 +46,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 236
-        y: -400
+        x: 300
+        y: -326
       id: get-block-id
       inputConfig: {}
       displayName: ブロック情報からブロックID取得
@@ -63,8 +63,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 172.70516967773438
-        y: -165.921142578125
+        x: 191.70516967773438
+        y: -170.921142578125
       id: item-null-check
       inputConfig: {}
       displayName: Null分岐
@@ -83,11 +83,11 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 395.74285888671875
-        y: -207.22589111328125
+        x: 406.74285888671875
+        y: -191.22589111328125
       id: get-item-id
       inputConfig: {}
-      displayName: ItemStack情報からアイテムID取得
+      displayName: 所持アイテム情報からアイテムID取得
       nodeId: GetFromItemStack
       config:
         O_ｱｲﾃﾑ:
@@ -100,8 +100,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 397.7519226074219
-        y: -115.66839599609375
+        x: 407.7519226074219
+        y: -124.66839599609375
       id: 素手-fallback
       inputConfig: {}
       displayName: nullを素手に変換
@@ -116,8 +116,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 656.6130065917969
-        y: -311.816650390625
+        x: 621.6130065917969
+        y: -267.816650390625
       id: say-cmd
       inputConfig: {}
       nodeId: RunCommand
@@ -133,8 +133,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 443.5
-        y: 13
+        x: 380.95013427734375
+        y: -54.92999267578125
       id: MinecraftDisconnect-k27f1ltq
       inputConfig: {}
       nodeId: MinecraftDisconnect
@@ -147,8 +147,8 @@ node:
         type: file
         data: ..\_nodes\index.flyde.ts
     - pos:
-        x: 9.5
-        y: 6
+        x: -2.5
+        y: -69
       id: OnPlayerChat-w2pinzqg
       inputConfig: {}
       nodeId: OnPlayerChat
@@ -161,8 +161,8 @@ node:
         type: file
         data: ..\_nodes\index.flyde.ts
     - pos:
-        x: 230
-        y: 16.5
+        x: 186
+        y: -57.5
       id: Conditional-vjg3r1f2
       inputConfig: {}
       nodeId: Conditional
