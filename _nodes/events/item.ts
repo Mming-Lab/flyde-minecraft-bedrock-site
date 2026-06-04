@@ -24,7 +24,7 @@ export const アイテムを使った: CodeNode = {
     ワールド: { description: 'Minecraft接続ノードのワールド出力' },
   },
   outputs: {
-    O_ｱｲﾃﾑ: { description: '【null許容】ItemStack オブジェクト。アイテムなしの場合 null → Conditional(EXISTS)で分岐' },
+    O_ｱｲﾃﾑ: { description: '【null許容】所持アイテム。アイテムなしの場合 null → Conditional(EXISTS)で分岐' },
     O_ﾌﾟﾚｲﾔｰ: { description: 'WorldPlayer オブジェクト → プレイヤー情報取得ノードへ' },
     E_使用方法: { description: 'アイテム使用方法の数値コード（Enum）→ enum名称変換ノードへ' },
   },
@@ -53,7 +53,7 @@ export const アイテム取得: CodeNode = {
   },
   outputs: {
     個数: { description: '取得したアイテムの個数' },
-    O_ｱｲﾃﾑ: { description: 'ItemType オブジェクト → ItemType情報取得ノードへ' },
+    O_ｱｲﾃﾑ: { description: 'アイテム種別 → アイテム種別情報取得ノードへ' },
     O_ﾌﾟﾚｲﾔｰ: { description: 'WorldPlayer オブジェクト → プレイヤー情報取得ノードへ' },
     E_取得方法: { description: 'アイテム取得方法の数値コード（Enum）→ enum名称変換ノードへ' },
   },
@@ -82,7 +82,7 @@ export const アイテムをクラフト: CodeNode = {
     ワールド: { description: 'Minecraft接続ノードのワールド出力' },
   },
   outputs: {
-    O_ｱｲﾃﾑ: { description: 'ItemStack オブジェクト（クラフトしたアイテム）→ ItemStack情報取得ノードへ' },
+    O_ｱｲﾃﾑ: { description: '所持アイテム（クラフトしたアイテム）→ 所持アイテム情報取得ノードへ' },
     O_ﾌﾟﾚｲﾔｰ: { description: 'WorldPlayer オブジェクト → プレイヤー情報取得ノードへ' },
     ｸﾗﾌﾄ台使用: { description: 'クラフトテーブルを使用したか（true/false）' },
   },
@@ -110,7 +110,7 @@ export const アイテムを装備: CodeNode = {
     ワールド: { description: 'Minecraft接続ノードのワールド出力' },
   },
   outputs: {
-    O_ｱｲﾃﾑ: { description: 'ItemStack オブジェクト → ItemStack情報取得ノードへ' },
+    O_ｱｲﾃﾑ: { description: '所持アイテム → 所持アイテム情報取得ノードへ' },
     O_ﾌﾟﾚｲﾔｰ: { description: 'WorldPlayer オブジェクト → プレイヤー情報取得ノードへ' },
     E_ｽﾛｯﾄ: { description: '装備スロットの数値コード（Enum）→ enum名称変換ノードへ' },
   },
@@ -138,9 +138,9 @@ export const アイテムを精錬: CodeNode = {
     ワールド: { description: 'Minecraft接続ノードのワールド出力' },
   },
   outputs: {
-    O_ｱｲﾃﾑ: { description: 'ItemType オブジェクト（精錬されたアイテム）→ ItemType情報取得ノードへ' },
+    O_ｱｲﾃﾑ: { description: 'アイテム種別（精錬されたアイテム）→ アイテム種別情報取得ノードへ' },
     O_ﾌﾟﾚｲﾔｰ: { description: 'WorldPlayer オブジェクト → プレイヤー情報取得ノードへ' },
-    O_燃料ｱｲﾃﾑ: { description: 'ItemType オブジェクト（燃料アイテム）→ ItemType情報取得ノードへ' },
+    O_燃料ｱｲﾃﾑ: { description: 'アイテム種別（燃料アイテム）→ アイテム種別情報取得ノードへ' },
   },
   run: ({ ワールド }, { O_ｱｲﾃﾑ, O_ﾌﾟﾚｲﾔｰ, O_燃料ｱｲﾃﾑ }, adv) => {
     const world = ワールド as World
@@ -166,11 +166,11 @@ export const アイテムを取引: CodeNode = {
     ワールド: { description: 'Minecraft接続ノードのワールド出力' },
   },
   outputs: {
-    O_ｱｲﾃﾑ: { description: 'ItemStack オブジェクト（受け取ったアイテム）→ ItemStack情報取得ノードへ' },
+    O_ｱｲﾃﾑ: { description: '所持アイテム（受け取ったアイテム）→ 所持アイテム情報取得ノードへ' },
     O_村人: { description: 'WorldVillager オブジェクト → 村人情報取得ノードへ' },
     O_ﾌﾟﾚｲﾔｰ: { description: 'WorldPlayer オブジェクト → プレイヤー情報取得ノードへ' },
-    O_支払A: { description: 'ItemType オブジェクト（支払いアイテムA）→ ItemType情報取得ノードへ' },
-    O_支払B: { description: '【null許容】ItemType オブジェクト（支払いアイテムB）。不要な取引では null → Conditional(EXISTS)で分岐' },
+    O_支払A: { description: 'アイテム種別（支払いアイテムA）→ アイテム種別情報取得ノードへ' },
+    O_支払B: { description: '【null許容】アイテム種別（支払いアイテムB）。不要な取引では null → Conditional(EXISTS)で分岐' },
     ﾌﾟﾚｲﾔｰEM数: { description: 'プレイヤーが取引後に持っているエメラルド数' },
     村人EM数: { description: '村人が取引後に持っているエメラルド数' },
   },

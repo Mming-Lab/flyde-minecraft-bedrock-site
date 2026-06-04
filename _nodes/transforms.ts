@@ -199,14 +199,14 @@ export const プレイヤー情報取得: CodeNode = {
   }
 }
 
-export const ItemType情報取得: CodeNode = {
+export const アイテム種別情報取得: CodeNode = {
   id: 'GetFromItemType',
-  displayName: 'ItemType情報取得',
-  menuDisplayName: 'ItemType情報',
+  displayName: 'アイテム種別情報取得',
+  menuDisplayName: 'ｱｲﾃﾑ種別情報',
   icon: 'shuffle',
   defaultStyle: STYLE,
   inputs: {
-    O_ｱｲﾃﾑ: { description: 'ItemType（アイテム取得・精錬イベントの O_ｱｲﾃﾑ 出力）' },
+    O_ｱｲﾃﾑ: { description: 'アイテム種別（アイテム取得・精錬イベントの O_ｱｲﾃﾑ 出力）' },
     項目: {
       description: '取得する情報',
       defaultValue: 'id',
@@ -225,14 +225,14 @@ export const ItemType情報取得: CodeNode = {
   }
 }
 
-export const ItemStack情報取得: CodeNode = {
+export const 所持アイテム情報取得: CodeNode = {
   id: 'GetFromItemStack',
-  displayName: 'ItemStack情報取得',
-  menuDisplayName: 'ItemStack情報',
+  displayName: '所持アイテム情報取得',
+  menuDisplayName: '所持ｱｲﾃﾑ情報',
   icon: 'shuffle',
   defaultStyle: STYLE,
   inputs: {
-    O_ｱｲﾃﾑ: { description: 'ItemStack（使用・装備・クラフト・取引イベントの O_ｱｲﾃﾑ 出力）' },
+    O_ｱｲﾃﾑ: { description: '所持アイテム（使用・装備・クラフト・取引イベントの O_ｱｲﾃﾑ 出力）' },
     項目: {
       description: '取得する情報',
       defaultValue: 'typeId',
