@@ -1,5 +1,5 @@
 import { CodeNode } from '@flyde/core'
-import { BLOCK_ID_TO_JA, ITEM_ID_TO_JA, MOB_ID_TO_JA, ENUM_JA } from './_catalog'
+import { BLOCK_JA, ITEM_JA, MOB_JA, ENUM_JA } from './_catalog'
 
 const STYLE = { color: '#767676' }
 
@@ -40,9 +40,9 @@ export const 日本語変換: CodeNode = {
     const k = String(種別)
     let result: string | undefined
     if (k === 'ブロック' || k === 'アイテム' || k === 'モブ') {
-      const order = k === 'アイテム' ? [ITEM_ID_TO_JA, BLOCK_ID_TO_JA, MOB_ID_TO_JA]
-                  : k === 'モブ'     ? [MOB_ID_TO_JA,  ITEM_ID_TO_JA,  BLOCK_ID_TO_JA]
-                  :                    [BLOCK_ID_TO_JA, ITEM_ID_TO_JA,  MOB_ID_TO_JA]
+      const order = k === 'アイテム' ? [ITEM_JA, BLOCK_JA, MOB_JA]
+                  : k === 'モブ'     ? [MOB_JA,  ITEM_JA,  BLOCK_JA]
+                  :                    [BLOCK_JA, ITEM_JA,  MOB_JA]
       result = order.reduce<string | undefined>((found, map) => found ?? map[v], undefined)
     } else {
       result = (ENUM_JA[k] ?? {})[v]

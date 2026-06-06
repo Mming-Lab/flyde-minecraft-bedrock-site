@@ -4,9 +4,9 @@ import jaMaps from './_ja_maps.json'
 export type SelectOption = { value: string; label: string }
 
 // 日本語ラベルマップ（pxt-mc/core-strings.json から自動生成 → _ja_maps.json）
-const BLOCK_JA: Record<string, string> = jaMaps.BLOCK_JA
-const ITEM_JA:  Record<string, string> = jaMaps.ITEM_JA
-const MOB_JA:   Record<string, string> = jaMaps.MOB_JA
+export const BLOCK_JA: Record<string, string> = jaMaps.BLOCK_JA
+export const ITEM_JA:  Record<string, string> = jaMaps.ITEM_JA
+export const MOB_JA:   Record<string, string> = jaMaps.MOB_JA
 
 // ── 全ID一覧の生成 ────────────────────────────────────────────────
 
