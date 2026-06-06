@@ -5,25 +5,25 @@ const STYLE = { color: '#767676' }
 export const エンティティ情報取得: CodeNode = {
   id: 'GetFromEntity',
   displayName: 'エンティティ情報取得',
-  menuDisplayName: 'Entity情報',
+  menuDisplayName: 'ｴﾝﾃｨﾃｨ情報',
   icon: 'shuffle',
   defaultStyle: STYLE,
   inputs: {
-    O_Entity: { description: 'WorldPlayer または WorldVillager（O_ﾌﾟﾚｲﾔｰ・O_村人 出力）' },
+    O_ｴﾝﾃｨﾃｨ: { description: 'プレイヤーまたは村人オブジェクト（O_ﾌﾟﾚｲﾔｰ・O_村人 出力）' },
   },
   outputs: {
     座標:         { description: '座標 (position)' },
-    向き:         { description: '向き (yRot)' },
-    ディメンション: { description: 'ディメンション番号 (dimension)' },
+    向き:         { description: '向き・Y軸回転 (yRot)' },
+    ﾃﾞｨﾒﾝｼｮﾝ: { description: 'ディメンション番号 (dimension)' },
     種別:         { description: '種別文字列 (type)' },
     バリアント:   { description: 'バリアント番号 (variant)' },
     ID:           { description: 'エンティティID番号 (id)' },
   },
-  run: ({ O_Entity }, { 座標, 向き, ディメンション, 種別, バリアント, ID }) => {
-    const e = O_Entity as any
+  run: ({ O_ｴﾝﾃｨﾃｨ }, { 座標, 向き, ﾃﾞｨﾒﾝｼｮﾝ, 種別, バリアント, ID }) => {
+    const e = O_ｴﾝﾃｨﾃｨ as any
     座標.next(e.position)
     向き.next(e.yRot)
-    ディメンション.next(e.dimension)
+    ﾃﾞｨﾒﾝｼｮﾝ.next(e.dimension)
     種別.next(e.type)
     バリアント.next(e.variant)
     ID.next(e.id)
@@ -37,18 +37,18 @@ export const プレイヤー情報取得: CodeNode = {
   icon: 'shuffle',
   defaultStyle: STYLE,
   inputs: {
-    O_ﾌﾟﾚｲﾔｰ: { description: 'イベントノードの O_ﾌﾟﾚｲﾔｰ 出力（WorldPlayer オブジェクト）' },
+    O_ﾌﾟﾚｲﾔｰ: { description: 'イベントノードの O_ﾌﾟﾚｲﾔｰ 出力（プレイヤーオブジェクト）' },
   },
   outputs: {
     名前:     { description: 'プレイヤー名 (name)' },
     カラー:   { description: 'マップマーカーの色 (color)' },
-    O_Entity: { description: 'WorldEntity 情報取得ノードへ渡すパススルー出力' },
+    O_ｴﾝﾃｨﾃｨ: { description: 'エンティティ情報取得ノードへ渡すパススルー出力' },
   },
-  run: ({ O_ﾌﾟﾚｲﾔｰ }, { 名前, カラー, O_Entity }) => {
+  run: ({ O_ﾌﾟﾚｲﾔｰ }, { 名前, カラー, O_ｴﾝﾃｨﾃｨ }) => {
     const p = O_ﾌﾟﾚｲﾔｰ as any
     名前.next(p.name)
     カラー.next(p.color)
-    O_Entity.next(p)
+    O_ｴﾝﾃｨﾃｨ.next(p)
   },
 }
 
@@ -63,7 +63,7 @@ export const アイテム種別情報取得: CodeNode = {
   },
   outputs: {
     アイテムID: { description: 'アイテムID (id)' },
-    データ値:   { description: 'データ値/aux (data)' },
+    データ値:   { description: 'データ値 (data)' },
   },
   run: ({ O_ｱｲﾃﾑ }, { アイテムID, データ値 }) => {
     const a = O_ｱｲﾃﾑ as any
@@ -85,7 +85,7 @@ export const 所持アイテム情報取得: CodeNode = {
     アイテムID: { description: 'アイテムID (typeId)' },
     個数:       { description: '個数 (amount)' },
     最大個数:   { description: 'スタック最大個数 (maxAmount)' },
-    データ値:   { description: 'データ値/aux (data)' },
+    データ値:   { description: 'データ値 (data)' },
   },
   run: ({ O_ｱｲﾃﾑ }, { アイテムID, 個数, 最大個数, データ値 }) => {
     const a = O_ｱｲﾃﾑ as any
@@ -103,11 +103,11 @@ export const ブロック情報取得: CodeNode = {
   icon: 'shuffle',
   defaultStyle: STYLE,
   inputs: {
-    O_ﾌﾞﾛｯｸ: { description: 'BlockType（ブロック・バウンスイベントの O_ﾌﾞﾛｯｸ 出力）' },
+    O_ﾌﾞﾛｯｸ: { description: 'ブロック種別オブジェクト（ブロック・バウンスイベントの O_ﾌﾞﾛｯｸ 出力）' },
   },
   outputs: {
     ブロックID: { description: 'ブロックID (id)' },
-    データ値:   { description: 'データ値/aux (data)' },
+    データ値:   { description: 'データ値 (data)' },
   },
   run: ({ O_ﾌﾞﾛｯｸ }, { ブロックID, データ値 }) => {
     const b = O_ﾌﾞﾛｯｸ as any
@@ -165,17 +165,17 @@ export const 村人情報取得: CodeNode = {
   icon: 'shuffle',
   defaultStyle: STYLE,
   inputs: {
-    O_村人: { description: 'WorldVillager（アイテム取引イベントの O_村人 出力）' },
+    O_村人: { description: '村人オブジェクト（アイテム取引イベントの O_村人 出力）' },
   },
   outputs: {
     名前:     { description: '村人の名前 (trader.name)' },
     ランク:   { description: '取引ランク (trader.tier)' },
-    O_Entity: { description: 'エンティティ情報取得ノードへ渡すパススルー出力' },
+    O_ｴﾝﾃｨﾃｨ: { description: 'エンティティ情報取得ノードへ渡すパススルー出力' },
   },
-  run: ({ O_村人 }, { 名前, ランク, O_Entity }) => {
+  run: ({ O_村人 }, { 名前, ランク, O_ｴﾝﾃｨﾃｨ }) => {
     const v = O_村人 as any
     名前.next(v.trader?.name)
     ランク.next(v.trader?.tier)
-    O_Entity.next(v)
+    O_ｴﾝﾃｨﾃｨ.next(v)
   },
 }
