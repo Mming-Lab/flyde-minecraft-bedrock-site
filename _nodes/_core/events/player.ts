@@ -8,10 +8,11 @@ import {
   type PlayerMessageSignal,
   type PlayerTeleportedSignal,
   type PlayerTitleSignal,
+  type PlayerTransformSignal,
   type PlayerTravelledSignal,
 } from 'socket-be'
 import { setCurrentContext } from '../../context-manager'
-import { getCurrentWorld } from '../../socketbe-instance'
+import { getCurrentWorld } from '../../ws-server'
 import { toEnumString } from '../enum-utils'
 
 const STYLE = { color: '#25567D' }
@@ -233,5 +234,33 @@ export const OnPlayerBounced: CodeNode = {
     }
     w.server.on(ServerEvent.PlayerBounced, handler)
     adv.onCleanup(() => w.server.remove(ServerEvent.PlayerBounced, handler))
+  },
+}
+
+export const OnPlayerTransform: CodeNode = {
+  id: 'OnPlayerTransform',
+  displayName: 'OnPlayerTransform',
+  menuDisplayName: 'OnPlayerTransform',
+  icon: 'bolt',
+  defaultStyle: STYLE,
+  completionOutputs: [],
+  inputs: {
+    world: { description: 'World output from MinecraftConnect node' },
+  },
+  outputs: {
+    position:  { description: 'Player position {x,y,z} (fires every tick while moving)' },
+    direction: { description: 'Player yaw rotation' },
+    player:    { description: 'WorldPlayer object → pass to player info node' },
+  },
+  run: ({ world }, { position, direction, player }, adv) => {
+    const w = getCurrentWorld()!
+    const handler = (ev: PlayerTransformSignal) => {
+      setCurrentContext(w, ev.player)
+      position.next(ev.rawPlayer.position)
+      direction.next(ev.rawPlayer.yRot)
+      player.next(ev.rawPlayer)
+    }
+    w.server.on(ServerEvent.PlayerTransform, handler)
+    adv.onCleanup(() => w.server.remove(ServerEvent.PlayerTransform, handler))
   },
 }

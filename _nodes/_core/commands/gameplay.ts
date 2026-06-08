@@ -1,5 +1,6 @@
 import { CodeNode } from '@flyde/core'
 import { getCurrentContext } from '../../context-manager'
+import { getCurrentWorld } from '../../ws-server'
 
 const STYLE = { color: '#8F6D40' }
 
@@ -157,5 +158,129 @@ export const WorldQuery: CodeNode = {
   run: async ({ type }, { list }) => {
     const { world } = getCurrentContext()
     list.next(await (world.queryData as any)(type))
+  },
+}
+
+export const SendMessage: CodeNode = {
+  id: 'SendMessage',
+  displayName: 'SendMessage',
+  menuDisplayName: 'SendMessage',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger:  { description: 'Trigger (optional)' },
+    message:  { description: 'Message to send' },
+    target:   { description: 'Target selector or player name (default: @a)', defaultValue: '@a' },
+  },
+  outputs: { done: {} },
+  run: async ({ message, target }, { done }) => {
+    const { world } = getCurrentContext()
+    await world.sendMessage(String(message), String(target))
+    done.next(true)
+  },
+}
+
+export const SetTimeOfDay: CodeNode = {
+  id: 'SetTimeOfDay',
+  displayName: 'SetTimeOfDay',
+  menuDisplayName: 'SetTimeOfDay',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger: { description: 'Trigger (optional)' },
+    time:    { description: 'Time of day (0–24000). Dawn=1000, Noon=6000, Sunset=12000, Night=13000', defaultValue: 6000 },
+  },
+  outputs: { done: {} },
+  run: async ({ time }, { done }) => {
+    const { world } = getCurrentContext()
+    await world.setTimeOfDay(Number(time))
+    done.next(true)
+  },
+}
+
+export const SetWeather: CodeNode = {
+  id: 'SetWeather',
+  displayName: 'SetWeather',
+  menuDisplayName: 'SetWeather',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger: { description: 'Trigger (optional)' },
+    weather: {
+      description: 'Weather type',
+      defaultValue: 'Clear',
+      editorType: 'select',
+      editorTypeData: {
+        options: [
+          { label: 'Clear',   value: 'Clear' },
+          { label: 'Rain',    value: 'Rain' },
+          { label: 'Thunder', value: 'Thunder' },
+        ],
+      },
+    },
+    duration: { description: 'Duration in ticks (20 ticks = 1 second)', defaultValue: 600 },
+  },
+  outputs: { done: {} },
+  run: async ({ weather, duration }, { done }) => {
+    const { world } = getCurrentContext()
+    await world.setWeather(weather as any, Number(duration))
+    done.next(true)
+  },
+}
+
+export const SetBlock: CodeNode = {
+  id: 'SetBlock',
+  displayName: 'SetBlock',
+  menuDisplayName: 'SetBlock',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger:  { description: 'Trigger (optional)' },
+    position: { description: 'Block position {x,y,z}' },
+    block_id: { description: 'Block ID (e.g. minecraft:stone)' },
+  },
+  outputs: { done: {} },
+  run: async ({ position, block_id }, { done }) => {
+    const { world } = getCurrentContext()
+    await world.setBlock(position as any, String(block_id))
+    done.next(true)
+  },
+}
+
+// --- server tier ---
+
+export const BroadcastCommand: CodeNode = {
+  id: 'BroadcastCommand',
+  displayName: 'BroadcastCommand',
+  menuDisplayName: 'BroadcastCommand',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger:  { description: 'Trigger (optional)' },
+    command:  { description: 'Minecraft command to broadcast to all worlds (without /)' },
+  },
+  outputs: { done: {} },
+  run: async ({ command }, { done }) => {
+    const world = getCurrentWorld()!
+    await world.server.broadcastCommand(String(command))
+    done.next(true)
+  },
+}
+
+export const BroadcastMessage: CodeNode = {
+  id: 'BroadcastMessage',
+  displayName: 'BroadcastMessage',
+  menuDisplayName: 'BroadcastMessage',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger:  { description: 'Trigger (optional)' },
+    message:  { description: 'Message to broadcast to all worlds' },
+  },
+  outputs: { done: {} },
+  run: async ({ message }, { done }) => {
+    const world = getCurrentWorld()!
+    await world.server.broadcastMessage(String(message))
+    done.next(true)
   },
 }

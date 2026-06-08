@@ -155,3 +155,157 @@ export const GetLocalPlayer: CodeNode = {
     player.next(await world.getLocalPlayer())
   },
 }
+
+export const GiveItem: CodeNode = {
+  id: 'GiveItem',
+  displayName: 'GiveItem',
+  menuDisplayName: 'GiveItem',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger:  { description: 'Trigger (optional)' },
+    item_id:  { description: 'Item ID (e.g. minecraft:diamond)' },
+    amount:   { description: 'Amount to give', defaultValue: 1 },
+  },
+  outputs: { done: {} },
+  run: async ({ item_id, amount }, { done }) => {
+    const { player } = getCurrentContext()
+    await player.giveItem(String(item_id), Number(amount))
+    done.next(true)
+  },
+}
+
+// --- server tier ---
+
+export const AddPlayerLevel: CodeNode = {
+  id: 'AddPlayerLevel',
+  displayName: 'AddPlayerLevel',
+  menuDisplayName: 'AddPlayerLevel',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger: { description: 'Trigger (optional)' },
+    level:   { description: 'Levels to add (negative to subtract)', defaultValue: 1 },
+  },
+  outputs: { done: {} },
+  run: async ({ level }, { done }) => {
+    const { player } = getCurrentContext()
+    await player.addLevel(Number(level))
+    done.next(true)
+  },
+}
+
+export const SetGameMode: CodeNode = {
+  id: 'SetGameMode',
+  displayName: 'SetGameMode',
+  menuDisplayName: 'SetGameMode',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger: { description: 'Trigger (optional)' },
+    mode: {
+      description: 'Game mode to set',
+      defaultValue: 'Survival',
+      editorType: 'select',
+      editorTypeData: {
+        options: [
+          { label: 'Survival',  value: 'Survival' },
+          { label: 'Creative',  value: 'Creative' },
+          { label: 'Adventure', value: 'Adventure' },
+          { label: 'Spectator', value: 'Spectator' },
+        ],
+      },
+    },
+  },
+  outputs: { done: {} },
+  run: async ({ mode }, { done }) => {
+    const { player } = getCurrentContext()
+    await player.setGameMode(mode as any)
+    done.next(true)
+  },
+}
+
+export const UpdateAbility: CodeNode = {
+  id: 'UpdateAbility',
+  displayName: 'UpdateAbility',
+  menuDisplayName: 'UpdateAbility',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger: { description: 'Trigger (optional)' },
+    ability: {
+      description: 'Ability type',
+      defaultValue: 'mayfly',
+      editorType: 'select',
+      editorTypeData: {
+        options: [
+          { label: 'Mayfly',       value: 'mayfly' },
+          { label: 'Mute',         value: 'mute' },
+          { label: 'Worldbuilder', value: 'worldbuilder' },
+        ],
+      },
+    },
+    value: { description: 'Enable (true) or disable (false)', defaultValue: true },
+  },
+  outputs: { done: {} },
+  run: async ({ ability, value }, { done }) => {
+    const { player } = getCurrentContext()
+    await player.updateAbility(ability as any, Boolean(value))
+    done.next(true)
+  },
+}
+
+export const SetTitle: CodeNode = {
+  id: 'SetTitle',
+  displayName: 'SetTitle',
+  menuDisplayName: 'SetTitle',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger:  { description: 'Trigger (optional)' },
+    title:    { description: 'Title text (large center text)' },
+    subtitle: { description: 'Subtitle text (below title, optional)', defaultValue: '' },
+  },
+  outputs: { done: {} },
+  run: async ({ title, subtitle }, { done }) => {
+    const { player } = getCurrentContext()
+    const opts = subtitle ? { subtitle: String(subtitle) } : undefined
+    await player.onScreenDisplay.setTitle(String(title), opts)
+    done.next(true)
+  },
+}
+
+export const SetActionBar: CodeNode = {
+  id: 'SetActionBar',
+  displayName: 'SetActionBar',
+  menuDisplayName: 'SetActionBar',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger: { description: 'Trigger (optional)' },
+    text:    { description: 'Action bar text (small text above hotbar)' },
+  },
+  outputs: { done: {} },
+  run: async ({ text }, { done }) => {
+    const { player } = getCurrentContext()
+    await player.onScreenDisplay.setActionBar(String(text))
+    done.next(true)
+  },
+}
+
+export const ClearTitle: CodeNode = {
+  id: 'ClearTitle',
+  displayName: 'ClearTitle',
+  menuDisplayName: 'ClearTitle',
+  icon: 'play',
+  defaultStyle: STYLE,
+  inputs: {
+    trigger: { description: 'Trigger (optional)' },
+  },
+  outputs: { done: {} },
+  run: async (_, { done }) => {
+    const { player } = getCurrentContext()
+    await player.onScreenDisplay.clearTitle()
+    done.next(true)
+  },
+}

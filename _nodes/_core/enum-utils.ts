@@ -1,15 +1,38 @@
-import {
-  TravelMethod,
-  TeleportationCause,
-  MobInteractionType,
-  ItemInteractMethod,
-  ItemAcquisitionMethod,
-  PlayerEquipmentSlot,
-} from 'socket-be'
-
 export function enumKeyName(enumObj: Record<string, string | number>, value: number): string {
   const entry = Object.entries(enumObj).find(([, v]) => v === value)
   return entry ? entry[0] : String(value)
+}
+
+const TRAVEL_METHOD: Record<number, string> = {
+  0: 'Walk', 1: 'SwimWater', 2: 'Fall',   3: 'Climb',    4: 'SwimLava',
+  5: 'Fly',  6: 'Riding',   7: 'Sneak',   8: 'Sprint',   9: 'Bounce',
+  10: 'FrostWalk', 11: 'Teleport',
+}
+
+const TELEPORT_CAUSE: Record<number, string> = {
+  1: 'Projectile', 2: 'ChorusFruit', 3: 'Command', 4: 'Behavior',
+}
+
+const MOB_INTERACTION: Record<number, string> = {
+  1: 'Breeding', 2: 'Taming',     3: 'Curing',      4: 'Crafted',
+  5: 'Shearing', 6: 'Milking',    7: 'Trading',      8: 'Feeding',
+  9: 'Igniting', 10: 'Coloring',  11: 'Naming',      12: 'Leashing',
+  13: 'Unleashing', 14: 'PetSleep', 15: 'Trusting',  16: 'Commanding',
+}
+
+const ITEM_USE_METHOD: Record<number, string> = {
+  0: 'Use', 1: 'Place',
+}
+
+const ITEM_ACQ_METHOD: Record<number, string> = {
+  1: 'Pickedup', 2: 'Crafted',  3: 'TakenFromChest',      4: 'TakenFromEnderChest',
+  5: 'Bought',   6: 'Anvil',    7: 'Smelted',              8: 'Brewed',
+  9: 'Filled',   10: 'Trading', 11: 'Fishing',             13: 'Container',
+  14: 'Feeding',
+}
+
+const EQUIP_SLOT: Record<number, string> = {
+  1: 'Offhand', 2: 'Head', 3: 'Chest', 4: 'Legs', 5: 'Feet',
 }
 
 export const DESTRUCTION_METHOD: Record<number, string> = {
@@ -117,15 +140,15 @@ export const BIOME_NAMES: Record<number, string> = {
 /** kind 名は英語キーに統一（TravelMethod, TeleportCause, ...） */
 export function toEnumString(kind: string, value: number): string {
   switch (kind) {
-    case 'TravelMethod':     return enumKeyName(TravelMethod as any, value)
-    case 'TeleportCause':    return enumKeyName(TeleportationCause as any, value)
-    case 'MobInteraction':   return enumKeyName(MobInteractionType as any, value)
-    case 'ItemAcqMethod':    return enumKeyName(ItemAcquisitionMethod as any, value)
-    case 'ItemUseMethod':    return enumKeyName(ItemInteractMethod as any, value)
-    case 'EquipSlot':        return enumKeyName(PlayerEquipmentSlot as any, value)
+    case 'TravelMethod':     return TRAVEL_METHOD[value]     ?? String(value)
+    case 'TeleportCause':    return TELEPORT_CAUSE[value]    ?? String(value)
+    case 'MobInteraction':   return MOB_INTERACTION[value]   ?? String(value)
+    case 'ItemAcqMethod':    return ITEM_ACQ_METHOD[value]   ?? String(value)
+    case 'ItemUseMethod':    return ITEM_USE_METHOD[value]   ?? String(value)
+    case 'EquipSlot':        return EQUIP_SLOT[value]        ?? String(value)
     case 'BlockBreakMethod': return DESTRUCTION_METHOD[value] ?? String(value)
-    case 'BlockPlaceMethod': return PLACEMENT_METHOD[value] ?? String(value)
-    case 'biome':            return BIOME_NAMES[value] ?? String(value)
+    case 'BlockPlaceMethod': return PLACEMENT_METHOD[value]  ?? String(value)
+    case 'biome':            return BIOME_NAMES[value]       ?? String(value)
     default:                 return String(value)
   }
 }

@@ -2,7 +2,7 @@ import { appendFileSync } from 'fs'
 import { join } from 'path'
 import { CodeNode } from '@flyde/core'
 import { ServerEvent } from 'socket-be'
-import { getServer, stopServer } from '../socketbe-instance'
+import { getServer, stopServer } from '../ws-server'
 
 const DIAG_FILE = join(process.cwd(), 'mc-flow-diag.log')
 function diagLog(msg: string): void {

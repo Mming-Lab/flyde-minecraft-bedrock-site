@@ -69,11 +69,11 @@ export function getServer(port: number = 8080, onError?: (msg: string) => void):
     // WorldAdd で _world をセットしてから connection.ts の handler が ワールド.next(true) を流す
     _server.on(ServerEvent.WorldAdd, (signal: any) => {
       _world = signal.world
-      diagLog(`[mc-flow] [socketbe-instance] WorldAdd fired! world=${typeof signal?.world}`)
+      diagLog(`[mc-flow] [ws-server] WorldAdd fired! world=${typeof signal?.world}`)
     })
     _server.on(ServerEvent.WorldRemove, (signal: any) => {
       _world = null
-      diagLog(`[mc-flow] [socketbe-instance] WorldRemove fired! code=${signal?.code}`)
+      diagLog(`[mc-flow] [ws-server] WorldRemove fired! code=${signal?.code}`)
     })
 
     // new Server() は server.network.wss (ws.WebSocketServer) を内部で起動する。

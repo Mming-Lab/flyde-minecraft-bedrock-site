@@ -9,7 +9,7 @@ import {
   type ItemTradedSignal,
 } from 'socket-be'
 import { setCurrentContext } from '../../context-manager'
-import { getCurrentWorld } from '../../socketbe-instance'
+import { getCurrentWorld } from '../../ws-server'
 import { toEnumString } from '../enum-utils'
 
 const STYLE = { color: '#25567D' }

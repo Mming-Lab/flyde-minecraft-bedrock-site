@@ -3,18 +3,28 @@
     "displayName": "Minecraft接続",
     "menuDisplayName": "Minecraft接続",
     "inputs": {
-      "port": { "name": "ポート", "description": "WebSocketポート番号（デフォルト: 8080）" }
+      "port": {
+        "name": "ポート",
+        "description": "WebSocketポート番号（デフォルト: 8080）"
+      }
     },
     "outputs": {
-      "world": { "name": "ワールド" },
-      "error": { "name": "エラー" }
+      "world": {
+        "name": "ワールド"
+      },
+      "error": {
+        "name": "エラー"
+      }
     }
   },
   "MinecraftDisconnect": {
     "displayName": "Minecraft切断",
     "menuDisplayName": "Minecraft切断",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（例: チャットで「stop」と入力）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（例: チャットで「stop」と入力）"
+      }
     },
     "outputs": {}
   },
@@ -22,591 +32,1104 @@
     "displayName": "エージェント座標取得",
     "menuDisplayName": "AG座標取得",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "position": { "name": "座標" }
+      "position": {
+        "name": "座標"
+      }
     }
   },
   "GetScoreboardObjectives": {
     "displayName": "スコアボード目標一覧取得",
     "menuDisplayName": "SB目標一覧",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "objectives": { "name": "目標一覧" }
+      "objectives": {
+        "name": "目標一覧"
+      }
     }
   },
   "GetScoreboardObjective": {
     "displayName": "スコアボード目標取得",
     "menuDisplayName": "SB目標取得",
     "inputs": {
-      "trigger":      { "name": "トリガー",  "description": "トリガー（任意）" },
-      "objective_id": { "name": "目標ID",   "description": "スコアボード目標のID" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      },
+      "objective_id": {
+        "name": "目標ID",
+        "description": "スコアボード目標のID"
+      }
     },
     "outputs": {
-      "objective": { "name": "目標" }
+      "objective": {
+        "name": "目標"
+      }
     }
   },
   "AddScoreboardObjective": {
     "displayName": "スコアボード目標追加",
     "menuDisplayName": "SB目標追加",
     "inputs": {
-      "trigger":      { "name": "トリガー",  "description": "トリガー（任意）" },
-      "objective_id": { "name": "目標ID",   "description": "スコアボード目標のID" },
-      "display_name": { "name": "表示名",   "description": "表示名（省略可）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      },
+      "objective_id": {
+        "name": "目標ID",
+        "description": "スコアボード目標のID"
+      },
+      "display_name": {
+        "name": "表示名",
+        "description": "表示名（省略可）"
+      }
     },
     "outputs": {
-      "objective": { "name": "目標" }
+      "objective": {
+        "name": "目標"
+      }
     }
   },
   "RemoveScoreboardObjective": {
     "displayName": "スコアボード目標削除",
     "menuDisplayName": "SB目標削除",
     "inputs": {
-      "trigger":      { "name": "トリガー",  "description": "トリガー（任意）" },
-      "objective_id": { "name": "目標ID",   "description": "スコアボード目標のID" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      },
+      "objective_id": {
+        "name": "目標ID",
+        "description": "スコアボード目標のID"
+      }
     },
     "outputs": {
-      "result": { "name": "結果" }
+      "result": {
+        "name": "結果"
+      }
     }
   },
   "GetScores": {
     "displayName": "全スコア取得",
     "menuDisplayName": "全スコア",
     "inputs": {
-      "trigger":     { "name": "トリガー",     "description": "トリガー（任意）" },
-      "player_name": { "name": "プレイヤー名", "description": "プレイヤー名" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      },
+      "player_name": {
+        "name": "プレイヤー名",
+        "description": "プレイヤー名"
+      }
     },
     "outputs": {
-      "scores": { "name": "スコア一覧" }
+      "scores": {
+        "name": "スコア一覧"
+      }
     }
   },
   "GetScore": {
     "displayName": "スコア取得",
     "menuDisplayName": "スコア取得",
     "inputs": {
-      "trigger":      { "name": "トリガー",     "description": "トリガー（任意）" },
-      "player_name":  { "name": "プレイヤー名", "description": "プレイヤー名" },
-      "objective_id": { "name": "目標ID",      "description": "スコアボード目標のID" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      },
+      "player_name": {
+        "name": "プレイヤー名",
+        "description": "プレイヤー名"
+      },
+      "objective_id": {
+        "name": "目標ID",
+        "description": "スコアボード目標のID"
+      }
     },
     "outputs": {
-      "score": { "name": "スコア" }
+      "score": {
+        "name": "スコア"
+      }
     }
   },
   "ScoreOperation": {
     "displayName": "スコア演算",
     "menuDisplayName": "スコア演算",
     "inputs": {
-      "trigger":      { "name": "トリガー",     "description": "トリガー（任意）" },
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      },
       "operation": {
         "name": "操作",
         "description": "演算の種類",
-        "options": { "add": "加算", "remove": "減算", "set": "設定" }
+        "options": {
+          "add": "加算",
+          "remove": "減算",
+          "set": "設定"
+        }
       },
-      "player_name":  { "name": "プレイヤー名", "description": "プレイヤー名" },
-      "objective_id": { "name": "目標ID",      "description": "スコアボード目標のID" },
-      "value":        { "name": "値",          "description": "演算する値" }
+      "player_name": {
+        "name": "プレイヤー名",
+        "description": "プレイヤー名"
+      },
+      "objective_id": {
+        "name": "目標ID",
+        "description": "スコアボード目標のID"
+      },
+      "value": {
+        "name": "値",
+        "description": "演算する値"
+      }
     },
     "outputs": {
-      "new_score": { "name": "新スコア" }
+      "new_score": {
+        "name": "新スコア"
+      }
     }
   },
   "OnPlayerChat": {
     "displayName": "チャット受信",
     "menuDisplayName": "ﾁｬｯﾄ受信",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "sender":  { "name": "送信者名", "description": "送信したプレイヤーの名前（文字列）" },
-      "message": { "name": "メッセージ", "description": "チャットメッセージの内容（文字列）" }
+      "sender": {
+        "name": "送信者名",
+        "description": "送信したプレイヤーの名前（文字列）"
+      },
+      "message": {
+        "name": "メッセージ",
+        "description": "チャットメッセージの内容（文字列）"
+      }
     }
   },
   "OnPlayerJoin": {
     "displayName": "プレイヤー参加",
     "menuDisplayName": "ﾌﾟﾚｲﾔｰ参加",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "player_name": { "name": "ﾌﾟﾚｲﾔｰ名", "description": "参加したプレイヤーの名前（文字列）" }
+      "player_name": {
+        "name": "ﾌﾟﾚｲﾔｰ名",
+        "description": "参加したプレイヤーの名前（文字列）"
+      }
     }
   },
   "OnPlayerLeave": {
     "displayName": "プレイヤー退出",
     "menuDisplayName": "ﾌﾟﾚｲﾔ退出",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "player_name": { "name": "ﾌﾟﾚｲﾔｰ名", "description": "退出したプレイヤーの名前（文字列）" }
+      "player_name": {
+        "name": "ﾌﾟﾚｲﾔｰ名",
+        "description": "退出したプレイヤーの名前（文字列）"
+      }
     }
   },
   "OnPlayerTravelled": {
     "displayName": "プレイヤーが移動",
     "menuDisplayName": "ﾌﾟﾚｲﾔｰ移動",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "distance":      { "name": "移動距離", "description": "今回の移動距離（メートル）" },
-      "player":      { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" },
-      "underwater":    { "name": "水中", "description": "水中を移動中か（true/false）" },
-      "biome":         { "name": "バイオーム", "description": "現在いるバイオーム名" },
-      "travel_method": { "name": "移動方法", "description": "移動方法名" }
+      "distance": {
+        "name": "移動距離",
+        "description": "今回の移動距離（メートル）"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      },
+      "underwater": {
+        "name": "水中",
+        "description": "水中を移動中か（true/false）"
+      },
+      "biome": {
+        "name": "バイオーム",
+        "description": "現在いるバイオーム名"
+      },
+      "travel_method": {
+        "name": "移動方法",
+        "description": "移動方法名"
+      }
     }
   },
   "OnPlayerTeleported": {
     "displayName": "テレポート完了",
     "menuDisplayName": "ﾃﾚﾎﾟｰﾄ完了",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "player":       { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" },
-      "teleport_cause": { "name": "テレポート原因", "description": "テレポート原因名" },
-      "distance":       { "name": "移動距離", "description": "テレポートした距離（メートル）" }
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      },
+      "teleport_cause": {
+        "name": "テレポート原因",
+        "description": "テレポート原因名"
+      },
+      "distance": {
+        "name": "移動距離",
+        "description": "テレポートした距離（メートル）"
+      }
     }
   },
   "OnPlayerTitle": {
     "displayName": "プレイヤータイトル",
     "menuDisplayName": "ﾀｲﾄﾙ受信",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "sender":    { "name": "送信者名", "description": "送信したプレイヤーの名前（文字列）" },
-      "message":   { "name": "メッセージ", "description": "タイトルのメッセージ内容（文字列）" },
-      "recipient": { "name": "受信者名", "description": "受信したプレイヤーの名前（文字列）" }
+      "sender": {
+        "name": "送信者名",
+        "description": "送信したプレイヤーの名前（文字列）"
+      },
+      "message": {
+        "name": "メッセージ",
+        "description": "タイトルのメッセージ内容（文字列）"
+      },
+      "recipient": {
+        "name": "受信者名",
+        "description": "受信したプレイヤーの名前（文字列）"
+      }
     }
   },
   "OnPlayerMessage": {
     "displayName": "プレイヤーメッセージ",
     "menuDisplayName": "ﾒｯｾｰｼﾞ受信",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "sender":    { "name": "送信者名", "description": "送信したプレイヤーの名前（文字列）" },
-      "message":   { "name": "メッセージ", "description": "メッセージの内容（文字列）" },
-      "type":      { "name": "種別", "description": "メッセージの種別（chat / tell 等）" },
-      "recipient": { "name": "受信者名", "description": "【null許容】受信者の名前。tell 以外では null" }
+      "sender": {
+        "name": "送信者名",
+        "description": "送信したプレイヤーの名前（文字列）"
+      },
+      "message": {
+        "name": "メッセージ",
+        "description": "メッセージの内容（文字列）"
+      },
+      "type": {
+        "name": "種別",
+        "description": "メッセージの種別（chat / tell 等）"
+      },
+      "recipient": {
+        "name": "受信者名",
+        "description": "【null許容】受信者の名前。tell 以外では null"
+      }
     }
   },
   "OnPlayerBounced": {
     "displayName": "バウンス",
     "menuDisplayName": "ﾊﾞｳﾝｽ",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "height":   { "name": "高さ", "description": "バウンスの高さ（ブロック数）" },
-      "block":  { "name": "ﾌﾞﾛｯｸ", "description": "BlockType オブジェクト（バウンスしたブロック）→ ブロック情報取得ノードへ" },
-      "player": { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" }
+      "height": {
+        "name": "高さ",
+        "description": "バウンスの高さ（ブロック数）"
+      },
+      "block": {
+        "name": "ﾌﾞﾛｯｸ",
+        "description": "BlockType オブジェクト（バウンスしたブロック）→ ブロック情報取得ノードへ"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      }
     }
   },
   "OnBlockBroken": {
     "displayName": "ブロック破壊",
     "menuDisplayName": "ﾌﾞﾛｯｸ破壊",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "block":        { "name": "ﾌﾞﾛｯｸ", "description": "BlockType オブジェクト → ブロック情報取得ノードへ" },
-      "player":       { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" },
-      "destroy_method": { "name": "破壊方法", "description": "破壊方法名" },
-      "item":         { "name": "ｱｲﾃﾑ", "description": "【null許容】所持アイテム（破壊前）。素手のとき null" }
+      "block": {
+        "name": "ﾌﾞﾛｯｸ",
+        "description": "BlockType オブジェクト → ブロック情報取得ノードへ"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      },
+      "destroy_method": {
+        "name": "破壊方法",
+        "description": "破壊方法名"
+      },
+      "item": {
+        "name": "ｱｲﾃﾑ",
+        "description": "【null許容】所持アイテム（破壊前）。素手のとき null"
+      }
     }
   },
   "OnBlockPlaced": {
     "displayName": "ブロック設置イベント",
     "menuDisplayName": "ﾌﾞﾛｯｸ設置イベント",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "block":      { "name": "ﾌﾞﾛｯｸ", "description": "BlockType オブジェクト → ブロック情報取得ノードへ" },
-      "player":     { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" },
-      "underwater":   { "name": "水中", "description": "水中に設置したか（true/false）" },
-      "place_method": { "name": "設置方法", "description": "設置方法名" },
-      "item":       { "name": "ｱｲﾃﾑ", "description": "所持アイテム（設置前）→ 所持アイテム情報取得ノードへ" }
+      "block": {
+        "name": "ﾌﾞﾛｯｸ",
+        "description": "BlockType オブジェクト → ブロック情報取得ノードへ"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      },
+      "underwater": {
+        "name": "水中",
+        "description": "水中に設置したか（true/false）"
+      },
+      "place_method": {
+        "name": "設置方法",
+        "description": "設置方法名"
+      },
+      "item": {
+        "name": "ｱｲﾃﾑ",
+        "description": "所持アイテム（設置前）→ 所持アイテム情報取得ノードへ"
+      }
     }
   },
   "OnItemInteracted": {
     "displayName": "アイテムを使った",
     "menuDisplayName": "ｱｲﾃﾑ使用",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "item":     { "name": "ｱｲﾃﾑ", "description": "【null許容】所持アイテム。なし → null" },
-      "player":   { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" },
-      "use_method": { "name": "使用方法", "description": "アイテム使用方法名" }
+      "item": {
+        "name": "ｱｲﾃﾑ",
+        "description": "【null許容】所持アイテム。なし → null"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      },
+      "use_method": {
+        "name": "使用方法",
+        "description": "アイテム使用方法名"
+      }
     }
   },
   "OnItemAcquired": {
     "displayName": "アイテム取得",
     "menuDisplayName": "ｱｲﾃﾑ取得",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "count":      { "name": "個数", "description": "取得したアイテムの個数" },
-      "item":     { "name": "ｱｲﾃﾑ", "description": "アイテム種別 → アイテム種別情報取得ノードへ" },
-      "player":   { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" },
-      "acq_method": { "name": "取得方法", "description": "アイテム取得方法名" }
+      "count": {
+        "name": "個数",
+        "description": "取得したアイテムの個数"
+      },
+      "item": {
+        "name": "ｱｲﾃﾑ",
+        "description": "アイテム種別 → アイテム種別情報取得ノードへ"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      },
+      "acq_method": {
+        "name": "取得方法",
+        "description": "アイテム取得方法名"
+      }
     }
   },
   "OnItemCrafted": {
     "displayName": "アイテムをクラフト",
     "menuDisplayName": "ｸﾗﾌﾄ",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "item":     { "name": "ｱｲﾃﾑ", "description": "所持アイテム（クラフトしたアイテム）→ 所持アイテム情報取得ノードへ" },
-      "player":   { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" },
-      "used_table": { "name": "ｸﾗﾌﾄ台使用", "description": "クラフトテーブルを使用したか（true/false）" }
+      "item": {
+        "name": "ｱｲﾃﾑ",
+        "description": "所持アイテム（クラフトしたアイテム）→ 所持アイテム情報取得ノードへ"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      },
+      "used_table": {
+        "name": "ｸﾗﾌﾄ台使用",
+        "description": "クラフトテーブルを使用したか（true/false）"
+      }
     }
   },
   "OnItemEquipped": {
     "displayName": "アイテムを装備",
     "menuDisplayName": "ｱｲﾃﾑ装備",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "item":     { "name": "ｱｲﾃﾑ", "description": "所持アイテム → 所持アイテム情報取得ノードへ" },
-      "player":   { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" },
-      "equip_slot": { "name": "装備スロット", "description": "装備スロット名" }
+      "item": {
+        "name": "ｱｲﾃﾑ",
+        "description": "所持アイテム → 所持アイテム情報取得ノードへ"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      },
+      "equip_slot": {
+        "name": "装備スロット",
+        "description": "装備スロット名"
+      }
     }
   },
   "OnItemSmelted": {
     "displayName": "アイテムを精錬",
     "menuDisplayName": "ｱｲﾃﾑ精錬",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "item":   { "name": "ｱｲﾃﾑ", "description": "アイテム種別（精錬されたアイテム）→ アイテム種別情報取得ノードへ" },
-      "player": { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" },
-      "fuel":   { "name": "燃料", "description": "アイテム種別（燃料アイテム）→ アイテム種別情報取得ノードへ" }
+      "item": {
+        "name": "ｱｲﾃﾑ",
+        "description": "アイテム種別（精錬されたアイテム）→ アイテム種別情報取得ノードへ"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      },
+      "fuel": {
+        "name": "燃料",
+        "description": "アイテム種別（燃料アイテム）→ アイテム種別情報取得ノードへ"
+      }
     }
   },
   "OnItemTraded": {
     "displayName": "アイテムを取引",
     "menuDisplayName": "ｱｲﾃﾑ取引",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "item":      { "name": "ｱｲﾃﾑ", "description": "所持アイテム（受け取ったアイテム）→ 所持アイテム情報取得ノードへ" },
-      "villager":  { "name": "村人", "description": "WorldVillager オブジェクト → 村人情報取得ノードへ" },
-      "player":    { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" },
-      "payment_a": { "name": "支払A", "description": "アイテム種別（支払いアイテムA）→ アイテム種別情報取得ノードへ" },
-      "payment_b": { "name": "支払B", "description": "【null許容】アイテム種別（支払いアイテムB）。不要な取引では null" },
-      "player_xp":   { "name": "ﾌﾟﾚｲﾔｰEM数", "description": "プレイヤーが取引後に持っているエメラルド数" },
-      "villager_xp": { "name": "村人EM数", "description": "村人が取引後に持っているエメラルド数" }
+      "item": {
+        "name": "ｱｲﾃﾑ",
+        "description": "所持アイテム（受け取ったアイテム）→ 所持アイテム情報取得ノードへ"
+      },
+      "villager": {
+        "name": "村人",
+        "description": "WorldVillager オブジェクト → 村人情報取得ノードへ"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      },
+      "payment_a": {
+        "name": "支払A",
+        "description": "アイテム種別（支払いアイテムA）→ アイテム種別情報取得ノードへ"
+      },
+      "payment_b": {
+        "name": "支払B",
+        "description": "【null許容】アイテム種別（支払いアイテムB）。不要な取引では null"
+      },
+      "player_xp": {
+        "name": "ﾌﾟﾚｲﾔｰEM数",
+        "description": "プレイヤーが取引後に持っているエメラルド数"
+      },
+      "villager_xp": {
+        "name": "村人EM数",
+        "description": "村人が取引後に持っているエメラルド数"
+      }
     }
   },
   "OnMobInteracted": {
     "displayName": "モブと交流",
     "menuDisplayName": "ﾓﾌﾞ交流",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "mob":            { "name": "ﾓﾌﾞ", "description": "WorldMob オブジェクト（交流したモブ）" },
-      "player":         { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" },
-      "interaction_type": { "name": "交流種別", "description": "モブ交流種別名" }
+      "mob": {
+        "name": "ﾓﾌﾞ",
+        "description": "WorldMob オブジェクト（交流したモブ）"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      },
+      "interaction_type": {
+        "name": "交流種別",
+        "description": "モブ交流種別名"
+      }
     }
   },
   "OnTargetBlockHit": {
     "displayName": "的ブロック命中",
     "menuDisplayName": "的命中",
     "inputs": {
-      "world": { "name": "ワールド", "description": "Minecraft接続ノードのワールド出力" }
+      "world": {
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
+      }
     },
     "outputs": {
-      "strength": { "name": "強さ", "description": "レッドストーン信号の強さ（0〜15）" },
-      "player": { "name": "ﾌﾟﾚｲﾔｰ", "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ" }
+      "strength": {
+        "name": "強さ",
+        "description": "レッドストーン信号の強さ（0〜15）"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
+      }
     }
   },
   "RunCommand": {
     "displayName": "コマンド実行",
     "menuDisplayName": "ｺﾏﾝﾄﾞ実行",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" },
-      "command": { "name": "コマンド", "description": "実行するコマンド（/ は不要）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      },
+      "command": {
+        "name": "コマンド",
+        "description": "実行するコマンド（/ は不要）"
+      }
     },
     "outputs": {
-      "done": { "name": "完了" }
+      "done": {
+        "name": "完了"
+      }
     }
   },
   "GetGameTime": {
     "displayName": "ゲーム内時刻取得",
     "menuDisplayName": "ゲーム時刻",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" },
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      },
       "type": {
         "name": "種別",
         "description": "取得する時刻の種別",
-        "options": { "time": "時刻 (0〜24000)", "day": "日数", "tick": "ティック数" }
+        "options": {
+          "time": "時刻 (0〜24000)",
+          "day": "日数",
+          "tick": "ティック数"
+        }
       }
     },
     "outputs": {
-      "value": { "name": "値" }
+      "value": {
+        "name": "値"
+      }
     }
   },
   "IsDaytime": {
     "displayName": "昼夜判定",
     "menuDisplayName": "昼夜判定",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "is_day": { "name": "昼" }
+      "is_day": {
+        "name": "昼"
+      }
     }
   },
   "GetWeather": {
     "displayName": "天気を取得",
     "menuDisplayName": "天気取得",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "weather": { "name": "天気" }
+      "weather": {
+        "name": "天気"
+      }
     }
   },
   "FillBlocks": {
     "displayName": "エリアを塗りつぶす",
     "menuDisplayName": "ｴﾘｱ塗りつぶし",
     "inputs": {
-      "trigger":  { "name": "トリガー",  "description": "トリガー（任意）" },
-      "from":     { "name": "始点",     "description": "始点 {x, y, z}" },
-      "to":       { "name": "終点",     "description": "終点 {x, y, z}" },
-      "block_id": { "name": "ブロックID", "description": "ブロックID（例: minecraft:stone）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      },
+      "from": {
+        "name": "始点",
+        "description": "始点 {x, y, z}"
+      },
+      "to": {
+        "name": "終点",
+        "description": "終点 {x, y, z}"
+      },
+      "block_id": {
+        "name": "ブロックID",
+        "description": "ブロックID（例: minecraft:stone）"
+      }
     },
     "outputs": {
-      "done":  { "name": "完了" },
-      "count": { "name": "個数" }
+      "done": {
+        "name": "完了"
+      },
+      "count": {
+        "name": "個数"
+      }
     }
   },
   "GetTopSolidBlock": {
     "displayName": "地面の高さを取得",
     "menuDisplayName": "地面高さ",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "position":   { "name": "座標" },
-      "block_name": { "name": "ブロック名" }
+      "position": {
+        "name": "座標"
+      },
+      "block_name": {
+        "name": "ブロック名"
+      }
     }
   },
   "WorldQuery": {
     "displayName": "ワールドクエリ",
     "menuDisplayName": "ﾜｰﾙﾄﾞｸｴﾘ",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" },
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      },
       "type": {
         "name": "種別",
         "description": "取得する種別",
-        "options": { "mob": "エンティティ", "block": "ブロック", "item": "アイテム" }
+        "options": {
+          "mob": "エンティティ",
+          "block": "ブロック",
+          "item": "アイテム"
+        }
       }
     },
     "outputs": {
-      "list": { "name": "一覧" }
+      "list": {
+        "name": "一覧"
+      }
     }
   },
   "GetPlayerLocation": {
     "displayName": "プレイヤー座標取得",
     "menuDisplayName": "ﾌﾟﾚｲﾔｰ座標",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "position":  { "name": "座標" },
-      "direction": { "name": "向き" }
+      "position": {
+        "name": "座標"
+      },
+      "direction": {
+        "name": "向き"
+      }
     }
   },
   "GetPlayerOrientation": {
     "displayName": "プレイヤー向き取得",
     "menuDisplayName": "ﾌﾟﾚｲﾔｰ向き",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "angle": { "name": "角度" }
+      "angle": {
+        "name": "角度"
+      }
     }
   },
   "GetPlayerTags": {
     "displayName": "プレイヤータグ一覧取得",
     "menuDisplayName": "PLタグ一覧",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "tags": { "name": "タグ一覧" }
+      "tags": {
+        "name": "タグ一覧"
+      }
     }
   },
   "PlayerHasTag": {
     "displayName": "プレイヤータグ判定",
     "menuDisplayName": "PLタグ判定",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" },
-      "tag":     { "name": "タグ",     "description": "判定するタグ名" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      },
+      "tag": {
+        "name": "タグ",
+        "description": "判定するタグ名"
+      }
     },
     "outputs": {
-      "result": { "name": "結果" }
+      "result": {
+        "name": "結果"
+      }
     }
   },
   "GetPlayerLevel": {
     "displayName": "プレイヤーレベル取得",
     "menuDisplayName": "PLレベル",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "level": { "name": "レベル" }
+      "level": {
+        "name": "レベル"
+      }
     }
   },
   "GetGameMode": {
     "displayName": "ゲームモード取得",
     "menuDisplayName": "ゲームモード",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "game_mode": { "name": "ゲームモード" }
+      "game_mode": {
+        "name": "ゲームモード"
+      }
     }
   },
   "GetPlayerAbilities": {
     "displayName": "プレイヤーアビリティ取得",
     "menuDisplayName": "PLアビリティ",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "abilities": { "name": "アビリティ" }
+      "abilities": {
+        "name": "アビリティ"
+      }
     }
   },
   "GetPlayers": {
     "displayName": "プレイヤー一覧取得",
     "menuDisplayName": "PL一覧",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "players": { "name": "プレイヤー一覧" }
+      "players": {
+        "name": "プレイヤー一覧"
+      }
     }
   },
   "GetLocalPlayer": {
     "displayName": "ローカルプレイヤー取得",
     "menuDisplayName": "ローカルPL",
     "inputs": {
-      "trigger": { "name": "トリガー", "description": "トリガー（任意）" }
+      "trigger": {
+        "name": "トリガー",
+        "description": "トリガー（任意）"
+      }
     },
     "outputs": {
-      "player": { "name": "プレイヤー" }
+      "player": {
+        "name": "プレイヤー"
+      }
     }
   },
   "GetFromEntity": {
     "displayName": "エンティティ情報取得",
     "menuDisplayName": "ｴﾝﾃｨﾃｨ情報",
     "inputs": {
-      "entity": { "name": "ｴﾝﾃｨﾃｨ", "description": "プレイヤーまたは村人オブジェクト（ﾌﾟﾚｲﾔｰ・村人 出力）" }
+      "entity": {
+        "name": "ｴﾝﾃｨﾃｨ",
+        "description": "プレイヤーまたは村人オブジェクト（ﾌﾟﾚｲﾔｰ・村人 出力）"
+      }
     },
     "outputs": {
-      "position":  { "name": "座標",       "description": "エンティティの座標（position）" },
-      "direction": { "name": "向き",       "description": "Y軸の回転角（yRot）" },
-      "dimension": { "name": "ﾃﾞｨﾒﾝｼｮﾝ", "description": "ディメンション番号（dimension）" },
-      "type":      { "name": "種別",       "description": "種別文字列（type）" },
-      "variant":   { "name": "バリアント", "description": "バリアント番号（variant）" },
-      "ID":        { "name": "ID",         "description": "エンティティID番号（id）" }
+      "position": {
+        "name": "座標",
+        "description": "エンティティの座標（position）"
+      },
+      "direction": {
+        "name": "向き",
+        "description": "Y軸の回転角（yRot）"
+      },
+      "dimension": {
+        "name": "ﾃﾞｨﾒﾝｼｮﾝ",
+        "description": "ディメンション番号（dimension）"
+      },
+      "type": {
+        "name": "種別",
+        "description": "種別文字列（type）"
+      },
+      "variant": {
+        "name": "バリアント",
+        "description": "バリアント番号（variant）"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "エンティティID番号（id）"
+      }
     }
   },
   "GetFromPlayerSnapshot": {
     "displayName": "プレイヤー情報取得",
     "menuDisplayName": "ﾌﾟﾚｲﾔｰ情報",
     "inputs": {
-      "player": { "name": "ﾌﾟﾚｲﾔｰ", "description": "イベントノードの ﾌﾟﾚｲﾔｰ 出力（プレイヤーオブジェクト）" }
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "イベントノードの ﾌﾟﾚｲﾔｰ 出力（プレイヤーオブジェクト）"
+      }
     },
     "outputs": {
-      "name":     { "name": "名前",     "description": "プレイヤー名（name）" },
-      "color":    { "name": "カラー",   "description": "マップマーカー色（color）" },
-      "entity": { "name": "ｴﾝﾃｨﾃｨ", "description": "エンティティ情報取得ノードに接続" }
+      "name": {
+        "name": "名前",
+        "description": "プレイヤー名（name）"
+      },
+      "color": {
+        "name": "カラー",
+        "description": "マップマーカー色（color）"
+      },
+      "entity": {
+        "name": "ｴﾝﾃｨﾃｨ",
+        "description": "エンティティ情報取得ノードに接続"
+      }
     }
   },
   "GetFromItemType": {
     "displayName": "アイテム種別情報取得",
     "menuDisplayName": "ｱｲﾃﾑ種別情報",
     "inputs": {
-      "item": { "name": "ｱｲﾃﾑ", "description": "アイテム種別（アイテム取得・精錬イベントの ｱｲﾃﾑ 出力）" }
+      "item": {
+        "name": "ｱｲﾃﾑ",
+        "description": "アイテム種別（アイテム取得・精錬イベントの ｱｲﾃﾑ 出力）"
+      }
     },
     "outputs": {
-      "item_id": { "name": "アイテムID", "description": "アイテムID文字列（id）" },
-      "data":    { "name": "データ値",   "description": "データ値（data）" }
+      "item_id": {
+        "name": "アイテムID",
+        "description": "アイテムID文字列（id）"
+      },
+      "data": {
+        "name": "データ値",
+        "description": "データ値（data）"
+      }
     }
   },
   "GetFromItemStack": {
     "displayName": "所持アイテム情報取得",
     "menuDisplayName": "所持ｱｲﾃﾑ情報",
     "inputs": {
-      "item": { "name": "ｱｲﾃﾑ", "description": "所持アイテム（使用・装備・クラフト・取引イベントの ｱｲﾃﾑ 出力）" }
+      "item": {
+        "name": "ｱｲﾃﾑ",
+        "description": "所持アイテム（使用・装備・クラフト・取引イベントの ｱｲﾃﾑ 出力）"
+      }
     },
     "outputs": {
-      "item_id":   { "name": "アイテムID", "description": "アイテムID文字列（typeId）" },
-      "count":     { "name": "個数",       "description": "個数（amount）" },
-      "max_count": { "name": "最大個数",   "description": "最大スタック数（maxAmount）" },
-      "data":      { "name": "データ値",   "description": "データ値（data）" }
+      "item_id": {
+        "name": "アイテムID",
+        "description": "アイテムID文字列（typeId）"
+      },
+      "count": {
+        "name": "個数",
+        "description": "個数（amount）"
+      },
+      "max_count": {
+        "name": "最大個数",
+        "description": "最大スタック数（maxAmount）"
+      },
+      "data": {
+        "name": "データ値",
+        "description": "データ値（data）"
+      }
     }
   },
   "GetFromBlockType": {
     "displayName": "ブロック情報取得",
     "menuDisplayName": "ﾌﾞﾛｯｸ情報",
     "inputs": {
-      "block": { "name": "ﾌﾞﾛｯｸ", "description": "ブロック種別オブジェクト（ブロック・バウンスイベントの ﾌﾞﾛｯｸ 出力）" }
+      "block": {
+        "name": "ﾌﾞﾛｯｸ",
+        "description": "ブロック種別オブジェクト（ブロック・バウンスイベントの ﾌﾞﾛｯｸ 出力）"
+      }
     },
     "outputs": {
-      "block_id": { "name": "ブロックID", "description": "ブロックID文字列（id）" },
-      "data":     { "name": "データ値",   "description": "データ値（data）" }
+      "block_id": {
+        "name": "ブロックID",
+        "description": "ブロックID文字列（id）"
+      },
+      "data": {
+        "name": "データ値",
+        "description": "データ値（data）"
+      }
     }
   },
   "GetFromScoreboardObjective": {
     "displayName": "スコアボード目標情報取得",
     "menuDisplayName": "SB目標情報",
     "inputs": {
-      "objective": { "name": "目標", "description": "スコアボード目標追加・取得ノードの 目標 出力" }
+      "objective": {
+        "name": "目標",
+        "description": "スコアボード目標追加・取得ノードの 目標 出力"
+      }
     },
     "outputs": {
-      "objective_id": { "name": "目標ID", "description": "目標ID文字列（id）" },
-      "display_name": { "name": "表示名", "description": "表示名（displayName）" }
+      "objective_id": {
+        "name": "目標ID",
+        "description": "目標ID文字列（id）"
+      },
+      "display_name": {
+        "name": "表示名",
+        "description": "表示名（displayName）"
+      }
     }
   },
   "GetFromMob": {
     "displayName": "モブ情報取得",
     "menuDisplayName": "ﾓﾌﾞ情報",
     "inputs": {
-      "mob": { "name": "ﾓﾌﾞ", "description": "モブと交流イベントの ﾓﾌﾞ 出力" }
+      "mob": {
+        "name": "ﾓﾌﾞ",
+        "description": "モブと交流イベントの ﾓﾌﾞ 出力"
+      }
     },
     "outputs": {
-      "type":    { "name": "種別",       "description": "モブ種別番号（type）" },
-      "color":   { "name": "カラー",     "description": "カラー番号（color）" },
-      "variant": { "name": "バリアント", "description": "バリアント番号（variant）" }
+      "type": {
+        "name": "種別",
+        "description": "モブ種別番号（type）"
+      },
+      "color": {
+        "name": "カラー",
+        "description": "カラー番号（color）"
+      },
+      "variant": {
+        "name": "バリアント",
+        "description": "バリアント番号（variant）"
+      }
     }
   },
   "GetFromVillager": {
     "displayName": "村人情報取得",
     "menuDisplayName": "村人情報",
     "inputs": {
-      "villager": { "name": "村人", "description": "村人オブジェクト（アイテム取引イベントの 村人 出力）" }
+      "villager": {
+        "name": "村人",
+        "description": "村人オブジェクト（アイテム取引イベントの 村人 出力）"
+      }
     },
     "outputs": {
-      "name":     { "name": "名前",     "description": "村人名（trader.name）" },
-      "rank":     { "name": "ランク",   "description": "取引ランク（trader.tier）" },
-      "entity": { "name": "ｴﾝﾃｨﾃｨ", "description": "エンティティ情報取得ノードに接続" }
+      "name": {
+        "name": "名前",
+        "description": "村人名（trader.name）"
+      },
+      "rank": {
+        "name": "ランク",
+        "description": "取引ランク（trader.tier）"
+      },
+      "entity": {
+        "name": "ｴﾝﾃｨﾃｨ",
+        "description": "エンティティ情報取得ノードに接続"
+      }
     }
   },
   "Selector": {
@@ -617,60 +1140,101 @@
         "name": "種別",
         "description": "選択する値の種別",
         "options": {
-          "block":            "🧱 ブロック",
-          "item":             "🎒 アイテム",
-          "mob":              "🐾 モブ",
-          "TravelMethod":     "🚶 移動方法",
-          "TeleportCause":    "✨ テレポート原因",
-          "MobInteraction":   "🐄 モブ交流",
-          "ItemUseMethod":    "🤚 アイテム使用",
-          "ItemAcqMethod":    "📦 アイテム取得",
-          "EquipSlot":        "🪖 装備スロット",
+          "block": "🧱 ブロック",
+          "item": "🎒 アイテム",
+          "mob": "🐾 モブ",
+          "TravelMethod": "🚶 移動方法",
+          "TeleportCause": "✨ テレポート原因",
+          "MobInteraction": "🐄 モブ交流",
+          "ItemUseMethod": "🤚 アイテム使用",
+          "ItemAcqMethod": "📦 アイテム取得",
+          "EquipSlot": "🪖 装備スロット",
           "BlockBreakMethod": "⛏️ 破壊方法",
           "BlockPlaceMethod": "🏗️ 設置方法"
         }
       },
-      "block":            { "name": "ブロック",     "description": "ブロックID" },
-      "item":             { "name": "アイテム",     "description": "アイテムID" },
-      "mob":              { "name": "モブ",         "description": "モブ（エンティティ）ID" },
-      "TravelMethod":     { "name": "移動方法",     "description": "移動方法" },
-      "TeleportCause":    { "name": "テレポート原因", "description": "テレポート原因" },
-      "MobInteraction":   { "name": "モブ交流",     "description": "モブ交流種別" },
-      "ItemUseMethod":    { "name": "アイテム使用", "description": "アイテム使用方法" },
-      "ItemAcqMethod":    { "name": "アイテム取得", "description": "アイテム取得方法" },
-      "EquipSlot":        { "name": "装備スロット", "description": "装備スロット" },
-      "BlockBreakMethod": { "name": "破壊方法",     "description": "ブロック破壊方法" },
-      "BlockPlaceMethod": { "name": "設置方法",     "description": "ブロック設置方法" }
+      "block": {
+        "name": "ブロック",
+        "description": "ブロックID"
+      },
+      "item": {
+        "name": "アイテム",
+        "description": "アイテムID"
+      },
+      "mob": {
+        "name": "モブ",
+        "description": "モブ（エンティティ）ID"
+      },
+      "TravelMethod": {
+        "name": "移動方法",
+        "description": "移動方法"
+      },
+      "TeleportCause": {
+        "name": "テレポート原因",
+        "description": "テレポート原因"
+      },
+      "MobInteraction": {
+        "name": "モブ交流",
+        "description": "モブ交流種別"
+      },
+      "ItemUseMethod": {
+        "name": "アイテム使用",
+        "description": "アイテム使用方法"
+      },
+      "ItemAcqMethod": {
+        "name": "アイテム取得",
+        "description": "アイテム取得方法"
+      },
+      "EquipSlot": {
+        "name": "装備スロット",
+        "description": "装備スロット"
+      },
+      "BlockBreakMethod": {
+        "name": "破壊方法",
+        "description": "ブロック破壊方法"
+      },
+      "BlockPlaceMethod": {
+        "name": "設置方法",
+        "description": "ブロック設置方法"
+      }
     },
     "outputs": {
-      "value": { "name": "値" }
+      "value": {
+        "name": "値"
+      }
     }
   },
   "ToJa": {
     "displayName": "日本語変換",
     "menuDisplayName": "日本語変換",
     "inputs": {
-      "value": { "name": "値", "description": "Minecraft ID（\"minecraft:stone\" など）またはイベント値（\"Walk\" など）" },
+      "value": {
+        "name": "値",
+        "description": "Minecraft ID（\"minecraft:stone\" など）またはイベント値（\"Walk\" など）"
+      },
       "type": {
         "name": "種別",
         "description": "どの種別として変換するか",
         "options": {
-          "block":            "ブロックID",
-          "item":             "アイテムID",
-          "mob":              "モブID",
-          "TravelMethod":     "移動方法",
-          "TeleportCause":    "テレポート原因",
-          "MobInteraction":   "モブ交流種別",
-          "ItemUseMethod":    "アイテム使用方法",
-          "ItemAcqMethod":    "アイテム取得方法",
-          "EquipSlot":        "装備スロット",
+          "block": "ブロックID",
+          "item": "アイテムID",
+          "mob": "モブID",
+          "TravelMethod": "移動方法",
+          "TeleportCause": "テレポート原因",
+          "MobInteraction": "モブ交流種別",
+          "ItemUseMethod": "アイテム使用方法",
+          "ItemAcqMethod": "アイテム取得方法",
+          "EquipSlot": "装備スロット",
           "BlockBreakMethod": "ブロック破壊方法",
           "BlockPlaceMethod": "ブロック設置方法"
         }
       }
     },
     "outputs": {
-      "name": { "name": "日本語名", "description": "日本語に変換した名前（見つからない場合は入力値をそのまま返す）" }
+      "name": {
+        "name": "日本語名",
+        "description": "日本語に変換した名前（見つからない場合は入力値をそのまま返す）"
+      }
     }
   },
   "Vector3Op": {
@@ -682,92 +1246,732 @@
         "description": "演算の種類",
         "options": {
           "assemble": "🔧 組み立てる",
-          "add":      "➕ 足す",
+          "add": "➕ 足す",
           "subtract": "➖ 引く",
-          "scale":    "✖️ スケール",
-          "floor":    "⬇️ 切り捨て",
-          "fill_y":   "📐 Y補完"
+          "scale": "✖️ スケール",
+          "floor": "⬇️ 切り捨て",
+          "fill_y": "📐 Y補完"
         }
       },
-      "x":        { "name": "x",     "description": "X座標" },
-      "y":        { "name": "y",     "description": "Y座標" },
-      "z":        { "name": "z",     "description": "Z座標" },
-      "pos_a":    { "name": "座標A", "description": "ベース座標 {x,y,z}" },
-      "pos_b":    { "name": "座標B", "description": "相手座標 {x,y,z}" },
-      "position": { "name": "座標",  "description": "座標 {x,y,z}" },
-      "scale":    { "name": "倍率",  "description": "スカラー倍率（例: 2 で2倍）" },
-      "pos_xz":   { "name": "座標XZ", "description": "2D座標 {x,z}" },
-      "Y":        { "name": "Y",     "description": "Y座標の値" }
+      "x": {
+        "name": "x",
+        "description": "X座標"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y座標"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z座標"
+      },
+      "pos_a": {
+        "name": "座標A",
+        "description": "ベース座標 {x,y,z}"
+      },
+      "pos_b": {
+        "name": "座標B",
+        "description": "相手座標 {x,y,z}"
+      },
+      "position": {
+        "name": "座標",
+        "description": "座標 {x,y,z}"
+      },
+      "scale": {
+        "name": "倍率",
+        "description": "スカラー倍率（例: 2 で2倍）"
+      },
+      "pos_xz": {
+        "name": "座標XZ",
+        "description": "2D座標 {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Y座標の値"
+      }
     },
     "outputs": {
-      "result": { "name": "座標", "description": "演算結果の座標 {x,y,z}" }
+      "result": {
+        "name": "座標",
+        "description": "演算結果の座標 {x,y,z}"
+      }
     }
   },
   "Vector3Distance": {
     "displayName": "座標間の距離",
     "menuDisplayName": "距離",
     "inputs": {
-      "pos_a": { "name": "座標A", "description": "始点 {x,y,z}" },
-      "pos_b": { "name": "座標B", "description": "終点 {x,y,z}" }
+      "pos_a": {
+        "name": "座標A",
+        "description": "始点 {x,y,z}"
+      },
+      "pos_b": {
+        "name": "座標B",
+        "description": "終点 {x,y,z}"
+      }
     },
     "outputs": {
-      "distance": { "name": "距離" }
+      "distance": {
+        "name": "距離"
+      }
     }
   },
   "Vector3ToString": {
     "displayName": "座標を文字列に変換",
     "menuDisplayName": "座標→文字列",
     "inputs": {
-      "position": { "name": "座標", "description": "変換する座標 {x,y,z}" }
+      "position": {
+        "name": "座標",
+        "description": "変換する座標 {x,y,z}"
+      }
     },
     "outputs": {
-      "text": { "name": "文字列" }
+      "text": {
+        "name": "文字列"
+      }
     }
   },
   "Vector3Split": {
     "displayName": "座標を分解",
     "menuDisplayName": "座標分解",
     "inputs": {
-      "position": { "name": "座標", "description": "分解する座標 {x,y,z}" }
+      "position": {
+        "name": "座標",
+        "description": "分解する座標 {x,y,z}"
+      }
     },
     "outputs": {
-      "x": { "name": "x" },
-      "y": { "name": "y" },
-      "z": { "name": "z" }
+      "x": {
+        "name": "x"
+      },
+      "y": {
+        "name": "y"
+      },
+      "z": {
+        "name": "z"
+      }
     }
   },
   "ClampNumber": {
     "displayName": "数値を範囲に収める",
     "menuDisplayName": "数値Clamp",
     "inputs": {
-      "value": { "name": "値",  "description": "クランプする数値" },
-      "min":   { "name": "最小", "description": "下限値" },
-      "max":   { "name": "最大", "description": "上限値" }
+      "value": {
+        "name": "値",
+        "description": "クランプする数値"
+      },
+      "min": {
+        "name": "最小",
+        "description": "下限値"
+      },
+      "max": {
+        "name": "最大",
+        "description": "上限値"
+      }
     },
     "outputs": {
-      "result": { "name": "結果" }
+      "result": {
+        "name": "結果"
+      }
     }
   },
   "AABBCreate": {
     "displayName": "エリアを作る",
     "menuDisplayName": "AABB作成",
     "inputs": {
-      "corner_a": { "name": "角座標A", "description": "エリアの角1 {x,y,z}（順序不問）" },
-      "corner_b": { "name": "角座標B", "description": "エリアの角2 {x,y,z}（順序不問）" }
+      "corner_a": {
+        "name": "角座標A",
+        "description": "エリアの角1 {x,y,z}（順序不問）"
+      },
+      "corner_b": {
+        "name": "角座標B",
+        "description": "エリアの角2 {x,y,z}（順序不問）"
+      }
     },
     "outputs": {
-      "area": { "name": "エリア" }
+      "area": {
+        "name": "エリア"
+      }
     }
   },
   "AABBIsInside": {
     "displayName": "エリア内判定",
     "menuDisplayName": "AABB内判定",
     "inputs": {
-      "area":     { "name": "エリア", "description": "AABBエリア {min,max}" },
-      "position": { "name": "座標",  "description": "判定する座標 {x,y,z}" }
+      "area": {
+        "name": "エリア",
+        "description": "AABBエリア {min,max}"
+      },
+      "position": {
+        "name": "座標",
+        "description": "判定する座標 {x,y,z}"
+      }
     },
     "outputs": {
-      "result": { "name": "結果" }
+      "result": {
+        "name": "結果"
+      }
+    }
+  },
+  "SendMessage": {
+    "displayName": "メッセージ送信",
+    "menuDisplayName": "MSG送信",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "message": {
+        "name": "メッセージ"
+      },
+      "target": {
+        "name": "送信先"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "SetTimeOfDay": {
+    "displayName": "時刻設定",
+    "menuDisplayName": "時刻設定",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "time": {
+        "name": "時刻",
+        "description": "0〜24000。朝=1000,昼=6000,夕=12000,夜=13000"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "SetWeather": {
+    "displayName": "天気設定",
+    "menuDisplayName": "天気設定",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "weather": {
+        "name": "天気",
+        "options": {
+          "Clear": "晴れ",
+          "Rain": "雨",
+          "Thunder": "雷雨"
+        }
+      },
+      "duration": {
+        "name": "継続時間",
+        "description": "tick数（20tick=1秒）"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "SetBlock": {
+    "displayName": "ブロック設置",
+    "menuDisplayName": "ブロック設置",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "position": {
+        "name": "座標"
+      },
+      "block_id": {
+        "name": "ブロックID"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "GiveItem": {
+    "displayName": "アイテム付与",
+    "menuDisplayName": "アイテム付与",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "item_id": {
+        "name": "アイテムID"
+      },
+      "amount": {
+        "name": "個数"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "BroadcastCommand": {
+    "displayName": "全体コマンド実行",
+    "menuDisplayName": "全体CMD",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "command": {
+        "name": "コマンド"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "BroadcastMessage": {
+    "displayName": "全体MSG送信",
+    "menuDisplayName": "全体MSG",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "message": {
+        "name": "メッセージ"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "AddPlayerLevel": {
+    "displayName": "レベル加算",
+    "menuDisplayName": "レベル加算",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "level": {
+        "name": "レベル"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "SetGameMode": {
+    "displayName": "GMD設定",
+    "menuDisplayName": "GMD設定",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "mode": {
+        "name": "GMD",
+        "options": {
+          "Survival": "サバイバル",
+          "Creative": "クリエイティブ",
+          "Adventure": "アドベンチャー",
+          "Spectator": "スペクテイター"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "UpdateAbility": {
+    "displayName": "アビリティ変更",
+    "menuDisplayName": "アビリティ",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "ability": {
+        "name": "アビリティ",
+        "options": {
+          "mayfly": "飛行",
+          "mute": "ミュート",
+          "worldbuilder": "WLDビルダー"
+        }
+      },
+      "value": {
+        "name": "値"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "SetTitle": {
+    "displayName": "タイトル表示",
+    "menuDisplayName": "タイトル",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "title": {
+        "name": "タイトル"
+      },
+      "subtitle": {
+        "name": "サブタイトル"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "SetActionBar": {
+    "displayName": "アクションバー",
+    "menuDisplayName": "ACTIONバー",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "text": {
+        "name": "テキスト"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "ClearTitle": {
+    "displayName": "タイトル消去",
+    "menuDisplayName": "タイトル消去",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "PLY位置変化",
+    "menuDisplayName": "位置変化",
+    "inputs": {
+      "world": {
+        "name": "ワールド"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "座標"
+      },
+      "direction": {
+        "name": "向き"
+      },
+      "player": {
+        "name": "ﾌﾟﾚｲﾔｰ"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "エージェント移動",
+    "menuDisplayName": "AGT移動",
+    "inputs": {
+      "direction": {
+        "name": "方向",
+        "options": {
+          "forward": "前",
+          "back": "後",
+          "left": "左",
+          "right": "右",
+          "up": "上",
+          "down": "下"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "エージェント回転",
+    "menuDisplayName": "AGT回転",
+    "inputs": {
+      "direction": {
+        "name": "方向",
+        "options": {
+          "left": "左",
+          "right": "右"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "エージェントTP",
+    "menuDisplayName": "AGTTP",
+    "inputs": {
+      "trigger": {
+        "name": "トリガー"
+      },
+      "position": {
+        "name": "座標"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "エージェント行動",
+    "menuDisplayName": "AGT行動",
+    "inputs": {
+      "action": {
+        "name": "行動",
+        "options": {
+          "attack": "攻撃",
+          "destroyBlock": "破壊",
+          "till": "耕す",
+          "dropAllItems": "全捨て",
+          "inspect": "調べる",
+          "inspectData": "データ調査",
+          "detect": "検知",
+          "detectRedstone": "RS検知"
+        }
+      },
+      "direction": {
+        "name": "方向",
+        "options": {
+          "forward": "前",
+          "back": "後",
+          "left": "左",
+          "right": "右",
+          "up": "上",
+          "down": "下"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "ブロック設置(AGT)",
+    "menuDisplayName": "AGTブロック",
+    "inputs": {
+      "direction": {
+        "name": "方向",
+        "options": {
+          "forward": "前",
+          "back": "後",
+          "left": "左",
+          "right": "右",
+          "up": "上",
+          "down": "下"
+        }
+      },
+      "slot": {
+        "name": "スロット"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "アイテム投棄(AGT)",
+    "menuDisplayName": "AGT投棄",
+    "inputs": {
+      "direction": {
+        "name": "方向",
+        "options": {
+          "forward": "前",
+          "back": "後",
+          "left": "左",
+          "right": "右",
+          "up": "上",
+          "down": "下"
+        }
+      },
+      "slot": {
+        "name": "スロット"
+      },
+      "amount": {
+        "name": "個数"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "スロット移動(AGT)",
+    "menuDisplayName": "AGTスロット",
+    "inputs": {
+      "from_slot": {
+        "name": "元スロット"
+      },
+      "to_slot": {
+        "name": "先スロット"
+      },
+      "amount": {
+        "name": "個数"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "アイテムセット(AGT)",
+    "menuDisplayName": "AGTセット",
+    "inputs": {
+      "slot": {
+        "name": "スロット"
+      },
+      "item_id": {
+        "name": "アイテムID"
+      },
+      "amount": {
+        "name": "個数"
+      },
+      "data": {
+        "name": "データ値"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "アイテム収集(AGT)",
+    "menuDisplayName": "AGT収集",
+    "inputs": {
+      "item_id": {
+        "name": "アイテムID"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "座標補間",
+    "menuDisplayName": "座標補間",
+    "inputs": {
+      "pos_a": {
+        "name": "座標A"
+      },
+      "pos_b": {
+        "name": "座標B"
+      },
+      "t": {
+        "name": "補間値"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "結果"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "正規化ベクトル",
+    "menuDisplayName": "正規化",
+    "inputs": {
+      "position": {
+        "name": "座標"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "結果"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "内積",
+    "menuDisplayName": "内積",
+    "inputs": {
+      "pos_a": {
+        "name": "座標A"
+      },
+      "pos_b": {
+        "name": "座標B"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "値"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "エリア移動",
+    "menuDisplayName": "AABB移動",
+    "inputs": {
+      "area": {
+        "name": "エリア"
+      },
+      "delta": {
+        "name": "移動量"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "エリア"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "エリア重複判定",
+    "menuDisplayName": "AABB重複",
+    "inputs": {
+      "area_a": {
+        "name": "エリアA"
+      },
+      "area_b": {
+        "name": "エリアB"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "結果"
+      }
     }
   }
 }

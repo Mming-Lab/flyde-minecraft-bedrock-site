@@ -1,13 +1,13 @@
-import type { World } from 'socket-be'
+import type { World, Player } from 'socket-be'
 
 interface McContext {
   world: World
-  player: any
+  player: Player
 }
 
 let _ctx: McContext | null = null
 
-export function setCurrentContext(world: World, player: any): void {
+export function setCurrentContext(world: World, player: Player): void {
   _ctx = { world, player }
 }
 

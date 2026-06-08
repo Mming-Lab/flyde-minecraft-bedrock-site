@@ -3,18 +3,28 @@
     "displayName": "Minecraft Connect",
     "menuDisplayName": "MC Connect",
     "inputs": {
-      "port": { "name": "port", "description": "WebSocket port number (default: 8080)" }
+      "port": {
+        "name": "port",
+        "description": "WebSocket port number (default: 8080)"
+      }
     },
     "outputs": {
-      "world": { "name": "world" },
-      "error": { "name": "error" }
+      "world": {
+        "name": "world"
+      },
+      "error": {
+        "name": "error"
+      }
     }
   },
   "MinecraftDisconnect": {
     "displayName": "Minecraft Disconnect",
     "menuDisplayName": "MC Disconnect",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (e.g. chat 'stop')" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (e.g. chat 'stop')"
+      }
     },
     "outputs": {}
   },
@@ -22,591 +32,1104 @@
     "displayName": "Get Agent Location",
     "menuDisplayName": "Agent Pos",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "position": { "name": "position" }
+      "position": {
+        "name": "position"
+      }
     }
   },
   "GetScoreboardObjectives": {
     "displayName": "Get SB Objectives",
     "menuDisplayName": "SB Objectives",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "objectives": { "name": "objectives" }
+      "objectives": {
+        "name": "objectives"
+      }
     }
   },
   "GetScoreboardObjective": {
     "displayName": "Get SB Objective",
     "menuDisplayName": "SB Objective",
     "inputs": {
-      "trigger":      { "name": "trigger",      "description": "Trigger (optional)" },
-      "objective_id": { "name": "objective_id", "description": "Scoreboard objective ID" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      },
+      "objective_id": {
+        "name": "objective_id",
+        "description": "Scoreboard objective ID"
+      }
     },
     "outputs": {
-      "objective": { "name": "objective" }
+      "objective": {
+        "name": "objective"
+      }
     }
   },
   "AddScoreboardObjective": {
     "displayName": "Add SB Objective",
     "menuDisplayName": "SB Add Obj",
     "inputs": {
-      "trigger":      { "name": "trigger",      "description": "Trigger (optional)" },
-      "objective_id": { "name": "objective_id", "description": "Scoreboard objective ID" },
-      "display_name": { "name": "display_name", "description": "Display name (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      },
+      "objective_id": {
+        "name": "objective_id",
+        "description": "Scoreboard objective ID"
+      },
+      "display_name": {
+        "name": "display_name",
+        "description": "Display name (optional)"
+      }
     },
     "outputs": {
-      "objective": { "name": "objective" }
+      "objective": {
+        "name": "objective"
+      }
     }
   },
   "RemoveScoreboardObjective": {
     "displayName": "Remove SB Objective",
     "menuDisplayName": "SB Remove Obj",
     "inputs": {
-      "trigger":      { "name": "trigger",      "description": "Trigger (optional)" },
-      "objective_id": { "name": "objective_id", "description": "Scoreboard objective ID" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      },
+      "objective_id": {
+        "name": "objective_id",
+        "description": "Scoreboard objective ID"
+      }
     },
     "outputs": {
-      "result": { "name": "result" }
+      "result": {
+        "name": "result"
+      }
     }
   },
   "GetScores": {
     "displayName": "Get All Scores",
     "menuDisplayName": "All Scores",
     "inputs": {
-      "trigger":     { "name": "trigger",     "description": "Trigger (optional)" },
-      "player_name": { "name": "player_name", "description": "Player name" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      },
+      "player_name": {
+        "name": "player_name",
+        "description": "Player name"
+      }
     },
     "outputs": {
-      "scores": { "name": "scores" }
+      "scores": {
+        "name": "scores"
+      }
     }
   },
   "GetScore": {
     "displayName": "Get Score",
     "menuDisplayName": "Get Score",
     "inputs": {
-      "trigger":      { "name": "trigger",      "description": "Trigger (optional)" },
-      "player_name":  { "name": "player_name",  "description": "Player name" },
-      "objective_id": { "name": "objective_id", "description": "Scoreboard objective ID" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      },
+      "player_name": {
+        "name": "player_name",
+        "description": "Player name"
+      },
+      "objective_id": {
+        "name": "objective_id",
+        "description": "Scoreboard objective ID"
+      }
     },
     "outputs": {
-      "score": { "name": "score" }
+      "score": {
+        "name": "score"
+      }
     }
   },
   "ScoreOperation": {
     "displayName": "Score Operation",
     "menuDisplayName": "Score Op",
     "inputs": {
-      "trigger":      { "name": "trigger",      "description": "Trigger (optional)" },
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      },
       "operation": {
         "name": "operation",
         "description": "Operation type",
-        "options": { "add": "Add", "remove": "Remove", "set": "Set" }
+        "options": {
+          "add": "Add",
+          "remove": "Remove",
+          "set": "Set"
+        }
       },
-      "player_name":  { "name": "player_name",  "description": "Player name" },
-      "objective_id": { "name": "objective_id", "description": "Scoreboard objective ID" },
-      "value":        { "name": "value",        "description": "Value to operate with" }
+      "player_name": {
+        "name": "player_name",
+        "description": "Player name"
+      },
+      "objective_id": {
+        "name": "objective_id",
+        "description": "Scoreboard objective ID"
+      },
+      "value": {
+        "name": "value",
+        "description": "Value to operate with"
+      }
     },
     "outputs": {
-      "new_score": { "name": "new_score" }
+      "new_score": {
+        "name": "new_score"
+      }
     }
   },
   "OnPlayerChat": {
     "displayName": "On Player Chat",
     "menuDisplayName": "Chat",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "sender":  { "name": "sender",  "description": "Name of the player who sent the chat" },
-      "message": { "name": "message", "description": "Chat message content" }
+      "sender": {
+        "name": "sender",
+        "description": "Name of the player who sent the chat"
+      },
+      "message": {
+        "name": "message",
+        "description": "Chat message content"
+      }
     }
   },
   "OnPlayerJoin": {
     "displayName": "On Player Join",
     "menuDisplayName": "Join",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "player_name": { "name": "player_name", "description": "Name of the player who joined" }
+      "player_name": {
+        "name": "player_name",
+        "description": "Name of the player who joined"
+      }
     }
   },
   "OnPlayerLeave": {
     "displayName": "On Player Leave",
     "menuDisplayName": "Leave",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "player_name": { "name": "player_name", "description": "Name of the player who left" }
+      "player_name": {
+        "name": "player_name",
+        "description": "Name of the player who left"
+      }
     }
   },
   "OnPlayerTravelled": {
     "displayName": "On Player Travelled",
     "menuDisplayName": "Travelled",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "distance":      { "name": "distance",      "description": "Distance travelled (meters)" },
-      "player":        { "name": "player",        "description": "WorldPlayer object → connect to player info node" },
-      "underwater":    { "name": "underwater",    "description": "Whether travelling underwater (true/false)" },
-      "biome":         { "name": "biome",         "description": "Current biome name" },
-      "travel_method": { "name": "travel_method", "description": "Travel method name" }
+      "distance": {
+        "name": "distance",
+        "description": "Distance travelled (meters)"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      },
+      "underwater": {
+        "name": "underwater",
+        "description": "Whether travelling underwater (true/false)"
+      },
+      "biome": {
+        "name": "biome",
+        "description": "Current biome name"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Travel method name"
+      }
     }
   },
   "OnPlayerTeleported": {
     "displayName": "On Player Teleported",
     "menuDisplayName": "Teleported",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "player":         { "name": "player",         "description": "WorldPlayer object → connect to player info node" },
-      "teleport_cause": { "name": "teleport_cause", "description": "Teleportation cause name" },
-      "distance":       { "name": "distance",       "description": "Teleportation distance (meters)" }
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Teleportation cause name"
+      },
+      "distance": {
+        "name": "distance",
+        "description": "Teleportation distance (meters)"
+      }
     }
   },
   "OnPlayerTitle": {
     "displayName": "On Player Title",
     "menuDisplayName": "Title",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "sender":    { "name": "sender",    "description": "Name of the player who sent the title" },
-      "message":   { "name": "message",   "description": "Title message content" },
-      "recipient": { "name": "recipient", "description": "Name of the player who received the title" }
+      "sender": {
+        "name": "sender",
+        "description": "Name of the player who sent the title"
+      },
+      "message": {
+        "name": "message",
+        "description": "Title message content"
+      },
+      "recipient": {
+        "name": "recipient",
+        "description": "Name of the player who received the title"
+      }
     }
   },
   "OnPlayerMessage": {
     "displayName": "On Player Message",
     "menuDisplayName": "Message",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "sender":    { "name": "sender",    "description": "Name of the player who sent the message" },
-      "message":   { "name": "message",   "description": "Message content" },
-      "type":      { "name": "type",      "description": "Message type (chat / tell etc.)" },
-      "recipient": { "name": "recipient", "description": "[nullable] Recipient name. null for non-tell messages" }
+      "sender": {
+        "name": "sender",
+        "description": "Name of the player who sent the message"
+      },
+      "message": {
+        "name": "message",
+        "description": "Message content"
+      },
+      "type": {
+        "name": "type",
+        "description": "Message type (chat / tell etc.)"
+      },
+      "recipient": {
+        "name": "recipient",
+        "description": "[nullable] Recipient name. null for non-tell messages"
+      }
     }
   },
   "OnPlayerBounced": {
     "displayName": "On Player Bounced",
     "menuDisplayName": "Bounced",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "height": { "name": "height", "description": "Bounce height (blocks)" },
-      "block":  { "name": "block",  "description": "BlockType object (block bounced on) → connect to block info node" },
-      "player": { "name": "player", "description": "WorldPlayer object → connect to player info node" }
+      "height": {
+        "name": "height",
+        "description": "Bounce height (blocks)"
+      },
+      "block": {
+        "name": "block",
+        "description": "BlockType object (block bounced on) → connect to block info node"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      }
     }
   },
   "OnBlockBroken": {
     "displayName": "On Block Broken",
     "menuDisplayName": "Block Break",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "block":          { "name": "block",          "description": "BlockType object → connect to block info node" },
-      "player":         { "name": "player",         "description": "WorldPlayer object → connect to player info node" },
-      "destroy_method": { "name": "destroy_method", "description": "Destruction method name" },
-      "item":           { "name": "item",           "description": "[nullable] Held item before breaking. null if bare-handed" }
+      "block": {
+        "name": "block",
+        "description": "BlockType object → connect to block info node"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Destruction method name"
+      },
+      "item": {
+        "name": "item",
+        "description": "[nullable] Held item before breaking. null if bare-handed"
+      }
     }
   },
   "OnBlockPlaced": {
     "displayName": "On Block Placed",
     "menuDisplayName": "Block Place",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "block":        { "name": "block",        "description": "BlockType object → connect to block info node" },
-      "player":       { "name": "player",       "description": "WorldPlayer object → connect to player info node" },
-      "underwater":   { "name": "underwater",   "description": "Whether placed underwater (true/false)" },
-      "place_method": { "name": "place_method", "description": "Placement method name" },
-      "item":         { "name": "item",         "description": "Held item before placing → connect to item info node" }
+      "block": {
+        "name": "block",
+        "description": "BlockType object → connect to block info node"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      },
+      "underwater": {
+        "name": "underwater",
+        "description": "Whether placed underwater (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Placement method name"
+      },
+      "item": {
+        "name": "item",
+        "description": "Held item before placing → connect to item info node"
+      }
     }
   },
   "OnItemInteracted": {
     "displayName": "On Item Used",
     "menuDisplayName": "Item Used",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "item":       { "name": "item",       "description": "[nullable] Held item. null if no item" },
-      "player":     { "name": "player",     "description": "WorldPlayer object → connect to player info node" },
-      "use_method": { "name": "use_method", "description": "Item use method name" }
+      "item": {
+        "name": "item",
+        "description": "[nullable] Held item. null if no item"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Item use method name"
+      }
     }
   },
   "OnItemAcquired": {
     "displayName": "On Item Acquired",
     "menuDisplayName": "Item Acq",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "count":      { "name": "count",      "description": "Number of items acquired" },
-      "item":       { "name": "item",       "description": "Item type → connect to item type info node" },
-      "player":     { "name": "player",     "description": "WorldPlayer object → connect to player info node" },
-      "acq_method": { "name": "acq_method", "description": "Item acquisition method name" }
+      "count": {
+        "name": "count",
+        "description": "Number of items acquired"
+      },
+      "item": {
+        "name": "item",
+        "description": "Item type → connect to item type info node"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Item acquisition method name"
+      }
     }
   },
   "OnItemCrafted": {
     "displayName": "On Item Crafted",
     "menuDisplayName": "Crafted",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "item":       { "name": "item",       "description": "Item stack (crafted item) → connect to item stack info node" },
-      "player":     { "name": "player",     "description": "WorldPlayer object → connect to player info node" },
-      "used_table": { "name": "used_table", "description": "Whether crafting table was used (true/false)" }
+      "item": {
+        "name": "item",
+        "description": "Item stack (crafted item) → connect to item stack info node"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      },
+      "used_table": {
+        "name": "used_table",
+        "description": "Whether crafting table was used (true/false)"
+      }
     }
   },
   "OnItemEquipped": {
     "displayName": "On Item Equipped",
     "menuDisplayName": "Equipped",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "item":       { "name": "item",       "description": "Item stack → connect to item stack info node" },
-      "player":     { "name": "player",     "description": "WorldPlayer object → connect to player info node" },
-      "equip_slot": { "name": "equip_slot", "description": "Equipment slot name" }
+      "item": {
+        "name": "item",
+        "description": "Item stack → connect to item stack info node"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      },
+      "equip_slot": {
+        "name": "equip_slot",
+        "description": "Equipment slot name"
+      }
     }
   },
   "OnItemSmelted": {
     "displayName": "On Item Smelted",
     "menuDisplayName": "Smelted",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "item":   { "name": "item",   "description": "Item type (smelted item) → connect to item type info node" },
-      "player": { "name": "player", "description": "WorldPlayer object → connect to player info node" },
-      "fuel":   { "name": "fuel",   "description": "Item type (fuel item) → connect to item type info node" }
+      "item": {
+        "name": "item",
+        "description": "Item type (smelted item) → connect to item type info node"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      },
+      "fuel": {
+        "name": "fuel",
+        "description": "Item type (fuel item) → connect to item type info node"
+      }
     }
   },
   "OnItemTraded": {
     "displayName": "On Item Traded",
     "menuDisplayName": "Traded",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "item":        { "name": "item",        "description": "Item stack (received item) → connect to item stack info node" },
-      "villager":    { "name": "villager",    "description": "WorldVillager object → connect to villager info node" },
-      "player":      { "name": "player",      "description": "WorldPlayer object → connect to player info node" },
-      "payment_a":   { "name": "payment_a",   "description": "Item type (payment item A) → connect to item type info node" },
-      "payment_b":   { "name": "payment_b",   "description": "[nullable] Item type (payment item B). null if unused" },
-      "player_xp":   { "name": "player_xp",   "description": "Emeralds the player holds after trade" },
-      "villager_xp": { "name": "villager_xp", "description": "Emeralds the villager holds after trade" }
+      "item": {
+        "name": "item",
+        "description": "Item stack (received item) → connect to item stack info node"
+      },
+      "villager": {
+        "name": "villager",
+        "description": "WorldVillager object → connect to villager info node"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      },
+      "payment_a": {
+        "name": "payment_a",
+        "description": "Item type (payment item A) → connect to item type info node"
+      },
+      "payment_b": {
+        "name": "payment_b",
+        "description": "[nullable] Item type (payment item B). null if unused"
+      },
+      "player_xp": {
+        "name": "player_xp",
+        "description": "Emeralds the player holds after trade"
+      },
+      "villager_xp": {
+        "name": "villager_xp",
+        "description": "Emeralds the villager holds after trade"
+      }
     }
   },
   "OnMobInteracted": {
     "displayName": "On Mob Interaction",
     "menuDisplayName": "Mob Interact",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "mob":              { "name": "mob",              "description": "WorldMob object (interacted mob)" },
-      "player":           { "name": "player",           "description": "WorldPlayer object → connect to player info node" },
-      "interaction_type": { "name": "interaction_type", "description": "Mob interaction type name" }
+      "mob": {
+        "name": "mob",
+        "description": "WorldMob object (interacted mob)"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Mob interaction type name"
+      }
     }
   },
   "OnTargetBlockHit": {
     "displayName": "On Target Hit",
     "menuDisplayName": "Target Hit",
     "inputs": {
-      "world": { "name": "world", "description": "World output from MinecraftConnect node" }
+      "world": {
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
+      }
     },
     "outputs": {
-      "strength": { "name": "strength", "description": "Redstone signal strength (0–15)" },
-      "player":   { "name": "player",   "description": "WorldPlayer object → connect to player info node" }
+      "strength": {
+        "name": "strength",
+        "description": "Redstone signal strength (0–15)"
+      },
+      "player": {
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
+      }
     }
   },
   "RunCommand": {
     "displayName": "Run Command",
     "menuDisplayName": "Run Cmd",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" },
-      "command": { "name": "command", "description": "Minecraft command to run (without leading /)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      },
+      "command": {
+        "name": "command",
+        "description": "Minecraft command to run (without leading /)"
+      }
     },
     "outputs": {
-      "done": { "name": "done" }
+      "done": {
+        "name": "done"
+      }
     }
   },
   "GetGameTime": {
     "displayName": "Get Game Time",
     "menuDisplayName": "Game Time",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" },
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      },
       "type": {
         "name": "type",
         "description": "Time type to query",
-        "options": { "time": "Time (0–24000)", "day": "Day count", "tick": "Tick count" }
+        "options": {
+          "time": "Time (0–24000)",
+          "day": "Day count",
+          "tick": "Tick count"
+        }
       }
     },
     "outputs": {
-      "value": { "name": "value" }
+      "value": {
+        "name": "value"
+      }
     }
   },
   "IsDaytime": {
     "displayName": "Is Daytime",
     "menuDisplayName": "Daytime?",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "is_day": { "name": "is_day" }
+      "is_day": {
+        "name": "is_day"
+      }
     }
   },
   "GetWeather": {
     "displayName": "Get Weather",
     "menuDisplayName": "Weather",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "weather": { "name": "weather" }
+      "weather": {
+        "name": "weather"
+      }
     }
   },
   "FillBlocks": {
     "displayName": "Fill Blocks",
     "menuDisplayName": "Fill",
     "inputs": {
-      "trigger":  { "name": "trigger",   "description": "Trigger (optional)" },
-      "from":     { "name": "from",      "description": "Start corner {x, y, z}" },
-      "to":       { "name": "to",        "description": "End corner {x, y, z}" },
-      "block_id": { "name": "block_id",  "description": "Block ID (e.g. minecraft:stone)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      },
+      "from": {
+        "name": "from",
+        "description": "Start corner {x, y, z}"
+      },
+      "to": {
+        "name": "to",
+        "description": "End corner {x, y, z}"
+      },
+      "block_id": {
+        "name": "block_id",
+        "description": "Block ID (e.g. minecraft:stone)"
+      }
     },
     "outputs": {
-      "done":  { "name": "done" },
-      "count": { "name": "count" }
+      "done": {
+        "name": "done"
+      },
+      "count": {
+        "name": "count"
+      }
     }
   },
   "GetTopSolidBlock": {
     "displayName": "Get Ground Height",
     "menuDisplayName": "Ground",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "position":   { "name": "position" },
-      "block_name": { "name": "block_name" }
+      "position": {
+        "name": "position"
+      },
+      "block_name": {
+        "name": "block_name"
+      }
     }
   },
   "WorldQuery": {
     "displayName": "World Query",
     "menuDisplayName": "World Query",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" },
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      },
       "type": {
         "name": "type",
         "description": "Category to query",
-        "options": { "mob": "Entity", "block": "Block", "item": "Item" }
+        "options": {
+          "mob": "Entity",
+          "block": "Block",
+          "item": "Item"
+        }
       }
     },
     "outputs": {
-      "list": { "name": "list" }
+      "list": {
+        "name": "list"
+      }
     }
   },
   "GetPlayerLocation": {
     "displayName": "Get Player Location",
     "menuDisplayName": "Player Pos",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "position":  { "name": "position" },
-      "direction": { "name": "direction" }
+      "position": {
+        "name": "position"
+      },
+      "direction": {
+        "name": "direction"
+      }
     }
   },
   "GetPlayerOrientation": {
     "displayName": "Get Player Orientation",
     "menuDisplayName": "Player Dir",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "angle": { "name": "angle" }
+      "angle": {
+        "name": "angle"
+      }
     }
   },
   "GetPlayerTags": {
     "displayName": "Get Player Tags",
     "menuDisplayName": "Player Tags",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "tags": { "name": "tags" }
+      "tags": {
+        "name": "tags"
+      }
     }
   },
   "PlayerHasTag": {
     "displayName": "Player Has Tag",
     "menuDisplayName": "Has Tag?",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" },
-      "tag":     { "name": "tag",     "description": "Tag name to check" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      },
+      "tag": {
+        "name": "tag",
+        "description": "Tag name to check"
+      }
     },
     "outputs": {
-      "result": { "name": "result" }
+      "result": {
+        "name": "result"
+      }
     }
   },
   "GetPlayerLevel": {
     "displayName": "Get Player Level",
     "menuDisplayName": "Player Lvl",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "level": { "name": "level" }
+      "level": {
+        "name": "level"
+      }
     }
   },
   "GetGameMode": {
     "displayName": "Get Game Mode",
     "menuDisplayName": "Game Mode",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "game_mode": { "name": "game_mode" }
+      "game_mode": {
+        "name": "game_mode"
+      }
     }
   },
   "GetPlayerAbilities": {
     "displayName": "Get Player Abilities",
     "menuDisplayName": "Abilities",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "abilities": { "name": "abilities" }
+      "abilities": {
+        "name": "abilities"
+      }
     }
   },
   "GetPlayers": {
     "displayName": "Get Players",
     "menuDisplayName": "Players",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "players": { "name": "players" }
+      "players": {
+        "name": "players"
+      }
     }
   },
   "GetLocalPlayer": {
     "displayName": "Get Local Player",
     "menuDisplayName": "Local Player",
     "inputs": {
-      "trigger": { "name": "trigger", "description": "Trigger (optional)" }
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optional)"
+      }
     },
     "outputs": {
-      "player": { "name": "player" }
+      "player": {
+        "name": "player"
+      }
     }
   },
   "GetFromEntity": {
     "displayName": "Get From Entity",
     "menuDisplayName": "Entity Info",
     "inputs": {
-      "entity": { "name": "entity", "description": "Player or villager object (player / villager output)" }
+      "entity": {
+        "name": "entity",
+        "description": "Player or villager object (player / villager output)"
+      }
     },
     "outputs": {
-      "position":  { "name": "position",  "description": "Entity position (position)" },
-      "direction": { "name": "direction", "description": "Y-axis rotation (yRot)" },
-      "dimension": { "name": "dimension", "description": "Dimension number (dimension)" },
-      "type":      { "name": "type",      "description": "Type string (type)" },
-      "variant":   { "name": "variant",   "description": "Variant number (variant)" },
-      "ID":        { "name": "ID",        "description": "Entity ID number (id)" }
+      "position": {
+        "name": "position",
+        "description": "Entity position (position)"
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Y-axis rotation (yRot)"
+      },
+      "dimension": {
+        "name": "dimension",
+        "description": "Dimension number (dimension)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Type string (type)"
+      },
+      "variant": {
+        "name": "variant",
+        "description": "Variant number (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Entity ID number (id)"
+      }
     }
   },
   "GetFromPlayerSnapshot": {
     "displayName": "Get From Player",
     "menuDisplayName": "Player Info",
     "inputs": {
-      "player": { "name": "player", "description": "Player object from event node player output" }
+      "player": {
+        "name": "player",
+        "description": "Player object from event node player output"
+      }
     },
     "outputs": {
-      "name":   { "name": "name",   "description": "Player name (name)" },
-      "color":  { "name": "color",  "description": "Map marker color (color)" },
-      "entity": { "name": "entity", "description": "Connect to entity info node" }
+      "name": {
+        "name": "name",
+        "description": "Player name (name)"
+      },
+      "color": {
+        "name": "color",
+        "description": "Map marker color (color)"
+      },
+      "entity": {
+        "name": "entity",
+        "description": "Connect to entity info node"
+      }
     }
   },
   "GetFromItemType": {
     "displayName": "Get From Item Type",
     "menuDisplayName": "Item Type Info",
     "inputs": {
-      "item": { "name": "item", "description": "Item type (item output from acquire / smelt events)" }
+      "item": {
+        "name": "item",
+        "description": "Item type (item output from acquire / smelt events)"
+      }
     },
     "outputs": {
-      "item_id": { "name": "item_id", "description": "Item ID string (id)" },
-      "data":    { "name": "data",    "description": "Data value (data)" }
+      "item_id": {
+        "name": "item_id",
+        "description": "Item ID string (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Data value (data)"
+      }
     }
   },
   "GetFromItemStack": {
     "displayName": "Get From Item Stack",
     "menuDisplayName": "Item Stack Info",
     "inputs": {
-      "item": { "name": "item", "description": "Item stack (item output from use / equip / craft / trade events)" }
+      "item": {
+        "name": "item",
+        "description": "Item stack (item output from use / equip / craft / trade events)"
+      }
     },
     "outputs": {
-      "item_id":   { "name": "item_id",   "description": "Item ID string (typeId)" },
-      "count":     { "name": "count",     "description": "Stack size (amount)" },
-      "max_count": { "name": "max_count", "description": "Max stack size (maxAmount)" },
-      "data":      { "name": "data",      "description": "Data value (data)" }
+      "item_id": {
+        "name": "item_id",
+        "description": "Item ID string (typeId)"
+      },
+      "count": {
+        "name": "count",
+        "description": "Stack size (amount)"
+      },
+      "max_count": {
+        "name": "max_count",
+        "description": "Max stack size (maxAmount)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Data value (data)"
+      }
     }
   },
   "GetFromBlockType": {
     "displayName": "Get From Block Type",
     "menuDisplayName": "Block Info",
     "inputs": {
-      "block": { "name": "block", "description": "Block type object (block / bounce event block output)" }
+      "block": {
+        "name": "block",
+        "description": "Block type object (block / bounce event block output)"
+      }
     },
     "outputs": {
-      "block_id": { "name": "block_id", "description": "Block ID string (id)" },
-      "data":     { "name": "data",     "description": "Data value (data)" }
+      "block_id": {
+        "name": "block_id",
+        "description": "Block ID string (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Data value (data)"
+      }
     }
   },
   "GetFromScoreboardObjective": {
     "displayName": "Get From SB Objective",
     "menuDisplayName": "SB Obj Info",
     "inputs": {
-      "objective": { "name": "objective", "description": "Objective from add / get objective node" }
+      "objective": {
+        "name": "objective",
+        "description": "Objective from add / get objective node"
+      }
     },
     "outputs": {
-      "objective_id": { "name": "objective_id", "description": "Objective ID string (id)" },
-      "display_name": { "name": "display_name", "description": "Display name (displayName)" }
+      "objective_id": {
+        "name": "objective_id",
+        "description": "Objective ID string (id)"
+      },
+      "display_name": {
+        "name": "display_name",
+        "description": "Display name (displayName)"
+      }
     }
   },
   "GetFromMob": {
     "displayName": "Get From Mob",
     "menuDisplayName": "Mob Info",
     "inputs": {
-      "mob": { "name": "mob", "description": "Mob object (mob output from mob interaction event)" }
+      "mob": {
+        "name": "mob",
+        "description": "Mob object (mob output from mob interaction event)"
+      }
     },
     "outputs": {
-      "type":    { "name": "type",    "description": "Mob type number (type)" },
-      "color":   { "name": "color",   "description": "Color number (color)" },
-      "variant": { "name": "variant", "description": "Variant number (variant)" }
+      "type": {
+        "name": "type",
+        "description": "Mob type number (type)"
+      },
+      "color": {
+        "name": "color",
+        "description": "Color number (color)"
+      },
+      "variant": {
+        "name": "variant",
+        "description": "Variant number (variant)"
+      }
     }
   },
   "GetFromVillager": {
     "displayName": "Get From Villager",
     "menuDisplayName": "Villager Info",
     "inputs": {
-      "villager": { "name": "villager", "description": "Villager object (villager output from trade event)" }
+      "villager": {
+        "name": "villager",
+        "description": "Villager object (villager output from trade event)"
+      }
     },
     "outputs": {
-      "name":   { "name": "name",   "description": "Villager name (trader.name)" },
-      "rank":   { "name": "rank",   "description": "Trade rank (trader.tier)" },
-      "entity": { "name": "entity", "description": "Connect to entity info node" }
+      "name": {
+        "name": "name",
+        "description": "Villager name (trader.name)"
+      },
+      "rank": {
+        "name": "rank",
+        "description": "Trade rank (trader.tier)"
+      },
+      "entity": {
+        "name": "entity",
+        "description": "Connect to entity info node"
+      }
     }
   },
   "Selector": {
@@ -617,60 +1140,101 @@
         "name": "type",
         "description": "Category to select",
         "options": {
-          "block":            "🧱 Block",
-          "item":             "🎒 Item",
-          "mob":              "🐾 Mob",
-          "TravelMethod":     "🚶 Travel Method",
-          "TeleportCause":    "✨ Teleport Cause",
-          "MobInteraction":   "🐄 Mob Interaction",
-          "ItemUseMethod":    "🤚 Item Use Method",
-          "ItemAcqMethod":    "📦 Item Acq Method",
-          "EquipSlot":        "🪖 Equip Slot",
+          "block": "🧱 Block",
+          "item": "🎒 Item",
+          "mob": "🐾 Mob",
+          "TravelMethod": "🚶 Travel Method",
+          "TeleportCause": "✨ Teleport Cause",
+          "MobInteraction": "🐄 Mob Interaction",
+          "ItemUseMethod": "🤚 Item Use Method",
+          "ItemAcqMethod": "📦 Item Acq Method",
+          "EquipSlot": "🪖 Equip Slot",
           "BlockBreakMethod": "⛏️ Break Method",
           "BlockPlaceMethod": "🏗️ Place Method"
         }
       },
-      "block":            { "name": "block",        "description": "Block ID" },
-      "item":             { "name": "item",         "description": "Item ID" },
-      "mob":              { "name": "mob",          "description": "Mob (entity) ID" },
-      "TravelMethod":     { "name": "travel",       "description": "Travel method" },
-      "TeleportCause":    { "name": "tp_cause",     "description": "Teleport cause" },
-      "MobInteraction":   { "name": "mob_interact", "description": "Mob interaction type" },
-      "ItemUseMethod":    { "name": "item_use",     "description": "Item use method" },
-      "ItemAcqMethod":    { "name": "item_acq",     "description": "Item acquisition method" },
-      "EquipSlot":        { "name": "equip_slot",   "description": "Equipment slot" },
-      "BlockBreakMethod": { "name": "break_method", "description": "Block break method" },
-      "BlockPlaceMethod": { "name": "place_method", "description": "Block place method" }
+      "block": {
+        "name": "block",
+        "description": "Block ID"
+      },
+      "item": {
+        "name": "item",
+        "description": "Item ID"
+      },
+      "mob": {
+        "name": "mob",
+        "description": "Mob (entity) ID"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Travel method"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Teleport cause"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Mob interaction type"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Item use method"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Item acquisition method"
+      },
+      "EquipSlot": {
+        "name": "equip_slot",
+        "description": "Equipment slot"
+      },
+      "BlockBreakMethod": {
+        "name": "break_method",
+        "description": "Block break method"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Block place method"
+      }
     },
     "outputs": {
-      "value": { "name": "value" }
+      "value": {
+        "name": "value"
+      }
     }
   },
   "ToJa": {
     "displayName": "Locale Name",
     "menuDisplayName": "Locale Name",
     "inputs": {
-      "value": { "name": "value", "description": "Minecraft ID (e.g. \"minecraft:stone\") or event value (e.g. \"Walk\")" },
+      "value": {
+        "name": "value",
+        "description": "Minecraft ID (e.g. \"minecraft:stone\") or event value (e.g. \"Walk\")"
+      },
       "type": {
         "name": "type",
         "description": "Category to convert",
         "options": {
-          "block":            "Block ID",
-          "item":             "Item ID",
-          "mob":              "Mob ID",
-          "TravelMethod":     "Travel Method",
-          "TeleportCause":    "Teleport Cause",
-          "MobInteraction":   "Mob Interaction",
-          "ItemUseMethod":    "Item Use Method",
-          "ItemAcqMethod":    "Item Acq Method",
-          "EquipSlot":        "Equip Slot",
+          "block": "Block ID",
+          "item": "Item ID",
+          "mob": "Mob ID",
+          "TravelMethod": "Travel Method",
+          "TeleportCause": "Teleport Cause",
+          "MobInteraction": "Mob Interaction",
+          "ItemUseMethod": "Item Use Method",
+          "ItemAcqMethod": "Item Acq Method",
+          "EquipSlot": "Equip Slot",
           "BlockBreakMethod": "Block Break Method",
           "BlockPlaceMethod": "Block Place Method"
         }
       }
     },
     "outputs": {
-      "name": { "name": "name", "description": "Localized name (returns input value if not found)" }
+      "name": {
+        "name": "name",
+        "description": "Localized name (returns input value if not found)"
+      }
     }
   },
   "Vector3Op": {
@@ -682,92 +1246,668 @@
         "description": "Operation type",
         "options": {
           "assemble": "🔧 Assemble",
-          "add":      "➕ Add",
+          "add": "➕ Add",
           "subtract": "➖ Subtract",
-          "scale":    "✖️ Scale",
-          "floor":    "⬇️ Floor",
-          "fill_y":   "📐 Fill Y"
+          "scale": "✖️ Scale",
+          "floor": "⬇️ Floor",
+          "fill_y": "📐 Fill Y"
         }
       },
-      "x":        { "name": "x",       "description": "X coordinate" },
-      "y":        { "name": "y",       "description": "Y coordinate" },
-      "z":        { "name": "z",       "description": "Z coordinate" },
-      "pos_a":    { "name": "pos_a",   "description": "Base position {x,y,z}" },
-      "pos_b":    { "name": "pos_b",   "description": "Other position {x,y,z}" },
-      "position": { "name": "position","description": "Position {x,y,z}" },
-      "scale":    { "name": "scale",   "description": "Scalar multiplier (e.g. 2 for double)" },
-      "pos_xz":   { "name": "pos_xz", "description": "2D position {x,z}" },
-      "Y":        { "name": "Y",       "description": "Y coordinate value" }
+      "x": {
+        "name": "x",
+        "description": "X coordinate"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y coordinate"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z coordinate"
+      },
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Base position {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Other position {x,y,z}"
+      },
+      "position": {
+        "name": "position",
+        "description": "Position {x,y,z}"
+      },
+      "scale": {
+        "name": "scale",
+        "description": "Scalar multiplier (e.g. 2 for double)"
+      },
+      "pos_xz": {
+        "name": "pos_xz",
+        "description": "2D position {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Y coordinate value"
+      }
     },
     "outputs": {
-      "result": { "name": "result", "description": "Resulting position {x,y,z}" }
+      "result": {
+        "name": "result",
+        "description": "Resulting position {x,y,z}"
+      }
     }
   },
   "Vector3Distance": {
     "displayName": "Vector3 Distance",
     "menuDisplayName": "Distance",
     "inputs": {
-      "pos_a": { "name": "pos_a", "description": "Start position {x,y,z}" },
-      "pos_b": { "name": "pos_b", "description": "End position {x,y,z}" }
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Start position {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "End position {x,y,z}"
+      }
     },
     "outputs": {
-      "distance": { "name": "distance" }
+      "distance": {
+        "name": "distance"
+      }
     }
   },
   "Vector3ToString": {
     "displayName": "Vector3 to String",
     "menuDisplayName": "Vec3→String",
     "inputs": {
-      "position": { "name": "position", "description": "Position to convert {x,y,z}" }
+      "position": {
+        "name": "position",
+        "description": "Position to convert {x,y,z}"
+      }
     },
     "outputs": {
-      "text": { "name": "text" }
+      "text": {
+        "name": "text"
+      }
     }
   },
   "Vector3Split": {
     "displayName": "Vector3 Split",
     "menuDisplayName": "Vec3 Split",
     "inputs": {
-      "position": { "name": "position", "description": "Position to split {x,y,z}" }
+      "position": {
+        "name": "position",
+        "description": "Position to split {x,y,z}"
+      }
     },
     "outputs": {
-      "x": { "name": "x" },
-      "y": { "name": "y" },
-      "z": { "name": "z" }
+      "x": {
+        "name": "x"
+      },
+      "y": {
+        "name": "y"
+      },
+      "z": {
+        "name": "z"
+      }
     }
   },
   "ClampNumber": {
     "displayName": "Clamp Number",
     "menuDisplayName": "Clamp",
     "inputs": {
-      "value": { "name": "value", "description": "Number to clamp" },
-      "min":   { "name": "min",   "description": "Lower bound" },
-      "max":   { "name": "max",   "description": "Upper bound" }
+      "value": {
+        "name": "value",
+        "description": "Number to clamp"
+      },
+      "min": {
+        "name": "min",
+        "description": "Lower bound"
+      },
+      "max": {
+        "name": "max",
+        "description": "Upper bound"
+      }
     },
     "outputs": {
-      "result": { "name": "result" }
+      "result": {
+        "name": "result"
+      }
     }
   },
   "AABBCreate": {
     "displayName": "Create Area",
     "menuDisplayName": "AABB Create",
     "inputs": {
-      "corner_a": { "name": "corner_a", "description": "Area corner 1 {x,y,z} (order does not matter)" },
-      "corner_b": { "name": "corner_b", "description": "Area corner 2 {x,y,z} (order does not matter)" }
+      "corner_a": {
+        "name": "corner_a",
+        "description": "Area corner 1 {x,y,z} (order does not matter)"
+      },
+      "corner_b": {
+        "name": "corner_b",
+        "description": "Area corner 2 {x,y,z} (order does not matter)"
+      }
     },
     "outputs": {
-      "area": { "name": "area" }
+      "area": {
+        "name": "area"
+      }
     }
   },
   "AABBIsInside": {
     "displayName": "Is In Area",
     "menuDisplayName": "AABB Inside",
     "inputs": {
-      "area":     { "name": "area",     "description": "AABB area {min, max}" },
-      "position": { "name": "position", "description": "Position to test {x,y,z}" }
+      "area": {
+        "name": "area",
+        "description": "AABB area {min, max}"
+      },
+      "position": {
+        "name": "position",
+        "description": "Position to test {x,y,z}"
+      }
     },
     "outputs": {
-      "result": { "name": "result" }
+      "result": {
+        "name": "result"
+      }
+    }
+  },
+  "SendMessage": {
+    "displayName": "Send Message",
+    "menuDisplayName": "SendMsg",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "message": {
+        "name": "message"
+      },
+      "target": {
+        "name": "target"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "SetTimeOfDay": {
+    "displayName": "Set Time of Day",
+    "menuDisplayName": "SetTime",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "time": {
+        "name": "time"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "SetWeather": {
+    "displayName": "Set Weather",
+    "menuDisplayName": "SetWeather",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "weather": {
+        "name": "weather"
+      },
+      "duration": {
+        "name": "duration"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "SetBlock": {
+    "displayName": "Set Block",
+    "menuDisplayName": "SetBlock",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "position": {
+        "name": "position"
+      },
+      "block_id": {
+        "name": "block_id"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "GiveItem": {
+    "displayName": "Give Item",
+    "menuDisplayName": "GiveItem",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "item_id": {
+        "name": "item_id"
+      },
+      "amount": {
+        "name": "amount"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "BroadcastCommand": {
+    "displayName": "Broadcast Command",
+    "menuDisplayName": "BroadcastCmd",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "command": {
+        "name": "command"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "BroadcastMessage": {
+    "displayName": "Broadcast Message",
+    "menuDisplayName": "BroadcastMsg",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "message": {
+        "name": "message"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "AddPlayerLevel": {
+    "displayName": "Add Player Level",
+    "menuDisplayName": "AddLevel",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "level": {
+        "name": "level"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "SetGameMode": {
+    "displayName": "Set Game Mode",
+    "menuDisplayName": "SetGameMode",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "mode": {
+        "name": "mode"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "UpdateAbility": {
+    "displayName": "Update Ability",
+    "menuDisplayName": "UpdateAbility",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "ability": {
+        "name": "ability"
+      },
+      "value": {
+        "name": "value"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "SetTitle": {
+    "displayName": "Set Title",
+    "menuDisplayName": "SetTitle",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "title": {
+        "name": "title"
+      },
+      "subtitle": {
+        "name": "subtitle"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "SetActionBar": {
+    "displayName": "Set Action Bar",
+    "menuDisplayName": "SetActionBar",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "text": {
+        "name": "text"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "ClearTitle": {
+    "displayName": "Clear Title",
+    "menuDisplayName": "ClearTitle",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "On Player Transform",
+    "menuDisplayName": "PlayerTransform",
+    "inputs": {
+      "world": {
+        "name": "world"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "position"
+      },
+      "direction": {
+        "name": "direction"
+      },
+      "player": {
+        "name": "player"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Agent Move",
+    "menuDisplayName": "AgentMove",
+    "inputs": {
+      "direction": {
+        "name": "direction"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Agent Turn",
+    "menuDisplayName": "AgentTurn",
+    "inputs": {
+      "direction": {
+        "name": "direction"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Agent Teleport",
+    "menuDisplayName": "AgentTP",
+    "inputs": {
+      "trigger": {
+        "name": "trigger"
+      },
+      "position": {
+        "name": "position"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Agent Action",
+    "menuDisplayName": "AgentAction",
+    "inputs": {
+      "action": {
+        "name": "action"
+      },
+      "direction": {
+        "name": "direction"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Agent Place Block",
+    "menuDisplayName": "AgentPlace",
+    "inputs": {
+      "direction": {
+        "name": "direction"
+      },
+      "slot": {
+        "name": "slot"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Agent Drop Item",
+    "menuDisplayName": "AgentDrop",
+    "inputs": {
+      "direction": {
+        "name": "direction"
+      },
+      "slot": {
+        "name": "slot"
+      },
+      "amount": {
+        "name": "amount"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Agent Move Item",
+    "menuDisplayName": "AgentMoveItem",
+    "inputs": {
+      "from_slot": {
+        "name": "from_slot"
+      },
+      "to_slot": {
+        "name": "to_slot"
+      },
+      "amount": {
+        "name": "amount"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Agent Set Item",
+    "menuDisplayName": "AgentSetItem",
+    "inputs": {
+      "slot": {
+        "name": "slot"
+      },
+      "item_id": {
+        "name": "item_id"
+      },
+      "amount": {
+        "name": "amount"
+      },
+      "data": {
+        "name": "data"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Agent Collect",
+    "menuDisplayName": "AgentCollect",
+    "inputs": {
+      "item_id": {
+        "name": "item_id"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Vector3 Lerp",
+    "menuDisplayName": "Vec3Lerp",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a"
+      },
+      "pos_b": {
+        "name": "pos_b"
+      },
+      "t": {
+        "name": "t"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "result"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Vector3 Normalize",
+    "menuDisplayName": "Vec3Norm",
+    "inputs": {
+      "position": {
+        "name": "position"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "result"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Vector3 Dot",
+    "menuDisplayName": "Vec3Dot",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a"
+      },
+      "pos_b": {
+        "name": "pos_b"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "value"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "AABB Translate",
+    "menuDisplayName": "AABBTranslate",
+    "inputs": {
+      "area": {
+        "name": "area"
+      },
+      "delta": {
+        "name": "delta"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "area"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "AABB Intersects",
+    "menuDisplayName": "AABBIntersects",
+    "inputs": {
+      "area_a": {
+        "name": "area_a"
+      },
+      "area_b": {
+        "name": "area_b"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "result"
+      }
     }
   }
 }
