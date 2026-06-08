@@ -2,16 +2,13 @@
   "name": "flyde-minecraft-bedrock-ws",
   "version": "1.0.0",
   "description": "Flyde nodes for Minecraft Bedrock / Education Edition via WebSocket",
-  "main": "./_nodes/index.ts",
+  "main": "./_nodes/index.flyde.ts",
   "exports": {
-    ".":    "./_nodes/index.flyde.ts",
-    "./ja": "./_nodes/index.flyde.ts",
-    "./en": "./_nodes/index.en_US.flyde.ts"
+    ".": "./_nodes/index.flyde.ts"
   },
   "flyde": {
     "exposes": [
-      "_nodes/index.flyde.ts",
-      "_nodes/index.en_US.flyde.ts"
+      "_nodes/index.flyde.ts"
     ]
   },
   "files": [
@@ -19,7 +16,9 @@
   ],
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "generate-maps": "cd scripts && npx ts-node --project tsconfig.json generate-maps.ts"
+    "generate-maps": "cd scripts && npx ts-node --project tsconfig.json generate-maps.ts",
+    "lang:ja": "node scripts/set-lang.js ja",
+    "lang:en": "node scripts/set-lang.js en"
   },
   "peerDependencies": {
     "@flyde/core": "*",

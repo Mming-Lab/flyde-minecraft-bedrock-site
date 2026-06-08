@@ -16,8 +16,8 @@ node:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: -188.81304931640625
-        y: -565.5792236328125
+        x: -236.44979858398438
+        y: -688.3088989257812
       id: block-broken
       inputConfig: {}
       nodeId: OnBlockBroken
@@ -41,13 +41,16 @@ node:
         項目:
           type: select
           value: id
+        O_ﾌﾞﾛｯｸ:
+          type: dynamic
+          value: "{{O_ﾌﾞﾛｯｸ}}"
       type: code
       source:
         type: file
         data: ../_nodes/index.flyde.ts
     - pos:
-        x: 30.5255126953125
-        y: -408.2000732421875
+        x: -7.48333740234375
+        y: -434.713134765625
       id: item-null-check
       inputConfig: {}
       displayName: Null分岐
@@ -66,8 +69,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 280.1705856323242
-        y: -467.44879150390625
+        x: 279.1705856323242
+        y: -474.7034912109375
       id: get-item-id
       inputConfig: {}
       displayName: アイテムID取得
@@ -78,6 +81,9 @@ node:
         項目:
           type: select
           value: typeId
+        O_ｱｲﾃﾑ:
+          type: dynamic
+          value: "{{O_ｱｲﾃﾑ}}"
       type: code
       source:
         type: file
@@ -182,8 +188,8 @@ node:
         type: file
         data: ..\_nodes\index.flyde.ts
     - pos:
-        x: 471.10440695285797
-        y: -449.45616149902344
+        x: 479.11414206027985
+        y: -463.7156219482422
       id: ToJa-ptlyzslx
       inputConfig: {}
       nodeId: ToJa
@@ -211,13 +217,16 @@ node:
         項目:
           type: select
           value: name
+        O_ﾌﾟﾚｲﾔｰ:
+          type: dynamic
+          value: "{{O_ﾌﾟﾚｲﾔｰ}}"
       type: code
       source:
         type: file
         data: ..\_nodes\index.flyde.ts
     - pos:
-        x: 284.4402595758438
-        y: -642.3902740478516
+        x: 269.4253364801407
+        y: -655.8452911376953
       id: GetFromEntity-x5uk8cb1
       inputConfig: {}
       nodeId: GetFromEntity
@@ -228,13 +237,16 @@ node:
         ｴﾝﾃｨﾃｨ:
           type: dynamic
           value: "{{ｴﾝﾃｨﾃｨ}}"
+        O_ｴﾝﾃｨﾃｨ:
+          type: dynamic
+          value: "{{O_ｴﾝﾃｨﾃｨ}}"
       type: code
       source:
         type: file
         data: ..\_nodes\index.flyde.ts
     - pos:
-        x: 526.6618477106094
-        y: -607.4225006103516
+        x: 497.75901567935944
+        y: -654.3303985595703
       id: Vector3Op-nk9lsam0
       inputConfig: {}
       displayName: 座標切捨
@@ -282,18 +294,6 @@ node:
         insId: block-broken
         pinId: ワールド
     - from:
-        insId: block-broken
-        pinId: ﾌﾞﾛｯｸ
-      to:
-        insId: get-block-id
-        pinId: ﾌﾞﾛｯｸ
-    - from:
-        insId: item-null-check
-        pinId: "true"
-      to:
-        insId: get-item-id
-        pinId: ｱｲﾃﾑ
-    - from:
         insId: 素手-fallback
         pinId: value
       to:
@@ -324,12 +324,6 @@ node:
         insId: 素手-fallback
         pinId: __trigger
     - from:
-        insId: block-broken
-        pinId: ｱｲﾃﾑ
-      to:
-        insId: item-null-check
-        pinId: leftOperand
-    - from:
         insId: ToJa-obal288i
         pinId: 日本語名
       to:
@@ -341,12 +335,6 @@ node:
       to:
         insId: say-cmd
         pinId: アイテム
-    - from:
-        insId: block-broken
-        pinId: ﾌﾟﾚｲﾔｰ
-      to:
-        insId: GetFromPlayerSnapshot-tmly7kvv
-        pinId: ﾌﾟﾚｲﾔｰ
     - from:
         insId: get-block-id
         pinId: ブロックID
@@ -372,17 +360,41 @@ node:
         insId: say-cmd
         pinId: 座標
     - from:
+        insId: GetFromEntity-x5uk8cb1
+        pinId: 座標
+      to:
+        insId: Vector3Op-nk9lsam0
+        pinId: __trigger
+    - from:
+        insId: block-broken
+        pinId: ﾌﾞﾛｯｸ
+      to:
+        insId: get-block-id
+        pinId: ﾌﾞﾛｯｸ
+    - from:
+        insId: block-broken
+        pinId: ﾌﾟﾚｲﾔｰ
+      to:
+        insId: GetFromPlayerSnapshot-tmly7kvv
+        pinId: ﾌﾟﾚｲﾔｰ
+    - from:
         insId: GetFromPlayerSnapshot-tmly7kvv
         pinId: ｴﾝﾃｨﾃｨ
       to:
         insId: GetFromEntity-x5uk8cb1
         pinId: ｴﾝﾃｨﾃｨ
     - from:
-        insId: GetFromEntity-x5uk8cb1
-        pinId: 座標
+        insId: block-broken
+        pinId: ｱｲﾃﾑ
       to:
-        insId: Vector3Op-nk9lsam0
-        pinId: __trigger
+        insId: item-null-check
+        pinId: leftOperand
+    - from:
+        insId: item-null-check
+        pinId: "true"
+      to:
+        insId: get-item-id
+        pinId: ｱｲﾃﾑ
   id: BlockBreakInfoFlow
   inputs: {}
   outputs: {}
