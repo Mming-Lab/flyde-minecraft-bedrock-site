@@ -1,18 +1,43 @@
 {
-  "name": "mc-flow-template",
-  "version": "0.1.0",
-  "description": "Minecraft Education Edition フロープログラミング教室用テンプレート",
-  "private": true,
-  "scripts": {
-    "typecheck": "tsc --noEmit"
+  "name": "@yutari-club/mc-flow",
+  "version": "1.0.0",
+  "description": "Flyde nodes for Minecraft Education Edition",
+  "main": "./_nodes/index.ts",
+  "exports": {
+    ".":    "./_nodes/index.flyde.ts",
+    "./ja": "./_nodes/index.flyde.ts",
+    "./en": "./_nodes/index.en_US.flyde.ts"
   },
-  "dependencies": {
+  "files": [
+    "_nodes/"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "generate-maps": "cd scripts && npx ts-node --project tsconfig.json generate-maps.ts"
+  },
+  "peerDependencies": {
     "@flyde/core": "*",
     "@minecraft/vanilla-data": "*",
     "socket-be": "*"
   },
   "devDependencies": {
+    "@flyde/core": "*",
+    "@minecraft/vanilla-data": "*",
+    "socket-be": "*",
     "@types/node": "^20.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "flyde",
+    "minecraft",
+    "minecraft-education",
+    "visual-programming",
+    "block-programming"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yutari-club/mc-flow-template"
   }
 }
