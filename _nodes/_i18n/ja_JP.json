@@ -10,10 +10,12 @@
     },
     "outputs": {
       "world": {
-        "name": "ワールド"
+        "name": "ワールド",
+        "description": "World オブジェクト（内部で使用。コマンドノードへの接続不要）"
       },
       "error": {
-        "name": "エラー"
+        "name": "エラー",
+        "description": "接続エラー情報"
       }
     }
   },
@@ -39,7 +41,8 @@
     },
     "outputs": {
       "position": {
-        "name": "座標"
+        "name": "座標",
+        "description": "エージェントの座標 {x, y, z}"
       }
     }
   },
@@ -54,7 +57,8 @@
     },
     "outputs": {
       "objectives": {
-        "name": "目標一覧"
+        "name": "目標一覧",
+        "description": "スコアボード目標オブジェクトの配列"
       }
     }
   },
@@ -73,7 +77,8 @@
     },
     "outputs": {
       "objective": {
-        "name": "目標"
+        "name": "目標",
+        "description": "スコアボード目標 → SB目標情報取得ノードへ"
       }
     }
   },
@@ -96,7 +101,8 @@
     },
     "outputs": {
       "objective": {
-        "name": "目標"
+        "name": "目標",
+        "description": "追加した目標 → SB目標情報取得ノードへ"
       }
     }
   },
@@ -115,7 +121,8 @@
     },
     "outputs": {
       "result": {
-        "name": "結果"
+        "name": "結果",
+        "description": "削除結果"
       }
     }
   },
@@ -134,7 +141,8 @@
     },
     "outputs": {
       "scores": {
-        "name": "スコア一覧"
+        "name": "スコア一覧",
+        "description": "全スコアの配列"
       }
     }
   },
@@ -157,7 +165,8 @@
     },
     "outputs": {
       "score": {
-        "name": "スコア"
+        "name": "スコア",
+        "description": "スコア値（数値）"
       }
     }
   },
@@ -193,7 +202,8 @@
     },
     "outputs": {
       "new_score": {
-        "name": "新スコア"
+        "name": "新スコア",
+        "description": "演算後の新スコア値"
       }
     }
   },
@@ -664,7 +674,8 @@
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "実行完了（true）"
       }
     }
   },
@@ -703,7 +714,8 @@
     },
     "outputs": {
       "is_day": {
-        "name": "昼"
+        "name": "昼",
+        "description": "昼なら true、夜なら false"
       }
     }
   },
@@ -718,7 +730,8 @@
     },
     "outputs": {
       "weather": {
-        "name": "天気"
+        "name": "天気",
+        "description": "天気名（\"Clear\" / \"Rain\" / \"Thunder\"）"
       }
     }
   },
@@ -745,10 +758,12 @@
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "塗りつぶし完了（true）"
       },
       "count": {
-        "name": "個数"
+        "name": "個数",
+        "description": "塗りつぶしたブロック数"
       }
     }
   },
@@ -763,10 +778,12 @@
     },
     "outputs": {
       "position": {
-        "name": "座標"
+        "name": "座標",
+        "description": "地面の座標 {x, y, z}"
       },
       "block_name": {
-        "name": "ブロック名"
+        "name": "ブロック名",
+        "description": "地面ブロックの名前"
       }
     }
   },
@@ -790,7 +807,8 @@
     },
     "outputs": {
       "list": {
-        "name": "一覧"
+        "name": "一覧",
+        "description": "クエリ結果の一覧"
       }
     }
   },
@@ -805,10 +823,12 @@
     },
     "outputs": {
       "position": {
-        "name": "座標"
+        "name": "座標",
+        "description": "プレイヤーの座標 {x, y, z}"
       },
       "direction": {
-        "name": "向き"
+        "name": "向き",
+        "description": "プレイヤーの向き（Y軸回転）"
       }
     }
   },
@@ -823,7 +843,8 @@
     },
     "outputs": {
       "angle": {
-        "name": "角度"
+        "name": "角度",
+        "description": "プレイヤーの向き {x, y}（度数）"
       }
     }
   },
@@ -838,7 +859,8 @@
     },
     "outputs": {
       "tags": {
-        "name": "タグ一覧"
+        "name": "タグ一覧",
+        "description": "タグ名の配列"
       }
     }
   },
@@ -857,7 +879,8 @@
     },
     "outputs": {
       "result": {
-        "name": "結果"
+        "name": "結果",
+        "description": "タグを持っていれば true"
       }
     }
   },
@@ -872,7 +895,8 @@
     },
     "outputs": {
       "level": {
-        "name": "レベル"
+        "name": "レベル",
+        "description": "プレイヤーのレベル（数値）"
       }
     }
   },
@@ -887,7 +911,8 @@
     },
     "outputs": {
       "game_mode": {
-        "name": "ゲームモード"
+        "name": "ゲームモード",
+        "description": "ゲームモード名（\"Survival\" 等）"
       }
     }
   },
@@ -902,7 +927,8 @@
     },
     "outputs": {
       "abilities": {
-        "name": "アビリティ"
+        "name": "アビリティ",
+        "description": "アビリティのオブジェクト"
       }
     }
   },
@@ -917,7 +943,8 @@
     },
     "outputs": {
       "players": {
-        "name": "プレイヤー一覧"
+        "name": "プレイヤー一覧",
+        "description": "プレイヤーオブジェクトの配列"
       }
     }
   },
@@ -932,7 +959,8 @@
     },
     "outputs": {
       "player": {
-        "name": "プレイヤー"
+        "name": "プレイヤー",
+        "description": "ローカルプレイヤーオブジェクト"
       }
     }
   },
@@ -1200,7 +1228,8 @@
     },
     "outputs": {
       "value": {
-        "name": "値"
+        "name": "値",
+        "description": "選択した ID または enum 値"
       }
     }
   },
@@ -1312,7 +1341,8 @@
     },
     "outputs": {
       "distance": {
-        "name": "距離"
+        "name": "距離",
+        "description": "2点間の距離（メートル）"
       }
     }
   },
@@ -1327,7 +1357,8 @@
     },
     "outputs": {
       "text": {
-        "name": "文字列"
+        "name": "文字列",
+        "description": "「x y z」形式の文字列"
       }
     }
   },
@@ -1342,13 +1373,16 @@
     },
     "outputs": {
       "x": {
-        "name": "x"
+        "name": "x",
+        "description": "X座標"
       },
       "y": {
-        "name": "y"
+        "name": "y",
+        "description": "Y座標"
       },
       "z": {
-        "name": "z"
+        "name": "z",
+        "description": "Z座標"
       }
     }
   },
@@ -1371,7 +1405,8 @@
     },
     "outputs": {
       "result": {
-        "name": "結果"
+        "name": "結果",
+        "description": "クランプ後の値"
       }
     }
   },
@@ -1390,7 +1425,8 @@
     },
     "outputs": {
       "area": {
-        "name": "エリア"
+        "name": "エリア",
+        "description": "AABB エリアオブジェクト {min, max}"
       }
     }
   },
@@ -1409,7 +1445,8 @@
     },
     "outputs": {
       "result": {
-        "name": "結果"
+        "name": "結果",
+        "description": "座標がエリア内なら true"
       }
     }
   },
@@ -1418,18 +1455,22 @@
     "menuDisplayName": "MSG送信",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "message": {
-        "name": "メッセージ"
+        "name": "メッセージ",
+        "description": "送信するメッセージ"
       },
       "target": {
-        "name": "送信先"
+        "name": "送信先",
+        "description": "送信先プレイヤー名（省略可: 全員）"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "送信完了（true）"
       }
     }
   },
@@ -1438,7 +1479,8 @@
     "menuDisplayName": "時刻設定",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "time": {
         "name": "時刻",
@@ -1447,7 +1489,8 @@
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "設定完了（true）"
       }
     }
   },
@@ -1456,10 +1499,12 @@
     "menuDisplayName": "天気設定",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "weather": {
         "name": "天気",
+        "description": "設定する天気",
         "options": {
           "Clear": "晴れ",
           "Rain": "雨",
@@ -1473,7 +1518,8 @@
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "設定完了（true）"
       }
     }
   },
@@ -1482,18 +1528,22 @@
     "menuDisplayName": "ブロック設置",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "position": {
-        "name": "座標"
+        "name": "座標",
+        "description": "ブロックを設置する座標 {x, y, z}"
       },
       "block_id": {
-        "name": "ブロックID"
+        "name": "ブロックID",
+        "description": "ブロックID（例: minecraft:stone）"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "設置完了（true）"
       }
     }
   },
@@ -1502,18 +1552,22 @@
     "menuDisplayName": "アイテム付与",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "item_id": {
-        "name": "アイテムID"
+        "name": "アイテムID",
+        "description": "アイテムID（例: minecraft:apple）"
       },
       "amount": {
-        "name": "個数"
+        "name": "個数",
+        "description": "付与する個数"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "付与完了（true）"
       }
     }
   },
@@ -1522,15 +1576,18 @@
     "menuDisplayName": "全体CMD",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "command": {
-        "name": "コマンド"
+        "name": "コマンド",
+        "description": "全プレイヤーに実行するコマンド（/ は不要）"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "実行完了（true）"
       }
     }
   },
@@ -1539,15 +1596,18 @@
     "menuDisplayName": "全体MSG",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "message": {
-        "name": "メッセージ"
+        "name": "メッセージ",
+        "description": "全員に送信するメッセージ"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "送信完了（true）"
       }
     }
   },
@@ -1556,15 +1616,18 @@
     "menuDisplayName": "レベル加算",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "level": {
-        "name": "レベル"
+        "name": "レベル",
+        "description": "加算するレベル数（負の値で減算）"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "加算完了（true）"
       }
     }
   },
@@ -1573,10 +1636,12 @@
     "menuDisplayName": "GMD設定",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "mode": {
         "name": "GMD",
+        "description": "設定するゲームモード",
         "options": {
           "Survival": "サバイバル",
           "Creative": "クリエイティブ",
@@ -1587,7 +1652,8 @@
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "設定完了（true）"
       }
     }
   },
@@ -1596,10 +1662,12 @@
     "menuDisplayName": "アビリティ",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "ability": {
         "name": "アビリティ",
+        "description": "変更するアビリティ",
         "options": {
           "mayfly": "飛行",
           "mute": "ミュート",
@@ -1607,12 +1675,14 @@
         }
       },
       "value": {
-        "name": "値"
+        "name": "値",
+        "description": "有効: true / 無効: false"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "変更完了（true）"
       }
     }
   },
@@ -1621,18 +1691,22 @@
     "menuDisplayName": "タイトル",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "title": {
-        "name": "タイトル"
+        "name": "タイトル",
+        "description": "タイトルに表示するテキスト"
       },
       "subtitle": {
-        "name": "サブタイトル"
+        "name": "サブタイトル",
+        "description": "サブタイトルに表示するテキスト（省略可）"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "表示完了（true）"
       }
     }
   },
@@ -1641,15 +1715,18 @@
     "menuDisplayName": "ACTIONバー",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "text": {
-        "name": "テキスト"
+        "name": "テキスト",
+        "description": "アクションバーに表示するテキスト"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "表示完了（true）"
       }
     }
   },
@@ -1658,12 +1735,14 @@
     "menuDisplayName": "タイトル消去",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "消去完了（true）"
       }
     }
   },
@@ -1672,18 +1751,22 @@
     "menuDisplayName": "位置変化",
     "inputs": {
       "world": {
-        "name": "ワールド"
+        "name": "ワールド",
+        "description": "Minecraft接続ノードのワールド出力"
       }
     },
     "outputs": {
       "position": {
-        "name": "座標"
+        "name": "座標",
+        "description": "プレイヤーの座標 {x, y, z}"
       },
       "direction": {
-        "name": "向き"
+        "name": "向き",
+        "description": "プレイヤーの向き（Y軸回転）"
       },
       "player": {
-        "name": "ﾌﾟﾚｲﾔｰ"
+        "name": "ﾌﾟﾚｲﾔｰ",
+        "description": "WorldPlayer オブジェクト → プレイヤー情報取得ノードへ"
       }
     }
   },
@@ -1693,6 +1776,7 @@
     "inputs": {
       "direction": {
         "name": "方向",
+        "description": "移動する方向",
         "options": {
           "forward": "前",
           "back": "後",
@@ -1705,7 +1789,8 @@
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "移動完了（true）"
       }
     }
   },
@@ -1715,6 +1800,7 @@
     "inputs": {
       "direction": {
         "name": "方向",
+        "description": "回転する方向",
         "options": {
           "left": "左",
           "right": "右"
@@ -1723,7 +1809,8 @@
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "回転完了（true）"
       }
     }
   },
@@ -1732,15 +1819,18 @@
     "menuDisplayName": "AGTTP",
     "inputs": {
       "trigger": {
-        "name": "トリガー"
+        "name": "トリガー",
+        "description": "トリガー（任意）"
       },
       "position": {
-        "name": "座標"
+        "name": "座標",
+        "description": "テレポート先の座標 {x, y, z}"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "TP完了（true）"
       }
     }
   },
@@ -1750,6 +1840,7 @@
     "inputs": {
       "action": {
         "name": "行動",
+        "description": "実行する行動",
         "options": {
           "attack": "攻撃",
           "destroyBlock": "破壊",
@@ -1763,6 +1854,7 @@
       },
       "direction": {
         "name": "方向",
+        "description": "行動する方向",
         "options": {
           "forward": "前",
           "back": "後",
@@ -1775,7 +1867,8 @@
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "行動完了（true）"
       }
     }
   },
@@ -1785,6 +1878,7 @@
     "inputs": {
       "direction": {
         "name": "方向",
+        "description": "設置する方向",
         "options": {
           "forward": "前",
           "back": "後",
@@ -1795,12 +1889,14 @@
         }
       },
       "slot": {
-        "name": "スロット"
+        "name": "スロット",
+        "description": "使用するインベントリスロット番号（1〜27）"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "設置完了（true）"
       }
     }
   },
@@ -1810,6 +1906,7 @@
     "inputs": {
       "direction": {
         "name": "方向",
+        "description": "投棄する方向",
         "options": {
           "forward": "前",
           "back": "後",
@@ -1820,15 +1917,18 @@
         }
       },
       "slot": {
-        "name": "スロット"
+        "name": "スロット",
+        "description": "対象インベントリスロット番号（1〜27）"
       },
       "amount": {
-        "name": "個数"
+        "name": "個数",
+        "description": "投棄する個数"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "投棄完了（true）"
       }
     }
   },
@@ -1837,18 +1937,22 @@
     "menuDisplayName": "AGTスロット",
     "inputs": {
       "from_slot": {
-        "name": "元スロット"
+        "name": "元スロット",
+        "description": "移動元スロット番号（1〜27）"
       },
       "to_slot": {
-        "name": "先スロット"
+        "name": "先スロット",
+        "description": "移動先スロット番号（1〜27）"
       },
       "amount": {
-        "name": "個数"
+        "name": "個数",
+        "description": "移動する個数"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "移動完了（true）"
       }
     }
   },
@@ -1857,21 +1961,26 @@
     "menuDisplayName": "AGTセット",
     "inputs": {
       "slot": {
-        "name": "スロット"
+        "name": "スロット",
+        "description": "セット先スロット番号（1〜27）"
       },
       "item_id": {
-        "name": "アイテムID"
+        "name": "アイテムID",
+        "description": "アイテムID（例: minecraft:apple）"
       },
       "amount": {
-        "name": "個数"
+        "name": "個数",
+        "description": "セットする個数"
       },
       "data": {
-        "name": "データ値"
+        "name": "データ値",
+        "description": "データ値（通常: 0）"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "セット完了（true）"
       }
     }
   },
@@ -1880,12 +1989,14 @@
     "menuDisplayName": "AGT収集",
     "inputs": {
       "item_id": {
-        "name": "アイテムID"
+        "name": "アイテムID",
+        "description": "収集するアイテムID"
       }
     },
     "outputs": {
       "done": {
-        "name": "完了"
+        "name": "完了",
+        "description": "収集完了（true）"
       }
     }
   },
@@ -1894,18 +2005,22 @@
     "menuDisplayName": "座標補間",
     "inputs": {
       "pos_a": {
-        "name": "座標A"
+        "name": "座標A",
+        "description": "開始座標 {x, y, z}"
       },
       "pos_b": {
-        "name": "座標B"
+        "name": "座標B",
+        "description": "終了座標 {x, y, z}"
       },
       "t": {
-        "name": "補間値"
+        "name": "補間値",
+        "description": "補間係数（0.0〜1.0）"
       }
     },
     "outputs": {
       "result": {
-        "name": "結果"
+        "name": "結果",
+        "description": "補間後の座標 {x, y, z}"
       }
     }
   },
@@ -1914,12 +2029,14 @@
     "menuDisplayName": "正規化",
     "inputs": {
       "position": {
-        "name": "座標"
+        "name": "座標",
+        "description": "正規化するベクトル {x, y, z}"
       }
     },
     "outputs": {
       "result": {
-        "name": "結果"
+        "name": "結果",
+        "description": "長さ1の単位ベクトル {x, y, z}"
       }
     }
   },
@@ -1928,15 +2045,18 @@
     "menuDisplayName": "内積",
     "inputs": {
       "pos_a": {
-        "name": "座標A"
+        "name": "座標A",
+        "description": "ベクトルA {x, y, z}"
       },
       "pos_b": {
-        "name": "座標B"
+        "name": "座標B",
+        "description": "ベクトルB {x, y, z}"
       }
     },
     "outputs": {
       "value": {
-        "name": "値"
+        "name": "値",
+        "description": "内積の値（スカラー）"
       }
     }
   },
@@ -1945,15 +2065,18 @@
     "menuDisplayName": "AABB移動",
     "inputs": {
       "area": {
-        "name": "エリア"
+        "name": "エリア",
+        "description": "移動するエリア {min, max}"
       },
       "delta": {
-        "name": "移動量"
+        "name": "移動量",
+        "description": "移動量ベクトル {x, y, z}"
       }
     },
     "outputs": {
       "area": {
-        "name": "エリア"
+        "name": "エリア",
+        "description": "移動後のエリアオブジェクト"
       }
     }
   },
@@ -1962,15 +2085,18 @@
     "menuDisplayName": "AABB重複",
     "inputs": {
       "area_a": {
-        "name": "エリアA"
+        "name": "エリアA",
+        "description": "エリア A {min, max}"
       },
       "area_b": {
-        "name": "エリアB"
+        "name": "エリアB",
+        "description": "エリア B {min, max}"
       }
     },
     "outputs": {
       "result": {
-        "name": "結果"
+        "name": "結果",
+        "description": "重複していれば true"
       }
     }
   }

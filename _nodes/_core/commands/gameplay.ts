@@ -15,7 +15,7 @@ export const RunCommand: CodeNode = {
     command:  { description: 'Minecraft command to run (without /)' },
   },
   outputs: {
-    done: {},
+    done: { description: 'Emits true when command completes' },
   },
   run: async ({ command }, { done }) => {
     const { world } = getCurrentContext()
@@ -45,7 +45,7 @@ export const GetGameTime: CodeNode = {
       },
     },
   },
-  outputs: { value: {} },
+  outputs: { value: { description: 'Current game time in ticks' } },
   run: async ({ type }, { value }) => {
     const { world } = getCurrentContext()
     const k = String(type)
@@ -65,7 +65,7 @@ export const IsDaytime: CodeNode = {
     trigger: { description: 'Trigger (optional)' },
   },
   outputs: {
-    is_day: {},
+    is_day: { description: 'true if daytime, false if night' },
   },
   run: async (_, { is_day }) => {
     const { world } = getCurrentContext()
@@ -83,7 +83,7 @@ export const GetWeather: CodeNode = {
   inputs: {
     trigger: { description: 'Trigger (optional)' },
   },
-  outputs: { weather: {} },
+  outputs: { weather: { description: 'Current weather name (Clear / Rain / Thunder)' } },
   run: async (_, { weather }) => {
     const { world } = getCurrentContext()
     weather.next(await world.getWeather())
@@ -102,7 +102,7 @@ export const FillBlocks: CodeNode = {
     to:       { description: 'End position {x, y, z}' },
     block_id: { description: 'Block ID (e.g. minecraft:stone)' },
   },
-  outputs: { done: {}, count: {} },
+  outputs: { done: { description: 'Emits true when fill completes' }, count: { description: 'Number of blocks filled' } },
   run: async ({ from, to, block_id }, { done, count }) => {
     const { world } = getCurrentContext()
     const n = await world.fillBlocks(
@@ -124,7 +124,7 @@ export const GetTopSolidBlock: CodeNode = {
   inputs: {
     trigger: { description: 'Trigger (optional)' },
   },
-  outputs: { position: {}, block_name: {} },
+  outputs: { position: { description: 'Position {x,y,z} of the top solid block' }, block_name: { description: 'Minecraft ID of the top solid block' } },
   run: async (_, { position, block_name }) => {
     const { world } = getCurrentContext()
     const result = await world.getTopSolidBlock()
@@ -154,7 +154,7 @@ export const WorldQuery: CodeNode = {
       },
     },
   },
-  outputs: { list: {} },
+  outputs: { list: { description: 'Array of matching entity / block / item data' } },
   run: async ({ type }, { list }) => {
     const { world } = getCurrentContext()
     list.next(await (world.queryData as any)(type))
@@ -172,7 +172,7 @@ export const SendMessage: CodeNode = {
     message:  { description: 'Message to send' },
     target:   { description: 'Target selector or player name (default: @a)', defaultValue: '@a' },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when message is sent' } },
   run: async ({ message, target }, { done }) => {
     const { world } = getCurrentContext()
     await world.sendMessage(String(message), String(target))
@@ -190,7 +190,7 @@ export const SetTimeOfDay: CodeNode = {
     trigger: { description: 'Trigger (optional)' },
     time:    { description: 'Time of day (0–24000). Dawn=1000, Noon=6000, Sunset=12000, Night=13000', defaultValue: 6000 },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when time is set' } },
   run: async ({ time }, { done }) => {
     const { world } = getCurrentContext()
     await world.setTimeOfDay(Number(time))
@@ -220,7 +220,7 @@ export const SetWeather: CodeNode = {
     },
     duration: { description: 'Duration in ticks (20 ticks = 1 second)', defaultValue: 600 },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when weather is set' } },
   run: async ({ weather, duration }, { done }) => {
     const { world } = getCurrentContext()
     await world.setWeather(weather as any, Number(duration))
@@ -239,7 +239,7 @@ export const SetBlock: CodeNode = {
     position: { description: 'Block position {x,y,z}' },
     block_id: { description: 'Block ID (e.g. minecraft:stone)' },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when block is placed' } },
   run: async ({ position, block_id }, { done }) => {
     const { world } = getCurrentContext()
     await world.setBlock(position as any, String(block_id))
@@ -259,7 +259,7 @@ export const BroadcastCommand: CodeNode = {
     trigger:  { description: 'Trigger (optional)' },
     command:  { description: 'Minecraft command to broadcast to all worlds (without /)' },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when broadcast completes' } },
   run: async ({ command }, { done }) => {
     const world = getCurrentWorld()!
     await world.server.broadcastCommand(String(command))
@@ -277,7 +277,7 @@ export const BroadcastMessage: CodeNode = {
     trigger:  { description: 'Trigger (optional)' },
     message:  { description: 'Message to broadcast to all worlds' },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when broadcast completes' } },
   run: async ({ message }, { done }) => {
     const world = getCurrentWorld()!
     await world.server.broadcastMessage(String(message))

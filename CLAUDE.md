@@ -346,16 +346,3 @@ connections:
 接続できるのは `type: dynamic`（または config 未設定）なポートのみ。  
 IIP（boolean/number/string/json/select）で焼き込んだポートはワイヤー接続不可。
 
----
-
-## 設計書の場所
-
-```
-\\as6702t-7258\Public\01_mming\14_研究開発\技術資料\Flyde-Minecraft-WS\
-├── 01_技術選定経緯.md
-├── 02_システムアーキテクチャ.md
-├── 03_Flydeノード設計.md   ← ノード一覧はここ
-└── 04_統合設計.md          ← 実装パターンはここ
-```
-
-ノードを追加・変更したときは設計書も更新する（doc-updater エージェントを使う）。

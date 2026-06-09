@@ -27,7 +27,7 @@ export const GetAgentLocation: CodeNode = {
     trigger: { description: 'Trigger (optional)' },
   },
   outputs: {
-    position: {},
+    position: { description: 'Agent position {x,y,z}' },
   },
   run: async (_, { position }) => {
     const { world } = getCurrentContext()

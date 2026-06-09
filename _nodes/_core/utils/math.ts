@@ -78,7 +78,7 @@ export const Vector3Distance: CodeNode = {
     pos_b: { description: 'End position {x,y,z}' },
   },
   outputs: {
-    distance: {},
+    distance: { description: 'Distance between the two positions' },
   },
   run: ({ pos_a, pos_b }, { distance }) => {
     const a = pos_a as Vec3, b = pos_b as Vec3
@@ -97,7 +97,7 @@ export const Vector3ToString: CodeNode = {
     position: { description: 'Position to convert {x,y,z}' },
   },
   outputs: {
-    text: {},
+    text: { description: 'Coordinate string "x y z"' },
   },
   run: ({ position }, { text }) => {
     const v = position as Vec3
@@ -115,9 +115,9 @@ export const Vector3Split: CodeNode = {
     position: { description: 'Position to split {x,y,z}' },
   },
   outputs: {
-    x: {},
-    y: {},
-    z: {},
+    x: { description: 'X component' },
+    y: { description: 'Y component' },
+    z: { description: 'Z component' },
   },
   run: ({ position }, { x, y, z }) => {
     const v = position as Vec3
@@ -139,7 +139,7 @@ export const ClampNumber: CodeNode = {
     max:   { description: 'Upper bound' },
   },
   outputs: {
-    result: {},
+    result: { description: 'Clamped value within [min, max]' },
   },
   run: ({ value, min, max }, { result }) => {
     result.next(Math.min(Math.max(Number(value), Number(min)), Number(max)))
@@ -156,7 +156,7 @@ export const AABBCreate: CodeNode = {
     corner_a: { description: 'Corner 1 {x,y,z} (order does not matter)' },
     corner_b: { description: 'Corner 2 {x,y,z} (order does not matter)' },
   },
-  outputs: { area: {} },
+  outputs: { area: { description: 'AABB object {min,max}' } },
   run: ({ corner_a, corner_b }, { area }) => {
     const a = corner_a as Vec3, b = corner_b as Vec3
     area.next({
@@ -176,7 +176,7 @@ export const AABBIsInside: CodeNode = {
     area:     { description: 'AABB area {min, max}' },
     position: { description: 'Position to test {x,y,z}' },
   },
-  outputs: { result: {} },
+  outputs: { result: { description: 'true if position is inside the area' } },
   run: ({ area, position }, { result }) => {
     const box = area as AABB, p = position as Vec3
     result.next(
@@ -201,7 +201,7 @@ export const Vector3Lerp: CodeNode = {
     t:     { description: 'Interpolation factor (0.0–1.0)', defaultValue: 0.5 },
   },
   outputs: {
-    result: {},
+    result: { description: 'Interpolated position {x,y,z}' },
   },
   run: ({ pos_a, pos_b, t }, { result }) => {
     const a = pos_a as Vec3, b = pos_b as Vec3, f = Number(t)
@@ -223,7 +223,7 @@ export const Vector3Normalize: CodeNode = {
     position: { description: 'Vector to normalize {x,y,z}' },
   },
   outputs: {
-    result: {},
+    result: { description: 'Normalized direction vector {x,y,z}' },
   },
   run: ({ position }, { result }) => {
     const v = position as Vec3
@@ -243,7 +243,7 @@ export const Vector3Dot: CodeNode = {
     pos_b: { description: 'Vector B {x,y,z}' },
   },
   outputs: {
-    value: {},
+    value: { description: 'Dot product of the two vectors' },
   },
   run: ({ pos_a, pos_b }, { value }) => {
     const a = pos_a as Vec3, b = pos_b as Vec3
@@ -262,7 +262,7 @@ export const AABBTranslate: CodeNode = {
     delta: { description: 'Translation vector {x,y,z}' },
   },
   outputs: {
-    area: {},
+    area: { description: 'Translated AABB object {min,max}' },
   },
   run: ({ area, delta }, outputs) => {
     const box = area as AABB, d = delta as Vec3
@@ -284,7 +284,7 @@ export const AABBIntersects: CodeNode = {
     area_b: { description: 'AABB area B {min, max}' },
   },
   outputs: {
-    result: {},
+    result: { description: 'true if the two areas overlap' },
   },
   run: ({ area_a, area_b }, { result }) => {
     const a = area_a as AABB, b = area_b as AABB

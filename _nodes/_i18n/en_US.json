@@ -10,10 +10,12 @@
     },
     "outputs": {
       "world": {
-        "name": "world"
+        "name": "world",
+        "description": "World object (used internally; no need to connect to command nodes)"
       },
       "error": {
-        "name": "error"
+        "name": "error",
+        "description": "Connection error info"
       }
     }
   },
@@ -39,7 +41,8 @@
     },
     "outputs": {
       "position": {
-        "name": "position"
+        "name": "position",
+        "description": "Agent position {x, y, z}"
       }
     }
   },
@@ -54,7 +57,8 @@
     },
     "outputs": {
       "objectives": {
-        "name": "objectives"
+        "name": "objectives",
+        "description": "Array of scoreboard objective objects"
       }
     }
   },
@@ -73,7 +77,8 @@
     },
     "outputs": {
       "objective": {
-        "name": "objective"
+        "name": "objective",
+        "description": "Scoreboard objective → connect to SB objective info node"
       }
     }
   },
@@ -96,7 +101,8 @@
     },
     "outputs": {
       "objective": {
-        "name": "objective"
+        "name": "objective",
+        "description": "Added objective → connect to SB objective info node"
       }
     }
   },
@@ -115,7 +121,8 @@
     },
     "outputs": {
       "result": {
-        "name": "result"
+        "name": "result",
+        "description": "Removal result"
       }
     }
   },
@@ -134,7 +141,8 @@
     },
     "outputs": {
       "scores": {
-        "name": "scores"
+        "name": "scores",
+        "description": "Array of all scores"
       }
     }
   },
@@ -157,7 +165,8 @@
     },
     "outputs": {
       "score": {
-        "name": "score"
+        "name": "score",
+        "description": "Score value (number)"
       }
     }
   },
@@ -193,7 +202,8 @@
     },
     "outputs": {
       "new_score": {
-        "name": "new_score"
+        "name": "new_score",
+        "description": "New score value after operation"
       }
     }
   },
@@ -664,7 +674,8 @@
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when done"
       }
     }
   },
@@ -688,7 +699,8 @@
     },
     "outputs": {
       "value": {
-        "name": "value"
+        "name": "value",
+        "description": "Queried time value"
       }
     }
   },
@@ -703,7 +715,8 @@
     },
     "outputs": {
       "is_day": {
-        "name": "is_day"
+        "name": "is_day",
+        "description": "true if daytime, false if nighttime"
       }
     }
   },
@@ -718,7 +731,8 @@
     },
     "outputs": {
       "weather": {
-        "name": "weather"
+        "name": "weather",
+        "description": "Weather name (\"Clear\" / \"Rain\" / \"Thunder\")"
       }
     }
   },
@@ -745,10 +759,12 @@
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when fill is complete"
       },
       "count": {
-        "name": "count"
+        "name": "count",
+        "description": "Number of blocks filled"
       }
     }
   },
@@ -763,10 +779,12 @@
     },
     "outputs": {
       "position": {
-        "name": "position"
+        "name": "position",
+        "description": "Ground position {x, y, z}"
       },
       "block_name": {
-        "name": "block_name"
+        "name": "block_name",
+        "description": "Name of the topmost solid block"
       }
     }
   },
@@ -790,7 +808,8 @@
     },
     "outputs": {
       "list": {
-        "name": "list"
+        "name": "list",
+        "description": "Query result list"
       }
     }
   },
@@ -805,10 +824,12 @@
     },
     "outputs": {
       "position": {
-        "name": "position"
+        "name": "position",
+        "description": "Player position {x, y, z}"
       },
       "direction": {
-        "name": "direction"
+        "name": "direction",
+        "description": "Player facing direction (Y-axis rotation)"
       }
     }
   },
@@ -823,7 +844,8 @@
     },
     "outputs": {
       "angle": {
-        "name": "angle"
+        "name": "angle",
+        "description": "Player facing angle {x, y} (degrees)"
       }
     }
   },
@@ -838,7 +860,8 @@
     },
     "outputs": {
       "tags": {
-        "name": "tags"
+        "name": "tags",
+        "description": "Array of tag name strings"
       }
     }
   },
@@ -857,7 +880,8 @@
     },
     "outputs": {
       "result": {
-        "name": "result"
+        "name": "result",
+        "description": "true if the player has the tag"
       }
     }
   },
@@ -872,7 +896,8 @@
     },
     "outputs": {
       "level": {
-        "name": "level"
+        "name": "level",
+        "description": "Player level (number)"
       }
     }
   },
@@ -887,7 +912,8 @@
     },
     "outputs": {
       "game_mode": {
-        "name": "game_mode"
+        "name": "game_mode",
+        "description": "Game mode name (e.g. \"Survival\")"
       }
     }
   },
@@ -902,7 +928,8 @@
     },
     "outputs": {
       "abilities": {
-        "name": "abilities"
+        "name": "abilities",
+        "description": "Player abilities object"
       }
     }
   },
@@ -917,7 +944,8 @@
     },
     "outputs": {
       "players": {
-        "name": "players"
+        "name": "players",
+        "description": "Array of player objects"
       }
     }
   },
@@ -932,7 +960,8 @@
     },
     "outputs": {
       "player": {
-        "name": "player"
+        "name": "player",
+        "description": "Local player object"
       }
     }
   },
@@ -1200,7 +1229,8 @@
     },
     "outputs": {
       "value": {
-        "name": "value"
+        "name": "value",
+        "description": "Selected ID or enum value"
       }
     }
   },
@@ -1312,7 +1342,8 @@
     },
     "outputs": {
       "distance": {
-        "name": "distance"
+        "name": "distance",
+        "description": "Distance between the two points (meters)"
       }
     }
   },
@@ -1327,7 +1358,8 @@
     },
     "outputs": {
       "text": {
-        "name": "text"
+        "name": "text",
+        "description": "String in \"x y z\" format"
       }
     }
   },
@@ -1342,13 +1374,16 @@
     },
     "outputs": {
       "x": {
-        "name": "x"
+        "name": "x",
+        "description": "X coordinate"
       },
       "y": {
-        "name": "y"
+        "name": "y",
+        "description": "Y coordinate"
       },
       "z": {
-        "name": "z"
+        "name": "z",
+        "description": "Z coordinate"
       }
     }
   },
@@ -1371,7 +1406,8 @@
     },
     "outputs": {
       "result": {
-        "name": "result"
+        "name": "result",
+        "description": "Clamped value"
       }
     }
   },
@@ -1390,7 +1426,8 @@
     },
     "outputs": {
       "area": {
-        "name": "area"
+        "name": "area",
+        "description": "AABB area object {min, max}"
       }
     }
   },
@@ -1409,7 +1446,8 @@
     },
     "outputs": {
       "result": {
-        "name": "result"
+        "name": "result",
+        "description": "true if position is inside the area"
       }
     }
   },
@@ -1418,18 +1456,22 @@
     "menuDisplayName": "SendMsg",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "message": {
-        "name": "message"
+        "name": "message",
+        "description": "Message to send"
       },
       "target": {
-        "name": "target"
+        "name": "target",
+        "description": "Target player name (optional; omit for all players)"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when sent"
       }
     }
   },
@@ -1438,15 +1480,18 @@
     "menuDisplayName": "SetTime",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "time": {
-        "name": "time"
+        "name": "time",
+        "description": "0–24000. Morning=1000, Noon=6000, Evening=12000, Night=13000"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when set"
       }
     }
   },
@@ -1455,18 +1500,27 @@
     "menuDisplayName": "SetWeather",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "weather": {
-        "name": "weather"
+        "name": "weather",
+        "description": "Weather to set",
+        "options": {
+          "Clear": "Clear",
+          "Rain": "Rain",
+          "Thunder": "Thunder"
+        }
       },
       "duration": {
-        "name": "duration"
+        "name": "duration",
+        "description": "Tick count (20 ticks = 1 second)"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when set"
       }
     }
   },
@@ -1475,18 +1529,22 @@
     "menuDisplayName": "SetBlock",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "position": {
-        "name": "position"
+        "name": "position",
+        "description": "Position to place the block {x, y, z}"
       },
       "block_id": {
-        "name": "block_id"
+        "name": "block_id",
+        "description": "Block ID (e.g. minecraft:stone)"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when placed"
       }
     }
   },
@@ -1495,18 +1553,22 @@
     "menuDisplayName": "GiveItem",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "item_id": {
-        "name": "item_id"
+        "name": "item_id",
+        "description": "Item ID (e.g. minecraft:apple)"
       },
       "amount": {
-        "name": "amount"
+        "name": "amount",
+        "description": "Number of items to give"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when given"
       }
     }
   },
@@ -1515,15 +1577,18 @@
     "menuDisplayName": "BroadcastCmd",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "command": {
-        "name": "command"
+        "name": "command",
+        "description": "Command to run on all players (without leading /)"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when done"
       }
     }
   },
@@ -1532,15 +1597,18 @@
     "menuDisplayName": "BroadcastMsg",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "message": {
-        "name": "message"
+        "name": "message",
+        "description": "Message to send to all players"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when sent"
       }
     }
   },
@@ -1549,15 +1617,18 @@
     "menuDisplayName": "AddLevel",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "level": {
-        "name": "level"
+        "name": "level",
+        "description": "Levels to add (negative to subtract)"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when done"
       }
     }
   },
@@ -1566,15 +1637,24 @@
     "menuDisplayName": "SetGameMode",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "mode": {
-        "name": "mode"
+        "name": "mode",
+        "description": "Game mode to set",
+        "options": {
+          "Survival": "Survival",
+          "Creative": "Creative",
+          "Adventure": "Adventure",
+          "Spectator": "Spectator"
+        }
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when set"
       }
     }
   },
@@ -1583,18 +1663,27 @@
     "menuDisplayName": "UpdateAbility",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "ability": {
-        "name": "ability"
+        "name": "ability",
+        "description": "Ability to update",
+        "options": {
+          "mayfly": "Fly",
+          "mute": "Mute",
+          "worldbuilder": "World Builder"
+        }
       },
       "value": {
-        "name": "value"
+        "name": "value",
+        "description": "true to enable, false to disable"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when updated"
       }
     }
   },
@@ -1603,18 +1692,22 @@
     "menuDisplayName": "SetTitle",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "title": {
-        "name": "title"
+        "name": "title",
+        "description": "Title text to display"
       },
       "subtitle": {
-        "name": "subtitle"
+        "name": "subtitle",
+        "description": "Subtitle text (optional)"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when displayed"
       }
     }
   },
@@ -1623,15 +1716,18 @@
     "menuDisplayName": "SetActionBar",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "text": {
-        "name": "text"
+        "name": "text",
+        "description": "Text to show in the action bar"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when displayed"
       }
     }
   },
@@ -1640,12 +1736,14 @@
     "menuDisplayName": "ClearTitle",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when cleared"
       }
     }
   },
@@ -1654,18 +1752,22 @@
     "menuDisplayName": "PlayerTransform",
     "inputs": {
       "world": {
-        "name": "world"
+        "name": "world",
+        "description": "World output from MinecraftConnect node"
       }
     },
     "outputs": {
       "position": {
-        "name": "position"
+        "name": "position",
+        "description": "Player position {x, y, z}"
       },
       "direction": {
-        "name": "direction"
+        "name": "direction",
+        "description": "Player facing direction (Y-axis rotation)"
       },
       "player": {
-        "name": "player"
+        "name": "player",
+        "description": "WorldPlayer object → connect to player info node"
       }
     }
   },
@@ -1674,12 +1776,22 @@
     "menuDisplayName": "AgentMove",
     "inputs": {
       "direction": {
-        "name": "direction"
+        "name": "direction",
+        "description": "Direction to move",
+        "options": {
+          "forward": "Forward",
+          "back": "Back",
+          "left": "Left",
+          "right": "Right",
+          "up": "Up",
+          "down": "Down"
+        }
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when moved"
       }
     }
   },
@@ -1688,12 +1800,18 @@
     "menuDisplayName": "AgentTurn",
     "inputs": {
       "direction": {
-        "name": "direction"
+        "name": "direction",
+        "description": "Direction to turn",
+        "options": {
+          "left": "Left",
+          "right": "Right"
+        }
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when turned"
       }
     }
   },
@@ -1702,15 +1820,18 @@
     "menuDisplayName": "AgentTP",
     "inputs": {
       "trigger": {
-        "name": "trigger"
+        "name": "trigger",
+        "description": "Trigger (optional)"
       },
       "position": {
-        "name": "position"
+        "name": "position",
+        "description": "Destination position {x, y, z}"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when teleported"
       }
     }
   },
@@ -1719,15 +1840,36 @@
     "menuDisplayName": "AgentAction",
     "inputs": {
       "action": {
-        "name": "action"
+        "name": "action",
+        "description": "Action to perform",
+        "options": {
+          "attack": "Attack",
+          "destroyBlock": "Destroy",
+          "till": "Till",
+          "dropAllItems": "Drop All",
+          "inspect": "Inspect",
+          "inspectData": "Inspect Data",
+          "detect": "Detect",
+          "detectRedstone": "Detect RS"
+        }
       },
       "direction": {
-        "name": "direction"
+        "name": "direction",
+        "description": "Direction to act",
+        "options": {
+          "forward": "Forward",
+          "back": "Back",
+          "left": "Left",
+          "right": "Right",
+          "up": "Up",
+          "down": "Down"
+        }
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when done"
       }
     }
   },
@@ -1736,15 +1878,26 @@
     "menuDisplayName": "AgentPlace",
     "inputs": {
       "direction": {
-        "name": "direction"
+        "name": "direction",
+        "description": "Direction to place",
+        "options": {
+          "forward": "Forward",
+          "back": "Back",
+          "left": "Left",
+          "right": "Right",
+          "up": "Up",
+          "down": "Down"
+        }
       },
       "slot": {
-        "name": "slot"
+        "name": "slot",
+        "description": "Inventory slot number (1–27)"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when placed"
       }
     }
   },
@@ -1753,18 +1906,30 @@
     "menuDisplayName": "AgentDrop",
     "inputs": {
       "direction": {
-        "name": "direction"
+        "name": "direction",
+        "description": "Direction to drop",
+        "options": {
+          "forward": "Forward",
+          "back": "Back",
+          "left": "Left",
+          "right": "Right",
+          "up": "Up",
+          "down": "Down"
+        }
       },
       "slot": {
-        "name": "slot"
+        "name": "slot",
+        "description": "Inventory slot number (1–27)"
       },
       "amount": {
-        "name": "amount"
+        "name": "amount",
+        "description": "Number of items to drop"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when dropped"
       }
     }
   },
@@ -1773,18 +1938,22 @@
     "menuDisplayName": "AgentMoveItem",
     "inputs": {
       "from_slot": {
-        "name": "from_slot"
+        "name": "from_slot",
+        "description": "Source slot number (1–27)"
       },
       "to_slot": {
-        "name": "to_slot"
+        "name": "to_slot",
+        "description": "Destination slot number (1–27)"
       },
       "amount": {
-        "name": "amount"
+        "name": "amount",
+        "description": "Number of items to move"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when moved"
       }
     }
   },
@@ -1793,21 +1962,26 @@
     "menuDisplayName": "AgentSetItem",
     "inputs": {
       "slot": {
-        "name": "slot"
+        "name": "slot",
+        "description": "Slot number to set (1–27)"
       },
       "item_id": {
-        "name": "item_id"
+        "name": "item_id",
+        "description": "Item ID (e.g. minecraft:apple)"
       },
       "amount": {
-        "name": "amount"
+        "name": "amount",
+        "description": "Number of items to set"
       },
       "data": {
-        "name": "data"
+        "name": "data",
+        "description": "Data value (usually 0)"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when set"
       }
     }
   },
@@ -1816,12 +1990,14 @@
     "menuDisplayName": "AgentCollect",
     "inputs": {
       "item_id": {
-        "name": "item_id"
+        "name": "item_id",
+        "description": "Item ID to collect"
       }
     },
     "outputs": {
       "done": {
-        "name": "done"
+        "name": "done",
+        "description": "Fires true when collected"
       }
     }
   },
@@ -1830,18 +2006,22 @@
     "menuDisplayName": "Vec3Lerp",
     "inputs": {
       "pos_a": {
-        "name": "pos_a"
+        "name": "pos_a",
+        "description": "Start position {x, y, z}"
       },
       "pos_b": {
-        "name": "pos_b"
+        "name": "pos_b",
+        "description": "End position {x, y, z}"
       },
       "t": {
-        "name": "t"
+        "name": "t",
+        "description": "Interpolation factor (0.0–1.0)"
       }
     },
     "outputs": {
       "result": {
-        "name": "result"
+        "name": "result",
+        "description": "Interpolated position {x, y, z}"
       }
     }
   },
@@ -1850,12 +2030,14 @@
     "menuDisplayName": "Vec3Norm",
     "inputs": {
       "position": {
-        "name": "position"
+        "name": "position",
+        "description": "Vector to normalize {x, y, z}"
       }
     },
     "outputs": {
       "result": {
-        "name": "result"
+        "name": "result",
+        "description": "Unit vector with length 1 {x, y, z}"
       }
     }
   },
@@ -1864,15 +2046,18 @@
     "menuDisplayName": "Vec3Dot",
     "inputs": {
       "pos_a": {
-        "name": "pos_a"
+        "name": "pos_a",
+        "description": "Vector A {x, y, z}"
       },
       "pos_b": {
-        "name": "pos_b"
+        "name": "pos_b",
+        "description": "Vector B {x, y, z}"
       }
     },
     "outputs": {
       "value": {
-        "name": "value"
+        "name": "value",
+        "description": "Dot product (scalar)"
       }
     }
   },
@@ -1881,15 +2066,18 @@
     "menuDisplayName": "AABBTranslate",
     "inputs": {
       "area": {
-        "name": "area"
+        "name": "area",
+        "description": "Area to translate {min, max}"
       },
       "delta": {
-        "name": "delta"
+        "name": "delta",
+        "description": "Translation vector {x, y, z}"
       }
     },
     "outputs": {
       "area": {
-        "name": "area"
+        "name": "area",
+        "description": "Translated area object"
       }
     }
   },
@@ -1898,15 +2086,18 @@
     "menuDisplayName": "AABBIntersects",
     "inputs": {
       "area_a": {
-        "name": "area_a"
+        "name": "area_a",
+        "description": "Area A {min, max}"
       },
       "area_b": {
-        "name": "area_b"
+        "name": "area_b",
+        "description": "Area B {min, max}"
       }
     },
     "outputs": {
       "result": {
-        "name": "result"
+        "name": "result",
+        "description": "true if the two areas overlap"
       }
     }
   }

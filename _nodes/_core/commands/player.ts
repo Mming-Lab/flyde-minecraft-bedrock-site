@@ -13,8 +13,8 @@ export const GetPlayerLocation: CodeNode = {
     trigger: { description: 'Trigger (optional)' },
   },
   outputs: {
-    position:  {},
-    direction: {},
+    position:  { description: 'Player position {x,y,z}' },
+    direction: { description: 'Look direction vector {x,y,z}' },
   },
   run: async (_, { position, direction }) => {
     const { player } = getCurrentContext()
@@ -34,7 +34,7 @@ export const GetPlayerOrientation: CodeNode = {
     trigger: { description: 'Trigger (optional)' },
   },
   outputs: {
-    angle: {},
+    angle: { description: 'Player yaw angle (degrees)' },
   },
   run: async (_, { angle }) => {
     const { player } = getCurrentContext()
@@ -52,7 +52,7 @@ export const GetPlayerTags: CodeNode = {
   inputs: {
     trigger: { description: 'Trigger (optional)' },
   },
-  outputs: { tags: {} },
+  outputs: { tags: { description: 'Array of tag strings attached to the player' } },
   run: async (_, { tags }) => {
     const { player } = getCurrentContext()
     tags.next(await player.getTags())
@@ -69,7 +69,7 @@ export const PlayerHasTag: CodeNode = {
     trigger: { description: 'Trigger (optional)' },
     tag:     { description: 'Tag name to check' },
   },
-  outputs: { result: {} },
+  outputs: { result: { description: 'true if the player has the tag' } },
   run: async ({ tag }, { result }) => {
     const { player } = getCurrentContext()
     result.next(await player.hasTag(String(tag)))
@@ -85,7 +85,7 @@ export const GetPlayerLevel: CodeNode = {
   inputs: {
     trigger: { description: 'Trigger (optional)' },
   },
-  outputs: { level: {} },
+  outputs: { level: { description: 'Player XP level' } },
   run: async (_, { level }) => {
     const { player } = getCurrentContext()
     level.next(await player.getLevel())
@@ -101,7 +101,7 @@ export const GetGameMode: CodeNode = {
   inputs: {
     trigger: { description: 'Trigger (optional)' },
   },
-  outputs: { game_mode: {} },
+  outputs: { game_mode: { description: 'Game mode name (Survival / Creative / Adventure / Spectator)' } },
   run: async (_, { game_mode }) => {
     const { player } = getCurrentContext()
     game_mode.next(await player.getGameMode())
@@ -117,7 +117,7 @@ export const GetPlayerAbilities: CodeNode = {
   inputs: {
     trigger: { description: 'Trigger (optional)' },
   },
-  outputs: { abilities: {} },
+  outputs: { abilities: { description: 'Player abilities object' } },
   run: async (_, { abilities }) => {
     const { player } = getCurrentContext()
     abilities.next(await player.getAbilities())
@@ -133,7 +133,7 @@ export const GetPlayers: CodeNode = {
   inputs: {
     trigger: { description: 'Trigger (optional)' },
   },
-  outputs: { players: {} },
+  outputs: { players: { description: 'Array of player name strings' } },
   run: async (_, { players }) => {
     const { world } = getCurrentContext()
     players.next(await world.getPlayers())
@@ -149,7 +149,7 @@ export const GetLocalPlayer: CodeNode = {
   inputs: {
     trigger: { description: 'Trigger (optional)' },
   },
-  outputs: { player: {} },
+  outputs: { player: { description: 'WorldPlayer snapshot of the local player' } },
   run: async (_, { player }) => {
     const { world } = getCurrentContext()
     player.next(await world.getLocalPlayer())
@@ -167,7 +167,7 @@ export const GiveItem: CodeNode = {
     item_id:  { description: 'Item ID (e.g. minecraft:diamond)' },
     amount:   { description: 'Amount to give', defaultValue: 1 },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when item is given' } },
   run: async ({ item_id, amount }, { done }) => {
     const { player } = getCurrentContext()
     await player.giveItem(String(item_id), Number(amount))
@@ -187,7 +187,7 @@ export const AddPlayerLevel: CodeNode = {
     trigger: { description: 'Trigger (optional)' },
     level:   { description: 'Levels to add (negative to subtract)', defaultValue: 1 },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when level is added' } },
   run: async ({ level }, { done }) => {
     const { player } = getCurrentContext()
     await player.addLevel(Number(level))
@@ -217,7 +217,7 @@ export const SetGameMode: CodeNode = {
       },
     },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when game mode is set' } },
   run: async ({ mode }, { done }) => {
     const { player } = getCurrentContext()
     await player.setGameMode(mode as any)
@@ -247,7 +247,7 @@ export const UpdateAbility: CodeNode = {
     },
     value: { description: 'Enable (true) or disable (false)', defaultValue: true },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when ability is updated' } },
   run: async ({ ability, value }, { done }) => {
     const { player } = getCurrentContext()
     await player.updateAbility(ability as any, Boolean(value))
@@ -266,7 +266,7 @@ export const SetTitle: CodeNode = {
     title:    { description: 'Title text (large center text)' },
     subtitle: { description: 'Subtitle text (below title, optional)', defaultValue: '' },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when title is displayed' } },
   run: async ({ title, subtitle }, { done }) => {
     const { player } = getCurrentContext()
     const opts = subtitle ? { subtitle: String(subtitle) } : undefined
@@ -285,7 +285,7 @@ export const SetActionBar: CodeNode = {
     trigger: { description: 'Trigger (optional)' },
     text:    { description: 'Action bar text (small text above hotbar)' },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when action bar is updated' } },
   run: async ({ text }, { done }) => {
     const { player } = getCurrentContext()
     await player.onScreenDisplay.setActionBar(String(text))
@@ -302,7 +302,7 @@ export const ClearTitle: CodeNode = {
   inputs: {
     trigger: { description: 'Trigger (optional)' },
   },
-  outputs: { done: {} },
+  outputs: { done: { description: 'Emits true when title is cleared' } },
   run: async (_, { done }) => {
     const { player } = getCurrentContext()
     await player.onScreenDisplay.clearTitle()

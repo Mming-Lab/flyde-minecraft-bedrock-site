@@ -12,7 +12,7 @@ export const GetScoreboardObjectives: CodeNode = {
   inputs: {
     trigger: { description: 'Trigger (optional)' },
   },
-  outputs: { objectives: {} },
+  outputs: { objectives: { description: 'Array of all scoreboard objectives' } },
   run: async (_, { objectives }) => {
     const { world } = getCurrentContext()
     objectives.next(await world.scoreboard.getObjectives())
@@ -29,7 +29,7 @@ export const GetScoreboardObjective: CodeNode = {
     trigger:      { description: 'Trigger (optional)' },
     objective_id: { description: 'Scoreboard objective ID' },
   },
-  outputs: { objective: {} },
+  outputs: { objective: { description: 'Scoreboard objective object' } },
   run: async ({ objective_id }, { objective }) => {
     const { world } = getCurrentContext()
     objective.next(await world.scoreboard.getObjective(String(objective_id)))
@@ -47,7 +47,7 @@ export const AddScoreboardObjective: CodeNode = {
     objective_id: { description: 'Scoreboard objective ID' },
     display_name: { description: 'Display name (optional)' },
   },
-  outputs: { objective: {} },
+  outputs: { objective: { description: 'The newly added objective' } },
   run: async ({ objective_id, display_name }, { objective }) => {
     const { world } = getCurrentContext()
     objective.next(await world.scoreboard.addObjective(
@@ -67,7 +67,7 @@ export const RemoveScoreboardObjective: CodeNode = {
     trigger:      { description: 'Trigger (optional)' },
     objective_id: { description: 'Scoreboard objective ID' },
   },
-  outputs: { result: {} },
+  outputs: { result: { description: 'true if removed successfully' } },
   run: async ({ objective_id }, { result }) => {
     const { world } = getCurrentContext()
     result.next(await world.scoreboard.removeObjective(String(objective_id)))
@@ -84,7 +84,7 @@ export const GetScores: CodeNode = {
     trigger:     { description: 'Trigger (optional)' },
     player_name: { description: 'Player name' },
   },
-  outputs: { scores: {} },
+  outputs: { scores: { description: 'Array of {name, score} entries' } },
   run: async ({ player_name }, { scores }) => {
     const { world } = getCurrentContext()
     scores.next(await world.scoreboard.getScores(String(player_name)))
@@ -102,7 +102,7 @@ export const GetScore: CodeNode = {
     player_name:  { description: 'Player name' },
     objective_id: { description: 'Scoreboard objective ID' },
   },
-  outputs: { score: {} },
+  outputs: { score: { description: 'Score value for the specified player' } },
   run: async ({ player_name, objective_id }, { score }) => {
     const { world } = getCurrentContext()
     score.next(await world.scoreboard.getScore(String(player_name), String(objective_id)))
@@ -133,7 +133,7 @@ export const ScoreOperation: CodeNode = {
     objective_id: { description: 'Scoreboard objective ID' },
     value:        { description: 'Value to apply' },
   },
-  outputs: { new_score: {} },
+  outputs: { new_score: { description: 'Score value after the operation' } },
   run: async ({ operation, player_name, objective_id, value }, { new_score }) => {
     const { world } = getCurrentContext()
     const p = String(player_name)
