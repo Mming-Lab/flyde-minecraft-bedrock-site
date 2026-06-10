@@ -14,7 +14,7 @@ node:
       type: code
       source:
         type: file
-        data: ../_nodes/index.flyde.ts
+        data: ../dist/index.flyde.js
     - pos:
         x: 673.8952102661133
         y: -367.5574207305908
@@ -27,7 +27,7 @@ node:
       type: code
       source:
         type: file
-        data: ../_nodes/index.flyde.ts
+        data: ../dist/index.flyde.js
     - pos:
         x: 852.428783416748
         y: -356.18806076049805
@@ -96,7 +96,7 @@ node:
       type: code
       source:
         type: file
-        data: ../_nodes/index.flyde.ts
+        data: ../dist/index.flyde.js
     - pos:
         x: 1386.9301147460938
         y: -114.38301086425781
@@ -124,7 +124,7 @@ node:
       type: code
       source:
         type: file
-        data: ../_nodes/index.flyde.ts
+        data: ../dist/index.flyde.js
     - pos:
         x: 622.142403839237
         y: -221.9089839180313
