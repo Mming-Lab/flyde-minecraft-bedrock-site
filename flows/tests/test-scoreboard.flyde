@@ -1,0 +1,151 @@
+imports: {}
+node:
+  # 【使い方】
+  # 1. フローを開始する
+  # 2. Minecraft で /connect localhost:8080
+  # 3. チャットで何か送信する（例: "test"）
+  # → 送信者名がプレイヤー名として各スコアボード操作に自動使用される
+  # → logs/ フォルダのログファイルで PASS/FAIL を確認する
+  # ※ テスト用目標 "mcflowtest" を一時的に追加・削除します
+  instances:
+    # --- 接続 ---
+    - id: mc-connect
+      type: code
+      nodeId: MinecraftConnect
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config: {}
+      pos: {x: 50, y: 100}
+
+    - id: on-chat
+      type: code
+      nodeId: OnPlayerChat
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config: {}
+      pos: {x: 350, y: 100}
+
+    # --- TC-SB01: AddScoreboardObjective("mcflowtest") ---
+    - id: add-obj
+      type: code
+      nodeId: AddScoreboardObjective
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        目標ID: {type: string, value: mcflowtest}
+        表示名: {type: string, value: テスト目標}
+      pos: {x: 50, y: 300}
+
+    # --- TC-SB02: ScoreOperation(set, player, mcflowtest, 42) → new_score = 42 ---
+    - id: score-set
+      type: code
+      nodeId: ScoreOperation
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        操作: {type: select, value: set}
+        目標ID: {type: string, value: mcflowtest}
+        値: {type: number, value: 42}
+      pos: {x: 50, y: 500}
+
+    - id: assert-sb02
+      type: code
+      nodeId: Assert
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        期待値: {type: number, value: 42}
+        比較: {type: select, value: eq}
+        ID: {type: string, value: TC-SB02}
+      pos: {x: 650, y: 500}
+
+    # --- TC-SB03: GetScore(player, mcflowtest) = 42 ---
+    - id: get-score
+      type: code
+      nodeId: GetScore
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        目標ID: {type: string, value: mcflowtest}
+      pos: {x: 50, y: 700}
+
+    - id: assert-sb03
+      type: code
+      nodeId: Assert
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        期待値: {type: number, value: 42}
+        比較: {type: select, value: eq}
+        ID: {type: string, value: TC-SB03}
+      pos: {x: 650, y: 700}
+
+    # --- TC-SB04: ScoreOperation(add, player, mcflowtest, 8) → new_score = 50 ---
+    - id: score-add
+      type: code
+      nodeId: ScoreOperation
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        操作: {type: select, value: add}
+        目標ID: {type: string, value: mcflowtest}
+        値: {type: number, value: 8}
+      pos: {x: 50, y: 900}
+
+    - id: assert-sb04
+      type: code
+      nodeId: Assert
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        期待値: {type: number, value: 50}
+        比較: {type: select, value: eq}
+        ID: {type: string, value: TC-SB04}
+      pos: {x: 650, y: 900}
+
+    # --- TC-SB05: RemoveScoreboardObjective("mcflowtest") → result = true ---
+    - id: remove-obj
+      type: code
+      nodeId: RemoveScoreboardObjective
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        目標ID: {type: string, value: mcflowtest}
+      pos: {x: 50, y: 1100}
+
+    - id: assert-sb05
+      type: code
+      nodeId: Assert
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        期待値: {type: boolean, value: true}
+        比較: {type: select, value: eq}
+        ID: {type: string, value: TC-SB05}
+      pos: {x: 650, y: 1100}
+
+  connections:
+    # MinecraftConnect → OnPlayerChat
+    - {from: {insId: mc-connect, pinId: ワールド}, to: {insId: on-chat, pinId: ワールド}}
+
+    # チャット受信者名をファンアウト（プレイヤー名として各ノードへ）
+    - {from: {insId: on-chat, pinId: 送信者名}, to: {insId: add-obj,   pinId: トリガー}}
+    - {from: {insId: on-chat, pinId: 送信者名}, to: {insId: score-set, pinId: プレイヤー名}}
+    - {from: {insId: on-chat, pinId: 送信者名}, to: {insId: get-score, pinId: プレイヤー名}}
+    - {from: {insId: on-chat, pinId: 送信者名}, to: {insId: score-add, pinId: プレイヤー名}}
+
+    # TC-SB02: AddObj完了 → ScoreOperation(set) → Assert
+    - {from: {insId: add-obj,   pinId: 目標},    to: {insId: score-set,  pinId: トリガー}}
+    - {from: {insId: score-set, pinId: 新スコア}, to: {insId: assert-sb02, pinId: 実際値}}
+
+    # TC-SB03: Assert完了 → GetScore → Assert
+    - {from: {insId: assert-sb02, pinId: 完了},  to: {insId: get-score,  pinId: トリガー}}
+    - {from: {insId: get-score,   pinId: スコア}, to: {insId: assert-sb03, pinId: 実際値}}
+
+    # TC-SB04: Assert完了 → ScoreOperation(add) → Assert
+    - {from: {insId: assert-sb03, pinId: 完了},   to: {insId: score-add,  pinId: トリガー}}
+    - {from: {insId: score-add,   pinId: 新スコア}, to: {insId: assert-sb04, pinId: 実際値}}
+
+    # TC-SB05: Assert完了 → RemoveObj → Assert
+    - {from: {insId: assert-sb04, pinId: 完了},  to: {insId: remove-obj, pinId: トリガー}}
+    - {from: {insId: remove-obj,  pinId: 結果},  to: {insId: assert-sb05, pinId: 実際値}}

@@ -2302,5 +2302,55 @@
         "description": "true if the two areas overlap"
       }
     }
+  },
+  "Assert": {
+    "displayName": "Assert",
+    "menuDisplayName": "Assert",
+    "description": "Compare actual vs expected and log PASS/FAIL. Always emits done for chaining.",
+    "inputs": {
+      "actual": {
+        "name": "actual",
+        "description": "Value to test"
+      },
+      "expected": {
+        "name": "expected",
+        "description": "Expected value"
+      },
+      "op": {
+        "name": "op",
+        "description": "Comparison operator",
+        "options": {
+          "eq":     "Equal (===)",
+          "deep":   "Deep equal (JSON)",
+          "lt":     "Less than (<)",
+          "gt":     "Greater than (>)",
+          "lte":    "Less or equal (≤)",
+          "gte":    "Greater or equal (≥)",
+          "approx": "Approx (±tolerance)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "Test case ID (e.g. TC-111)"
+      },
+      "tolerance": {
+        "name": "tolerance",
+        "description": "Tolerance for approx comparison"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "done",
+        "description": "Always emits true (for chaining)"
+      },
+      "passed": {
+        "name": "passed",
+        "description": "Emits true when test passes"
+      },
+      "failed": {
+        "name": "failed",
+        "description": "Emits actual when test fails"
+      }
+    }
   }
 }

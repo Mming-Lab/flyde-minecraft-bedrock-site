@@ -1,0 +1,227 @@
+imports: {}
+node:
+  # 【使い方】
+  # 1. フローを開始する
+  # 2. Minecraft で /connect localhost:8080
+  # 3. チャットで何か送信する（例: "test"）
+  # → チャット受信を起点に全テストが自動実行される
+  # → logs/ フォルダのログファイルで PASS/FAIL を確認する
+  instances:
+    # --- 接続 ---
+    - id: mc-connect
+      type: code
+      nodeId: MinecraftConnect
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config: {}
+      pos: {x: 50, y: 100}
+
+    - id: on-chat
+      type: code
+      nodeId: OnPlayerChat
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config: {}
+      pos: {x: 350, y: 100}
+
+    # --- TC-052: SetTimeOfDay(6000) → GetGameTime ≈ 6000 ---
+    - id: set-noon
+      type: code
+      nodeId: SetTimeOfDay
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        時刻: {type: number, value: 6000}
+      pos: {x: 50, y: 300}
+
+    - id: get-time
+      type: code
+      nodeId: GetGameTime
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        種別: {type: select, value: time}
+      pos: {x: 350, y: 300}
+
+    - id: assert-052
+      type: code
+      nodeId: Assert
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        期待値: {type: number, value: 6000}
+        比較: {type: select, value: approx}
+        許容差: {type: number, value: 500}
+        ID: {type: string, value: TC-052}
+      pos: {x: 650, y: 300}
+
+    # --- TC-053: SetTimeOfDay(6000) → IsDaytime = true ---
+    - id: is-daytime
+      type: code
+      nodeId: IsDaytime
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config: {}
+      pos: {x: 50, y: 500}
+
+    - id: assert-053
+      type: code
+      nodeId: Assert
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        期待値: {type: boolean, value: true}
+        比較: {type: select, value: eq}
+        ID: {type: string, value: TC-053}
+      pos: {x: 350, y: 500}
+
+    # --- TC-056: SetWeather(Rain) → GetWeather = "Rain" ---
+    - id: set-rain
+      type: code
+      nodeId: SetWeather
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        天気: {type: select, value: Rain}
+      pos: {x: 50, y: 700}
+
+    - id: get-weather-rain
+      type: code
+      nodeId: GetWeather
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config: {}
+      pos: {x: 350, y: 700}
+
+    - id: assert-056
+      type: code
+      nodeId: Assert
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        期待値: {type: string, value: Rain}
+        比較: {type: select, value: eq}
+        ID: {type: string, value: TC-056}
+      pos: {x: 650, y: 700}
+
+    # --- TC-057: SetWeather(Clear) → GetWeather = "Clear" ---
+    - id: set-clear
+      type: code
+      nodeId: SetWeather
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        天気: {type: select, value: Clear}
+      pos: {x: 50, y: 900}
+
+    - id: get-weather-clear
+      type: code
+      nodeId: GetWeather
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config: {}
+      pos: {x: 350, y: 900}
+
+    - id: assert-057
+      type: code
+      nodeId: Assert
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        期待値: {type: string, value: Clear}
+        比較: {type: select, value: eq}
+        ID: {type: string, value: TC-057}
+      pos: {x: 650, y: 900}
+
+    # --- TC-058: SetGameMode(Creative) → GetGameMode = "Creative" ---
+    - id: set-creative
+      type: code
+      nodeId: SetGameMode
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        GMD: {type: select, value: Creative}
+      pos: {x: 50, y: 1100}
+
+    - id: get-gamemode-creative
+      type: code
+      nodeId: GetGameMode
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config: {}
+      pos: {x: 350, y: 1100}
+
+    - id: assert-058
+      type: code
+      nodeId: Assert
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        期待値: {type: string, value: Creative}
+        比較: {type: select, value: eq}
+        ID: {type: string, value: TC-058}
+      pos: {x: 650, y: 1100}
+
+    # --- TC-059: SetGameMode(Survival) → GetGameMode = "Survival" ---
+    - id: set-survival
+      type: code
+      nodeId: SetGameMode
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        GMD: {type: select, value: Survival}
+      pos: {x: 50, y: 1300}
+
+    - id: get-gamemode-survival
+      type: code
+      nodeId: GetGameMode
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config: {}
+      pos: {x: 350, y: 1300}
+
+    - id: assert-059
+      type: code
+      nodeId: Assert
+      source: {type: file, data: "../../_nodes/index.flyde.ts"}
+      inputConfig: {}
+      config:
+        期待値: {type: string, value: Survival}
+        比較: {type: select, value: eq}
+        ID: {type: string, value: TC-059}
+      pos: {x: 650, y: 1300}
+
+  connections:
+    # MinecraftConnect → OnPlayerChat
+    - {from: {insId: mc-connect, pinId: ワールド}, to: {insId: on-chat, pinId: ワールド}}
+
+    # チャット受信 → SetTimeOfDay(noon)
+    - {from: {insId: on-chat, pinId: 送信者名}, to: {insId: set-noon, pinId: トリガー}}
+
+    # TC-052: SetTimeOfDay → GetGameTime → Assert
+    - {from: {insId: set-noon,     pinId: 完了}, to: {insId: get-time,    pinId: トリガー}}
+    - {from: {insId: get-time,     pinId: 値},   to: {insId: assert-052,  pinId: 実際値}}
+
+    # TC-053: GetGameTime完了後 → IsDaytime → Assert
+    - {from: {insId: assert-052,   pinId: 完了}, to: {insId: is-daytime,  pinId: トリガー}}
+    - {from: {insId: is-daytime,   pinId: 昼},   to: {insId: assert-053,  pinId: 実際値}}
+
+    # TC-056: Assert完了 → SetWeather(Rain) → GetWeather → Assert
+    - {from: {insId: assert-053,   pinId: 完了}, to: {insId: set-rain,         pinId: トリガー}}
+    - {from: {insId: set-rain,     pinId: 完了}, to: {insId: get-weather-rain, pinId: トリガー}}
+    - {from: {insId: get-weather-rain, pinId: 天気}, to: {insId: assert-056,   pinId: 実際値}}
+
+    # TC-057: Assert完了 → SetWeather(Clear) → GetWeather → Assert
+    - {from: {insId: assert-056,   pinId: 完了}, to: {insId: set-clear,         pinId: トリガー}}
+    - {from: {insId: set-clear,    pinId: 完了}, to: {insId: get-weather-clear, pinId: トリガー}}
+    - {from: {insId: get-weather-clear, pinId: 天気}, to: {insId: assert-057,   pinId: 実際値}}
+
+    # TC-058: Assert完了 → SetGameMode(Creative) → GetGameMode → Assert
+    - {from: {insId: assert-057,   pinId: 完了}, to: {insId: set-creative,          pinId: トリガー}}
+    - {from: {insId: set-creative, pinId: 完了}, to: {insId: get-gamemode-creative, pinId: トリガー}}
+    - {from: {insId: get-gamemode-creative, pinId: ゲームモード}, to: {insId: assert-058, pinId: 実際値}}
+
+    # TC-059: Assert完了 → SetGameMode(Survival) → GetGameMode → Assert
+    - {from: {insId: assert-058,   pinId: 完了}, to: {insId: set-survival,         pinId: トリガー}}
+    - {from: {insId: set-survival, pinId: 完了}, to: {insId: get-gamemode-survival, pinId: トリガー}}
+    - {from: {insId: get-gamemode-survival, pinId: ゲームモード}, to: {insId: assert-059, pinId: 実際値}}

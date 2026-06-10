@@ -2301,5 +2301,55 @@
         "description": "重複していれば true"
       }
     }
+  },
+  "Assert": {
+    "displayName": "テスト比較",
+    "menuDisplayName": "Assert",
+    "description": "actual と expected を比較し PASS/FAIL をログに記録する。常に done を emit する",
+    "inputs": {
+      "actual": {
+        "name": "実際値",
+        "description": "テスト対象の値"
+      },
+      "expected": {
+        "name": "期待値",
+        "description": "期待する値"
+      },
+      "op": {
+        "name": "比較",
+        "description": "比較の種類",
+        "options": {
+          "eq":     "一致 (===)",
+          "deep":   "深い一致",
+          "lt":     "より小さい (<)",
+          "gt":     "より大きい (>)",
+          "lte":    "以下 (≤)",
+          "gte":    "以上 (≥)",
+          "approx": "近似 (±許容差)"
+        }
+      },
+      "testId": {
+        "name": "ID",
+        "description": "テストケースID（例: TC-111）"
+      },
+      "tolerance": {
+        "name": "許容差",
+        "description": "approx 比較の許容誤差"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完了",
+        "description": "常に true を emit（次のテストへ連鎖）"
+      },
+      "passed": {
+        "name": "合格",
+        "description": "テスト合格時に true を emit"
+      },
+      "failed": {
+        "name": "不合格",
+        "description": "テスト不合格時に実際値を emit"
+      }
+    }
   }
 }

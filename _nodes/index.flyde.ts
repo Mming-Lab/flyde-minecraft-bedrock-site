@@ -14,6 +14,7 @@ import * as info from './_core/utils/info'
 import * as selectors from './_core/utils/selectors'
 import * as converters from './_core/utils/converters'
 import * as math from './_core/utils/math'
+import * as assertUtil from './_core/utils/assert'
 
 const n = i18n as Record<string, any>
 const ln = (node: any, t: any) => withDiagLog(localizeNode(node, t))
@@ -109,6 +110,9 @@ export const Vector3Normalize = ln(math.Vector3Normalize, n.Vector3Normalize)
 export const Vector3Dot       = ln(math.Vector3Dot,       n.Vector3Dot)
 export const AABBTranslate    = ln(math.AABBTranslate,    n.AABBTranslate)
 export const AABBIntersects   = ln(math.AABBIntersects,   n.AABBIntersects)
+
+// Test utilities
+export const Assert = ln(assertUtil.Assert, n.Assert)
 
 // Agents
 export const GetAgentLocation = ln(agents.GetAgentLocation, n.GetAgentLocation)
