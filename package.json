@@ -43,17 +43,12 @@
     "minecraft",
     "minecraft-education",
     "minecraft-bedrock",
-    "websocket",
+    "flow-based-programming",
+    "dataflow-programming",
     "visual-programming",
-    "block-programming",
-    "education",
-    "socket-be"
+    "education"
   ],
   "license": "PolyForm-Noncommercial-1.0.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mming-Lab/flyde-minecraft-bedrock"
-  },
   "allowScripts": {
     "esbuild@0.25.12": true
   }
