@@ -60,11 +60,15 @@ export const Gemini: CodeNode = {
       body.systemInstruction = { parts: [{ text: String(systemInstruction) }] }
     }
     dbg(`request: model=${selectedModel} prompt="${String(prompt).slice(0, 60)}"`)
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    })
+    const fetchOpts = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }
+    let res = await fetch(url, fetchOpts)
+    // 503/429 は一時的な過負荷。最大3回リトライ（2s, 4s 待機）
+    for (let i = 1; !res.ok && (res.status === 503 || res.status === 429) && i <= 2; i++) {
+      const wait = i * 2000
+      dbg(`status=${res.status} retry ${i} in ${wait}ms`)
+      await new Promise(r => setTimeout(r, wait))
+      res = await fetch(url, fetchOpts)
+    }
     if (!res.ok) {
       throw new Error(`Gemini API error ${res.status}: ${await res.text()}`)
     }
