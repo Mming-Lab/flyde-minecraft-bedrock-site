@@ -100,8 +100,8 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 650
-        y: 230
+        x: 1069
+        y: 103
       id: note-054
       inputConfig: {}
       nodeId: Note
@@ -135,36 +135,6 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 350
-        y: 500
-      id: json-061-mob
-      inputConfig: {}
-      nodeId: JSON Stringify
-      config:
-        object:
-          type: dynamic
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 550
-        y: 500
-      id: say-061-mob
-      inputConfig: {}
-      nodeId: RunCommand
-      config:
-        コマンド:
-          type: string
-          value: "say [TC-061 モブ] {{v}}"
-        トリガー:
-          type: boolean
-          value: true
-      type: code
-      source:
-        type: file
-        data: ../../dist/index.flyde.js
-    - pos:
         x: 50
         y: 700
       id: world-query-block
@@ -177,36 +147,6 @@ node:
         トリガー:
           type: dynamic
           value: "{{トリガー}}"
-      type: code
-      source:
-        type: file
-        data: ../../dist/index.flyde.js
-    - pos:
-        x: 350
-        y: 700
-      id: json-061-block
-      inputConfig: {}
-      nodeId: JSON Stringify
-      config:
-        object:
-          type: dynamic
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 550
-        y: 700
-      id: say-061-block
-      inputConfig: {}
-      nodeId: RunCommand
-      config:
-        コマンド:
-          type: string
-          value: "say [TC-061 ブロック] {{v}}"
-        トリガー:
-          type: boolean
-          value: true
       type: code
       source:
         type: file
@@ -229,51 +169,20 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 350
-        y: 900
-      id: json-061-item
-      inputConfig: {}
-      nodeId: JSON Stringify
-      config:
-        object:
-          type: dynamic
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 550
-        y: 900
-      id: say-061-item
-      inputConfig: {}
-      nodeId: RunCommand
-      config:
-        コマンド:
-          type: string
-          value: "say [TC-061 アイテム] {{v}}"
-        トリガー:
-          type: boolean
-          value: true
-      type: code
-      source:
-        type: file
-        data: ../../dist/index.flyde.js
-    - pos:
-        x: 650
-        y: 600
+        x: 450
+        y: 700
       id: note-061
       inputConfig: {}
       nodeId: Note
       config:
         content: |-
-          # TC-061: WorldQuery 目視確認
+          # TC-061: WorldQuery 動作確認
           **操作手順:**
           1. Minecraft でチャットを送信する（TC-054 と同じチャットで同時発火）
-          2. **目視確認（エンティティ）:** Minecraft チャットに近くのモブ一覧が表示されること
-             - ワールドにモブがいない場合は空配列 `[]`
-          3. **目視確認（ブロック）:** 周辺のブロック情報一覧が表示されること
-          4. **目視確認（アイテム）:** ドロップアイテム一覧が表示されること
-          ※ 3種類のWorldQueryが同時に発火するため、チャット1回でOK
+          2. **TC-061 確認:** WorldQuery(mob/block/item) が例外なく完了すること
+             - ログに ERROR が出なければ PASS
+          ※ WorldQuery の結果リストは大量データになるため say では表示しない
+          ※ ログの [WorldQuery] OUT[一覧] で返り値を直接確認できる
       type: code
       source:
         type: package
@@ -327,42 +236,6 @@ node:
       to:
         insId: say-054-weather
         pinId: v
-    - from:
-        insId: world-query-mob
-        pinId: 一覧
-      to:
-        insId: json-061-mob
-        pinId: object
-    - from:
-        insId: json-061-mob
-        pinId: json
-      to:
-        insId: say-061-mob
-        pinId: v
-    - from:
-        insId: world-query-block
-        pinId: 一覧
-      to:
-        insId: json-061-block
-        pinId: object
-    - from:
-        insId: json-061-block
-        pinId: json
-      to:
-        insId: say-061-block
-        pinId: v
-    - from:
-        insId: world-query-item
-        pinId: 一覧
-      to:
-        insId: json-061-item
-        pinId: object
-    - from:
-        insId: json-061-item
-        pinId: json
-      to:
-        insId: say-061-item
-        pinId: v
   id: TestGameplay3
   inputs: {}
   outputs: {}
@@ -372,4 +245,4 @@ node:
   description: |
     ゲームプレイクエリ追加テスト（TC-054, TC-061）チャット1回で同時発火
     TC-054: GetWeather → Assert(天気 neq "")（自動）+ MCチャットに天気名を表示（目視確認）
-    TC-061: WorldQuery × 3種別 → エンティティ/ブロック/アイテム一覧をMCチャットに表示（目視確認）
+    TC-061: WorldQuery × 3種別 → 例外なく完了することを確認（大量データのため say 表示なし、ログの OUT[一覧] で確認）
