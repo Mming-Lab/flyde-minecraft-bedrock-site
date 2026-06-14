@@ -1,0 +1,229 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 50
+        y: 100
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 300
+      id: on-mob-interacted
+      inputConfig: {}
+      nodeId: OnMobInteracted
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 300
+      id: bcast-041-type
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 300
+      id: get-from-mob-096
+      inputConfig: {}
+      nodeId: GetFromMob
+      config:
+        ﾓﾌﾞ:
+          type: dynamic
+          value: "{{ﾓﾌﾞ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 950
+        y: 300
+      id: assert-096
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: gte
+        ID:
+          type: string
+          value: TC-096
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 600
+      id: on-target-block-hit
+      inputConfig: {}
+      nodeId: OnTargetBlockHit
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 600
+      id: assert-042
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: gte
+        ID:
+          type: string
+          value: TC-042
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 600
+      id: bcast-042-strength
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 1250
+        y: 250
+      id: note-041
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-041: OnMobInteracted 目視確認 / TC-096: GetFromMob 自動テスト
+          **操作手順:**
+          1. Minecraft で動物（ウシ・ブタ等）に右クリックする
+          2. **目視確認 TC-041:** Minecraft チャットに交流種別（例: `interact`）が表示されること
+          3. **TC-096 自動:** GetFromMob.種別（数値） >= 0 を Assert → ログで PASS 確認
+          ※ WorldMob には ID/名前フィールドがないため、種別は数値のみ
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 950
+        y: 550
+      id: note-042
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-042: OnTargetBlockHit 自動テスト
+          **操作手順:**
+          1. Minecraft で的ブロック（Target Block）を矢で射つ
+          2. **TC-042 自動:** 強さ（0〜15） >= 0 を Assert → ログで PASS 確認
+          3. **目視確認:** Minecraft チャットに強さの値が表示されること
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-mob-interacted
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-target-block-hit
+        pinId: ワールド
+    - from:
+        insId: on-mob-interacted
+        pinId: 交流種別
+      to:
+        insId: bcast-041-type
+        pinId: メッセージ
+    - from:
+        insId: on-mob-interacted
+        pinId: ﾓﾌﾞ
+      to:
+        insId: get-from-mob-096
+        pinId: ﾓﾌﾞ
+    - from:
+        insId: get-from-mob-096
+        pinId: 種別
+      to:
+        insId: assert-096
+        pinId: 実際値
+    - from:
+        insId: on-target-block-hit
+        pinId: 強さ
+      to:
+        insId: assert-042
+        pinId: 実際値
+    - from:
+        insId: on-target-block-hit
+        pinId: 強さ
+      to:
+        insId: bcast-042-strength
+        pinId: メッセージ
+  id: TestMobEvents
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: |
+    モブイベント系テスト（TC-041, TC-042, TC-096）手動操作で各イベントを発火させる
+    TC-041: 動物（ウシ等）に右クリック → MCチャットに交流種別が表示
+    TC-096: モブ交流 → GetFromMob.種別(数値) >= 0 を Assert → ログでPASS確認
+    TC-042: 的ブロックを矢で射つ → Assert(強さ 0〜15) + MCチャットに強さが表示
+    ※ WorldMob には ID/名前フィールドがないため、種別(type)は数値のみ

@@ -1,0 +1,195 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 50
+        y: 100
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 100
+      id: on-chat
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 300
+      id: get-local-player
+      inputConfig: {}
+      nodeId: GetLocalPlayer
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 300
+      id: get-from-player
+      inputConfig: {}
+      nodeId: GetFromPlayerSnapshot
+      config:
+        ﾌﾟﾚｲﾔｰ:
+          type: dynamic
+          value: "{{ﾌﾟﾚｲﾔｰ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 300
+      id: assert-091
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-091
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        期待値:
+          type: dynamic
+          value: "{{期待値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 500
+      id: get-from-entity
+      inputConfig: {}
+      nodeId: GetFromEntity
+      config:
+        ｴﾝﾃｨﾃｨ:
+          type: dynamic
+          value: "{{ｴﾝﾃｨﾃｨ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 950
+        y: 500
+      id: assert-092
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: gte
+        ID:
+          type: string
+          value: TC-092
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 950
+        y: 700
+      id: disconnect
+      inputConfig: {}
+      nodeId: MinecraftDisconnect
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+  connections:
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-chat
+        pinId: ワールド
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: get-local-player
+        pinId: トリガー
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: assert-091
+        pinId: 期待値
+    - from:
+        insId: get-local-player
+        pinId: プレイヤー
+      to:
+        insId: get-from-player
+        pinId: ﾌﾟﾚｲﾔｰ
+    - from:
+        insId: get-from-player
+        pinId: 名前
+      to:
+        insId: assert-091
+        pinId: 実際値
+    - from:
+        insId: get-from-player
+        pinId: ｴﾝﾃｨﾃｨ
+      to:
+        insId: get-from-entity
+        pinId: ｴﾝﾃｨﾃｨ
+    - from:
+        insId: get-from-entity
+        pinId: ID
+      to:
+        insId: assert-092
+        pinId: 実際値
+    - from:
+        insId: assert-092
+        pinId: 完了
+      to:
+        insId: disconnect
+        pinId: トリガー
+  id: TestInfo
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: 情報取得系ノードテスト（TC-091/092）チャット送信1回で自動実行。GetFromPlayerSnapshot・GetFromEntity を検証

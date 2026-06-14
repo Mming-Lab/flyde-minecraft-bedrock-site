@@ -1,0 +1,214 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 50
+        y: 100
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 300
+      id: on-block-broken
+      inputConfig: {}
+      nodeId: OnBlockBroken
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 300
+      id: bcast-021-method
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 300
+      id: get-from-block-021
+      inputConfig: {}
+      nodeId: GetFromBlockType
+      config:
+        ﾌﾞﾛｯｸ:
+          type: dynamic
+          value: "{{ﾌﾞﾛｯｸ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 950
+        y: 300
+      id: assert-093
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: ""
+        比較:
+          type: select
+          value: neq
+        ID:
+          type: string
+          value: TC-093
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 600
+      id: on-block-placed
+      inputConfig: {}
+      nodeId: OnBlockPlaced
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 600
+      id: bcast-022-method
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 600
+      id: bcast-022-block
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 1250
+        y: 250
+      id: note-021
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-021: OnBlockBroken 目視確認
+          **操作手順:**
+          1. Minecraft でブロックを破壊する
+          2. **目視確認:** Minecraft チャットに破壊方法（例: `player`）が表示されること
+          3. TC-093 は自動: ブロックID が空でないことを Assert → ログで PASS 確認
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 950
+        y: 550
+      id: note-022
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-022: OnBlockPlaced 目視確認
+          **操作手順:**
+          1. Minecraft でブロックを設置する
+          2. **目視確認:** Minecraft チャットに設置方法（例: `player`）とブロック情報が表示されること
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-block-broken
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-block-placed
+        pinId: ワールド
+    - from:
+        insId: on-block-broken
+        pinId: 破壊方法
+      to:
+        insId: bcast-021-method
+        pinId: メッセージ
+    - from:
+        insId: on-block-broken
+        pinId: ﾌﾞﾛｯｸ
+      to:
+        insId: get-from-block-021
+        pinId: ﾌﾞﾛｯｸ
+    - from:
+        insId: get-from-block-021
+        pinId: ブロックID
+      to:
+        insId: assert-093
+        pinId: 実際値
+    - from:
+        insId: on-block-placed
+        pinId: 設置方法
+      to:
+        insId: bcast-022-method
+        pinId: メッセージ
+    - from:
+        insId: on-block-placed
+        pinId: ﾌﾞﾛｯｸ
+      to:
+        insId: bcast-022-block
+        pinId: メッセージ
+  id: TestBlockEvents
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: |
+    ブロックイベント系テスト（TC-021, TC-022, TC-093）手動操作で各イベントを発火させる
+    TC-021: ブロックを破壊 → MCチャットに破壊方法が表示される
+    TC-022: ブロックを設置 → MCチャットに設置方法とブロック名が表示される
+    TC-093: ブロック破壊 → GetFromBlockType.ブロックID が空でないことをAssert → ログでPASS確認

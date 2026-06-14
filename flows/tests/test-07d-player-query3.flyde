@@ -1,0 +1,170 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 50
+        y: 100
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 100
+      id: on-chat
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 300
+      id: get-player-tags
+      inputConfig: {}
+      nodeId: GetPlayerTags
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 300
+      id: bcast-077-tags
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 500
+      id: get-abilities
+      inputConfig: {}
+      nodeId: GetPlayerAbilities
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 500
+      id: bcast-081-abilities
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 700
+      id: disconnect
+      inputConfig: {}
+      nodeId: MinecraftDisconnect
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 750
+        y: 250
+      id: note-077-081
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-077: GetPlayerTags / TC-081: GetPlayerAbilities 目視確認
+          **操作手順:**
+          1. 事前に `/tag @p add test1` でプレイヤーにタグを付与しておく（TC-077用）
+          2. Minecraft でチャットを 1 回送信する
+          3. **TC-077 目視確認:** Minecraft チャットにプレイヤーのタグ一覧（配列）が表示されること
+             - 例: `[ 'test1' ]`
+          4. **TC-081 目視確認:** Minecraft チャットにアビリティオブジェクトが表示されること
+             - 例: `{ mayfly: false, mute: false, ... }`
+          ※ 配列/オブジェクトは Assert で数値比較できないため目視確認
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-chat
+        pinId: ワールド
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: get-player-tags
+        pinId: トリガー
+    - from:
+        insId: get-player-tags
+        pinId: タグ一覧
+      to:
+        insId: bcast-077-tags
+        pinId: メッセージ
+    - from:
+        insId: bcast-077-tags
+        pinId: 完了
+      to:
+        insId: get-abilities
+        pinId: トリガー
+    - from:
+        insId: get-abilities
+        pinId: アビリティ
+      to:
+        insId: bcast-081-abilities
+        pinId: メッセージ
+    - from:
+        insId: bcast-081-abilities
+        pinId: 完了
+      to:
+        insId: disconnect
+        pinId: トリガー
+  id: TestPlayerQuery3
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: |
+    プレイヤー追加クエリテスト（TC-077, TC-081）チャット送信1回で自動実行
+    TC-077: GetPlayerTags → タグ一覧（配列）→ MCチャットに表示（配列の文字列変換を確認）
+    TC-081: GetPlayerAbilities → アビリティオブジェクト → MCチャットに表示（オブジェクトの文字列変換を確認）
+    ※ 配列/オブジェクトをAssertで数値比較できないため、BroadcastMessageで目視確認

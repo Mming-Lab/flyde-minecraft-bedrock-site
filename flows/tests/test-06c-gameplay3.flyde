@@ -1,0 +1,287 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 50
+        y: 100
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 100
+      id: on-chat
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 300
+      id: get-weather
+      inputConfig: {}
+      nodeId: GetWeather
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 300
+      id: assert-054
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: ""
+        比較:
+          type: select
+          value: neq
+        ID:
+          type: string
+          value: TC-054
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 300
+      id: bcast-054-weather
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 230
+      id: note-054
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-054: GetWeather（自動化済み + 目視確認）
+          **操作手順:**
+          1. Minecraft でチャットを送信する
+          2. **TC-054 自動:** 天気 neq "" を Assert → ログで PASS 確認
+          3. **目視確認:** Minecraft チャットに天気名が表示されること
+             - 例: `Clear` / `Rain` / `Thunder`
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 50
+        y: 500
+      id: world-query-mob
+      inputConfig: {}
+      nodeId: WorldQuery
+      config:
+        種別:
+          type: select
+          value: mob
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 500
+      id: bcast-061-mob
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 700
+      id: world-query-block
+      inputConfig: {}
+      nodeId: WorldQuery
+      config:
+        種別:
+          type: select
+          value: block
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 700
+      id: bcast-061-block
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 900
+      id: world-query-item
+      inputConfig: {}
+      nodeId: WorldQuery
+      config:
+        種別:
+          type: select
+          value: item
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 900
+      id: bcast-061-item
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 600
+      id: note-061
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-061: WorldQuery 目視確認
+          **操作手順:**
+          1. Minecraft でチャットを送信する（TC-054 と同じチャットで同時発火）
+          2. **目視確認（エンティティ）:** Minecraft チャットに近くのモブ一覧が表示されること
+             - ワールドにモブがいない場合は空配列 `[]`
+          3. **目視確認（ブロック）:** 周辺のブロック情報一覧が表示されること
+          4. **目視確認（アイテム）:** ドロップアイテム一覧が表示されること
+          ※ 3種類のWorldQueryが同時に発火するため、チャット1回でOK
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-chat
+        pinId: ワールド
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: get-weather
+        pinId: トリガー
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: world-query-mob
+        pinId: トリガー
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: world-query-block
+        pinId: トリガー
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: world-query-item
+        pinId: トリガー
+    - from:
+        insId: get-weather
+        pinId: 天気
+      to:
+        insId: assert-054
+        pinId: 実際値
+    - from:
+        insId: get-weather
+        pinId: 天気
+      to:
+        insId: bcast-054-weather
+        pinId: メッセージ
+    - from:
+        insId: world-query-mob
+        pinId: 一覧
+      to:
+        insId: bcast-061-mob
+        pinId: メッセージ
+    - from:
+        insId: world-query-block
+        pinId: 一覧
+      to:
+        insId: bcast-061-block
+        pinId: メッセージ
+    - from:
+        insId: world-query-item
+        pinId: 一覧
+      to:
+        insId: bcast-061-item
+        pinId: メッセージ
+  id: TestGameplay3
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: |
+    ゲームプレイクエリ追加テスト（TC-054, TC-061）チャット1回で同時発火
+    TC-054: GetWeather → Assert(天気 neq "")（自動）+ MCチャットに天気名を表示（目視確認）
+    TC-061: WorldQuery × 3種別 → エンティティ/ブロック/アイテム一覧をMCチャットに表示（目視確認）

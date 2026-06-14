@@ -1,0 +1,878 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 50
+        y: 100
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 100
+      id: on-chat
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 700
+        y: 30
+      id: note-overview
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # エージェントテスト（TC-131〜145）実行手順
+
+          ## 実行方法（2回実行が必要）
+
+          ### 1回目の実行
+          1. フローを起動する
+          2. Minecraft でチャットを 1 回送信する
+          3. TC-131（AgentTP）と TC-132（AG座標取得）が自動実行される
+          4. ログで TC-131/132 の PASS を確認
+          5. フローを停止する
+
+          ### 2回目の実行
+          1. フローを再起動する（Minecraftは切断せずそのまま）
+          2. TC-133〜145 が自動で順次実行される
+             - エージェントが前方に移動・回転・攻撃・ブロック設置等を行う
+          3. ログで各 TC の PASS/FAIL を確認
+
+          **なぜ2回必要か?**
+          コンテキスト（プレイヤー情報）は初回チャット時に設定され
+          OS プロセスに保持されるため、2回目の起動時に再利用される。
+
+          ※ Education Edition 専用。エージェントが存在しない場合は自動作成。
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 50
+        y: 300
+      id: agent-tp
+      inputConfig: {}
+      nodeId: AgentTeleport
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 300
+      id: assert-131
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-131
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 300
+      id: get-agent-loc
+      inputConfig: {}
+      nodeId: GetAgentLocation
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 950
+        y: 300
+      id: vec-split-132
+      inputConfig: {}
+      nodeId: Vector3Split
+      config:
+        座標:
+          type: dynamic
+          value: "{{座標}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 1250
+        y: 300
+      id: assert-132
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: -64
+        比較:
+          type: select
+          value: gte
+        ID:
+          type: string
+          value: TC-132
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 500
+      id: agent-move-fwd
+      inputConfig: {}
+      nodeId: AgentMove
+      config:
+        方向:
+          type: select
+          value: forward
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 500
+      id: assert-133
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-133
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 700
+      id: agent-turn-left
+      inputConfig: {}
+      nodeId: AgentTurn
+      config:
+        方向:
+          type: select
+          value: left
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 700
+      id: assert-134
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-134
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 900
+      id: agent-action-attack
+      inputConfig: {}
+      nodeId: AgentAction
+      config:
+        行動:
+          type: select
+          value: attack
+        方向:
+          type: select
+          value: forward
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 900
+      id: assert-135
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-135
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 700
+        y: 600
+      id: note-tc133-135
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-133〜135: AG移動/回転/行動（2回目の実行で自動テスト）
+          **TC-133:** AgentMove(前) → 完了=true を自動 Assert
+          **TC-134:** AgentTurn(左) → 完了=true を自動 Assert
+          **TC-135:** AgentAction(攻撃,前) → 完了=true を自動 Assert
+
+          **目視確認:** エージェントが前方に1ブロック移動、左90度回転、前方を攻撃することを確認
+          ※ エージェントが空中にいると移動失敗でエラーになる場合がある
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 50
+        y: 1100
+      id: agent-detect
+      inputConfig: {}
+      nodeId: AgentDetect
+      config:
+        種別:
+          type: select
+          value: block
+        方向:
+          type: select
+          value: forward
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1100
+      id: bcast-136-detect
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 1300
+      id: agent-inspect
+      inputConfig: {}
+      nodeId: AgentInspect
+      config:
+        種別:
+          type: select
+          value: block
+        方向:
+          type: select
+          value: forward
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1300
+      id: bcast-137-inspect
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 700
+        y: 1150
+      id: note-tc136-137
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-136: AgentDetect / TC-137: AgentInspect（目視確認）
+          **TC-136:** AgentDetect(ブロック,前) → 検知結果を MC チャットに表示
+          - `true`=前方にブロックあり / `false`=ブロックなし
+
+          **TC-137:** AgentInspect(ブロックID,前) → 前方ブロックの ID を MC チャットに表示
+          - 例: `minecraft:stone`
+
+          **目視確認:** MC チャットに検知結果とブロック ID が表示されること
+          ※ エージェントの前方にブロックを置いておくと分かりやすい
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 50
+        y: 1500
+      id: agent-set-item
+      inputConfig: {}
+      nodeId: AgentSetItem
+      config:
+        スロット:
+          type: number
+          value: 1
+        アイテムID:
+          type: string
+          value: minecraft:stone
+        個数:
+          type: number
+          value: 5
+        データ値:
+          type: number
+          value: 0
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1500
+      id: assert-138
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-138
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 1700
+      id: agent-get-count
+      inputConfig: {}
+      nodeId: AgentGetItemCount
+      config:
+        スロット:
+          type: number
+          value: 1
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1700
+      id: assert-139
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: gt
+        ID:
+          type: string
+          value: TC-139
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 1900
+      id: agent-get-space
+      inputConfig: {}
+      nodeId: AgentGetItemSpace
+      config:
+        スロット:
+          type: number
+          value: 2
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1900
+      id: assert-140
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: gte
+        ID:
+          type: string
+          value: TC-140
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 2100
+      id: agent-get-detail
+      inputConfig: {}
+      nodeId: AgentGetItemDetail
+      config:
+        スロット:
+          type: number
+          value: 1
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 2100
+      id: bcast-141-detail
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 700
+        y: 2050
+      id: note-tc141
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-141: AgentGetItemDetail 目視確認
+          **AgentGetItemDetail(スロット1) → アイテムID を MC チャットに表示**
+
+          **目視確認:** MC チャットにスロット1のアイテムID が表示されること
+          - 例: `minecraft:stone`（TC-138 で stone をセットした後）
+          - スロットが空の場合は `null`
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 50
+        y: 2300
+      id: agent-move-item
+      inputConfig: {}
+      nodeId: AgentMoveItem
+      config:
+        元スロット:
+          type: number
+          value: 1
+        先スロット:
+          type: number
+          value: 2
+        個数:
+          type: number
+          value: 1
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 2300
+      id: assert-142
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-142
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 2500
+      id: agent-place-block
+      inputConfig: {}
+      nodeId: AgentPlaceBlock
+      config:
+        方向:
+          type: select
+          value: forward
+        スロット:
+          type: number
+          value: 2
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 2500
+      id: assert-143
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-143
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 2700
+      id: agent-drop-item
+      inputConfig: {}
+      nodeId: AgentDropItem
+      config:
+        方向:
+          type: select
+          value: forward
+        スロット:
+          type: number
+          value: 1
+        個数:
+          type: number
+          value: 1
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 2700
+      id: assert-144
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-144
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 2900
+      id: agent-action-destroy
+      inputConfig: {}
+      nodeId: AgentAction
+      config:
+        行動:
+          type: select
+          value: destroyBlock
+        方向:
+          type: select
+          value: forward
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 2900
+      id: assert-145
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-145
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+  connections:
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-chat
+        pinId: ワールド
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: agent-tp
+        pinId: トリガー
+    - from:
+        insId: agent-tp
+        pinId: 完了
+      to:
+        insId: assert-131
+        pinId: 実際値
+    - from:
+        insId: assert-131
+        pinId: 完了
+      to:
+        insId: get-agent-loc
+        pinId: トリガー
+    - from:
+        insId: get-agent-loc
+        pinId: 座標
+      to:
+        insId: vec-split-132
+        pinId: 座標
+    - from:
+        insId: vec-split-132
+        pinId: y
+      to:
+        insId: assert-132
+        pinId: 実際値
+    - from:
+        insId: agent-move-fwd
+        pinId: 完了
+      to:
+        insId: assert-133
+        pinId: 実際値
+    - from:
+        insId: agent-turn-left
+        pinId: 完了
+      to:
+        insId: assert-134
+        pinId: 実際値
+    - from:
+        insId: agent-action-attack
+        pinId: 完了
+      to:
+        insId: assert-135
+        pinId: 実際値
+    - from:
+        insId: agent-detect
+        pinId: 検知
+      to:
+        insId: bcast-136-detect
+        pinId: メッセージ
+    - from:
+        insId: agent-inspect
+        pinId: 値
+      to:
+        insId: bcast-137-inspect
+        pinId: メッセージ
+    - from:
+        insId: agent-set-item
+        pinId: 完了
+      to:
+        insId: assert-138
+        pinId: 実際値
+    - from:
+        insId: agent-get-count
+        pinId: 個数
+      to:
+        insId: assert-139
+        pinId: 実際値
+    - from:
+        insId: agent-get-space
+        pinId: 空き
+      to:
+        insId: assert-140
+        pinId: 実際値
+    - from:
+        insId: agent-get-detail
+        pinId: アイテムID
+      to:
+        insId: bcast-141-detail
+        pinId: メッセージ
+    - from:
+        insId: agent-move-item
+        pinId: 完了
+      to:
+        insId: assert-142
+        pinId: 実際値
+    - from:
+        insId: agent-place-block
+        pinId: 完了
+      to:
+        insId: assert-143
+        pinId: 実際値
+    - from:
+        insId: agent-drop-item
+        pinId: 完了
+      to:
+        insId: assert-144
+        pinId: 実際値
+    - from:
+        insId: agent-action-destroy
+        pinId: 完了
+      to:
+        insId: assert-145
+        pinId: 実際値
+  id: TestAgents
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: |
+    エージェント系テスト（TC-131〜145）※ Education Edition 専用
+    【1回目】チャット送信 → TC-131（AgentTP）・TC-132（AG座標）が自動実行
+    【2回目】フロー再起動 → TC-133〜145 がフロー起動と同時に自動実行
+    ※ コンテキスト（プレイヤー情報）が process に保持されるため2回目から動作する
+    TC-131: AgentTeleport（プレイヤー位置へ）→ 完了=true
+    TC-132: GetAgentLocation → y >= -64
+    TC-133: AgentMove(前) → 完了=true（目視: エージェントが前進）
+    TC-134: AgentTurn(左) → 完了=true（目視: エージェントが左回転）
+    TC-135: AgentAction(攻撃, 前) → 完了=true
+    TC-136: AgentDetect(ブロック, 前) → MCチャットに検知結果
+    TC-137: AgentInspect(ブロックID, 前) → MCチャットにブロックID
+    TC-138: AgentSetItem(スロット1, stone, 5個) → 完了=true
+    TC-139: AgentGetItemCount(スロット1) → 個数 > 0
+    TC-140: AgentGetItemSpace(スロット2) → 空き >= 0
+    TC-141: AgentGetItemDetail(スロット1) → MCチャットにアイテムID
+    TC-142: AgentMoveItem(1→2, 1個) → 完了=true
+    TC-143: AgentPlaceBlock(前, スロット2) → 完了=true
+    TC-144: AgentDropItem(前, スロット1, 1個) → 完了=true
+    TC-145: AgentAction(破壊, 前) → 完了=true

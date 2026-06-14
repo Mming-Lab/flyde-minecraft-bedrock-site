@@ -1,0 +1,678 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 50
+        y: 100
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 300
+      id: on-chat
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 300
+      id: bcast-011-sender
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 300
+      id: bcast-011-msg
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 500
+      id: on-travelled
+      inputConfig: {}
+      nodeId: OnPlayerTravelled
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 500
+      id: assert-012
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: gt
+        ID:
+          type: string
+          value: TC-012
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 700
+      id: on-teleported
+      inputConfig: {}
+      nodeId: OnPlayerTeleported
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 700
+      id: run-cmd-013
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: tp @s 0 64 0
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 700
+      id: assert-013
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: ""
+        比較:
+          type: select
+          value: neq
+        ID:
+          type: string
+          value: TC-013
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 900
+      id: on-bounced
+      inputConfig: {}
+      nodeId: OnPlayerBounced
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 900
+      id: assert-014
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: gte
+        ID:
+          type: string
+          value: TC-014
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 1100
+      id: on-join
+      inputConfig: {}
+      nodeId: OnPlayerJoin
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1100
+      id: bcast-015
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 1300
+      id: on-leave
+      inputConfig: {}
+      nodeId: OnPlayerLeave
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1300
+      id: bcast-016
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 1500
+      id: on-title
+      inputConfig: {}
+      nodeId: OnPlayerTitle
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1500
+      id: run-cmd-017
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: title @a title test
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 1500
+      id: assert-017
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: ""
+        比較:
+          type: select
+          value: neq
+        ID:
+          type: string
+          value: TC-017
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 1700
+      id: on-message
+      inputConfig: {}
+      nodeId: OnPlayerMessage
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1700
+      id: run-cmd-018
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: tell @a hello
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 1700
+      id: assert-018
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: ""
+        比較:
+          type: select
+          value: neq
+        ID:
+          type: string
+          value: TC-018
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 1900
+      id: on-transform
+      inputConfig: {}
+      nodeId: OnPlayerTransform
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1900
+      id: vec-split-019
+      inputConfig: {}
+      nodeId: Vector3Split
+      config:
+        座標:
+          type: dynamic
+          value: "{{座標}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 1900
+      id: assert-019
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: -64
+        比較:
+          type: select
+          value: gte
+        ID:
+          type: string
+          value: TC-019
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 950
+        y: 250
+      id: note-011
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-011: OnPlayerChat 目視確認
+          **操作手順:**
+          1. Minecraft でチャットを送信する
+          2. **目視確認:** Minecraft チャットに送信者名とメッセージ内容の両方が表示されること
+          ※ このフロー自体の動作確認トリガーも兼ねている
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 650
+        y: 650
+      id: note-013
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-013: OnPlayerTeleported（自動化済み）
+          **チャット送信 1 回で自動テスト:**
+          - RunCommand `/tp @s 0 64 0` が自動実行される
+          - OnPlayerTeleported が発火 → テレポート原因 neq "" を Assert
+          - ログで TC-013 PASS を確認
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 650
+        y: 1050
+      id: note-015
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-015: OnPlayerJoin 目視確認
+          **操作手順:**
+          1. 別のプレイヤーがワールドに参加する
+          2. **目視確認:** Minecraft チャットに参加者のプレイヤー名が表示されること
+          ※ シングルプレイの場合はマルチプレイ環境が必要
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 650
+        y: 1250
+      id: note-016
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-016: OnPlayerLeave 目視確認
+          **操作手順:**
+          1. 別のプレイヤーがワールドから退出する
+          2. **目視確認:** Minecraft チャットに退出者のプレイヤー名が表示されること
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 650
+        y: 1450
+      id: note-017
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-017: OnPlayerTitle（自動化済み）
+          **チャット送信 1 回で自動テスト:**
+          - RunCommand `/title @a title test` が自動実行される
+          - OnPlayerTitle が発火 → メッセージ neq "" を Assert
+          - ログで TC-017 PASS を確認
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 650
+        y: 1650
+      id: note-018
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-018: OnPlayerMessage（自動化済み）
+          **チャット送信 1 回で自動テスト:**
+          - RunCommand `/tell @a hello` が自動実行される
+          - OnPlayerMessage が発火 → メッセージ neq "" を Assert
+          - ログで TC-018 PASS を確認
+          ※ チャットイベントではなくシステムメッセージ受信イベント
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-chat
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-travelled
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-teleported
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-bounced
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-join
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-leave
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-title
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-message
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-transform
+        pinId: ワールド
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: bcast-011-sender
+        pinId: メッセージ
+    - from:
+        insId: on-chat
+        pinId: メッセージ
+      to:
+        insId: bcast-011-msg
+        pinId: メッセージ
+    - from:
+        insId: on-travelled
+        pinId: 移動距離
+      to:
+        insId: assert-012
+        pinId: 実際値
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: run-cmd-013
+        pinId: トリガー
+    - from:
+        insId: on-teleported
+        pinId: テレポート原因
+      to:
+        insId: assert-013
+        pinId: 実際値
+    - from:
+        insId: on-bounced
+        pinId: 高さ
+      to:
+        insId: assert-014
+        pinId: 実際値
+    - from:
+        insId: on-join
+        pinId: ﾌﾟﾚｲﾔｰ名
+      to:
+        insId: bcast-015
+        pinId: メッセージ
+    - from:
+        insId: on-leave
+        pinId: ﾌﾟﾚｲﾔｰ名
+      to:
+        insId: bcast-016
+        pinId: メッセージ
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: run-cmd-017
+        pinId: トリガー
+    - from:
+        insId: on-title
+        pinId: メッセージ
+      to:
+        insId: assert-017
+        pinId: 実際値
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: run-cmd-018
+        pinId: トリガー
+    - from:
+        insId: on-message
+        pinId: メッセージ
+      to:
+        insId: assert-018
+        pinId: 実際値
+    - from:
+        insId: on-transform
+        pinId: 座標
+      to:
+        insId: vec-split-019
+        pinId: 座標
+    - from:
+        insId: vec-split-019
+        pinId: y
+      to:
+        insId: assert-019
+        pinId: 実際値
+  id: TestPlayerEvents
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: |
+    プレイヤーイベント系テスト（TC-011〜019）チャット1回で複数テストが自動実行
+    TC-011: チャット送信 → MCチャットに送信者名・内容が表示（目視確認）
+    TC-012: 歩く → Assert(移動距離 > 0) → ログでPASS確認（自動）
+    TC-013: チャット送信 → RunCommand(tp) → Assert(テレポート原因 neq "")（自動）
+    TC-014: スライムブロックで跳ねる → Assert(高さ >= 0) → ログでPASS確認（自動）
+    TC-015: 別プレイヤーが参加 → MCチャットにプレイヤー名が表示（目視確認）
+    TC-016: 別プレイヤーが退出 → MCチャットにプレイヤー名が表示（目視確認）
+    TC-017: チャット送信 → RunCommand(title) → Assert(メッセージ neq "")（自動）
+    TC-018: チャット送信 → RunCommand(tell) → Assert(メッセージ neq "")（自動）
+    TC-019: 動く（高頻度） → Assert(y >= -64) → ログでPASS確認（自動）

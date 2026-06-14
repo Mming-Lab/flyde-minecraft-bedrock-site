@@ -1,0 +1,477 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 50
+        y: 100
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 300
+      id: on-item-interacted
+      inputConfig: {}
+      nodeId: OnItemInteracted
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 300
+      id: bcast-031-method
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 500
+      id: on-item-acquired
+      inputConfig: {}
+      nodeId: OnItemAcquired
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 500
+      id: assert-032-count
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: gt
+        ID:
+          type: string
+          value: TC-032
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 500
+      id: get-from-item-type-094
+      inputConfig: {}
+      nodeId: GetFromItemType
+      config:
+        ｱｲﾃﾑ:
+          type: dynamic
+          value: "{{ｱｲﾃﾑ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 950
+        y: 500
+      id: assert-094
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: ""
+        比較:
+          type: select
+          value: neq
+        ID:
+          type: string
+          value: TC-094
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 700
+      id: on-item-crafted
+      inputConfig: {}
+      nodeId: OnItemCrafted
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 700
+      id: get-from-item-stack-095
+      inputConfig: {}
+      nodeId: GetFromItemStack
+      config:
+        ｱｲﾃﾑ:
+          type: dynamic
+          value: "{{ｱｲﾃﾑ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 700
+      id: assert-095
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: ""
+        比較:
+          type: select
+          value: neq
+        ID:
+          type: string
+          value: TC-095
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 900
+      id: on-item-equipped
+      inputConfig: {}
+      nodeId: OnItemEquipped
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 900
+      id: bcast-034-slot
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 1100
+      id: on-item-smelted
+      inputConfig: {}
+      nodeId: OnItemSmelted
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1100
+      id: bcast-035-fuel
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 1300
+      id: on-item-traded
+      inputConfig: {}
+      nodeId: OnItemTraded
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 1300
+      id: bcast-036-em
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 1300
+      id: get-from-villager-097
+      inputConfig: {}
+      nodeId: GetFromVillager
+      config:
+        村人:
+          type: dynamic
+          value: "{{村人}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 950
+        y: 1300
+      id: bcast-097-name
+      inputConfig: {}
+      nodeId: BroadcastMessage
+      config:
+        メッセージ:
+          type: dynamic
+          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 650
+        y: 250
+      id: note-031
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-031: OnItemInteracted 目視確認
+          **操作手順:**
+          1. Minecraft でアイテムを右クリックで使用する（食べる・ブロックに当てる等）
+          2. **目視確認:** Minecraft チャットに使用方法（例: `use_on` / `eat`）が表示されること
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 1250
+        y: 850
+      id: note-034
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-034: OnItemEquipped 目視確認
+          **操作手順:**
+          1. Minecraft でホットバーのスロットを切り替える
+          2. **目視確認:** Minecraft チャットに装備スロット番号が表示されること
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 650
+        y: 1050
+      id: note-035
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-035: OnItemSmelted 目視確認
+          **操作手順:**
+          1. Minecraft でかまどにアイテムを入れて精錬する
+          2. **目視確認:** Minecraft チャットに燃料情報（ItemStack オブジェクト）が表示されること
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 650
+        y: 1250
+      id: note-036
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          # TC-036: OnItemTraded / TC-097: GetFromVillager 目視確認
+          **操作手順:**
+          1. Minecraft で村人と取引する
+          2. **目視確認 TC-036:** Minecraft チャットにプレイヤーの残りEM数が表示されること
+          3. **目視確認 TC-097:** Minecraft チャットに村人の名前が表示されること
+          ※ 村人との取引にはエメラルドが必要
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-item-interacted
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-item-acquired
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-item-crafted
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-item-equipped
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-item-smelted
+        pinId: ワールド
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-item-traded
+        pinId: ワールド
+    - from:
+        insId: on-item-interacted
+        pinId: 使用方法
+      to:
+        insId: bcast-031-method
+        pinId: メッセージ
+    - from:
+        insId: on-item-acquired
+        pinId: 個数
+      to:
+        insId: assert-032-count
+        pinId: 実際値
+    - from:
+        insId: on-item-acquired
+        pinId: ｱｲﾃﾑ
+      to:
+        insId: get-from-item-type-094
+        pinId: ｱｲﾃﾑ
+    - from:
+        insId: get-from-item-type-094
+        pinId: アイテムID
+      to:
+        insId: assert-094
+        pinId: 実際値
+    - from:
+        insId: on-item-crafted
+        pinId: ｱｲﾃﾑ
+      to:
+        insId: get-from-item-stack-095
+        pinId: ｱｲﾃﾑ
+    - from:
+        insId: get-from-item-stack-095
+        pinId: アイテムID
+      to:
+        insId: assert-095
+        pinId: 実際値
+    - from:
+        insId: on-item-equipped
+        pinId: 装備スロット
+      to:
+        insId: bcast-034-slot
+        pinId: メッセージ
+    - from:
+        insId: on-item-smelted
+        pinId: 燃料
+      to:
+        insId: bcast-035-fuel
+        pinId: メッセージ
+    - from:
+        insId: on-item-traded
+        pinId: ﾌﾟﾚｲﾔｰEM数
+      to:
+        insId: bcast-036-em
+        pinId: メッセージ
+    - from:
+        insId: on-item-traded
+        pinId: 村人
+      to:
+        insId: get-from-villager-097
+        pinId: 村人
+    - from:
+        insId: get-from-villager-097
+        pinId: 名前
+      to:
+        insId: bcast-097-name
+        pinId: メッセージ
+  id: TestItemEvents
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: |
+    アイテムイベント系テスト（TC-031〜036, TC-094, TC-095, TC-097）手動操作で各イベントを発火させる
+    TC-031: アイテムを右クリック使用 → MCチャットに使用方法が表示
+    TC-032: アイテムを拾う → Assert(個数 > 0) → ログでPASS確認
+    TC-033: アイテムをクラフト → GetFromItemStack.アイテムID が空でないことを Assert (TC-095)
+    TC-034: アイテムをホットバーで切り替え(装備) → MCチャットに装備スロットが表示
+    TC-035: かまどで精錬 → MCチャットに燃料が表示
+    TC-036: 村人と取引 → MCチャットにプレイヤーEM数と村人名が表示
+    TC-094: アイテム取得 → GetFromItemType.アイテムID が空でないことを Assert
+    TC-095: クラフト → GetFromItemStack.アイテムID が空でないことを Assert
+    TC-097: 取引 → GetFromVillager.名前 → MCチャットに表示

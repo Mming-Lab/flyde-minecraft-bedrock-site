@@ -1,0 +1,109 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 50
+        y: 100
+      id: selector-block
+      inputConfig: {}
+      nodeId: Selector
+      config:
+        種別:
+          type: select
+          value: block
+        ブロック:
+          type: select
+          value: minecraft:grass_block
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 100
+      id: assert-101
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: minecraft:grass_block
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-101
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 300
+      id: locale-name
+      inputConfig: {}
+      nodeId: ToJa
+      config:
+        値:
+          type: string
+          value: minecraft:grass_block
+        種別:
+          type: select
+          value: block
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 300
+      id: assert-102
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: 草ブロック
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-102
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+  connections:
+    - from:
+        insId: selector-block
+        pinId: 値
+      to:
+        insId: assert-101
+        pinId: 実際値
+    - from:
+        insId: locale-name
+        pinId: 日本語名
+      to:
+        insId: assert-102
+        pinId: 実際値
+  id: TestSelectors
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: セレクター/コンバーター系テスト（TC-101/102）MC接続不要・フロー実行のみで自動テスト
