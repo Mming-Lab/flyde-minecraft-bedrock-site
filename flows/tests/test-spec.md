@@ -253,7 +253,7 @@ npm install ../flyde-minecraft-bedrock/flyde-minecraft-bedrock-x.x.x.tgz
 |---|---|---|---|---|
 | TC-091 | GetFromPlayerSnapshot | 自動テスト：GetLocalPlayer → GetFromPlayerSnapshot.name = チャット送信者名 を確認 | プレイヤー名が一致する | □ |
 | TC-092 | GetFromEntity | 自動テスト：GetLocalPlayer → GetFromPlayerSnapshot.entity → GetFromEntity.ID >= 0 を確認 | エンティティ ID が 0 以上の数値で返る | □ |
-| TC-093 | GetFromBlockType | test-03: OnBlockBroken → GetFromBlockType.ブロックID != "" を Assert | ブロック ID が空でない文字列で返る | □ |
+| TC-093 | GetFromBlockType | test-03: OnBlockBroken → GetFromBlockType.ブロックID != "" を Assert | ブロック ID が空でない文字列で返る | ✓ |
 | TC-094 | GetFromItemType | test-04: OnItemAcquired → GetFromItemType.アイテムID != "" を Assert | アイテム ID が空でない文字列で返る | □ |
 | TC-095 | GetFromItemStack | test-04: OnItemCrafted → GetFromItemStack.アイテムID != "" を Assert | アイテム ID が空でない文字列で返る | □ |
 | TC-096 | GetFromMob | test-05: OnMobInteracted → GetFromMob.種別 >= 0 を Assert（WorldMob は数値のみ） | 種別番号が 0 以上の数値で返る | □ |
