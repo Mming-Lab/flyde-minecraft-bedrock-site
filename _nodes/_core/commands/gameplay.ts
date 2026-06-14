@@ -104,26 +104,13 @@ export const FillBlocks: CodeNode = {
   outputs: { done: { description: 'Emits true when fill completes' }, count: { description: 'Number of blocks filled' } },
   run: async ({ from, to, block_id }, { done, count }) => {
     const { world } = getCurrentContext()
-    try {
-      const n = await world.fillBlocks(
-        from as { x: number; y: number; z: number },
-        to   as { x: number; y: number; z: number },
-        String(block_id)
-      )
-      count.next(n)
-      done.next(true)
-    } catch (e: any) {
-      // Minecraft returns statusCode != 0 when 0 blocks are filled ("0 個のブロックで満たしました").
-      // Parse the count from statusMessage/message if it starts with a digit.
-      const msg: string = e?.statusMessage ?? e?.message ?? ''
-      const m = /^(\d+)/.exec(msg)
-      if (m) {
-        count.next(parseInt(m[1], 10))
-        done.next(true)
-      } else {
-        throw e
-      }
-    }
+    const n = await world.fillBlocks(
+      from as { x: number; y: number; z: number },
+      to   as { x: number; y: number; z: number },
+      String(block_id)
+    )
+    count.next(n)
+    done.next(true)
   },
 }
 

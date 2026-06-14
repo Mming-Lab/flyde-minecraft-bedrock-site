@@ -128,7 +128,24 @@ node:
         data: ../../dist/index.flyde.js
     - pos:
         x: 50
-        y: 700
+        y: 620
+      id: setblock-064
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: setblock 0 30 0 minecraft:dirt
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 750
       id: fill-blocks
       inputConfig: {}
       nodeId: FillBlocks
@@ -137,13 +154,13 @@ node:
           type: json
           value:
             x: 0
-            y: 300
+            y: 30
             z: 0
         終点:
           type: json
           value:
             x: 0
-            y: 300
+            y: 30
             z: 0
         ブロックID:
           type: string
@@ -234,6 +251,12 @@ node:
         pinId: 実際値
     - from:
         insId: assert-060
+        pinId: 完了
+      to:
+        insId: setblock-064
+        pinId: トリガー
+    - from:
+        insId: setblock-064
         pinId: 完了
       to:
         insId: fill-blocks
