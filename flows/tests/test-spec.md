@@ -1,7 +1,7 @@
 # テスト仕様書
 
 対象：フル版（`index.flyde.ts`）全ノード  
-更新日：2026-06-15（TC-014/021/022/031/033 PASS 反映、BroadcastMessage → JSONStringify+RunCommand 移行）
+更新日：2026-06-15（TC-014/021/022/031/033/035 PASS 反映、BroadcastMessage → JSONStringify+RunCommand 移行）
 
 ---
 
@@ -166,7 +166,7 @@ npm install ../flyde-minecraft-bedrock/flyde-minecraft-bedrock-x.x.x.tgz
 | TC-032 | OnItemAcquired（アイテム取得時） | — | ブロックを壊してドロップを拾う | Assert(個数 > 0) → ログで PASS 確認 | ✓ |
 | TC-033 | OnItemCrafted（クラフト時） | 材料を持つ | クラフトテーブルでアイテムを作る | Assert(GetFromItemStack.アイテムID != "") → ログで PASS (TC-095) | ✓ |
 | TC-034 | OnItemEquipped（アイテム装備時） | 装備できるアイテムを持つ | 防具・ツールをホットバーに持つ | 装備スロットが MCチャットに表示される | □ |
-| TC-035 | OnItemSmelted（精錬時） | かまど + 精錬できる素材を持つ | かまどで精錬が完了する | 燃料が MCチャットに表示される | □ |
+| TC-035 | OnItemSmelted（精錬時） | かまど + 精錬できる素材を持つ | かまどで精錬が完了する | 燃料が MCチャットに表示される | ✓ |
 | TC-036 | OnItemTraded（取引時） | 村人の近く | 村人と取引する | プレイヤーEM数・村人名が MCチャットに表示される | □ |
 
 ---
