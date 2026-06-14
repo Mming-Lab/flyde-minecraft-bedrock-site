@@ -31,7 +31,24 @@ node:
         data: ../../dist/index.flyde.js
     - pos:
         x: 50
-        y: 300
+        y: 250
+      id: add-tag
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: tag @s add __flyde_test__
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 400
       id: get-player-tags
       inputConfig: {}
       nodeId: GetPlayerTags
@@ -45,7 +62,7 @@ node:
         data: ../../dist/index.flyde.js
     - pos:
         x: 350
-        y: 300
+        y: 400
       id: json-077-tags
       inputConfig: {}
       nodeId: JSON Stringify
@@ -57,8 +74,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 550
-        y: 300
+        x: 600
+        y: 400
       id: say-077-tags
       inputConfig: {}
       nodeId: RunCommand
@@ -75,7 +92,67 @@ node:
         data: ../../dist/index.flyde.js
     - pos:
         x: 50
-        y: 500
+        y: 550
+      id: has-tag
+      inputConfig: {}
+      nodeId: PlayerHasTag
+      config:
+        タグ:
+          type: string
+          value: __flyde_test__
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 350
+        y: 550
+      id: assert-078
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-078
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 700
+      id: remove-tag
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: tag @s remove __flyde_test__
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../dist/index.flyde.js
+    - pos:
+        x: 50
+        y: 850
       id: get-abilities
       inputConfig: {}
       nodeId: GetPlayerAbilities
@@ -89,7 +166,7 @@ node:
         data: ../../dist/index.flyde.js
     - pos:
         x: 350
-        y: 500
+        y: 850
       id: json-081-abilities
       inputConfig: {}
       nodeId: JSON Stringify
@@ -101,8 +178,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 550
-        y: 500
+        x: 600
+        y: 850
       id: say-081-abilities
       inputConfig: {}
       nodeId: RunCommand
@@ -119,7 +196,7 @@ node:
         data: ../../dist/index.flyde.js
     - pos:
         x: 350
-        y: 700
+        y: 1000
       id: disconnect
       inputConfig: {}
       nodeId: MinecraftDisconnect
@@ -132,22 +209,21 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 750
-        y: 250
+        x: 900
+        y: 350
       id: note-077-081
       inputConfig: {}
       nodeId: Note
       config:
         content: |-
-          # TC-077: GetPlayerTags / TC-081: GetPlayerAbilities 目視確認
+          # TC-077: GetPlayerTags / TC-078: PlayerHasTag / TC-081: GetPlayerAbilities
           **操作手順:**
-          1. 事前に `/tag @p add test1` でプレイヤーにタグを付与しておく（TC-077用）
-          2. Minecraft でチャットを 1 回送信する
-          3. **TC-077 目視確認:** Minecraft チャットにプレイヤーのタグ一覧（配列）が表示されること
-             - 例: `["test1"]`
-          4. **TC-081 目視確認:** Minecraft チャットにアビリティオブジェクトが表示されること
-             - 例: `{"mayfly":false,"mute":false,...}`
-          ※ 配列/オブジェクトは Assert で数値比較できないため目視確認
+          1. Minecraft でチャットを 1 回送信する
+          2. **自動:** tag @s add __flyde_test__ を実行
+          3. **TC-077 目視確認:** MCチャットに `["__flyde_test__"]` が表示されること
+          4. **TC-078 自動:** PlayerHasTag("__flyde_test__") = true を Assert → ログで PASS 確認
+          5. **自動:** tag @s remove __flyde_test__ でクリーンアップ
+          6. **TC-081 目視確認:** MCチャットにアビリティオブジェクトが表示されること
       type: code
       source:
         type: package
@@ -162,6 +238,12 @@ node:
     - from:
         insId: on-chat
         pinId: 送信者名
+      to:
+        insId: add-tag
+        pinId: トリガー
+    - from:
+        insId: add-tag
+        pinId: 完了
       to:
         insId: get-player-tags
         pinId: トリガー
@@ -179,6 +261,24 @@ node:
         pinId: v
     - from:
         insId: say-077-tags
+        pinId: 完了
+      to:
+        insId: has-tag
+        pinId: トリガー
+    - from:
+        insId: has-tag
+        pinId: 結果
+      to:
+        insId: assert-078
+        pinId: 実際値
+    - from:
+        insId: assert-078
+        pinId: 完了
+      to:
+        insId: remove-tag
+        pinId: トリガー
+    - from:
+        insId: remove-tag
         pinId: 完了
       to:
         insId: get-abilities
@@ -208,7 +308,8 @@ node:
   outputsPosition: {}
   completionOutputs: []
   description: |
-    プレイヤー追加クエリテスト（TC-077, TC-081）チャット送信1回で自動実行
-    TC-077: GetPlayerTags → タグ一覧（配列）→ MCチャットに JSON 表示（目視確認）
-    TC-081: GetPlayerAbilities → アビリティオブジェクト → MCチャットに JSON 表示（目視確認）
-    ※ 配列/オブジェクトは Assert で比較できないため JSONStringify → say で目視確認
+    プレイヤー追加クエリテスト（TC-077, TC-078, TC-081）チャット送信1回で自動実行
+    TC-077: tag add → GetPlayerTags → MCチャットに ["__flyde_test__"] を表示（目視確認）
+    TC-078: PlayerHasTag("__flyde_test__") = true を Assert（正常系・自動）
+    自動: tag remove でクリーンアップ
+    TC-081: GetPlayerAbilities → MCチャットにアビリティを表示（目視確認）

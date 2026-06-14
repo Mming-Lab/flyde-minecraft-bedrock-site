@@ -219,7 +219,7 @@ npm install ../flyde-minecraft-bedrock/flyde-minecraft-bedrock-x.x.x.tgz
 | TC-072 | GetPlayerLocation（座標取得） | 自動テスト：GetPlayerLocation → 座標.y >= -64 を確認 | y 座標が有効範囲内で返る | ✓ |
 | TC-073 | GetPlayerOrientation（向き取得） | 自動テスト：GetPlayerOrientation → 角度 >= -180 を確認（数値で返ることを確認） | yaw 角度が -180 以上の数値で返る | ✓ |
 | TC-077 | GetPlayerTags（タグ取得） | — | test-07d: チャット送信 → タグ一覧が MCチャットに表示される | ✓ |
-| TC-078 | PlayerHasTag（タグ判定） | 自動テスト：PlayerHasTag("__flyde_test_tag__") → false を確認（存在しないタグ） | 存在しないタグで false が返る | □ |
+| TC-078 | PlayerHasTag（タグ判定） | 自動テスト（test-07d）：tag add → PlayerHasTag("__flyde_test__") = true を Assert（正常系） | タグ付与後に true が返る | □ |
 | TC-079 | GetPlayerLevel（レベル取得） | 自動テスト：GetPlayerLevel → レベル >= 0 を確認 | レベルが 0 以上の数値で返る | ✓ |
 | TC-081 | GetPlayerAbilities（アビリティ取得） | — | test-07d: チャット送信 → アビリティオブジェクトが MCチャットに表示される | ✓ |
 | TC-083 | GetPlayers（プレイヤー一覧） | 自動テスト：GetPlayers → Assert(プレイヤー数 >= 0) を確認 | プレイヤー配列が例外なく返る | □ |
