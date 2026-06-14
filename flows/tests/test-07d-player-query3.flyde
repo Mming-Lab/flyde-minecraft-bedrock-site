@@ -46,13 +46,26 @@ node:
     - pos:
         x: 350
         y: 300
-      id: bcast-077-tags
+      id: json-077-tags
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 300
+      id: say-077-tags
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -74,13 +87,26 @@ node:
     - pos:
         x: 350
         y: 500
-      id: bcast-081-abilities
+      id: json-081-abilities
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 500
+      id: say-081-abilities
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -112,9 +138,9 @@ node:
           1. 事前に `/tag @p add test1` でプレイヤーにタグを付与しておく（TC-077用）
           2. Minecraft でチャットを 1 回送信する
           3. **TC-077 目視確認:** Minecraft チャットにプレイヤーのタグ一覧（配列）が表示されること
-             - 例: `[ 'test1' ]`
+             - 例: `["test1"]`
           4. **TC-081 目視確認:** Minecraft チャットにアビリティオブジェクトが表示されること
-             - 例: `{ mayfly: false, mute: false, ... }`
+             - 例: `{"mayfly":false,"mute":false,...}`
           ※ 配列/オブジェクトは Assert で数値比較できないため目視確認
       type: code
       source:
@@ -137,10 +163,16 @@ node:
         insId: get-player-tags
         pinId: タグ一覧
       to:
-        insId: bcast-077-tags
-        pinId: メッセージ
+        insId: json-077-tags
+        pinId: object
     - from:
-        insId: bcast-077-tags
+        insId: json-077-tags
+        pinId: json
+      to:
+        insId: say-077-tags
+        pinId: v
+    - from:
+        insId: say-077-tags
         pinId: 完了
       to:
         insId: get-abilities
@@ -149,10 +181,16 @@ node:
         insId: get-abilities
         pinId: アビリティ
       to:
-        insId: bcast-081-abilities
-        pinId: メッセージ
+        insId: json-081-abilities
+        pinId: object
     - from:
-        insId: bcast-081-abilities
+        insId: json-081-abilities
+        pinId: json
+      to:
+        insId: say-081-abilities
+        pinId: v
+    - from:
+        insId: say-081-abilities
         pinId: 完了
       to:
         insId: disconnect
@@ -165,6 +203,6 @@ node:
   completionOutputs: []
   description: |
     プレイヤー追加クエリテスト（TC-077, TC-081）チャット送信1回で自動実行
-    TC-077: GetPlayerTags → タグ一覧（配列）→ MCチャットに表示（配列の文字列変換を確認）
-    TC-081: GetPlayerAbilities → アビリティオブジェクト → MCチャットに表示（オブジェクトの文字列変換を確認）
-    ※ 配列/オブジェクトをAssertで数値比較できないため、BroadcastMessageで目視確認
+    TC-077: GetPlayerTags → タグ一覧（配列）→ MCチャットに JSON 表示（目視確認）
+    TC-081: GetPlayerAbilities → アビリティオブジェクト → MCチャットに JSON 表示（目視確認）
+    ※ 配列/オブジェクトは Assert で比較できないため JSONStringify → say で目視確認

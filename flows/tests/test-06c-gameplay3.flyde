@@ -72,13 +72,26 @@ node:
     - pos:
         x: 650
         y: 300
-      id: bcast-054-weather
+      id: json-054-weather
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 850
+        y: 300
+      id: say-054-weather
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -96,7 +109,7 @@ node:
           1. Minecraft でチャットを送信する
           2. **TC-054 自動:** 天気 neq "" を Assert → ログで PASS 確認
           3. **目視確認:** Minecraft チャットに天気名が表示されること
-             - 例: `Clear` / `Rain` / `Thunder`
+             - 例: `"Clear"` / `"Rain"` / `"Thunder"`
       type: code
       source:
         type: package
@@ -121,13 +134,26 @@ node:
     - pos:
         x: 350
         y: 500
-      id: bcast-061-mob
+      id: json-061-mob
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 500
+      id: say-061-mob
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -152,13 +178,26 @@ node:
     - pos:
         x: 350
         y: 700
-      id: bcast-061-block
+      id: json-061-block
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 700
+      id: say-061-block
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -183,13 +222,26 @@ node:
     - pos:
         x: 350
         y: 900
-      id: bcast-061-item
+      id: json-061-item
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 900
+      id: say-061-item
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -255,26 +307,50 @@ node:
         insId: get-weather
         pinId: 天気
       to:
-        insId: bcast-054-weather
-        pinId: メッセージ
+        insId: json-054-weather
+        pinId: object
+    - from:
+        insId: json-054-weather
+        pinId: json
+      to:
+        insId: say-054-weather
+        pinId: v
     - from:
         insId: world-query-mob
         pinId: 一覧
       to:
-        insId: bcast-061-mob
-        pinId: メッセージ
+        insId: json-061-mob
+        pinId: object
+    - from:
+        insId: json-061-mob
+        pinId: json
+      to:
+        insId: say-061-mob
+        pinId: v
     - from:
         insId: world-query-block
         pinId: 一覧
       to:
-        insId: bcast-061-block
-        pinId: メッセージ
+        insId: json-061-block
+        pinId: object
+    - from:
+        insId: json-061-block
+        pinId: json
+      to:
+        insId: say-061-block
+        pinId: v
     - from:
         insId: world-query-item
         pinId: 一覧
       to:
-        insId: bcast-061-item
-        pinId: メッセージ
+        insId: json-061-item
+        pinId: object
+    - from:
+        insId: json-061-item
+        pinId: json
+      to:
+        insId: say-061-item
+        pinId: v
   id: TestGameplay3
   inputs: {}
   outputs: {}

@@ -32,13 +32,26 @@ node:
     - pos:
         x: 350
         y: 300
-      id: bcast-031-method
+      id: json-031-method
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 300
+      id: say-031-method
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -194,13 +207,26 @@ node:
     - pos:
         x: 350
         y: 900
-      id: bcast-034-slot
+      id: json-034-slot
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 900
+      id: say-034-slot
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -222,13 +248,26 @@ node:
     - pos:
         x: 350
         y: 1100
-      id: bcast-035-fuel
+      id: json-035-fuel
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 1100
+      id: say-035-fuel
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -250,13 +289,26 @@ node:
     - pos:
         x: 350
         y: 1300
-      id: bcast-036-em
+      id: json-036-em
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 1300
+      id: say-036-em
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -278,13 +330,26 @@ node:
     - pos:
         x: 950
         y: 1300
-      id: bcast-097-name
+      id: json-097-name
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 1150
+        y: 1300
+      id: say-097-name
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -300,7 +365,7 @@ node:
           # TC-031: OnItemInteracted 目視確認
           **操作手順:**
           1. Minecraft でアイテムを右クリックで使用する（食べる・ブロックに当てる等）
-          2. **目視確認:** Minecraft チャットに使用方法（例: `use_on` / `eat`）が表示されること
+          2. **目視確認:** Minecraft チャットに使用方法（例: `"use_on"` / `"eat"`）が表示されること
       type: code
       source:
         type: package
@@ -396,8 +461,14 @@ node:
         insId: on-item-interacted
         pinId: 使用方法
       to:
-        insId: bcast-031-method
-        pinId: メッセージ
+        insId: json-031-method
+        pinId: object
+    - from:
+        insId: json-031-method
+        pinId: json
+      to:
+        insId: say-031-method
+        pinId: v
     - from:
         insId: on-item-acquired
         pinId: 個数
@@ -432,20 +503,38 @@ node:
         insId: on-item-equipped
         pinId: 装備スロット
       to:
-        insId: bcast-034-slot
-        pinId: メッセージ
+        insId: json-034-slot
+        pinId: object
+    - from:
+        insId: json-034-slot
+        pinId: json
+      to:
+        insId: say-034-slot
+        pinId: v
     - from:
         insId: on-item-smelted
         pinId: 燃料
       to:
-        insId: bcast-035-fuel
-        pinId: メッセージ
+        insId: json-035-fuel
+        pinId: object
+    - from:
+        insId: json-035-fuel
+        pinId: json
+      to:
+        insId: say-035-fuel
+        pinId: v
     - from:
         insId: on-item-traded
         pinId: ﾌﾟﾚｲﾔｰEM数
       to:
-        insId: bcast-036-em
-        pinId: メッセージ
+        insId: json-036-em
+        pinId: object
+    - from:
+        insId: json-036-em
+        pinId: json
+      to:
+        insId: say-036-em
+        pinId: v
     - from:
         insId: on-item-traded
         pinId: 村人
@@ -456,8 +545,14 @@ node:
         insId: get-from-villager-097
         pinId: 名前
       to:
-        insId: bcast-097-name
-        pinId: メッセージ
+        insId: json-097-name
+        pinId: object
+    - from:
+        insId: json-097-name
+        pinId: json
+      to:
+        insId: say-097-name
+        pinId: v
   id: TestItemEvents
   inputs: {}
   outputs: {}

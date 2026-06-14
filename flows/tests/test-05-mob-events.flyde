@@ -32,13 +32,26 @@ node:
     - pos:
         x: 350
         y: 300
-      id: bcast-041-type
+      id: json-041-type
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 300
+      id: say-041-type
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -126,13 +139,26 @@ node:
     - pos:
         x: 650
         y: 600
-      id: bcast-042-strength
+      id: json-042-strength
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 850
+        y: 600
+      id: say-042-strength
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -148,7 +174,7 @@ node:
           # TC-041: OnMobInteracted 目視確認 / TC-096: GetFromMob 自動テスト
           **操作手順:**
           1. Minecraft で動物（ウシ・ブタ等）に右クリックする
-          2. **目視確認 TC-041:** Minecraft チャットに交流種別（例: `interact`）が表示されること
+          2. **目視確認 TC-041:** Minecraft チャットに交流種別（例: `"interact"`）が表示されること
           3. **TC-096 自動:** GetFromMob.種別（数値） >= 0 を Assert → ログで PASS 確認
           ※ WorldMob には ID/名前フィールドがないため、種別は数値のみ
       type: code
@@ -189,8 +215,14 @@ node:
         insId: on-mob-interacted
         pinId: 交流種別
       to:
-        insId: bcast-041-type
-        pinId: メッセージ
+        insId: json-041-type
+        pinId: object
+    - from:
+        insId: json-041-type
+        pinId: json
+      to:
+        insId: say-041-type
+        pinId: v
     - from:
         insId: on-mob-interacted
         pinId: ﾓﾌﾞ
@@ -213,8 +245,14 @@ node:
         insId: on-target-block-hit
         pinId: 強さ
       to:
-        insId: bcast-042-strength
-        pinId: メッセージ
+        insId: json-042-strength
+        pinId: object
+    - from:
+        insId: json-042-strength
+        pinId: json
+      to:
+        insId: say-042-strength
+        pinId: v
   id: TestMobEvents
   inputs: {}
   outputs: {}

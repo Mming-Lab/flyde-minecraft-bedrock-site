@@ -32,16 +32,26 @@ node:
     - pos:
         x: 350
         y: 300
-      id: bcast-021-method
+      id: json-021-method
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
-        トリガー:
-          type: dynamic
-          value: "{{トリガー}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 300
+      id: say-021-method
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -103,16 +113,26 @@ node:
     - pos:
         x: 350
         y: 600
-      id: bcast-022-method
+      id: json-022-method
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
-        トリガー:
-          type: dynamic
-          value: "{{トリガー}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 600
+      id: say-022-method
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -120,16 +140,26 @@ node:
     - pos:
         x: 650
         y: 600
-      id: bcast-022-block
+      id: json-022-block
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
-        トリガー:
-          type: dynamic
-          value: "{{トリガー}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 850
+        y: 600
+      id: say-022-block
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -145,7 +175,7 @@ node:
           # TC-021: OnBlockBroken 目視確認
           **操作手順:**
           1. Minecraft でブロックを破壊する
-          2. **目視確認:** Minecraft チャットに破壊方法（例: `player`）が表示されること
+          2. **目視確認:** Minecraft チャットに破壊方法（例: `"player"`）が表示されること
           3. TC-093 は自動: ブロックID が空でないことを Assert → ログで PASS 確認
       type: code
       source:
@@ -162,7 +192,7 @@ node:
           # TC-022: OnBlockPlaced 目視確認
           **操作手順:**
           1. Minecraft でブロックを設置する
-          2. **目視確認:** Minecraft チャットに設置方法（例: `player`）とブロック情報が表示されること
+          2. **目視確認:** Minecraft チャットに設置方法（例: `"player"`）とブロック情報が表示されること
       type: code
       source:
         type: package
@@ -184,8 +214,14 @@ node:
         insId: on-block-broken
         pinId: 破壊方法
       to:
-        insId: bcast-021-method
-        pinId: メッセージ
+        insId: json-021-method
+        pinId: object
+    - from:
+        insId: json-021-method
+        pinId: json
+      to:
+        insId: say-021-method
+        pinId: v
     - from:
         insId: on-block-broken
         pinId: ﾌﾞﾛｯｸ
@@ -202,14 +238,26 @@ node:
         insId: on-block-placed
         pinId: 設置方法
       to:
-        insId: bcast-022-method
-        pinId: メッセージ
+        insId: json-022-method
+        pinId: object
+    - from:
+        insId: json-022-method
+        pinId: json
+      to:
+        insId: say-022-method
+        pinId: v
     - from:
         insId: on-block-placed
         pinId: ﾌﾞﾛｯｸ
       to:
-        insId: bcast-022-block
-        pinId: メッセージ
+        insId: json-022-block
+        pinId: object
+    - from:
+        insId: json-022-block
+        pinId: json
+      to:
+        insId: say-022-block
+        pinId: v
   id: TestBlockEvents
   inputs: {}
   outputs: {}

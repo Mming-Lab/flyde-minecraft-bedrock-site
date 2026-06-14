@@ -319,13 +319,26 @@ node:
     - pos:
         x: 350
         y: 1100
-      id: bcast-136-detect
+      id: json-136-detect
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 1100
+      id: say-136-detect
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -350,13 +363,26 @@ node:
     - pos:
         x: 350
         y: 1300
-      id: bcast-137-inspect
+      id: json-137-inspect
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 1300
+      id: say-137-inspect
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -528,13 +554,26 @@ node:
     - pos:
         x: 350
         y: 2100
-      id: bcast-141-detail
+      id: json-141-detail
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 2100
+      id: say-141-detail
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -794,14 +833,26 @@ node:
         insId: agent-detect
         pinId: 検知
       to:
-        insId: bcast-136-detect
-        pinId: メッセージ
+        insId: json-136-detect
+        pinId: object
+    - from:
+        insId: json-136-detect
+        pinId: json
+      to:
+        insId: say-136-detect
+        pinId: v
     - from:
         insId: agent-inspect
         pinId: 値
       to:
-        insId: bcast-137-inspect
-        pinId: メッセージ
+        insId: json-137-inspect
+        pinId: object
+    - from:
+        insId: json-137-inspect
+        pinId: json
+      to:
+        insId: say-137-inspect
+        pinId: v
     - from:
         insId: agent-set-item
         pinId: 完了
@@ -824,8 +875,14 @@ node:
         insId: agent-get-detail
         pinId: アイテムID
       to:
-        insId: bcast-141-detail
-        pinId: メッセージ
+        insId: json-141-detail
+        pinId: object
+    - from:
+        insId: json-141-detail
+        pinId: json
+      to:
+        insId: say-141-detail
+        pinId: v
     - from:
         insId: agent-move-item
         pinId: 完了

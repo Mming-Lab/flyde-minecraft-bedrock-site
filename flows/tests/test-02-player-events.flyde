@@ -32,16 +32,26 @@ node:
     - pos:
         x: 350
         y: 300
-      id: bcast-011-sender
+      id: json-011-sender
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
-        トリガー:
-          type: dynamic
-          value: "{{トリガー}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 300
+      id: say-011-sender
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -49,16 +59,26 @@ node:
     - pos:
         x: 650
         y: 300
-      id: bcast-011-msg
+      id: json-011-msg
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
-        トリガー:
-          type: dynamic
-          value: "{{トリガー}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 850
+        y: 300
+      id: say-011-msg
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -217,16 +237,26 @@ node:
     - pos:
         x: 350
         y: 1100
-      id: bcast-015
+      id: json-015
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
-        トリガー:
-          type: dynamic
-          value: "{{トリガー}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 1100
+      id: say-015
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -248,16 +278,26 @@ node:
     - pos:
         x: 350
         y: 1300
-      id: bcast-016
+      id: json-016
       inputConfig: {}
-      nodeId: BroadcastMessage
+      nodeId: JSON Stringify
       config:
-        メッセージ:
+        object:
           type: dynamic
-          value: "{{メッセージ}}"
-        トリガー:
-          type: dynamic
-          value: "{{トリガー}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 550
+        y: 1300
+      id: say-016
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: "say {{v}}"
       type: code
       source:
         type: file
@@ -405,8 +445,8 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 639.3098297119141
-        y: 2016.0982666015625
+        x: 639
+        y: 2016
       id: assert-019
       inputConfig: {}
       nodeId: Assert
@@ -465,8 +505,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 664.0000839233398
-        y: 969.286865234375
+        x: 664
+        y: 969
       id: note-015
       inputConfig: {}
       nodeId: Note
@@ -482,8 +522,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 648.2352600097656
-        y: 1212.8812255859375
+        x: 648
+        y: 1212
       id: note-016
       inputConfig: {}
       nodeId: Note
@@ -591,14 +631,26 @@ node:
         insId: on-chat
         pinId: 送信者名
       to:
-        insId: bcast-011-sender
-        pinId: メッセージ
+        insId: json-011-sender
+        pinId: object
+    - from:
+        insId: json-011-sender
+        pinId: json
+      to:
+        insId: say-011-sender
+        pinId: v
     - from:
         insId: on-chat
         pinId: メッセージ
       to:
-        insId: bcast-011-msg
-        pinId: メッセージ
+        insId: json-011-msg
+        pinId: object
+    - from:
+        insId: json-011-msg
+        pinId: json
+      to:
+        insId: say-011-msg
+        pinId: v
     - from:
         insId: on-travelled
         pinId: 移動距離
@@ -627,14 +679,26 @@ node:
         insId: on-join
         pinId: ﾌﾟﾚｲﾔｰ名
       to:
-        insId: bcast-015
-        pinId: メッセージ
+        insId: json-015
+        pinId: object
+    - from:
+        insId: json-015
+        pinId: json
+      to:
+        insId: say-015
+        pinId: v
     - from:
         insId: on-leave
         pinId: ﾌﾟﾚｲﾔｰ名
       to:
-        insId: bcast-016
-        pinId: メッセージ
+        insId: json-016
+        pinId: object
+    - from:
+        insId: json-016
+        pinId: json
+      to:
+        insId: say-016
+        pinId: v
     - from:
         insId: on-chat
         pinId: 送信者名
