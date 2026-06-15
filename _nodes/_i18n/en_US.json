@@ -1879,69 +1879,6 @@
       }
     }
   },
-  "AgentGetItemCount": {
-    "displayName": "AG Show Item Count",
-    "menuDisplayName": "AG ItemCount",
-    "description": "Show item count in slot {{slot}} in-game (WS cannot retrieve the value)",
-    "inputs": {
-      "trigger": {
-        "name": "trigger",
-        "description": "Trigger (optional)"
-      },
-      "slot": {
-        "name": "slot",
-        "description": "Inventory slot (1–27)"
-      }
-    },
-    "outputs": {
-      "done": {
-        "name": "done",
-        "description": "Fires true when command executed (result shown in-game)"
-      }
-    }
-  },
-  "AgentGetItemSpace": {
-    "displayName": "AG Show Item Space",
-    "menuDisplayName": "AG ItemSpace",
-    "description": "Show remaining space in slot {{slot}} in-game (WS cannot retrieve the value)",
-    "inputs": {
-      "trigger": {
-        "name": "trigger",
-        "description": "Trigger (optional)"
-      },
-      "slot": {
-        "name": "slot",
-        "description": "Inventory slot (1–27)"
-      }
-    },
-    "outputs": {
-      "done": {
-        "name": "done",
-        "description": "Fires true when command executed (result shown in-game)"
-      }
-    }
-  },
-  "AgentGetItemDetail": {
-    "displayName": "AG Show Item Detail",
-    "menuDisplayName": "AG ItemDetail",
-    "description": "Show item detail in slot {{slot}} in-game (WS cannot retrieve the value)",
-    "inputs": {
-      "trigger": {
-        "name": "trigger",
-        "description": "Trigger (optional)"
-      },
-      "slot": {
-        "name": "slot",
-        "description": "Inventory slot (1–27)"
-      }
-    },
-    "outputs": {
-      "done": {
-        "name": "done",
-        "description": "Fires true when command executed (result shown in-game)"
-      }
-    }
-  },
   "Vector3Lerp": {
     "displayName": "Vector3 Lerp",
     "menuDisplayName": "Vec3Lerp",

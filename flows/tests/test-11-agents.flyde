@@ -486,157 +486,6 @@ node:
         data: ../../dist/index.flyde.js
     - pos:
         x: 50
-        y: 1700
-      id: agent-get-count
-      inputConfig: {}
-      nodeId: AgentGetItemCount
-      config:
-        スロット:
-          type: number
-          value: 1
-        トリガー:
-          type: dynamic
-          value: "{{トリガー}}"
-      type: code
-      source:
-        type: file
-        data: ../../dist/index.flyde.js
-    - pos:
-        x: 350
-        y: 1700
-      id: assert-139
-      inputConfig: {}
-      nodeId: Assert
-      config:
-        期待値:
-          type: boolean
-          value: true
-        比較:
-          type: select
-          value: eq
-        ID:
-          type: string
-          value: TC-139
-        実際値:
-          type: dynamic
-          value: "{{実際値}}"
-        許容差:
-          type: number
-          value: 0.001
-      type: code
-      source:
-        type: file
-        data: ../../dist/index.flyde.js
-    - pos:
-        x: 50
-        y: 1900
-      id: agent-get-space
-      inputConfig: {}
-      nodeId: AgentGetItemSpace
-      config:
-        スロット:
-          type: number
-          value: 2
-        トリガー:
-          type: dynamic
-          value: "{{トリガー}}"
-      type: code
-      source:
-        type: file
-        data: ../../dist/index.flyde.js
-    - pos:
-        x: 350
-        y: 1900
-      id: assert-140
-      inputConfig: {}
-      nodeId: Assert
-      config:
-        期待値:
-          type: boolean
-          value: true
-        比較:
-          type: select
-          value: eq
-        ID:
-          type: string
-          value: TC-140
-        実際値:
-          type: dynamic
-          value: "{{実際値}}"
-        許容差:
-          type: number
-          value: 0.001
-      type: code
-      source:
-        type: file
-        data: ../../dist/index.flyde.js
-    - pos:
-        x: 50
-        y: 2100
-      id: agent-get-detail
-      inputConfig: {}
-      nodeId: AgentGetItemDetail
-      config:
-        スロット:
-          type: number
-          value: 1
-        トリガー:
-          type: dynamic
-          value: "{{トリガー}}"
-      type: code
-      source:
-        type: file
-        data: ../../dist/index.flyde.js
-    - pos:
-        x: 350
-        y: 2100
-      id: json-141-detail
-      inputConfig: {}
-      nodeId: JSON Stringify
-      config:
-        object:
-          type: dynamic
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 550
-        y: 2100
-      id: say-141-detail
-      inputConfig: {}
-      nodeId: RunCommand
-      config:
-        コマンド:
-          type: string
-          value: say [TC-141 アイテムID] {{v}}
-        トリガー:
-          type: boolean
-          value: true
-      type: code
-      source:
-        type: file
-        data: ../../dist/index.flyde.js
-    - pos:
-        x: 843.2865600585938
-        y: 1963.78759765625
-      id: note-tc141
-      inputConfig: {}
-      nodeId: Note
-      config:
-        content: |-
-          # TC-141: AgentGetItemDetail 目視確認
-          **AgentGetItemDetail(スロット1) → アイテムID を MC チャットに表示**
-
-          **目視確認:** MC チャットにスロット1のアイテムID が表示されること
-          - 例: `minecraft:stone`（TC-138 で stone をセットした後）
-          - スロットが空の場合は `null`
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 50
         y: 2300
       id: agent-move-item
       inputConfig: {}
@@ -944,30 +793,6 @@ node:
         insId: assert-138
         pinId: 完了
       to:
-        insId: agent-get-count
-        pinId: トリガー
-    - from:
-        insId: assert-139
-        pinId: 完了
-      to:
-        insId: agent-get-space
-        pinId: トリガー
-    - from:
-        insId: assert-140
-        pinId: 完了
-      to:
-        insId: agent-get-detail
-        pinId: トリガー
-    - from:
-        insId: json-141-detail
-        pinId: json
-      to:
-        insId: say-141-detail
-        pinId: v
-    - from:
-        insId: say-141-detail
-        pinId: 完了
-      to:
         insId: agent-move-item
         pinId: トリガー
     - from:
@@ -1018,24 +843,6 @@ node:
       to:
         insId: agent-move-fwd
         pinId: トリガー
-    - from:
-        insId: agent-get-count
-        pinId: 完了
-      to:
-        insId: assert-139
-        pinId: 実際値
-    - from:
-        insId: agent-get-space
-        pinId: 完了
-      to:
-        insId: assert-140
-        pinId: 実際値
-    - from:
-        insId: agent-get-detail
-        pinId: 完了
-      to:
-        insId: json-141-detail
-        pinId: object
   id: TestAgents
   inputs: {}
   outputs: {}
@@ -1043,7 +850,7 @@ node:
   outputsPosition: {}
   completionOutputs: []
   description: |
-    エージェント系テスト（TC-131〜145）※ Education Edition 専用
+    エージェント系テスト（TC-131〜138/142〜145）※ Education Edition 専用
     【1回目】チャット送信 → TC-131（AgentTP）・TC-132（AG座標）が自動実行
     【2回目】フロー再起動 → TC-133〜145 がフロー起動と同時に自動実行
     ※ コンテキスト（プレイヤー情報）が process に保持されるため2回目から動作する
@@ -1055,9 +862,7 @@ node:
     TC-136: AgentDetect(ブロック, 前) → MCチャットに検知結果
     TC-137: AgentInspect(ブロックID, 前) → MCチャットにブロックID
     TC-138: AgentSetItem(スロット1, stone, 5個) → 完了=true
-    TC-139: AgentGetItemCount(スロット1) → 個数 > 0
-    TC-140: AgentGetItemSpace(スロット2) → 空き >= 0
-    TC-141: AgentGetItemDetail(スロット1) → MCチャットにアイテムID
+    ※ TC-139/140/141 は削除（WS経由でエージェントインベントリ値取得不可）
     TC-142: AgentMoveItem(1→2, 1個) → 完了=true
     TC-143: AgentPlaceBlock(前, スロット2) → 完了=true
     TC-144: AgentDropItem(前, スロット1, 1個) → 完了=true

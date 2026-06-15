@@ -1878,69 +1878,6 @@
       }
     }
   },
-  "AgentGetItemCount": {
-    "displayName": "AGアイテム数表示",
-    "menuDisplayName": "AGアイテム数",
-    "description": "スロット{{slot}}のアイテム個数をゲーム内に表示する",
-    "inputs": {
-      "trigger": {
-        "name": "トリガー",
-        "description": "トリガー（任意）"
-      },
-      "slot": {
-        "name": "スロット",
-        "description": "対象スロット番号（1〜27）"
-      }
-    },
-    "outputs": {
-      "done": {
-        "name": "完了",
-        "description": "コマンド実行完了（結果はゲーム内に表示）"
-      }
-    }
-  },
-  "AgentGetItemSpace": {
-    "displayName": "AG空き表示",
-    "menuDisplayName": "AG空き",
-    "description": "スロット{{slot}}の残り空きをゲーム内に表示する",
-    "inputs": {
-      "trigger": {
-        "name": "トリガー",
-        "description": "トリガー（任意）"
-      },
-      "slot": {
-        "name": "スロット",
-        "description": "対象スロット番号（1〜27）"
-      }
-    },
-    "outputs": {
-      "done": {
-        "name": "完了",
-        "description": "コマンド実行完了（結果はゲーム内に表示）"
-      }
-    }
-  },
-  "AgentGetItemDetail": {
-    "displayName": "AGアイテム詳細表示",
-    "menuDisplayName": "AGアイテム",
-    "description": "スロット{{slot}}のアイテム詳細をゲーム内に表示する",
-    "inputs": {
-      "trigger": {
-        "name": "トリガー",
-        "description": "トリガー（任意）"
-      },
-      "slot": {
-        "name": "スロット",
-        "description": "対象スロット番号（1〜27）"
-      }
-    },
-    "outputs": {
-      "done": {
-        "name": "完了",
-        "description": "コマンド実行完了（結果はゲーム内に表示）"
-      }
-    }
-  },
   "Vector3Lerp": {
     "displayName": "座標補間",
     "menuDisplayName": "座標補間",

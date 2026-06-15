@@ -297,7 +297,9 @@ npm install ../flyde-minecraft-bedrock/flyde-minecraft-bedrock-x.x.x.tgz
 **共通前提：** Education Edition モードを有効化（エージェントが存在しなければ自動作成される）  
 **1回目：** チャット送信 → TC-131/132 が自動実行（AgentTP → GetAgentLocation）  
 **2回目：** フロー再起動 → TC-133〜145 が起動時に自動実行（前回のコンテキストを process から再利用）  
-**TC-131〜135/138〜140/142〜145 はログで PASS/FAIL を確認、TC-136/137/141 はMCチャットに表示（TC-141 は完了=true が表示、WS経由での詳細値取得不可）**
+**TC-131〜135/138/142〜145 はログで PASS/FAIL を確認、TC-136/137 はMCチャットに表示**  
+**注：** TC-139（AgentGetItemCount）/ TC-140（AgentGetItemSpace）/ TC-141（AgentGetItemDetail）は削除。  
+WS 外部接続（/connect）では agent インベントリ値を取得できないため（MakeCode の内部接続 8766/pxsim とは別プロトコル）。
 
 | ID | ノード | 操作 | 確認内容 | 結果 |
 |---|---|---|---|---|
@@ -309,10 +311,7 @@ npm install ../flyde-minecraft-bedrock/flyde-minecraft-bedrock-x.x.x.tgz
 | TC-136 | AgentDetect（障害物検知） | TC-135 の完了後に自動実行 | 検知結果（true/false）が MCチャットに表示（目視確認） | ✓ |
 | TC-137 | AgentInspect（ブロック調査） | TC-136 の完了後に自動実行 | 前方ブロックIDが MCチャットに表示（目視確認） | ✓ |
 | TC-138 | AgentSetItem（アイテムセット） | TC-137 の完了後に自動実行 | Assert(完了 = true)、スロット1に minecraft:stone 5個 | ✓ |
-| TC-139 | AgentGetItemCount（アイテム個数表示） | TC-138 の完了後に自動実行 | Assert(完了 = true) → ログで PASS 確認（※WS経由での数値取得不可。結果はゲーム内に表示） | ✓ |
-| TC-140 | AgentGetItemSpace（空きスペース表示） | TC-139 の完了後に自動実行 | Assert(完了 = true) → ログで PASS 確認（※WS経由での数値取得不可） | ✓ |
-| TC-141 | AgentGetItemDetail（アイテム詳細表示） | TC-140 の完了後に自動実行 | 完了=true が MCチャット表示（※WS経由での詳細取得不可。MakeCode はゲーム内APIで取得可） | ✓ |
-| TC-142 | AgentMoveItem（アイテム移動） | TC-141 の完了後に自動実行 | Assert(完了 = true)、スロット1→2に移動 | ✓ |
+| TC-142 | AgentMoveItem（アイテム移動） | TC-138 の完了後に自動実行 | Assert(完了 = true)、スロット1→2に移動 | ✓ |
 | TC-143 | AgentPlaceBlock（ブロック設置） | TC-142 の完了後に自動実行 | Assert(完了 = true)、スロット2のブロックを前に設置 | ✓ |
 | TC-144 | AgentDropItem（アイテムドロップ） | TC-143 の完了後に自動実行 | Assert(完了 = true)、スロット1から前にドロップ | ✓ |
 | TC-145 | AgentAction（ブロック破壊） | TC-144 の完了後に自動実行 | Assert(完了 = true) → ログで PASS 確認後 MinecraftDisconnect | ✓ |
@@ -365,10 +364,10 @@ MC との接続不要。ターミナルで実行。
 | 8. 情報取得系 | 8 | 6（TC-091/092/093/094/095/096） | 2 |
 | 9. セレクター/コンバーター系 | 2 | 2 | 0 |
 | 10. 数学・座標系 | 22 | 22 | 0 |
-| 11. エージェント系 | 15 | 12（TC-131〜135/138/139/140/142〜145） | 3 |
+| 11. エージェント系 | 12 | 9（TC-131〜135/138/142〜145） | 3 |
 | 12. スコアボード系 | 7 | 7 | 0 |
 | 13. ビルド・言語切替 | 5 | 0 | 5 |
-| **合計** | **99** | **73（74%）** | **26** |
+| **合計** | **96** | **70（73%）** | **26** |
 
 > **テストフロー一覧**
 >
@@ -395,4 +394,4 @@ MC との接続不要。ターミナルで実行。
 > | test-05-mob-events.flyde | TC-041/042/096（TC-042/096 は Assert） |
 > | test-06c-gameplay3.flyde | TC-054/061（TC-054 は Assert + 目視、TC-061 は目視確認） |
 > | test-07d-player-query3.flyde | TC-077/081（チャット送信、MCチャット目視確認） |
-> | test-11-agents.flyde | TC-131〜145（2回実行、TC-131〜135/138〜140/142〜145 は Assert） |
+> | test-11-agents.flyde | TC-131〜138/142〜145（2回実行、TC-131〜135/138/142〜145 は Assert） |

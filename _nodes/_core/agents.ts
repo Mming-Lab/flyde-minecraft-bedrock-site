@@ -1,6 +1,5 @@
 import { CodeNode } from '@flyde/core'
 import { getCurrentContext } from '../context-manager'
-import { diagLog } from '../diag'
 
 const STYLE = { color: '#D83B01' }
 
@@ -354,73 +353,3 @@ export const AgentInspect: CodeNode = {
   },
 }
 
-// Education Edition の WS API はアイテムクエリ結果をレスポンスに含めず statusCode のみ返す。
-// getItemCount/Space/Detail はゲーム内表示専用コマンドとして done のみ出力する。
-export const AgentGetItemCount: CodeNode = {
-  id: 'AgentGetItemCount',
-  displayName: 'AgentGetItemCount',
-  menuDisplayName: 'AgentGetItemCount',
-  description: '指定スロットのアイテム個数をゲーム内に表示する（WS経由で値取得不可）',
-  icon: 'robot',
-  defaultStyle: STYLE,
-  inputs: {
-    trigger: { description: 'Trigger (optional)' },
-    slot: { description: 'Inventory slot (1–27)', defaultValue: 1 },
-  },
-  outputs: {
-    done: { description: 'Fires true when command executed (result shown in-game)' },
-  },
-  run: async ({ slot }, { done }) => {
-    const { world } = getCurrentContext()
-    await world.getOrCreateAgent()
-    const res = await world.runCommand(`agent getitemcount ${Number(slot)}`) as any
-    diagLog('DEBUG', 'AgentGetItemCount', `raw response: ${JSON.stringify(res)}`)
-    done.next(true)
-  },
-}
-
-export const AgentGetItemSpace: CodeNode = {
-  id: 'AgentGetItemSpace',
-  displayName: 'AgentGetItemSpace',
-  menuDisplayName: 'AgentGetItemSpace',
-  description: '指定スロットの残り空きをゲーム内に表示する（WS経由で値取得不可）',
-  icon: 'robot',
-  defaultStyle: STYLE,
-  inputs: {
-    trigger: { description: 'Trigger (optional)' },
-    slot: { description: 'Inventory slot (1–27)', defaultValue: 1 },
-  },
-  outputs: {
-    done: { description: 'Fires true when command executed (result shown in-game)' },
-  },
-  run: async ({ slot }, { done }) => {
-    const { world } = getCurrentContext()
-    await world.getOrCreateAgent()
-    const res = await world.runCommand(`agent getitemspace ${Number(slot)}`) as any
-    diagLog('DEBUG', 'AgentGetItemSpace', `raw response: ${JSON.stringify(res)}`)
-    done.next(true)
-  },
-}
-
-export const AgentGetItemDetail: CodeNode = {
-  id: 'AgentGetItemDetail',
-  displayName: 'AgentGetItemDetail',
-  menuDisplayName: 'AgentGetItemDetail',
-  description: '指定スロットのアイテム詳細をゲーム内に表示する（WS経由で値取得不可）',
-  icon: 'robot',
-  defaultStyle: STYLE,
-  inputs: {
-    trigger: { description: 'Trigger (optional)' },
-    slot: { description: 'Inventory slot (1–27)', defaultValue: 1 },
-  },
-  outputs: {
-    done: { description: 'Fires true when command executed (result shown in-game)' },
-  },
-  run: async ({ slot }, { done }) => {
-    const { world } = getCurrentContext()
-    await world.getOrCreateAgent()
-    const res = await world.runCommand(`agent getitemdetail ${Number(slot)}`) as any
-    diagLog('DEBUG', 'AgentGetItemDetail', `raw response: ${JSON.stringify(res)}`)
-    done.next(true)
-  },
-}

@@ -118,9 +118,6 @@ export const AgentSetItem     = ln(agents.AgentSetItem,     n.AgentSetItem)
 export const AgentCollect        = ln(agents.AgentCollect,        n.AgentCollect)
 export const AgentDetect         = ln(agents.AgentDetect,         n.AgentDetect)
 export const AgentInspect        = ln(agents.AgentInspect,        n.AgentInspect)
-export const AgentGetItemCount   = ln(agents.AgentGetItemCount,   n.AgentGetItemCount)
-export const AgentGetItemSpace   = ln(agents.AgentGetItemSpace,   n.AgentGetItemSpace)
-export const AgentGetItemDetail  = ln(agents.AgentGetItemDetail,  n.AgentGetItemDetail)
 
 // Scoreboard
 export const GetScoreboardObjectives   = ln(scoreboard.GetScoreboardObjectives,   n.GetScoreboardObjectives)
