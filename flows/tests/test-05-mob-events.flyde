@@ -30,8 +30,8 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 350
-        y: 300
+        x: 316.47957611083984
+        y: 400.9077911376953
       id: json-041-type
       inputConfig: {}
       nodeId: JSON Stringify
@@ -43,15 +43,15 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 550
-        y: 300
+        x: 542.1096153259277
+        y: 424.9110565185547
       id: say-041-type
       inputConfig: {}
       nodeId: RunCommand
       config:
         コマンド:
           type: string
-          value: "say [TC-041 交流種別] {{v}}"
+          value: say [TC-041 交流種別] {{v}}
         トリガー:
           type: boolean
           value: true
@@ -161,7 +161,7 @@ node:
       config:
         コマンド:
           type: string
-          value: "say [TC-042 強さ] {{v}}"
+          value: say [TC-042 強さ] {{v}}
         トリガー:
           type: boolean
           value: true
@@ -170,8 +170,8 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 1250
-        y: 250
+        x: 1240.4493408203125
+        y: 161.9728240966797
       id: note-041
       inputConfig: {}
       nodeId: Note
@@ -188,8 +188,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 950
-        y: 550
+        x: 1092.1593322753906
+        y: 546.2836608886719
       id: note-042
       inputConfig: {}
       nodeId: Note

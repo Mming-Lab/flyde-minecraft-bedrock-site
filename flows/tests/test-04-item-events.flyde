@@ -51,7 +51,7 @@ node:
       config:
         コマンド:
           type: string
-          value: "say [TC-031 使用方法] {{v}}"
+          value: say [TC-031 使用方法] {{v}}
         トリガー:
           type: string
           value: ""
@@ -194,8 +194,8 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 50
-        y: 900
+        x: -107.00001525878906
+        y: 868.0000610351562
       id: on-item-equipped
       inputConfig: {}
       nodeId: OnItemEquipped
@@ -229,7 +229,7 @@ node:
       config:
         コマンド:
           type: string
-          value: "say [TC-034 装備スロット] {{v}}"
+          value: say [TC-034 装備スロット] {{v}}
         トリガー:
           type: string
           value: ""
@@ -238,8 +238,8 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 50
-        y: 1100
+        x: -77.0000228881836
+        y: 1089.9998168945312
       id: on-item-smelted
       inputConfig: {}
       nodeId: OnItemSmelted
@@ -273,7 +273,7 @@ node:
       config:
         コマンド:
           type: string
-          value: "say [TC-035 燃料] {{v}}"
+          value: say [TC-035 燃料] {{v}}
         トリガー:
           type: string
           value: ""
@@ -317,7 +317,7 @@ node:
       config:
         コマンド:
           type: string
-          value: "say [TC-036 EM数] {{v}}"
+          value: say [TC-036 EM数] {{v}}
         トリガー:
           type: string
           value: ""
@@ -361,7 +361,7 @@ node:
       config:
         コマンド:
           type: string
-          value: "say [TC-097 村人名] {{v}}"
+          value: say [TC-097 村人名] {{v}}
         トリガー:
           type: string
           value: ""

@@ -87,8 +87,8 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 350
-        y: 500
+        x: 334.78758239746094
+        y: 480.85498046875
       id: vec-split-060
       inputConfig: {}
       nodeId: Vector3Split
@@ -127,8 +127,8 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 50
-        y: 620
+        x: 53.1485595703125
+        y: 647.2295532226562
       id: setblock-064
       inputConfig: {}
       nodeId: RunCommand
@@ -144,8 +144,8 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 50
-        y: 750
+        x: 181.8556671142578
+        y: 781.9288635253906
       id: fill-blocks
       inputConfig: {}
       nodeId: FillBlocks
@@ -173,8 +173,8 @@ node:
         type: file
         data: ../../dist/index.flyde.js
     - pos:
-        x: 350
-        y: 700
+        x: 579.8536071777344
+        y: 697.8960266113281
       id: assert-064
       inputConfig: {}
       nodeId: Assert
