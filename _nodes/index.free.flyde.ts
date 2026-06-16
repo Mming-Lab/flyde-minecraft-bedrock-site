@@ -5,7 +5,6 @@ import * as conn from './_core/connection'
 import * as evPlayer from './_core/events/player'
 import * as evBlock from './_core/events/block'
 import * as evItem from './_core/events/item'
-import * as evMob from './_core/events/mob'
 import * as cmdGameplay from './_core/commands/gameplay'
 import * as cmdPlayer from './_core/commands/player'
 import * as info from './_core/utils/info'
@@ -39,10 +38,6 @@ export const OnItemEquipped   = ln(evItem.OnItemEquipped,   n.OnItemEquipped)
 export const OnItemSmelted    = ln(evItem.OnItemSmelted,    n.OnItemSmelted)
 export const OnItemTraded     = ln(evItem.OnItemTraded,     n.OnItemTraded)
 
-// Mob events
-export const OnMobInteracted  = ln(evMob.OnMobInteracted,  n.OnMobInteracted)
-export const OnTargetBlockHit = ln(evMob.OnTargetBlockHit, n.OnTargetBlockHit)
-
 // Gameplay commands
 export const RunCommand       = ln(cmdGameplay.RunCommand,       n.RunCommand)
 export const GetGameTime  = ln(cmdGameplay.GetGameTime,  n.GetGameTime)
@@ -62,7 +57,6 @@ export const GetFromPlayerSnapshot = ln(info.GetFromPlayerSnapshot, n.GetFromPla
 export const GetFromItemType       = ln(info.GetFromItemType,       n.GetFromItemType)
 export const GetFromItemStack      = ln(info.GetFromItemStack,      n.GetFromItemStack)
 export const GetFromBlockType      = ln(info.GetFromBlockType,      n.GetFromBlockType)
-export const GetFromMob            = ln(info.GetFromMob,            n.GetFromMob)
 export const GetFromVillager       = ln(info.GetFromVillager,       n.GetFromVillager)
 
 // Selectors / Converters

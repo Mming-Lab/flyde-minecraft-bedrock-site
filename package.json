@@ -1,6 +1,6 @@
 {
   "name": "flyde-minecraft-bedrock",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "Flyde nodes for Minecraft Bedrock / Education Edition via WebSocket (Free version)",
   "main": "./dist/index.free.flyde.js",
   "exports": {

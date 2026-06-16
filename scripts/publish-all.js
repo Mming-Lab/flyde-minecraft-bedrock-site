@@ -8,8 +8,10 @@
  *
  * Per locale (both _maps/ and _i18n/ must exist):
  *   1. Switch locale         (set-lang.js)
- *   2. Build free version    → dist/index.free.flyde.js  → npm publish
- *   3. Build full version    → dist/index.flyde.js       → releases/*.zip
+ *   2. Build free version    → dist/index.free.flyde.js  → npm publish + releases/*free-beta*.zip
+ *   3. Build full version    → dist/index.flyde.js       → releases/*full*.zip
+ * After all locales:
+ *   4. Upload free-beta zips → GitHub Release on the public site repo
  *
  * npm packages:
  *   ja_JP → flyde-minecraft-bedrock          (default, no suffix)
@@ -17,9 +19,9 @@
  *
  * zip files:
  *   releases/flyde-minecraft-bedrock-full-ja-jp-v{version}.zip
- *   releases/flyde-minecraft-bedrock-full-en-us-v{version}.zip
+ *   releases/flyde-minecraft-bedrock-free-beta-ja-jp-v{version}.zip
  *
- * zip contents (complete project template, no source files):
+ * full zip contents (complete project template, no source files):
  *   flyde-minecraft-bedrock/
  *     package.json         dependencies only, flyde.exposes → dist/
  *     dist/
@@ -27,6 +29,16 @@
  *     flows/
  *       *.flyde            sample flows
  *     flyde-mc.config.json  default log level (INFO)
+ *
+ * free-beta zip contents (same shape, free nodes only, no sample flows yet):
+ *   flyde-minecraft-bedrock/
+ *     package.json         dependencies only, flyde.exposes → dist/
+ *     dist/
+ *       index.free.flyde.js
+ *     flyde-mc.config.json  default log level (INFO)
+ *
+ * The free-beta zips are published to the public site repo via `gh release create`
+ * (npm publish isn't live yet during the beta phase, so the zip is the install path).
  */
 
 const fs       = require('fs')
@@ -43,6 +55,7 @@ const RELEASES_DIR = path.join(ROOT, 'releases')
 const DEFAULT_LOCALE = 'ja_JP'
 const FREE_ENTRY     = 'dist/index.free.flyde.js'
 const FULL_ENTRY     = 'dist/index.flyde.js'
+const SITE_REPO      = 'Mming-Lab/flyde-minecraft-bedrock-site'
 
 // Collect locales present in both _maps/ and _i18n/
 function collectLocales() {
@@ -122,6 +135,58 @@ function createZip(localeSlug, nameSuffix, version) {
   })
 }
 
+// Create zip: free-beta project template (free compiled nodes only)
+function createFreeZip(localeSlug, nameSuffix, version) {
+  return new Promise((resolve, reject) => {
+    fs.mkdirSync(RELEASES_DIR, { recursive: true })
+
+    const zipName = `flyde-minecraft-bedrock-free-beta-${localeSlug}-v${version}.zip`
+    const zipPath = path.join(RELEASES_DIR, zipName)
+    const DIR     = 'flyde-minecraft-bedrock'
+
+    const origPkg = JSON.parse(fs.readFileSync(PKG_PATH, 'utf8'))
+    const zipPkg  = {
+      name        : `flyde-minecraft-bedrock${nameSuffix}`,
+      version,
+      private     : true,
+      description : origPkg.description,
+      flyde       : { exposes: [FREE_ENTRY] },
+      dependencies: origPkg.peerDependencies,
+    }
+
+    const output  = fs.createWriteStream(zipPath)
+    const archive = new ZipArchive({ zlib: { level: 6 } })
+
+    output.on('close', () => {
+      const kb = (archive.pointer() / 1024).toFixed(1)
+      console.log(`✓ releases/${zipName}  (${kb} KB)`)
+      resolve(zipPath)
+    })
+    archive.on('error', reject)
+    archive.pipe(output)
+
+    // package.json
+    archive.append(JSON.stringify(zipPkg, null, 2) + '\n', { name: `${DIR}/package.json` })
+
+    // dist/index.free.flyde.js
+    archive.file(path.join(ROOT, FREE_ENTRY), { name: `${DIR}/${FREE_ENTRY}` })
+
+    // flyde-mc.config.json (INFO level for distribution)
+    archive.append(JSON.stringify({ logLevel: 'INFO' }, null, 2) + '\n', { name: `${DIR}/flyde-mc.config.json` })
+
+    // LICENSE.md (PolyForm Noncommercial — same as npm free version)
+    archive.file(path.join(ROOT, 'LICENSE.md'), { name: `${DIR}/LICENSE.md` })
+
+    archive.finalize()
+  })
+}
+
+// Upload free-beta zips to the public site repo as a single GitHub Release
+function uploadFreeRelease(version, zipPaths) {
+  const assets = zipPaths.map(p => `"${p}"`).join(' ')
+  run(`gh release create v${version} ${assets} --repo ${SITE_REPO} --title "v${version} (beta)" --notes "Free beta build"`)
+}
+
 async function main() {
   const langs       = collectLocales()
   const origPkgText = fs.readFileSync(PKG_PATH, 'utf8')
@@ -136,6 +201,7 @@ async function main() {
   console.log()
 
   let failed = false
+  const freeZipPaths = []
 
   try {
     for (const { locale, localeSlug, nameSuffix } of langs) {
@@ -146,7 +212,7 @@ async function main() {
       // 1. switch locale
       run(`node scripts/set-lang.js ${locale}`)
 
-      // 2. build free version → npm publish
+      // 2. build free version → npm publish + free-beta zip
       run('node scripts/build.js')
       const pkg  = JSON.parse(fs.readFileSync(PKG_PATH, 'utf8'))
       pkg.name    = baseName + nameSuffix
@@ -165,10 +231,21 @@ async function main() {
         failed = true
       }
 
+      freeZipPaths.push(await createFreeZip(localeSlug, nameSuffix, version))
+
       // 3. build full version → zip
       fs.writeFileSync(PKG_PATH, origPkgText, 'utf8')  // restore before full build
       run('node scripts/build.js --full')
       await createZip(localeSlug, nameSuffix, version)
+    }
+
+    // 4. upload free-beta zips to the public site repo
+    try {
+      uploadFreeRelease(version, freeZipPaths)
+      console.log(`\n✓ uploaded free-beta zips to ${SITE_REPO} (v${version})`)
+    } catch (err) {
+      console.error(`\n✗ gh release upload failed (repo may not exist yet, or release v${version} already exists)`)
+      console.error(err.message)
     }
   } finally {
     // restore to default locale and original package.json

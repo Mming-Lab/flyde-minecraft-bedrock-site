@@ -15,7 +15,6 @@ import * as selectors from './_core/utils/selectors'
 import * as converters from './_core/utils/converters'
 import * as math from './_core/utils/math'
 import * as assertUtil from './_core/utils/assert'
-import * as ai from './_core/ai'
 
 const n = i18n as Record<string, any>
 const ln = (node: any, t: any) => withDiagLog(localizeNode(node, t))
@@ -101,9 +100,6 @@ export const AABBIntersects   = ln(math.AABBIntersects,   n.AABBIntersects)
 
 // Test utilities
 export const Assert = ln(assertUtil.Assert, n.Assert)
-
-// AI
-export const Gemini = ln(ai.Gemini, n.Gemini)
 
 // Agents
 export const GetAgentLocation = ln(agents.GetAgentLocation, n.GetAgentLocation)
