@@ -263,14 +263,13 @@ export const RunCommand = localizeNode(core.RunCommand, i18n.RunCommand)
 
 ## 配布・公開
 
-### なぜ npm publish をやめて両方 zip にしたか
+### なぜ zip 配布か
 
-無料版は当初 npm パッケージとして公開する計画だったが、**Flyde VSCode拡張（v1.0.45時点）の制約により、npm依存（`node_modules`経由）のサードパーティノードはエディタのノードメニューに表示できない**ことが判明した。
+Flyde のカスタムノードは「ワークスペース内のファイルをスキャンして Local グループに表示する」のが標準の仕組み。zip を展開してそのフォルダをワークスペースとして開くと、`build/index.flyde.js` がワークスペース内のファイルとして自動検出されノードメニューに表示される。これは Flyde の設計に沿った方式であり、回避策ではない。
 
-- ローカルファイルスキャン（`scanImportableNodes`）は、パスに `dist` または `node_modules` を含むファイルを除外する（`default-scan-filter.js`）
-- `node_modules` 経由で検出されたノード（`resolveDependentPackages`）は、メニュー構築処理（`getLibraryData`）が `source.data === "@flyde/nodes"` という固定文字列でしかフィルタしておらず、`flyde-minecraft-bedrock` のようなサードパーティパッケージのノードは検出されても表示されない
+npm でサードパーティノードを配布してユーザーが `npm install` で使う方式は、Flyde がまだ対応していないユースケース（v1.0.45 時点）。
 
-つまり `npm install` する限り、パッケージ名やフォルダ名を何に変えても解決できない。**現状で唯一動作するのは、ビルド出力をワークスペース直下に直接配置し、ローカルファイルスキャン経由で検出させる方式**（zip展開してプロジェクトフォルダに置くだけ）。これにより無料版・フル版ともに zip 配布に統一している。拡張側のバグが修正されれば npm publish 再開も検討可能。
+注意：ビルド出力フォルダ名に `dist` を使ってはいけない。`scanImportableNodes` はパスに `dist` または `node_modules` を含むファイルを除外する（`default-scan-filter.js`）ため、`dist/index.flyde.js` はメニューに表示されない。このため出力先は `build/` としている。
 
 ### ライセンス構成（デュアルライセンス）
 
