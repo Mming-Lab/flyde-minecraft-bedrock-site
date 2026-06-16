@@ -2,18 +2,191 @@ imports: {}
 node:
   instances:
     - pos:
-        x: -200
-        y: -57
-      id: Note-xcizt8j6
+        x: -469.78125
+        y: -319.5074462890625
+      id: Gemini-epgn6kw6
       inputConfig: {}
-      nodeId: Note
+      nodeId: Gemini
       config:
-        content: Enter your comment here
+        APIキー:
+          type: string
+          value: ***REMOVED***
+        モデル:
+          type: select
+          value: gemini-2.5-flash
+        プロンプト:
+          type: string
+          value: "{{プロンプト}}"
+        システム指示:
+          type: string
+          value: あなたは「マイクラAI先生」です。
+            教育版のマインクラフトに精通しています。   あなたの応答はコマンドとして実行されるので返信の場合は"say"コマンド使ってください。  コマンドの始まりを示す"/"は別途付与するので不要です。  "/"は区切り文字として使います。
+            "/"を使うことで複数のコマンドを実行できます。
+        温度:
+          type: number
+          value: 0.1
+        トリガー:
+          type: string
+          value: ""
+      type: code
+      source:
+        type: file
+        data: ..\_nodes\index.flyde.ts
+    - pos:
+        x: -1071.5557861328125
+        y: -360.8066101074219
+      id: MinecraftConnect-b65go2sy
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ..\_nodes\index.free.flyde.ts
+    - pos:
+        x: -469.84088134765625
+        y: -384.36749267578125
+      id: MinecraftDisconnect-hxjf62pu
+      inputConfig: {}
+      nodeId: MinecraftDisconnect
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ..\_nodes\index.free.flyde.ts
+    - pos:
+        x: -841.8194580078125
+        y: -366.6333923339844
+      id: OnPlayerChat-gjjq5ifu
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ..\_nodes\index.free.flyde.ts
+    - pos:
+        x: -655.8693237304688
+        y: -366.85455322265625
+      id: Switch-e1afng37
+      inputConfig: {}
+      nodeId: Switch
+      config:
+        inputs:
+          - メッセージ
+        cases:
+          - name: 終了
+            conditionExpression: inputs.メッセージ=== 'stop'
+            outputExpression: inputs.メッセージ
+          - name: AIに質問
+            conditionExpression: inputs.メッセージ.charAt(0)==='!'
+            outputExpression: inputs.メッセージ.slice(1)
+        defaultCase:
+          enabled: false
       type: code
       source:
         type: package
         data: "@flyde/nodes"
-  connections: []
+    - pos:
+        x: 76.15256678611036
+        y: -349.6848450279899
+      id: RunCommand-eg0p4s50
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        トリガー:
+          type: string
+          value: ""
+        コマンド:
+          type: dynamic
+          value: "{{コマンド}}"
+      type: code
+      source:
+        type: file
+        data: ..\_nodes\index.free.flyde.ts
+    - pos:
+        x: -105.04566484913232
+        y: -362.2382355022762
+      id: Loop List-uxeyw7jh
+      inputConfig: {}
+      nodeId: Loop List
+      config:
+        list:
+          type: dynamic
+          value: "{{list}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: -286.3642073296011
+        y: -317.72242739680746
+      id: Split-giwj9zoi
+      inputConfig: {}
+      nodeId: Split
+      config:
+        string:
+          type: dynamic
+          value: ""
+        separator:
+          type: string
+          value: /
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: MinecraftConnect-b65go2sy
+        pinId: ワールド
+      to:
+        insId: OnPlayerChat-gjjq5ifu
+        pinId: ワールド
+    - from:
+        insId: Switch-e1afng37
+        pinId: 終了
+      to:
+        insId: MinecraftDisconnect-hxjf62pu
+        pinId: トリガー
+    - from:
+        insId: OnPlayerChat-gjjq5ifu
+        pinId: メッセージ
+      to:
+        insId: Switch-e1afng37
+        pinId: メッセージ
+    - from:
+        insId: Switch-e1afng37
+        pinId: AIに質問
+      to:
+        insId: Gemini-epgn6kw6
+        pinId: プロンプト
+    - from:
+        insId: Split-giwj9zoi
+        pinId: value
+      to:
+        insId: Loop List-uxeyw7jh
+        pinId: list
+    - from:
+        insId: Loop List-uxeyw7jh
+        pinId: item
+      to:
+        insId: RunCommand-eg0p4s50
+        pinId: コマンド
+    - from:
+        insId: Gemini-epgn6kw6
+        pinId: 応答
+      to:
+        insId: Split-giwj9zoi
+        pinId: string
   id: sample4
   inputs: {}
   outputs: {}

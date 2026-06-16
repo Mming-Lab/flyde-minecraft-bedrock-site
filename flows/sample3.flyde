@@ -148,14 +148,14 @@ node:
           value: "{{値}}"
         種別:
           type: select
-          value: block
+          value: item
       type: code
       source:
         type: file
         data: ../dist/index.flyde.js
     - pos:
-        x: 479.11414206027985
-        y: -464.7156219482422
+        x: 515.3438783884048
+        y: -497.58897399902344
       id: ToJa-ptlyzslx
       inputConfig: {}
       nodeId: ToJa
@@ -171,8 +171,8 @@ node:
         type: file
         data: ../dist/index.flyde.js
     - pos:
-        x: 60.090405657028896
-        y: -711.7228317822551
+        x: 78.49564857695077
+        y: -733.5818405713176
       id: GetFromPlayerSnapshot-tmly7kvv
       inputConfig: {}
       nodeId: GetFromPlayerSnapshot
@@ -211,8 +211,8 @@ node:
         type: file
         data: ../dist/index.flyde.js
     - pos:
-        x: 524.9276863336563
-        y: -657.0142974853516
+        x: 623.9673591852188
+        y: -744.8692779541016
       id: Vector3Op-ljellzgl
       inputConfig: {}
       nodeId: Vector3Op
@@ -266,8 +266,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 776.2252146791379
-        y: -591.1279449462891
+        x: 831.637095172302
+        y: -589.6364898681641
       id: RunCommand-lm4ku4jl
       inputConfig: {}
       nodeId: RunCommand

@@ -2,8 +2,8 @@ imports: {}
 node:
   instances:
     - pos:
-        x: 317.61563420295715
-        y: 96.8244960308075
+        x: 483.8691132068634
+        y: 106.72945666313171
       id: mc-connect
       inputConfig: {}
       nodeId: MinecraftConnect
@@ -15,242 +15,6 @@ node:
       source:
         type: file
         data: ../dist/index.flyde.js
-    - pos:
-        x: 554.1425590515137
-        y: 117.7242636680603
-      id: chat-listen
-      inputConfig: {}
-      nodeId: OnPlayerChat
-      config:
-        ワールド:
-          type: dynamic
-      type: code
-      source:
-        type: file
-        data: ../dist/index.flyde.js
-    - pos:
-        x: 706.3678894042969
-        y: 274.7557374238968
-      id: filter
-      inputConfig: {}
-      nodeId: Conditional
-      config:
-        condition:
-          type: EQUAL
-        leftOperand:
-          type: string
-          value: "{{メッセージ}}"
-        rightOperand:
-          type: string
-          value: toggle
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 883.3819580078125
-        y: 175.3326873779297
-      id: daytime
-      inputConfig: {}
-      nodeId: IsDaytime
-      config:
-        トリガー:
-          type: dynamic
-      type: code
-      source:
-        type: file
-        data: ../dist/index.flyde.js
-    - pos:
-        x: 1077.436767578125
-        y: 116.52415466308594
-      id: time-switch
-      inputConfig: {}
-      displayName: 昼夜コマンド
-      nodeId: Switch
-      config:
-        inputs:
-          - 昼
-        cases:
-          - name: to_night
-            conditionExpression: inputs.昼 === true
-            outputExpression: '"time set 13000"'
-          - name: to_day
-            conditionExpression: inputs.昼 === false
-            outputExpression: '"time set 6000"'
-        defaultCase:
-          enabled: false
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 1306.2139129638672
-        y: 131.8547134399414
-      id: run-time
-      inputConfig: {}
-      displayName: 昼夜切り替え
-      nodeId: RunCommand
-      config:
-        トリガー:
-          type: boolean
-          value: true
-        コマンド:
-          type: dynamic
-      type: code
-      source:
-        type: file
-        data: ../dist/index.flyde.js
-    - pos:
-        x: 1078.3798217773438
-        y: 205.17264938354492
-      id: time-say-switch
-      inputConfig: {}
-      displayName: 昼夜メッセージ
-      nodeId: Switch
-      config:
-        inputs:
-          - 昼
-        cases:
-          - name: night_say
-            conditionExpression: inputs.昼 === true
-            outputExpression: '"say 夜になりました！"'
-          - name: day_say
-            conditionExpression: inputs.昼 === false
-            outputExpression: '"say 昼になりました！"'
-        defaultCase:
-          enabled: false
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 1309.7996520996094
-        y: 213.71407318115234
-      id: say-time
-      inputConfig: {}
-      displayName: 昼夜アナウンス
-      nodeId: RunCommand
-      config:
-        トリガー:
-          type: boolean
-          value: true
-        コマンド:
-          type: dynamic
-      type: code
-      source:
-        type: file
-        data: ../dist/index.flyde.js
-    - pos:
-        x: 877.1784973144531
-        y: 372.6032905578613
-      id: get-weather
-      inputConfig: {}
-      nodeId: GetWeather
-      config:
-        トリガー:
-          type: dynamic
-      type: code
-      source:
-        type: file
-        data: ../dist/index.flyde.js
-    - pos:
-        x: 1080.406265258789
-        y: 296.3820791244507
-      id: weather-cmd-switch
-      inputConfig: {}
-      displayName: 天気コマンド
-      nodeId: Switch
-      config:
-        inputs:
-          - weather
-        cases:
-          - name: to_rain
-            conditionExpression: inputs.weather === 'clear'
-            outputExpression: '"weather rain"'
-          - name: to_thunder
-            conditionExpression: inputs.weather === 'rain'
-            outputExpression: '"weather thunder"'
-        defaultCase:
-          enabled: true
-          outputExpression: '"weather clear"'
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 1310.1073455810547
-        y: 318.35774421691895
-      id: run-weather
-      inputConfig: {}
-      displayName: 天気切り替え
-      nodeId: RunCommand
-      config:
-        トリガー:
-          type: boolean
-          value: true
-        コマンド:
-          type: dynamic
-      type: code
-      source:
-        type: file
-        data: ../dist/index.flyde.js
-    - pos:
-        x: 1077.306655883789
-        y: 412.2863893508911
-      id: weather-say-switch
-      inputConfig: {}
-      displayName: 天気メッセージ
-      nodeId: Switch
-      config:
-        inputs:
-          - weather
-        cases:
-          - name: rain_say
-            conditionExpression: inputs.weather === 'clear'
-            outputExpression: '"say 雨になりました！"'
-          - name: thunder_say
-            conditionExpression: inputs.weather === 'rain'
-            outputExpression: '"say 雷雨になりました！"'
-        defaultCase:
-          enabled: true
-          outputExpression: '"say 晴れになりました！"'
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 1311.7221069335938
-        y: 434.8030996322632
-      id: say-weather
-      inputConfig: {}
-      displayName: 天気アナウンス
-      nodeId: RunCommand
-      config:
-        トリガー:
-          type: boolean
-          value: true
-        コマンド:
-          type: dynamic
-      type: code
-      source:
-        type: file
-        data: ../dist/index.flyde.js
-    - pos:
-        x: 1535.1999816894531
-        y: 258.3832092285156
-      id: collect-all
-      inputConfig: {}
-      displayName: 4つ完了待ち
-      nodeId: Collect
-      config:
-        strategy: count
-        count:
-          mode: static
-          value: 4
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
     - pos:
         x: 1724.031982421875
         y: 257.2792167663574
@@ -264,145 +28,50 @@ node:
       source:
         type: file
         data: ../dist/index.flyde.js
+    - pos:
+        x: 1268.2418219540727
+        y: 87.04379551313204
+      id: RunCommand-ulmd8qqa
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        トリガー:
+          type: boolean
+          value: true
+        コマンド:
+          type: string
+          value: say {{コマンド}}
+      type: code
+      source:
+        type: file
+        data: ..\_nodes\index.free.flyde.ts
+    - pos:
+        x: 794.2302938044072
+        y: -12.43729841709137
+      id: OnPlayerChat-bwwrck0n
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ..\_nodes\index.free.flyde.ts
   connections:
+    - from:
+        insId: RunCommand-ulmd8qqa
+        pinId: 完了
+      to:
+        insId: disconnect
+        pinId: トリガー
     - from:
         insId: mc-connect
         pinId: ワールド
       to:
-        insId: chat-listen
+        insId: OnPlayerChat-bwwrck0n
         pinId: ワールド
-    - from:
-        insId: chat-listen
-        pinId: メッセージ
-      to:
-        insId: filter
-        pinId: メッセージ
-    - from:
-        insId: filter
-        pinId: "true"
-      to:
-        insId: daytime
-        pinId: トリガー
-    - from:
-        insId: filter
-        pinId: "true"
-      to:
-        insId: get-weather
-        pinId: トリガー
-    - from:
-        insId: daytime
-        pinId: 昼
-      to:
-        insId: time-switch
-        pinId: 昼
-    - from:
-        insId: daytime
-        pinId: 昼
-      to:
-        insId: time-say-switch
-        pinId: 昼
-    - from:
-        insId: time-switch
-        pinId: to_night
-      to:
-        insId: run-time
-        pinId: コマンド
-    - from:
-        insId: time-switch
-        pinId: to_day
-      to:
-        insId: run-time
-        pinId: コマンド
-    - from:
-        insId: time-say-switch
-        pinId: night_say
-      to:
-        insId: say-time
-        pinId: コマンド
-    - from:
-        insId: time-say-switch
-        pinId: day_say
-      to:
-        insId: say-time
-        pinId: コマンド
-    - from:
-        insId: get-weather
-        pinId: 天気
-      to:
-        insId: weather-cmd-switch
-        pinId: weather
-    - from:
-        insId: get-weather
-        pinId: 天気
-      to:
-        insId: weather-say-switch
-        pinId: weather
-    - from:
-        insId: weather-cmd-switch
-        pinId: to_rain
-      to:
-        insId: run-weather
-        pinId: コマンド
-    - from:
-        insId: weather-cmd-switch
-        pinId: to_thunder
-      to:
-        insId: run-weather
-        pinId: コマンド
-    - from:
-        insId: weather-cmd-switch
-        pinId: default
-      to:
-        insId: run-weather
-        pinId: コマンド
-    - from:
-        insId: weather-say-switch
-        pinId: rain_say
-      to:
-        insId: say-weather
-        pinId: コマンド
-    - from:
-        insId: weather-say-switch
-        pinId: thunder_say
-      to:
-        insId: say-weather
-        pinId: コマンド
-    - from:
-        insId: weather-say-switch
-        pinId: default
-      to:
-        insId: say-weather
-        pinId: コマンド
-    - from:
-        insId: run-time
-        pinId: 完了
-      to:
-        insId: collect-all
-        pinId: value
-    - from:
-        insId: say-time
-        pinId: 完了
-      to:
-        insId: collect-all
-        pinId: value
-    - from:
-        insId: run-weather
-        pinId: 完了
-      to:
-        insId: collect-all
-        pinId: value
-    - from:
-        insId: say-weather
-        pinId: 完了
-      to:
-        insId: collect-all
-        pinId: value
-    - from:
-        insId: collect-all
-        pinId: list
-      to:
-        insId: disconnect
-        pinId: トリガー
   id: SampleFlow
   inputs: {}
   outputs: {}
