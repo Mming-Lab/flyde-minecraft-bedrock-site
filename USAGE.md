@@ -9,9 +9,7 @@
 - Node.js (with npm available)
 - Minecraft Education Edition or Bedrock Edition (with WebSocket connections enabled)
 
-## 2. Project setup (zip installation)
-
-Distributed as a zip file only — not via npm. This is intentional: the Flyde VSCode extension (as of v1.0.45) only shows nodes in the node menu when they're detected by scanning files directly inside the open workspace. Nodes installed as an npm dependency (i.e. living under `node_modules/`) are never shown, due to a limitation in the extension itself. So **open the extracted folder itself as your VSCode workspace root** — don't nest it inside another project folder.
+## 2. Project setup
 
 1. Download and extract the zip — this gives you a `flyde-minecraft-bedrock` folder
 2. Open a terminal inside that folder and install its dependencies
@@ -22,6 +20,8 @@ npm install
 ```
 
 3. Open the `flyde-minecraft-bedrock` folder itself in VSCode (File > Open Folder)
+
+Flyde automatically scans the open workspace for node files. Nodes from `build/` will appear in the "Local" group in the Flyde editor.
 
 This is the same procedure for the Full Edition (after purchase).
 
@@ -54,8 +54,7 @@ The [examples/](examples/) folder contains ready-to-try sample flows. Copy them 
 
 | File | Description |
 |---|---|
-| [block-info.ja.flyde](examples/block-info.ja.flyde) | Shows the player's name, position, block name, and held item name in chat when a block is placed or broken. Type "dis" in chat to disconnect |
-| [chicken-rain.ja.flyde](examples/chicken-rain.ja.flyde) | Typing "chicken" in chat summons 100 chickens 10 blocks above the player |
+| [chicken-rain.en.flyde](examples/chicken-rain.ja.flyde) | Typing "chicken" in chat summons 100 chickens 10 blocks above the player |
 
 ## Troubleshooting
 
