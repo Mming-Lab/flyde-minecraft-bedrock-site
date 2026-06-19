@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Bağlan",
+    "description": "Bir WebSocket sunucusu başlatır ve Minecraft Education Edition'a bağlanır",
+    "inputs": {
+      "port": {
+        "name": "bağlantı noktası",
+        "description": "WebSocket bağlantı noktası numarası (varsayılan: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "dünya",
+        "description": "World nesnesi (dahili kullanılır; komut düğümlerine bağlanması gerekmez)"
+      },
+      "error": {
+        "name": "hata",
+        "description": "Bağlantı hatası bilgisi"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Bağlantıyı Kes",
+    "menuDisplayName": "MC Bağlantı Kes",
+    "description": "Minecraft bağlantısını keser ve WebSocket sunucusunu kapatır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (örn. sohbet 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Aracı Konumunu Al",
+    "menuDisplayName": "Aracı Konum",
+    "description": "Aracının mevcut konumunu alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "konum",
+        "description": "Aracı konumu {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "ST Hedeflerini Al",
+    "menuDisplayName": "ST Hedefleri",
+    "description": "Tüm skor tablosu hedeflerinin listesini alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "hedefler",
+        "description": "Skor tablosu hedef nesneleri dizisi"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "ST Hedefini Al",
+    "menuDisplayName": "ST Hedefi",
+    "description": "Bir skor tablosu hedefini ID'sine göre alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "objective_id": {
+        "name": "hedef_id",
+        "description": "Skor tablosu hedef ID'si"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "hedef",
+        "description": "Skor tablosu hedefi → ST hedef bilgi düğümüne bağla"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "ST Hedefi Ekle",
+    "menuDisplayName": "ST Hedef Ekle",
+    "description": "Skor tablosuna yeni bir hedef ekler",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "objective_id": {
+        "name": "hedef_id",
+        "description": "Skor tablosu hedef ID'si"
+      },
+      "display_name": {
+        "name": "görünen_ad",
+        "description": "Görünen ad (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "hedef",
+        "description": "Eklenen hedef → ST hedef bilgi düğümüne bağla"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "ST Hedefini Kaldır",
+    "menuDisplayName": "ST Hedef Kaldır",
+    "description": "Bir skor tablosu hedefini ID'sine göre kaldırır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "objective_id": {
+        "name": "hedef_id",
+        "description": "Skor tablosu hedef ID'si"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "sonuç",
+        "description": "Kaldırma sonucu"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Tüm Skorları Al",
+    "menuDisplayName": "Tüm Skorlar",
+    "description": "Bir oyuncunun tüm skorlarını alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "player_name": {
+        "name": "oyuncu_adı",
+        "description": "Oyuncu adı"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "skorlar",
+        "description": "Tüm skorların dizisi"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Skor Al",
+    "menuDisplayName": "Skor Al",
+    "description": "Bir oyuncunun belirli bir hedef için skorunu alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "player_name": {
+        "name": "oyuncu_adı",
+        "description": "Oyuncu adı"
+      },
+      "objective_id": {
+        "name": "hedef_id",
+        "description": "Skor tablosu hedef ID'si"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "skor",
+        "description": "Skor değeri (sayı)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Skor İşlemi",
+    "menuDisplayName": "Skor İşl.",
+    "description": "Oyuncu skorunda {{operation}} işlemini gerçekleştirir",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "operation": {
+        "name": "işlem",
+        "description": "İşlem türü",
+        "options": {
+          "add": "Ekle",
+          "remove": "Çıkar",
+          "set": "Ayarla"
+        }
+      },
+      "player_name": {
+        "name": "oyuncu_adı",
+        "description": "Oyuncu adı"
+      },
+      "objective_id": {
+        "name": "hedef_id",
+        "description": "Skor tablosu hedef ID'si"
+      },
+      "value": {
+        "name": "değer",
+        "description": "İşlemde kullanılacak değer"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "İşlemden sonraki yeni skor değeri"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "Oyuncu Sohbetinde",
+    "menuDisplayName": "Sohbet",
+    "description": "Bir oyuncu sohbet mesajı gönderdiğinde tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "gönderen",
+        "description": "Sohbeti gönderen oyuncunun adı"
+      },
+      "message": {
+        "name": "mesaj",
+        "description": "Sohbet mesajı içeriği"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "Oyuncu Katıldığında",
+    "menuDisplayName": "Katılma",
+    "description": "Bir oyuncu dünyaya katıldığında tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "oyuncu_adı",
+        "description": "Katılan oyuncunun adı"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "Oyuncu Ayrıldığında",
+    "menuDisplayName": "Ayrılma",
+    "description": "Bir oyuncu dünyadan ayrıldığında tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "oyuncu_adı",
+        "description": "Ayrılan oyuncunun adı"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "Oyuncu Hareketinde",
+    "menuDisplayName": "Hareket Etti",
+    "description": "Bir oyuncu her hareket ettiğinde tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "mesafe",
+        "description": "Kat edilen mesafe (metre)"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      },
+      "underwater": {
+        "name": "su_altında",
+        "description": "Su altında hareket edilip edilmediği (true/false)"
+      },
+      "biome": {
+        "name": "biyom",
+        "description": "Mevcut biyom adı"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Hareket yöntemi adı"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "Oyuncu Işınlandığında",
+    "menuDisplayName": "Işınlandı",
+    "description": "Bir oyuncu ışınlandığında tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Işınlanma nedeni adı"
+      },
+      "distance": {
+        "name": "mesafe",
+        "description": "Işınlanma mesafesi (metre)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "Oyuncu Başlığında",
+    "menuDisplayName": "Başlık",
+    "description": "Bir oyuncu başlık aldığında tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "gönderen",
+        "description": "Başlığı gönderen oyuncunun adı"
+      },
+      "message": {
+        "name": "mesaj",
+        "description": "Başlık mesajı içeriği"
+      },
+      "recipient": {
+        "name": "alıcı",
+        "description": "Başlığı alan oyuncunun adı"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "Oyuncu Mesajında",
+    "menuDisplayName": "Mesaj",
+    "description": "Bir oyuncu herhangi bir türde mesaj gönderdiğinde tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "gönderen",
+        "description": "Mesajı gönderen oyuncunun adı"
+      },
+      "message": {
+        "name": "mesaj",
+        "description": "Mesaj içeriği"
+      },
+      "type": {
+        "name": "tür",
+        "description": "Mesaj türü (chat / tell vb.)"
+      },
+      "recipient": {
+        "name": "alıcı",
+        "description": "[nullable] Alıcı adı. tell olmayan mesajlar için null"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "Oyuncu Zıpladığında",
+    "menuDisplayName": "Zıpladı",
+    "description": "Bir oyuncu balçık bloğu veya benzerinde zıpladığında tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "yükseklik",
+        "description": "Zıplama yüksekliği (blok)"
+      },
+      "block": {
+        "name": "blok",
+        "description": "BlockType nesnesi (zıplanan blok) → blok bilgi düğümüne bağla"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "Blok Kırıldığında",
+    "menuDisplayName": "Blok Kır",
+    "description": "Bir blok kırıldığında tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blok",
+        "description": "BlockType nesnesi → blok bilgi düğümüne bağla"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Yıkım yöntemi adı"
+      },
+      "item": {
+        "name": "eşya",
+        "description": "[nullable] Kırmadan önce tutulan eşya. çıplak elle ise null"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "Blok Yerleştirildiğinde",
+    "menuDisplayName": "Blok Yerleştir",
+    "description": "Bir blok yerleştirildiğinde tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blok",
+        "description": "BlockType nesnesi → blok bilgi düğümüne bağla"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      },
+      "underwater": {
+        "name": "su_altında",
+        "description": "Su altında yerleştirilip yerleştirilmediği (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Yerleştirme yöntemi adı"
+      },
+      "item": {
+        "name": "eşya",
+        "description": "Yerleştirmeden önce tutulan eşya → eşya bilgi düğümüne bağla"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "Eşya Kullanıldığında",
+    "menuDisplayName": "Eşya Kullanıldı",
+    "description": "Bir oyuncu bir eşya kullandığında tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "eşya",
+        "description": "[nullable] Tutulan eşya. eşya yoksa null"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Eşya kullanım yöntemi adı"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "Eşya Edinildiğinde",
+    "menuDisplayName": "Eşya Edinildi",
+    "description": "Bir oyuncu bir eşya edindiğinde tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "sayı",
+        "description": "Edinilen eşya sayısı"
+      },
+      "item": {
+        "name": "eşya",
+        "description": "Eşya türü → eşya türü bilgi düğümüne bağla"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Eşya edinme yöntemi adı"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "Eşya Üretildiğinde",
+    "menuDisplayName": "Üretildi",
+    "description": "Bir oyuncu bir eşya ürettiğinde tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "eşya",
+        "description": "Eşya yığını (üretilen eşya) → eşya yığını bilgi düğümüne bağla"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      },
+      "used_table": {
+        "name": "masa_kullanıldı",
+        "description": "Üretim masasının kullanılıp kullanılmadığı (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "Eşya Kuşanıldığında",
+    "menuDisplayName": "Kuşanıldı",
+    "description": "Bir oyuncu bir eşya kuşandığında tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "eşya",
+        "description": "Eşya yığını → eşya yığını bilgi düğümüne bağla"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      },
+      "equip_slot": {
+        "name": "kuşam_yuvası",
+        "description": "Ekipman yuvası adı"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "Eşya Eritildiğinde",
+    "menuDisplayName": "Eritildi",
+    "description": "Bir oyuncu bir eşya erittiğinde tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "eşya",
+        "description": "Eşya türü (eritilen) → eşya türü bilgi düğümüne bağla"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      },
+      "fuel": {
+        "name": "yakıt",
+        "description": "Eşya türü (yakıt) → eşya türü bilgi düğümüne bağla"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "Eşya Takas Edildiğinde",
+    "menuDisplayName": "Takas Edildi",
+    "description": "Bir oyuncu köylü takasını tamamladığında tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "eşya",
+        "description": "Eşya yığını (alınan eşya) → eşya yığını bilgi düğümüne bağla"
+      },
+      "villager": {
+        "name": "köylü",
+        "description": "WorldVillager nesnesi → köylü bilgi düğümüne bağla"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      },
+      "payment_a": {
+        "name": "ödeme_a",
+        "description": "Eşya türü (ödeme A) → eşya türü bilgi düğümüne bağla"
+      },
+      "payment_b": {
+        "name": "ödeme_b",
+        "description": "[nullable] Eşya türü (ödeme B). kullanılmıyorsa null"
+      },
+      "player_xp": {
+        "name": "oyuncu_zümrütleri",
+        "description": "Takastan sonra oyuncudaki zümrütler"
+      },
+      "villager_xp": {
+        "name": "köylü_zümrütleri",
+        "description": "Takastan sonra köylüdeki zümrütler"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "Yaratık Etkileşiminde",
+    "menuDisplayName": "Yaratık Etkil.",
+    "description": "Bir oyuncu bir yaratıkla etkileşime girdiğinde tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "yaratık",
+        "description": "WorldMob nesnesi (etkileşilen yaratık)"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Yaratık etkileşim türü adı"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "Hedef Vurulduğunda",
+    "menuDisplayName": "Hedef Vuruldu",
+    "description": "Bir hedef blok vurulduğunda tetiklenir",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "güç",
+        "description": "Redstone sinyal gücü (0–15)"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Komut Çalıştır",
+    "menuDisplayName": "Komut Çalış.",
+    "description": "Herhangi bir Minecraft komutunu çalıştırır (baştaki / olmadan)",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "command": {
+        "name": "komut",
+        "description": "Çalıştırılacak Minecraft komutu (baştaki / olmadan)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Tamamlandığında true gönderir"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Oyun Zamanını Al",
+    "menuDisplayName": "Oyun Zamanı",
+    "description": "Oyun zamanını alır ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "type": {
+        "name": "tür",
+        "description": "Sorgulanacak zaman türü",
+        "options": {
+          "time": "Zaman (0–24000)",
+          "day": "Gün sayısı",
+          "tick": "Tik sayısı"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "değer",
+        "description": "Sorgulanan zaman değeri"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Gündüz mü",
+    "menuDisplayName": "Gündüz?",
+    "description": "Şu anda gündüz olup olmadığını kontrol eder (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "gündüz_mü",
+        "description": "gündüzse true, geceyse false"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Havayı Al",
+    "menuDisplayName": "Hava",
+    "description": "Mevcut havayı alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "hava",
+        "description": "Hava adı (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Bloklarla Doldur",
+    "menuDisplayName": "Doldur",
+    "description": "İki konum arasındaki bir bölgeyi belirtilen blokla doldurur",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "from": {
+        "name": "başlangıç",
+        "description": "Başlangıç köşesi {x, y, z}"
+      },
+      "to": {
+        "name": "bitiş",
+        "description": "Bitiş köşesi {x, y, z}"
+      },
+      "block_id": {
+        "name": "blok_id",
+        "description": "Blok ID'si (örn. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Doldurma tamamlandığında true gönderir"
+      },
+      "count": {
+        "name": "sayı",
+        "description": "Doldurulan blok sayısı"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Zemin Yüksekliğini Al",
+    "menuDisplayName": "Zemin",
+    "description": "En üstteki katı bloğun konumunu ve türünü alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "konum",
+        "description": "Zemin konumu {x, y, z}"
+      },
+      "block_name": {
+        "name": "blok_adı",
+        "description": "En üstteki katı bloğun adı"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Dünya Sorgusu",
+    "menuDisplayName": "Dünya Sorgusu",
+    "description": "Dünyadaki {{type}} listesini sorgular",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "type": {
+        "name": "tür",
+        "description": "Sorgulanacak kategori",
+        "options": {
+          "mob": "Varlık",
+          "block": "Blok",
+          "item": "Eşya"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "liste",
+        "description": "Sorgu sonuç listesi"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Oyuncu Konumunu Al",
+    "menuDisplayName": "Oyuncu Konum",
+    "description": "Oyuncunun mevcut konumunu ve bakış yönünü alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "konum",
+        "description": "Oyuncu konumu {x, y, z}"
+      },
+      "direction": {
+        "name": "yön",
+        "description": "Oyuncu bakış yönü (Y ekseni dönüşü)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Oyuncu Yönelimini Al",
+    "menuDisplayName": "Oyuncu Yön",
+    "description": "Oyuncunun kamera açısını alır (eğim ve yatay dönüş)",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "açı",
+        "description": "Oyuncu bakış açısı {x, y} (derece)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Oyuncu Etiketlerini Al",
+    "menuDisplayName": "Oyuncu Etiket.",
+    "description": "Oyuncuya atanmış tüm etiketleri alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "etiketler",
+        "description": "Etiket adı dizesi dizisi"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "Oyuncuda Etiket Var",
+    "menuDisplayName": "Etiket Var mı?",
+    "description": "Oyuncuda belirtilen etiketin olup olmadığını kontrol eder",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "tag": {
+        "name": "etiket",
+        "description": "Kontrol edilecek etiket adı"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "sonuç",
+        "description": "oyuncuda etiket varsa true"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Oyuncu Seviyesini Al",
+    "menuDisplayName": "Oyuncu Sev.",
+    "description": "Oyuncunun mevcut deneyim seviyesini alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "seviye",
+        "description": "Oyuncu seviyesi (sayı)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Oyun Modunu Al",
+    "menuDisplayName": "Oyun Modu",
+    "description": "Oyuncunun mevcut oyun modunu alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "oyun_modu",
+        "description": "Oyun modu adı (örn. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Oyuncu Yeteneklerini Al",
+    "menuDisplayName": "Yetenekler",
+    "description": "Oyuncunun mevcut yetenek ayarlarını alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "yetenekler",
+        "description": "Oyuncu yetenekleri nesnesi"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Oyuncuları Al",
+    "menuDisplayName": "Oyuncular",
+    "description": "Dünyadaki tüm oyuncuların listesini alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "oyuncular",
+        "description": "Oyuncu nesneleri dizisi"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Yerel Oyuncuyu Al",
+    "menuDisplayName": "Yerel Oyuncu",
+    "description": "Yerel (kendi) oyuncu nesnesini alır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "oyuncu",
+        "description": "Yerel oyuncu nesnesi"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Varlıktan Çıkar",
+    "menuDisplayName": "Varlık Bilgisi",
+    "description": "Bir varlık nesnesinden konum, yön, boyut ve diğer alanları çıkarır",
+    "inputs": {
+      "entity": {
+        "name": "varlık",
+        "description": "Oyuncu veya köylü nesnesi (player / villager çıkışı)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "konum",
+        "description": "Varlık konumu (position)"
+      },
+      "direction": {
+        "name": "yön",
+        "description": "Y ekseni dönüşü (yRot)"
+      },
+      "dimension": {
+        "name": "boyut",
+        "description": "Boyut numarası (dimension)"
+      },
+      "type": {
+        "name": "tür",
+        "description": "Tür dizesi (type)"
+      },
+      "variant": {
+        "name": "varyant",
+        "description": "Varyant numarası (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Varlık ID numarası (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Oyuncudan Çıkar",
+    "menuDisplayName": "Oyuncu Bilgisi",
+    "description": "Bir oyuncu anlık görüntü nesnesinden ad, renk ve varlık bilgisini çıkarır",
+    "inputs": {
+      "player": {
+        "name": "oyuncu",
+        "description": "Olay düğümünün player çıkışından oyuncu nesnesi"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "ad",
+        "description": "Oyuncu adı (name)"
+      },
+      "color": {
+        "name": "renk",
+        "description": "Harita işaretçisi rengi (color)"
+      },
+      "entity": {
+        "name": "varlık",
+        "description": "Varlık bilgi düğümüne bağla"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Eşya Türünden Çıkar",
+    "menuDisplayName": "Eşya Türü Bilgisi",
+    "description": "Bir eşya türü nesnesinden eşya ID'si ve veri değerini çıkarır",
+    "inputs": {
+      "item": {
+        "name": "eşya",
+        "description": "Eşya türü (edinme / eritme olaylarından item çıkışı)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "eşya_id",
+        "description": "Eşya ID dizesi (id)"
+      },
+      "data": {
+        "name": "veri",
+        "description": "Veri değeri (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Eşya Yığınından Çıkar",
+    "menuDisplayName": "Eşya Yığını Bilgisi",
+    "description": "Bir eşya yığını nesnesinden eşya ID'si, sayı, maks sayı ve veri değerini çıkarır",
+    "inputs": {
+      "item": {
+        "name": "eşya",
+        "description": "Eşya yığını (kullanma / kuşanma / üretme / takas olaylarından item çıkışı)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "eşya_id",
+        "description": "Eşya ID dizesi (typeId)"
+      },
+      "count": {
+        "name": "sayı",
+        "description": "Yığın boyutu (amount)"
+      },
+      "max_count": {
+        "name": "maks_sayı",
+        "description": "Maks yığın boyutu (maxAmount)"
+      },
+      "data": {
+        "name": "veri",
+        "description": "Veri değeri (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Blok Türünden Çıkar",
+    "menuDisplayName": "Blok Bilgisi",
+    "description": "Bir blok türü nesnesinden blok ID'si ve veri değerini çıkarır",
+    "inputs": {
+      "block": {
+        "name": "blok",
+        "description": "Blok türü nesnesi (block / bounce olaylarından block çıkışı)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "blok_id",
+        "description": "Blok ID dizesi (id)"
+      },
+      "data": {
+        "name": "veri",
+        "description": "Veri değeri (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "ST Hedefinden Çıkar",
+    "menuDisplayName": "ST Hedef Bilgisi",
+    "description": "Bir skor tablosu hedef nesnesinden ID ve görünen adı çıkarır",
+    "inputs": {
+      "objective": {
+        "name": "hedef",
+        "description": "Hedef ekle / al düğümünden hedef"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "hedef_id",
+        "description": "Hedef ID dizesi (id)"
+      },
+      "display_name": {
+        "name": "görünen_ad",
+        "description": "Görünen ad (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Yaratıktan Çıkar",
+    "menuDisplayName": "Yaratık Bilgisi",
+    "description": "Bir yaratık nesnesinden tür, renk ve varyant numaralarını çıkarır",
+    "inputs": {
+      "mob": {
+        "name": "yaratık",
+        "description": "Yaratık nesnesi (yaratık etkileşim olayından mob çıkışı)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "tür",
+        "description": "Yaratık tür numarası (type)"
+      },
+      "color": {
+        "name": "renk",
+        "description": "Renk numarası (color)"
+      },
+      "variant": {
+        "name": "varyant",
+        "description": "Varyant numarası (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Köylüden Çıkar",
+    "menuDisplayName": "Köylü Bilgisi",
+    "description": "Bir köylü nesnesinden ad, rütbe ve varlık bilgisini çıkarır",
+    "inputs": {
+      "villager": {
+        "name": "köylü",
+        "description": "Köylü nesnesi (takas olayından villager çıkışı)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "ad",
+        "description": "Köylü adı (trader.name)"
+      },
+      "rank": {
+        "name": "rütbe",
+        "description": "Ticaret rütbesi (trader.tier)"
+      },
+      "entity": {
+        "name": "varlık",
+        "description": "Varlık bilgi düğümüne bağla"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Seçici",
+    "menuDisplayName": "Seçici",
+    "description": "{{type}} listesinden seçer",
+    "inputs": {
+      "type": {
+        "name": "tür",
+        "description": "Seçilecek kategori",
+        "options": {
+          "block": "🧱 Blok",
+          "item": "🎒 Eşya",
+          "mob": "🐾 Yaratık",
+          "TravelMethod": "🚶 Hareket Yöntemi",
+          "TeleportCause": "✨ Işınlanma Nedeni",
+          "MobInteraction": "🐄 Yaratık Etkileşimi",
+          "ItemUseMethod": "🤚 Eşya Kullanım Yöntemi",
+          "ItemAcqMethod": "📦 Edinme Yöntemi",
+          "EquipSlot": "🪖 Ekipman Yuvası",
+          "BlockBreakMethod": "⛏️ Kırma Yöntemi",
+          "BlockPlaceMethod": "🏗️ Yerleştirme Yöntemi"
+        }
+      },
+      "block": {
+        "name": "blok",
+        "description": "Blok ID'si"
+      },
+      "item": {
+        "name": "eşya",
+        "description": "Eşya ID'si"
+      },
+      "mob": {
+        "name": "yaratık",
+        "description": "Yaratık (varlık) ID'si"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Hareket yöntemi"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Işınlanma nedeni"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Yaratık etkileşim türü"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Eşya kullanım yöntemi"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Eşya edinme yöntemi"
+      },
+      "EquipSlot": {
+        "name": "kuşam_yuvası",
+        "description": "Ekipman yuvası"
+      },
+      "BlockBreakMethod": {
+        "name": "kırma_yöntemi",
+        "description": "Blok kırma yöntemi"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Blok yerleştirme yöntemi"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "değer",
+        "description": "Seçilen ID veya enum değeri"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Yerel Ad",
+    "menuDisplayName": "Yerel Ad",
+    "description": "{{type}} değerini yerel ada dönüştürür",
+    "inputs": {
+      "value": {
+        "name": "değer",
+        "description": "Minecraft ID'si (örn. \"minecraft:stone\") veya olay değeri (örn. \"Walk\")"
+      },
+      "type": {
+        "name": "tür",
+        "description": "Dönüştürülecek kategori",
+        "options": {
+          "block": "Blok ID'si",
+          "item": "Eşya ID'si",
+          "mob": "Yaratık ID'si",
+          "TravelMethod": "Hareket Yöntemi",
+          "TeleportCause": "Işınlanma Nedeni",
+          "MobInteraction": "Yaratık Etkileşimi",
+          "ItemUseMethod": "Eşya Kullanım Yöntemi",
+          "ItemAcqMethod": "Edinme Yöntemi",
+          "EquipSlot": "Ekipman Yuvası",
+          "BlockBreakMethod": "Blok Kırma Yöntemi",
+          "BlockPlaceMethod": "Blok Yerleştirme Yöntemi"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "ad",
+        "description": "Yerelleştirilmiş ad (bulunamazsa giriş değerini döndürür)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Vector3 İşlemi",
+    "menuDisplayName": "Vec3 İşl.",
+    "description": "Bir 3B konumda {{op}} işlemini gerçekleştirir",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "İşlem türü",
+        "options": {
+          "assemble": "🔧 Birleştir",
+          "add": "➕ Topla",
+          "subtract": "➖ Çıkar",
+          "scale": "✖️ Ölçekle",
+          "floor": "⬇️ Aşağı Yuvarla",
+          "ceil": "⬆️ Yukarı Yuvarla",
+          "fill_y": "📐 Y Doldur"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "X koordinatı"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y koordinatı"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z koordinatı"
+      },
+      "pos_a": {
+        "name": "konum_a",
+        "description": "Temel konum {x,y,z}"
+      },
+      "pos_b": {
+        "name": "konum_b",
+        "description": "Diğer konum {x,y,z}"
+      },
+      "position": {
+        "name": "konum",
+        "description": "Konum {x,y,z}"
+      },
+      "scale": {
+        "name": "ölçek",
+        "description": "Skaler çarpan (örn. iki katı için 2)"
+      },
+      "pos_xz": {
+        "name": "konum_xz",
+        "description": "2B konum {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Y koordinat değeri"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "sonuç",
+        "description": "Sonuç konumu {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Vector3 Mesafe",
+    "menuDisplayName": "Mesafe",
+    "description": "İki 3B konum arasındaki Öklid mesafesini hesaplar",
+    "inputs": {
+      "pos_a": {
+        "name": "konum_a",
+        "description": "Başlangıç konumu {x,y,z}"
+      },
+      "pos_b": {
+        "name": "konum_b",
+        "description": "Bitiş konumu {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "mesafe",
+        "description": "İki nokta arasındaki mesafe (metre)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3'ten Dizeye",
+    "menuDisplayName": "Vec3→Dize",
+    "description": "Bir konum nesnesini \"x y z\" biçimli bir dizeye dönüştürür",
+    "inputs": {
+      "position": {
+        "name": "konum",
+        "description": "Dönüştürülecek konum {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "metin",
+        "description": "\"x y z\" biçiminde dize"
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Vector3 Böl",
+    "menuDisplayName": "Vec3 Böl",
+    "description": "Bir konum nesnesini ayrı x, y ve z değerlerine böler",
+    "inputs": {
+      "position": {
+        "name": "konum",
+        "description": "Bölünecek konum {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "X koordinatı"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y koordinatı"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z koordinatı"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Sayı Sınırla",
+    "menuDisplayName": "Sınırla",
+    "description": "Bir sayıyı minimum ve maksimum değer arasında sınırlar",
+    "inputs": {
+      "value": {
+        "name": "değer",
+        "description": "Sınırlanacak sayı"
+      },
+      "min": {
+        "name": "min",
+        "description": "Alt sınır"
+      },
+      "max": {
+        "name": "maks",
+        "description": "Üst sınır"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "sonuç",
+        "description": "Sınırlanmış değer"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Alan Oluştur",
+    "menuDisplayName": "AABB Oluştur",
+    "description": "İki köşe konumundan eksen hizalı sınırlayıcı kutu (AABB) oluşturur",
+    "inputs": {
+      "corner_a": {
+        "name": "köşe_a",
+        "description": "Alan köşesi 1 {x,y,z} (sıra önemli değil)"
+      },
+      "corner_b": {
+        "name": "köşe_b",
+        "description": "Alan köşesi 2 {x,y,z} (sıra önemli değil)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "alan",
+        "description": "AABB alan nesnesi {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Alanda mı",
+    "menuDisplayName": "AABB İçinde",
+    "description": "Bir konumun AABB alanı içinde olup olmadığını kontrol eder",
+    "inputs": {
+      "area": {
+        "name": "alan",
+        "description": "AABB alanı {min, max}"
+      },
+      "position": {
+        "name": "konum",
+        "description": "Test edilecek konum {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "sonuç",
+        "description": "konum alan içindeyse true"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "Oyuncu Dönüşümünde",
+    "menuDisplayName": "OyuncuDönüşüm",
+    "description": "Bir oyuncunun konumu veya dönüşü değiştiğinde tetiklenir (yüksek frekans)",
+    "inputs": {
+      "world": {
+        "name": "dünya",
+        "description": "MinecraftConnect düğümünden World çıkışı"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "konum",
+        "description": "Oyuncu konumu {x, y, z}"
+      },
+      "direction": {
+        "name": "yön",
+        "description": "Oyuncu bakış yönü (Y ekseni dönüşü)"
+      },
+      "player": {
+        "name": "oyuncu",
+        "description": "WorldPlayer nesnesi → oyuncu bilgi düğümüne bağla"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Aracıyı Hareket Ettir",
+    "menuDisplayName": "AgentMove",
+    "description": "Aracıyı {{direction}} hareket ettirir",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "direction": {
+        "name": "yön",
+        "description": "Hareket yönü",
+        "options": {
+          "forward": "İleri",
+          "back": "Geri",
+          "left": "Sol",
+          "right": "Sağ",
+          "up": "Yukarı",
+          "down": "Aşağı"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Hareket ettiğinde true gönderir"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Aracıyı Döndür",
+    "menuDisplayName": "AgentTurn",
+    "description": "Aracıyı {{direction}} döndürür",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "direction": {
+        "name": "yön",
+        "description": "Dönüş yönü",
+        "options": {
+          "left": "Sol",
+          "right": "Sağ"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Döndüğünde true gönderir"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Aracıyı Işınla",
+    "menuDisplayName": "AracıTP",
+    "description": "Aracıyı bir konuma ışınlar (oyuncunun mevcut konumunu kullanmak için boş bırakın)",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "position": {
+        "name": "konum",
+        "description": "Hedef konum {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Işınlandığında true gönderir"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Aracı Eylemi",
+    "menuDisplayName": "AgentAction",
+    "description": "Aracı {{action}} gerçekleştirir (yön: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "action": {
+        "name": "eylem",
+        "description": "Gerçekleştirilecek eylem",
+        "options": {
+          "attack": "Saldır",
+          "destroyBlock": "Yık",
+          "till": "Çapala",
+          "dropAllItems": "Hepsini Bırak"
+        }
+      },
+      "direction": {
+        "name": "yön",
+        "description": "Eylem yönü",
+        "options": {
+          "forward": "İleri",
+          "back": "Geri",
+          "left": "Sol",
+          "right": "Sağ",
+          "up": "Yukarı",
+          "down": "Aşağı"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Tamamlandığında true gönderir"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Aracı Blok Yerleştirir",
+    "menuDisplayName": "AracıYerleştir",
+    "description": "{{slot}} yuvasındaki bloğu {{direction}} yönüne yerleştirir",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "direction": {
+        "name": "yön",
+        "description": "Yerleştirme yönü",
+        "options": {
+          "forward": "İleri",
+          "back": "Geri",
+          "left": "Sol",
+          "right": "Sağ",
+          "up": "Yukarı",
+          "down": "Aşağı"
+        }
+      },
+      "slot": {
+        "name": "yuva",
+        "description": "Envanter yuva numarası (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Yerleştirildiğinde true gönderir"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Aracı Eşya Bırakır",
+    "menuDisplayName": "AracıBırak",
+    "description": "{{slot}} yuvasındaki eşyayı {{direction}} yönüne bırakır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "direction": {
+        "name": "yön",
+        "description": "Bırakma yönü",
+        "options": {
+          "forward": "İleri",
+          "back": "Geri",
+          "left": "Sol",
+          "right": "Sağ",
+          "up": "Yukarı",
+          "down": "Aşağı"
+        }
+      },
+      "slot": {
+        "name": "yuva",
+        "description": "Envanter yuva numarası (1–27)"
+      },
+      "amount": {
+        "name": "miktar",
+        "description": "Bırakılacak eşya sayısı"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Bırakıldığında true gönderir"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Aracı Eşya Taşır",
+    "menuDisplayName": "AracıTaşıEşya",
+    "description": "Aracının envanterindeki yuvalar arasında eşya taşır",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "from_slot": {
+        "name": "kaynak_yuva",
+        "description": "Kaynak yuva numarası (1–27)"
+      },
+      "to_slot": {
+        "name": "hedef_yuva",
+        "description": "Hedef yuva numarası (1–27)"
+      },
+      "amount": {
+        "name": "miktar",
+        "description": "Taşınacak eşya sayısı"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Hareket ettiğinde true gönderir"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Aracı Eşya Ayarlar",
+    "menuDisplayName": "AracıAyarlaEşya",
+    "description": "Belirtilen aracı envanter yuvasına bir eşya ayarlar",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "slot": {
+        "name": "yuva",
+        "description": "Ayarlanacak yuva numarası (1–27)"
+      },
+      "item_id": {
+        "name": "eşya_id",
+        "description": "Eşya ID'si (örn. minecraft:apple)"
+      },
+      "amount": {
+        "name": "miktar",
+        "description": "Ayarlanacak eşya sayısı"
+      },
+      "data": {
+        "name": "veri",
+        "description": "Veri değeri (genellikle 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Ayarlandığında true gönderir"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Aracı Toplar",
+    "menuDisplayName": "AracıTopla",
+    "description": "Aracının çevresinden belirtilen eşya türünü toplar",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "item_id": {
+        "name": "eşya_id",
+        "description": "Toplanacak eşya ID'si"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Toplandığında true gönderir"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Aracı Algılar",
+    "menuDisplayName": "AR Algıla",
+    "description": "{{type}} {{direction}} algılar",
+    "inputs": {
+      "trigger": {
+        "name": "tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      },
+      "type": {
+        "name": "tür",
+        "description": "Ne algılanacak",
+        "options": {
+          "block": "Blok",
+          "redstone": "Redstone"
+        }
+      },
+      "direction": {
+        "name": "yön",
+        "description": "Algılama yönü",
+        "options": {
+          "forward": "İleri",
+          "back": "Geri",
+          "left": "Sol",
+          "right": "Sağ",
+          "up": "Yukarı",
+          "down": "Aşağı"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "algılandı",
+        "description": "bir şey algılanırsa true"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Vector3 Lerp",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "İki konum arasında doğrusal interpolasyon yapar (t=0 başlangıç, t=1 bitiş)",
+    "inputs": {
+      "pos_a": {
+        "name": "konum_a",
+        "description": "Başlangıç konumu {x, y, z}"
+      },
+      "pos_b": {
+        "name": "konum_b",
+        "description": "Bitiş konumu {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "İnterpolasyon faktörü (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "sonuç",
+        "description": "İnterpole edilmiş konum {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Vector3 Normalleştir",
+    "menuDisplayName": "Vec3Norm",
+    "description": "Bir vektörü birim uzunluğa normalleştirir (uzunluk = 1)",
+    "inputs": {
+      "position": {
+        "name": "konum",
+        "description": "Normalleştirilecek vektör {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "sonuç",
+        "description": "Uzunluğu 1 olan birim vektör {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Vector3 Nokta Çarpımı",
+    "menuDisplayName": "Vec3Dot",
+    "description": "İki vektörün nokta çarpımını hesaplar",
+    "inputs": {
+      "pos_a": {
+        "name": "konum_a",
+        "description": "Vektör A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "konum_b",
+        "description": "Vektör B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "değer",
+        "description": "Nokta çarpımı (skaler)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "AABB Öteleme",
+    "menuDisplayName": "AABBÖtele",
+    "description": "Bir AABB alanını verilen vektörle öteler",
+    "inputs": {
+      "area": {
+        "name": "alan",
+        "description": "Ötelenecek alan {min, max}"
+      },
+      "delta": {
+        "name": "delta",
+        "description": "Öteleme vektörü {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "alan",
+        "description": "Ötelenmiş alan nesnesi"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "AABB Kesişimi",
+    "menuDisplayName": "AABBKesişir",
+    "description": "İki AABB alanının çakışıp çakışmadığını kontrol eder",
+    "inputs": {
+      "area_a": {
+        "name": "alan_a",
+        "description": "Alan A {min, max}"
+      },
+      "area_b": {
+        "name": "alan_b",
+        "description": "Alan B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "sonuç",
+        "description": "iki alan çakışırsa true"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Assert",
+    "menuDisplayName": "Assert",
+    "description": "Gerçek değeri beklenenle karşılaştırır ve PASS/FAIL kaydeder. Zincirleme için her zaman done gönderir.",
+    "inputs": {
+      "actual": {
+        "name": "gerçek",
+        "description": "Test edilecek değer"
+      },
+      "expected": {
+        "name": "beklenen",
+        "description": "Beklenen değer"
+      },
+      "op": {
+        "name": "op",
+        "description": "Karşılaştırma operatörü",
+        "options": {
+          "eq": "Eşit (===)",
+          "neq": "Eşit değil (!==)",
+          "deep": "Derin eşitlik (JSON)",
+          "lt": "Küçüktür (<)",
+          "gt": "Büyüktür (>)",
+          "lte": "Küçük veya eşit (≤)",
+          "gte": "Büyük veya eşit (≥)",
+          "approx": "Yaklaşık (±tolerans)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "Test durumu ID'si (örn. TC-111)"
+      },
+      "tolerance": {
+        "name": "tolerans",
+        "description": "Yaklaşık karşılaştırma için tolerans"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "tamam",
+        "description": "Her zaman true gönderir (zincirleme için)"
+      },
+      "passed": {
+        "name": "geçti",
+        "description": "Test geçtiğinde true gönderir"
+      },
+      "failed": {
+        "name": "başarısız",
+        "description": "Test başarısız olduğunda gerçek değeri gönderir"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Gemini AI'ya metin gönderir ve yanıt alır",
+    "inputs": {
+      "apiKey": {
+        "name": "API Anahtarı",
+        "description": "Google AI Studio'dan API anahtarı"
+      },
+      "model": {
+        "name": "Model",
+        "description": "Kullanılacak Gemini modeli",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (önerilen)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "İstem",
+        "description": "Kullanıcı istem metni"
+      },
+      "systemInstruction": {
+        "name": "Sistem Talimatı",
+        "description": "Yapay zeka rolünü/davranışını tanımlayan sistem istemi (isteğe bağlı)"
+      },
+      "temperature": {
+        "name": "Sıcaklık",
+        "description": "Rastgelelik 0.0–1.0 (daha düşük = daha belirleyici)"
+      },
+      "trigger": {
+        "name": "Tetikleyici",
+        "description": "Tetikleyici (isteğe bağlı)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Yanıt",
+        "description": "Gemini tarafından üretilen metin"
+      }
+    }
+  }
+}

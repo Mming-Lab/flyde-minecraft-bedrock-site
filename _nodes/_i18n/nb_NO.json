@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Koble til",
+    "description": "Starter en WebSocket-server og kobler til Minecraft Education Edition",
+    "inputs": {
+      "port": {
+        "name": "port",
+        "description": "WebSocket-portnummer (standard: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-objekt (brukes internt; trenger ikke kobles til kommandonoder)"
+      },
+      "error": {
+        "name": "feil",
+        "description": "Informasjon om tilkoblingsfeil"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Koble fra",
+    "menuDisplayName": "MC Koble fra",
+    "description": "Kobler fra Minecraft og slår av WebSocket-serveren",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (f.eks. chat 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Hent agentposisjon",
+    "menuDisplayName": "Agentpos.",
+    "description": "Henter agentens nåværende posisjon",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "posisjon",
+        "description": "Agentposisjon {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "Hent ST-mål",
+    "menuDisplayName": "ST-mål",
+    "description": "Henter listen over alle scoreboard-mål",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "mål",
+        "description": "Matrise av scoreboard-målobjekter"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "Hent ST-mål",
+    "menuDisplayName": "ST-mål",
+    "description": "Henter et scoreboard-mål via ID-en",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Scoreboard-mål-ID"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "mål",
+        "description": "Scoreboard-mål → koble til ST-mål-infonode"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "Legg til ST-mål",
+    "menuDisplayName": "Legg til ST-mål",
+    "description": "Legger til et nytt mål i scoreboardet",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Scoreboard-mål-ID"
+      },
+      "display_name": {
+        "name": "visningsnavn",
+        "description": "Visningsnavn (valgfritt)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "mål",
+        "description": "Lagt til mål → koble til ST-mål-infonode"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "Fjern ST-mål",
+    "menuDisplayName": "Fjern ST-mål",
+    "description": "Fjerner et scoreboard-mål via ID-en",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Scoreboard-mål-ID"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "Resultat av fjerning"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Hent alle poeng",
+    "menuDisplayName": "Alle poeng",
+    "description": "Henter alle poeng for en spiller",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "player_name": {
+        "name": "spillernavn",
+        "description": "Spillernavn"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "poeng",
+        "description": "Matrise av alle poeng"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Hent poeng",
+    "menuDisplayName": "Hent poeng",
+    "description": "Henter en spillers poeng for et bestemt mål",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "player_name": {
+        "name": "spillernavn",
+        "description": "Spillernavn"
+      },
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Scoreboard-mål-ID"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "poeng",
+        "description": "Poengverdi (tall)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Poengoperasjon",
+    "menuDisplayName": "Poeng-op.",
+    "description": "Utfører {{operation}} på en spillerpoeng",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "operation": {
+        "name": "operasjon",
+        "description": "Operasjonstype",
+        "options": {
+          "add": "Legg til",
+          "remove": "Trekk fra",
+          "set": "Angi"
+        }
+      },
+      "player_name": {
+        "name": "spillernavn",
+        "description": "Spillernavn"
+      },
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Scoreboard-mål-ID"
+      },
+      "value": {
+        "name": "verdi",
+        "description": "Verdi å operere med"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Ny poengverdi etter operasjonen"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "Ved spillerchat",
+    "menuDisplayName": "Chat",
+    "description": "Utløses når en spiller sender en chatmelding",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "avsender",
+        "description": "Navn på spilleren som sendte chatten"
+      },
+      "message": {
+        "name": "melding",
+        "description": "Innhold i chatmelding"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "Ved spillertilkobling",
+    "menuDisplayName": "Bli med",
+    "description": "Utløses når en spiller blir med i verdenen",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "spillernavn",
+        "description": "Navn på spilleren som ble med"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "Ved spilleravgang",
+    "menuDisplayName": "Forlat",
+    "description": "Utløses når en spiller forlater verdenen",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "spillernavn",
+        "description": "Navn på spilleren som forlot"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "Ved spillerbevegelse",
+    "menuDisplayName": "Beveget seg",
+    "description": "Utløses hver gang en spiller beveger seg",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "avstand",
+        "description": "Tilbakelagt avstand (meter)"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      },
+      "underwater": {
+        "name": "under_vann",
+        "description": "Om man beveger seg under vann (true/false)"
+      },
+      "biome": {
+        "name": "biom",
+        "description": "Navn på nåværende biom"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Navn på bevegelsesmetode"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "Ved spillerteleportering",
+    "menuDisplayName": "Teleportert",
+    "description": "Utløses når en spiller teleporterer",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Navn på teleporteringsårsak"
+      },
+      "distance": {
+        "name": "avstand",
+        "description": "Teleporteringsavstand (meter)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "Ved spillertittel",
+    "menuDisplayName": "Tittel",
+    "description": "Utløses når en spiller mottar en tittel",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "avsender",
+        "description": "Navn på spilleren som sendte tittelen"
+      },
+      "message": {
+        "name": "melding",
+        "description": "Innhold i tittelmelding"
+      },
+      "recipient": {
+        "name": "mottaker",
+        "description": "Navn på spilleren som mottok tittelen"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "Ved spillermelding",
+    "menuDisplayName": "Melding",
+    "description": "Utløses når en spiller sender enhver type melding",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "avsender",
+        "description": "Navn på spilleren som sendte meldingen"
+      },
+      "message": {
+        "name": "melding",
+        "description": "Meldingsinnhold"
+      },
+      "type": {
+        "name": "type",
+        "description": "Meldingstype (chat / tell osv.)"
+      },
+      "recipient": {
+        "name": "mottaker",
+        "description": "[nullable] Mottakernavn. null for meldinger som ikke er tell"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "Ved spillersprett",
+    "menuDisplayName": "Sprettet",
+    "description": "Utløses når en spiller spretter på en slimblokk eller lignende",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "høyde",
+        "description": "Sprettehøyde (blokker)"
+      },
+      "block": {
+        "name": "blokk",
+        "description": "BlockType-objekt (blokken det ble sprettet på) → koble til blokk-infonode"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "Ved blokkbryting",
+    "menuDisplayName": "Bryt blokk",
+    "description": "Utløses når en blokk brytes",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blokk",
+        "description": "BlockType-objekt → koble til blokk-infonode"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Navn på ødeleggelsesmetode"
+      },
+      "item": {
+        "name": "gjenstand",
+        "description": "[nullable] Holdt gjenstand før bryting. null hvis med bare hender"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "Ved blokkplassering",
+    "menuDisplayName": "Plasser blokk",
+    "description": "Utløses når en blokk plasseres",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blokk",
+        "description": "BlockType-objekt → koble til blokk-infonode"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      },
+      "underwater": {
+        "name": "under_vann",
+        "description": "Om den ble plassert under vann (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Navn på plasseringsmetode"
+      },
+      "item": {
+        "name": "gjenstand",
+        "description": "Holdt gjenstand før plassering → koble til gjenstand-infonode"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "Ved gjenstandsbruk",
+    "menuDisplayName": "Gjenstand brukt",
+    "description": "Utløses når en spiller bruker en gjenstand",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "gjenstand",
+        "description": "[nullable] Holdt gjenstand. null hvis ingen gjenstand"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Navn på gjenstandsbruksmetode"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "Ved gjenstandsanskaffelse",
+    "menuDisplayName": "Gjenstand anskaffet",
+    "description": "Utløses når en spiller anskaffer en gjenstand",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "antall",
+        "description": "Antall anskaffede gjenstander"
+      },
+      "item": {
+        "name": "gjenstand",
+        "description": "Gjenstandstype → koble til gjenstandstype-infonode"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Navn på gjenstandsanskaffelsesmetode"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "Ved gjenstandslaging",
+    "menuDisplayName": "Laget",
+    "description": "Utløses når en spiller lager en gjenstand",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "gjenstand",
+        "description": "Gjenstandsstabel (laget gjenstand) → koble til gjenstandsstabel-infonode"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      },
+      "used_table": {
+        "name": "brukte_bord",
+        "description": "Om et arbeidsbord ble brukt (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "Ved gjenstandsutstyr",
+    "menuDisplayName": "Utstyrt",
+    "description": "Utløses når en spiller utstyrer en gjenstand",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "gjenstand",
+        "description": "Gjenstandsstabel → koble til gjenstandsstabel-infonode"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      },
+      "equip_slot": {
+        "name": "utstyrsplass",
+        "description": "Navn på utstyrsplass"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "Ved gjenstandssmelting",
+    "menuDisplayName": "Smeltet",
+    "description": "Utløses når en spiller smelter en gjenstand",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "gjenstand",
+        "description": "Gjenstandstype (smeltet) → koble til gjenstandstype-infonode"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      },
+      "fuel": {
+        "name": "brensel",
+        "description": "Gjenstandstype (brensel) → koble til gjenstandstype-infonode"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "Ved gjenstandsbytte",
+    "menuDisplayName": "Byttet",
+    "description": "Utløses når en spiller fullfører en landsbyboerhandel",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "gjenstand",
+        "description": "Gjenstandsstabel (mottatt gjenstand) → koble til gjenstandsstabel-infonode"
+      },
+      "villager": {
+        "name": "landsbyboer",
+        "description": "WorldVillager-objekt → koble til landsbyboer-infonode"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      },
+      "payment_a": {
+        "name": "betaling_a",
+        "description": "Gjenstandstype (betaling A) → koble til gjenstandstype-infonode"
+      },
+      "payment_b": {
+        "name": "betaling_b",
+        "description": "[nullable] Gjenstandstype (betaling B). null hvis ubrukt"
+      },
+      "player_xp": {
+        "name": "spiller_smaragder",
+        "description": "Smaragder spilleren har etter handel"
+      },
+      "villager_xp": {
+        "name": "landsbyboer_smaragder",
+        "description": "Smaragder landsbyboeren har etter handel"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "Ved mob-interaksjon",
+    "menuDisplayName": "Mob-interaksj.",
+    "description": "Utløses når en spiller interagerer med en mob",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "mob",
+        "description": "WorldMob-objekt (moben det ble interagert med)"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Navn på mob-interaksjonstype"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "Ved måltreff",
+    "menuDisplayName": "Mål truffet",
+    "description": "Utløses når en målblokk treffes",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "styrke",
+        "description": "Redstone-signalstyrke (0–15)"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Kjør kommando",
+    "menuDisplayName": "Kjør kmd.",
+    "description": "Kjører enhver Minecraft-kommando (uten den innledende /)",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "command": {
+        "name": "kommando",
+        "description": "Minecraft-kommando som skal kjøres (uten innledende /)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender true når ferdig"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Hent spilltid",
+    "menuDisplayName": "Spilltid",
+    "description": "Henter spilltiden ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Tidstype å spørre om",
+        "options": {
+          "time": "Tid (0–24000)",
+          "day": "Antall dager",
+          "tick": "Antall ticks"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "verdi",
+        "description": "Forespurt tidsverdi"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Er det dag",
+    "menuDisplayName": "Dag?",
+    "description": "Sjekker om det for øyeblikket er dag (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "er_dag",
+        "description": "true om dagen, false om natten"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Hent vær",
+    "menuDisplayName": "Vær",
+    "description": "Henter det nåværende været",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "vær",
+        "description": "Værnavn (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Fyll med blokker",
+    "menuDisplayName": "Fyll",
+    "description": "Fyller et område mellom to posisjoner med en angitt blokk",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "from": {
+        "name": "fra",
+        "description": "Starthjørne {x, y, z}"
+      },
+      "to": {
+        "name": "til",
+        "description": "Sluthjørne {x, y, z}"
+      },
+      "block_id": {
+        "name": "blokk_id",
+        "description": "Blokk-ID (f.eks. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender true når fyllingen er fullført"
+      },
+      "count": {
+        "name": "antall",
+        "description": "Antall fylte blokker"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Hent bakkehøyde",
+    "menuDisplayName": "Bakke",
+    "description": "Henter posisjonen og typen til den øverste faste blokken",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "posisjon",
+        "description": "Bakkeposisjon {x, y, z}"
+      },
+      "block_name": {
+        "name": "blokknavn",
+        "description": "Navn på den øverste faste blokken"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Verdensspørring",
+    "menuDisplayName": "Verdensspørring",
+    "description": "Spør om listen over {{type}} i verdenen",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Kategori å spørre om",
+        "options": {
+          "mob": "Entitet",
+          "block": "Blokk",
+          "item": "Gjenstand"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "liste",
+        "description": "Liste over spørringsresultater"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Hent spillerposisjon",
+    "menuDisplayName": "Spillerpos.",
+    "description": "Henter spillerens nåværende posisjon og blikkretning",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "posisjon",
+        "description": "Spillerposisjon {x, y, z}"
+      },
+      "direction": {
+        "name": "retning",
+        "description": "Spillerens blikkretning (Y-akse-rotasjon)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Hent spillerorientering",
+    "menuDisplayName": "Spillerretn.",
+    "description": "Henter spillerens kameravinkel (pitch og yaw)",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "vinkel",
+        "description": "Spillerens blikkvinkel {x, y} (grader)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Hent spillertagger",
+    "menuDisplayName": "Spillertagger",
+    "description": "Henter alle tagger knyttet til spilleren",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "tagger",
+        "description": "Matrise av taggnavn-strenger"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "Spiller har tagg",
+    "menuDisplayName": "Har tagg?",
+    "description": "Sjekker om spilleren har en angitt tagg",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "tag": {
+        "name": "tagg",
+        "description": "Taggnavn som skal sjekkes"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "true hvis spilleren har taggen"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Hent spillernivå",
+    "menuDisplayName": "Spillerniv.",
+    "description": "Henter spillerens nåværende erfaringsnivå",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "nivå",
+        "description": "Spillernivå (tall)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Hent spillmodus",
+    "menuDisplayName": "Spillmodus",
+    "description": "Henter spillerens nåværende spillmodus",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "spillmodus",
+        "description": "Navn på spillmodus (f.eks. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Hent spillerevner",
+    "menuDisplayName": "Evner",
+    "description": "Henter spillerens nåværende evneinnstillinger",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "evner",
+        "description": "Spillerevner-objekt"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Hent spillere",
+    "menuDisplayName": "Spillere",
+    "description": "Henter en liste over alle spillere i verdenen",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "spillere",
+        "description": "Matrise av spillerobjekter"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Hent lokal spiller",
+    "menuDisplayName": "Lokal spiller",
+    "description": "Henter det lokale (egne) spillerobjektet",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "spiller",
+        "description": "Lokalt spillerobjekt"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Hent fra entitet",
+    "menuDisplayName": "Entitetsinfo",
+    "description": "Henter ut posisjon, retning, dimensjon og andre felt fra et entitetsobjekt",
+    "inputs": {
+      "entity": {
+        "name": "entitet",
+        "description": "Spiller- eller landsbyboerobjekt (player / villager-utgang)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "posisjon",
+        "description": "Entitetsposisjon (position)"
+      },
+      "direction": {
+        "name": "retning",
+        "description": "Y-akse-rotasjon (yRot)"
+      },
+      "dimension": {
+        "name": "dimensjon",
+        "description": "Dimensjonsnummer (dimension)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Typestreng (type)"
+      },
+      "variant": {
+        "name": "variant",
+        "description": "Variantnummer (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Entitets-ID-nummer (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Hent fra spiller",
+    "menuDisplayName": "Spillerinfo",
+    "description": "Henter ut navn, farge og entitetsinfo fra et spiller-snapshotobjekt",
+    "inputs": {
+      "player": {
+        "name": "spiller",
+        "description": "Spillerobjekt fra en hendelsesnodes player-utgang"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "navn",
+        "description": "Spillernavn (name)"
+      },
+      "color": {
+        "name": "farge",
+        "description": "Kartmarkørfarge (color)"
+      },
+      "entity": {
+        "name": "entitet",
+        "description": "Koble til entitets-infonode"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Hent fra gjenstandstype",
+    "menuDisplayName": "Gjenstandstypeinfo",
+    "description": "Henter ut gjenstands-ID og dataverdi fra et gjenstandstypeobjekt",
+    "inputs": {
+      "item": {
+        "name": "gjenstand",
+        "description": "Gjenstandstype (item-utgang fra anskaffe-/smeltehendelser)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "gjenstand_id",
+        "description": "Gjenstands-ID-streng (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Dataverdi (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Hent fra gjenstandsstabel",
+    "menuDisplayName": "Gjenstandsstabelinfo",
+    "description": "Henter ut gjenstands-ID, antall, maks antall og dataverdi fra et gjenstandsstabelobjekt",
+    "inputs": {
+      "item": {
+        "name": "gjenstand",
+        "description": "Gjenstandsstabel (item-utgang fra bruk-/utstyr-/lag-/byttehendelser)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "gjenstand_id",
+        "description": "Gjenstands-ID-streng (typeId)"
+      },
+      "count": {
+        "name": "antall",
+        "description": "Stabelstørrelse (amount)"
+      },
+      "max_count": {
+        "name": "maks_antall",
+        "description": "Maks stabelstørrelse (maxAmount)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Dataverdi (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Hent fra blokktype",
+    "menuDisplayName": "Blokkinfo",
+    "description": "Henter ut blokk-ID og dataverdi fra et blokktypeobjekt",
+    "inputs": {
+      "block": {
+        "name": "blokk",
+        "description": "Blokktypeobjekt (block-utgang fra block-/bounce-hendelser)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "blokk_id",
+        "description": "Blokk-ID-streng (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Dataverdi (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Hent fra ST-mål",
+    "menuDisplayName": "ST-mål-info",
+    "description": "Henter ut ID og visningsnavn fra et scoreboard-målobjekt",
+    "inputs": {
+      "objective": {
+        "name": "mål",
+        "description": "Mål fra en legg-til-/hent-mål-node"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Mål-ID-streng (id)"
+      },
+      "display_name": {
+        "name": "visningsnavn",
+        "description": "Visningsnavn (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Hent fra mob",
+    "menuDisplayName": "Mob-info",
+    "description": "Henter ut type-, farge- og variantnumre fra et mobobjekt",
+    "inputs": {
+      "mob": {
+        "name": "mob",
+        "description": "Mobobjekt (mob-utgang fra mob-interaksjonshendelse)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "type",
+        "description": "Mobtypenummer (type)"
+      },
+      "color": {
+        "name": "farge",
+        "description": "Fargenummer (color)"
+      },
+      "variant": {
+        "name": "variant",
+        "description": "Variantnummer (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Hent fra landsbyboer",
+    "menuDisplayName": "Landsbyboerinfo",
+    "description": "Henter ut navn, rang og entitetsinfo fra et landsbyboerobjekt",
+    "inputs": {
+      "villager": {
+        "name": "landsbyboer",
+        "description": "Landsbyboerobjekt (villager-utgang fra byttehendelse)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "navn",
+        "description": "Landsbyboernavn (trader.name)"
+      },
+      "rank": {
+        "name": "rang",
+        "description": "Handelsrang (trader.tier)"
+      },
+      "entity": {
+        "name": "entitet",
+        "description": "Koble til entitets-infonode"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Velger",
+    "menuDisplayName": "Velger",
+    "description": "Velger fra {{type}}-listen",
+    "inputs": {
+      "type": {
+        "name": "type",
+        "description": "Kategori å velge",
+        "options": {
+          "block": "🧱 Blokk",
+          "item": "🎒 Gjenstand",
+          "mob": "🐾 Mob",
+          "TravelMethod": "🚶 Bevegelsesmetode",
+          "TeleportCause": "✨ Teleporteringsårsak",
+          "MobInteraction": "🐄 Mob-interaksjon",
+          "ItemUseMethod": "🤚 Gjenstandsbruksmetode",
+          "ItemAcqMethod": "📦 Anskaffelsesmetode",
+          "EquipSlot": "🪖 Utstyrsplass",
+          "BlockBreakMethod": "⛏️ Brytingsmetode",
+          "BlockPlaceMethod": "🏗️ Plasseringsmetode"
+        }
+      },
+      "block": {
+        "name": "blokk",
+        "description": "Blokk-ID"
+      },
+      "item": {
+        "name": "gjenstand",
+        "description": "Gjenstands-ID"
+      },
+      "mob": {
+        "name": "mob",
+        "description": "Mob-(entitets-)ID"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Bevegelsesmetode"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Teleporteringsårsak"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Mob-interaksjonstype"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Gjenstandsbruksmetode"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Gjenstandsanskaffelsesmetode"
+      },
+      "EquipSlot": {
+        "name": "utstyrsplass",
+        "description": "Utstyrsplass"
+      },
+      "BlockBreakMethod": {
+        "name": "brytingsmetode",
+        "description": "Blokkbrytingsmetode"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Blokkplasseringsmetode"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "verdi",
+        "description": "Valgt ID eller enum-verdi"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Lokalisert navn",
+    "menuDisplayName": "Lokalisert navn",
+    "description": "Konverterer {{type}} til lokalisert navn",
+    "inputs": {
+      "value": {
+        "name": "verdi",
+        "description": "Minecraft-ID (f.eks. \"minecraft:stone\") eller hendelsesverdi (f.eks. \"Walk\")"
+      },
+      "type": {
+        "name": "type",
+        "description": "Kategori å konvertere",
+        "options": {
+          "block": "Blokk-ID",
+          "item": "Gjenstands-ID",
+          "mob": "Mob-ID",
+          "TravelMethod": "Bevegelsesmetode",
+          "TeleportCause": "Teleporteringsårsak",
+          "MobInteraction": "Mob-interaksjon",
+          "ItemUseMethod": "Gjenstandsbruksmetode",
+          "ItemAcqMethod": "Anskaffelsesmetode",
+          "EquipSlot": "Utstyrsplass",
+          "BlockBreakMethod": "Blokkbrytingsmetode",
+          "BlockPlaceMethod": "Blokkplasseringsmetode"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "navn",
+        "description": "Lokalisert navn (returnerer inndataverdien hvis ikke funnet)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Vector3-operasjon",
+    "menuDisplayName": "Vec3-op.",
+    "description": "Utfører {{op}} på en 3D-posisjon",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Operasjonstype",
+        "options": {
+          "assemble": "🔧 Sett sammen",
+          "add": "➕ Legg sammen",
+          "subtract": "➖ Trekk fra",
+          "scale": "✖️ Skaler",
+          "floor": "⬇️ Rund ned",
+          "ceil": "⬆️ Rund opp",
+          "fill_y": "📐 Fyll Y"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "X-koordinat"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y-koordinat"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z-koordinat"
+      },
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Basisposisjon {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Annen posisjon {x,y,z}"
+      },
+      "position": {
+        "name": "posisjon",
+        "description": "Posisjon {x,y,z}"
+      },
+      "scale": {
+        "name": "skala",
+        "description": "Skalarmultiplikator (f.eks. 2 for dobling)"
+      },
+      "pos_xz": {
+        "name": "pos_xz",
+        "description": "2D-posisjon {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Y-koordinatverdi"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "Resulterende posisjon {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Vector3-avstand",
+    "menuDisplayName": "Avstand",
+    "description": "Beregner den euklidske avstanden mellom to 3D-posisjoner",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Startposisjon {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Sluttposisjon {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "avstand",
+        "description": "Avstand mellom de to punktene (meter)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 til streng",
+    "menuDisplayName": "Vec3→Streng",
+    "description": "Konverterer et posisjonsobjekt til en streng i formatet \"x y z\"",
+    "inputs": {
+      "position": {
+        "name": "posisjon",
+        "description": "Posisjon å konvertere {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "tekst",
+        "description": "Streng i formatet \"x y z\""
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Del opp Vector3",
+    "menuDisplayName": "Del Vec3",
+    "description": "Deler et posisjonsobjekt opp i separate x-, y- og z-verdier",
+    "inputs": {
+      "position": {
+        "name": "posisjon",
+        "description": "Posisjon å dele {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "X-koordinat"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y-koordinat"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z-koordinat"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Begrens tall",
+    "menuDisplayName": "Begrens",
+    "description": "Begrenser et tall mellom en minimums- og maksimumsverdi",
+    "inputs": {
+      "value": {
+        "name": "verdi",
+        "description": "Tall å begrense"
+      },
+      "min": {
+        "name": "min",
+        "description": "Nedre grense"
+      },
+      "max": {
+        "name": "maks",
+        "description": "Øvre grense"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "Begrenset verdi"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Opprett område",
+    "menuDisplayName": "Opprett AABB",
+    "description": "Oppretter en akse-justert avgrensningsboks (AABB) fra to hjørner",
+    "inputs": {
+      "corner_a": {
+        "name": "hjørne_a",
+        "description": "Områdehjørne 1 {x,y,z} (rekkefølgen spiller ingen rolle)"
+      },
+      "corner_b": {
+        "name": "hjørne_b",
+        "description": "Områdehjørne 2 {x,y,z} (rekkefølgen spiller ingen rolle)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "område",
+        "description": "AABB-områdeobjekt {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Er i område",
+    "menuDisplayName": "Inne i AABB",
+    "description": "Sjekker om en posisjon er inne i et AABB-område",
+    "inputs": {
+      "area": {
+        "name": "område",
+        "description": "AABB-område {min, max}"
+      },
+      "position": {
+        "name": "posisjon",
+        "description": "Posisjon å teste {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "true hvis posisjonen er inne i området"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "Ved spillertransformasjon",
+    "menuDisplayName": "SpillerTransf",
+    "description": "Utløses når en spillers posisjon eller rotasjon endres (høy frekvens)",
+    "inputs": {
+      "world": {
+        "name": "verden",
+        "description": "World-utgang fra MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "posisjon",
+        "description": "Spillerposisjon {x, y, z}"
+      },
+      "direction": {
+        "name": "retning",
+        "description": "Spillerens blikkretning (Y-akse-rotasjon)"
+      },
+      "player": {
+        "name": "spiller",
+        "description": "WorldPlayer-objekt → koble til spiller-infonode"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Flytt agent",
+    "menuDisplayName": "AgentMove",
+    "description": "Flytter agenten {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "direction": {
+        "name": "retning",
+        "description": "Bevegelsesretning",
+        "options": {
+          "forward": "Fremover",
+          "back": "Bakover",
+          "left": "Venstre",
+          "right": "Høyre",
+          "up": "Opp",
+          "down": "Ned"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender true etter flytting"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Snu agent",
+    "menuDisplayName": "AgentTurn",
+    "description": "Snur agenten {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "direction": {
+        "name": "retning",
+        "description": "Dreieretning",
+        "options": {
+          "left": "Venstre",
+          "right": "Høyre"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender true etter snuing"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Teleporter agent",
+    "menuDisplayName": "AgentTP",
+    "description": "Teleporterer agenten til en posisjon (utelat for å bruke spillerens nåværende plassering)",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "position": {
+        "name": "posisjon",
+        "description": "Destinasjonsposisjon {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender true etter teleportering"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Agenthandling",
+    "menuDisplayName": "AgentAction",
+    "description": "Agenten utfører {{action}} (retning: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "action": {
+        "name": "handling",
+        "description": "Handling som skal utføres",
+        "options": {
+          "attack": "Angrip",
+          "destroyBlock": "Ødelegg",
+          "till": "Pløy",
+          "dropAllItems": "Slipp alt"
+        }
+      },
+      "direction": {
+        "name": "retning",
+        "description": "Handlingsretning",
+        "options": {
+          "forward": "Fremover",
+          "back": "Bakover",
+          "left": "Venstre",
+          "right": "Høyre",
+          "up": "Opp",
+          "down": "Ned"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender true når ferdig"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Agent plasserer blokk",
+    "menuDisplayName": "AgentPlasser",
+    "description": "Plasserer blokk fra plass {{slot}} mot {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "direction": {
+        "name": "retning",
+        "description": "Plasseringsretning",
+        "options": {
+          "forward": "Fremover",
+          "back": "Bakover",
+          "left": "Venstre",
+          "right": "Høyre",
+          "up": "Opp",
+          "down": "Ned"
+        }
+      },
+      "slot": {
+        "name": "plass",
+        "description": "Beholdningsplassnummer (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender true etter plassering"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Agent slipper gjenstand",
+    "menuDisplayName": "AgentSlipp",
+    "description": "Slipper gjenstand fra plass {{slot}} mot {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "direction": {
+        "name": "retning",
+        "description": "Slippretning",
+        "options": {
+          "forward": "Fremover",
+          "back": "Bakover",
+          "left": "Venstre",
+          "right": "Høyre",
+          "up": "Opp",
+          "down": "Ned"
+        }
+      },
+      "slot": {
+        "name": "plass",
+        "description": "Beholdningsplassnummer (1–27)"
+      },
+      "amount": {
+        "name": "mengde",
+        "description": "Antall gjenstander å slippe"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender true etter slipping"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Agent flytter gjenstand",
+    "menuDisplayName": "AgentFlyttGjenst",
+    "description": "Flytter gjenstander mellom plasser i agentens beholdning",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "from_slot": {
+        "name": "kilde_plass",
+        "description": "Kildeplassnummer (1–27)"
+      },
+      "to_slot": {
+        "name": "mål_plass",
+        "description": "Målplassnummer (1–27)"
+      },
+      "amount": {
+        "name": "mengde",
+        "description": "Antall gjenstander å flytte"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender true etter flytting"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Agent angir gjenstand",
+    "menuDisplayName": "AgentAngiGjenst",
+    "description": "Angir en gjenstand i den angitte agentbeholdningsplassen",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "slot": {
+        "name": "plass",
+        "description": "Plassnummer å angi (1–27)"
+      },
+      "item_id": {
+        "name": "gjenstand_id",
+        "description": "Gjenstands-ID (f.eks. minecraft:apple)"
+      },
+      "amount": {
+        "name": "mengde",
+        "description": "Antall gjenstander å angi"
+      },
+      "data": {
+        "name": "data",
+        "description": "Dataverdi (vanligvis 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender true etter angivelse"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Agent samler",
+    "menuDisplayName": "AgentSaml",
+    "description": "Samler en angitt gjenstandstype rundt agenten",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "item_id": {
+        "name": "gjenstand_id",
+        "description": "Gjenstands-ID å samle"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender true etter samling"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Agent oppdager",
+    "menuDisplayName": "AG Oppdag",
+    "description": "Oppdager {{type}} {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "utløser",
+        "description": "Utløser (valgfri)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Hva som skal oppdages",
+        "options": {
+          "block": "Blokk",
+          "redstone": "Redstone"
+        }
+      },
+      "direction": {
+        "name": "retning",
+        "description": "Oppdagelsesretning",
+        "options": {
+          "forward": "Fremover",
+          "back": "Bakover",
+          "left": "Venstre",
+          "right": "Høyre",
+          "up": "Opp",
+          "down": "Ned"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "oppdaget",
+        "description": "true hvis noe oppdages"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Vector3-interpolasjon",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Interpolerer lineært mellom to posisjoner (t=0 er start, t=1 er slutt)",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Startposisjon {x, y, z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Sluttposisjon {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Interpolasjonsfaktor (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "Interpolert posisjon {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Vector3-normalisering",
+    "menuDisplayName": "Vec3Norm",
+    "description": "Normaliserer en vektor til enhetslengde (lengde = 1)",
+    "inputs": {
+      "position": {
+        "name": "posisjon",
+        "description": "Vektor å normalisere {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "Enhetsvektor med lengde 1 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Vector3-prikkprodukt",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Beregner prikkproduktet av to vektorer",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Vektor A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Vektor B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "verdi",
+        "description": "Prikkprodukt (skalar)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "Forskyv AABB",
+    "menuDisplayName": "AABBForskyv",
+    "description": "Forskyver et AABB-område med en gitt vektor",
+    "inputs": {
+      "area": {
+        "name": "område",
+        "description": "Område å forskyve {min, max}"
+      },
+      "delta": {
+        "name": "delta",
+        "description": "Forskyvningsvektor {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "område",
+        "description": "Forskjøvet områdeobjekt"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "AABB-skjæring",
+    "menuDisplayName": "AABBSkjærer",
+    "description": "Sjekker om to AABB-områder overlapper",
+    "inputs": {
+      "area_a": {
+        "name": "område_a",
+        "description": "Område A {min, max}"
+      },
+      "area_b": {
+        "name": "område_b",
+        "description": "Område B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "true hvis de to områdene overlapper"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Assert",
+    "menuDisplayName": "Assert",
+    "description": "Sammenligner faktisk med forventet og logger PASS/FAIL. Sender alltid done for kjeding.",
+    "inputs": {
+      "actual": {
+        "name": "faktisk",
+        "description": "Verdi å teste"
+      },
+      "expected": {
+        "name": "forventet",
+        "description": "Forventet verdi"
+      },
+      "op": {
+        "name": "op",
+        "description": "Sammenligningsoperator",
+        "options": {
+          "eq": "Lik (===)",
+          "neq": "Ikke lik (!==)",
+          "deep": "Dyp likhet (JSON)",
+          "lt": "Mindre enn (<)",
+          "gt": "Større enn (>)",
+          "lte": "Mindre eller lik (≤)",
+          "gte": "Større eller lik (≥)",
+          "approx": "Omtrent (±toleranse)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "Testtilfelle-ID (f.eks. TC-111)"
+      },
+      "tolerance": {
+        "name": "toleranse",
+        "description": "Toleranse for omtrentlig sammenligning"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "ferdig",
+        "description": "Sender alltid true (for kjeding)"
+      },
+      "passed": {
+        "name": "bestått",
+        "description": "Sender true når testen består"
+      },
+      "failed": {
+        "name": "feilet",
+        "description": "Sender faktisk verdi når testen feiler"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Sender tekst til Gemini AI og får et svar",
+    "inputs": {
+      "apiKey": {
+        "name": "API-nøkkel",
+        "description": "API-nøkkel fra Google AI Studio"
+      },
+      "model": {
+        "name": "Modell",
+        "description": "Gemini-modell som skal brukes",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (anbefalt)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Prompt",
+        "description": "Brukerprompttekst"
+      },
+      "systemInstruction": {
+        "name": "Systeminstruksjon",
+        "description": "Systemprompt som definerer AI-rolle/atferd (valgfritt)"
+      },
+      "temperature": {
+        "name": "Temperatur",
+        "description": "Tilfeldighet 0.0–1.0 (lavere = mer deterministisk)"
+      },
+      "trigger": {
+        "name": "Utløser",
+        "description": "Utløser (valgfri)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Svar",
+        "description": "Tekst generert av Gemini"
+      }
+    }
+  }
+}

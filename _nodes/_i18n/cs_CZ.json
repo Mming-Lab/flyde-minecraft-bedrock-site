@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Připojit",
+    "description": "Spustí server WebSocket a připojí se k Minecraft Education Edition",
+    "inputs": {
+      "port": {
+        "name": "port",
+        "description": "Číslo portu WebSocket (výchozí: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "svět",
+        "description": "Objekt World (používá se interně; není třeba připojovat k příkazovým uzlům)"
+      },
+      "error": {
+        "name": "chyba",
+        "description": "Informace o chybě připojení"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Odpojit",
+    "menuDisplayName": "MC Odpojit",
+    "description": "Odpojí se od Minecraftu a vypne server WebSocket",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (např. chat 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Získat pozici agenta",
+    "menuDisplayName": "Poz. agenta",
+    "description": "Získá aktuální pozici agenta",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozice",
+        "description": "Pozice agenta {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "Získat cíle ST",
+    "menuDisplayName": "Cíle ST",
+    "description": "Získá seznam všech cílů skóre tabule",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "cíle",
+        "description": "Pole objektů cílů skóre tabule"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "Získat cíl ST",
+    "menuDisplayName": "Cíl ST",
+    "description": "Získá cíl skóre tabule podle jeho ID",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "objective_id": {
+        "name": "id_cíle",
+        "description": "ID cíle skóre tabule"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "cíl",
+        "description": "Cíl skóre tabule → připojte k uzlu informací o cíli ST"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "Přidat cíl ST",
+    "menuDisplayName": "Přidat cíl ST",
+    "description": "Přidá nový cíl do skóre tabule",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "objective_id": {
+        "name": "id_cíle",
+        "description": "ID cíle skóre tabule"
+      },
+      "display_name": {
+        "name": "zobrazovaný_název",
+        "description": "Zobrazovaný název (volitelné)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "cíl",
+        "description": "Přidaný cíl → připojte k uzlu informací o cíli ST"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "Odebrat cíl ST",
+    "menuDisplayName": "Odebrat cíl ST",
+    "description": "Odebere cíl skóre tabule podle jeho ID",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "objective_id": {
+        "name": "id_cíle",
+        "description": "ID cíle skóre tabule"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "výsledek",
+        "description": "Výsledek odebrání"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Získat všechna skóre",
+    "menuDisplayName": "Všechna skóre",
+    "description": "Získá všechna skóre hráče",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "player_name": {
+        "name": "jméno_hráče",
+        "description": "Jméno hráče"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "skóre",
+        "description": "Pole všech skóre"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Získat skóre",
+    "menuDisplayName": "Získat skóre",
+    "description": "Získá skóre hráče pro konkrétní cíl",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "player_name": {
+        "name": "jméno_hráče",
+        "description": "Jméno hráče"
+      },
+      "objective_id": {
+        "name": "id_cíle",
+        "description": "ID cíle skóre tabule"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "skóre",
+        "description": "Hodnota skóre (číslo)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Operace se skóre",
+    "menuDisplayName": "Op. skóre",
+    "description": "Provede {{operation}} se skóre hráče",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "operation": {
+        "name": "operace",
+        "description": "Typ operace",
+        "options": {
+          "add": "Přičíst",
+          "remove": "Odečíst",
+          "set": "Nastavit"
+        }
+      },
+      "player_name": {
+        "name": "jméno_hráče",
+        "description": "Jméno hráče"
+      },
+      "objective_id": {
+        "name": "id_cíle",
+        "description": "ID cíle skóre tabule"
+      },
+      "value": {
+        "name": "hodnota",
+        "description": "Hodnota pro operaci"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Nová hodnota skóre po operaci"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "Při chatu hráče",
+    "menuDisplayName": "Chat",
+    "description": "Spustí se, když hráč odešle zprávu v chatu",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "odesílatel",
+        "description": "Jméno hráče, který odeslal chat"
+      },
+      "message": {
+        "name": "zpráva",
+        "description": "Obsah zprávy chatu"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "Při připojení hráče",
+    "menuDisplayName": "Připojení",
+    "description": "Spustí se, když se hráč připojí ke světu",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "jméno_hráče",
+        "description": "Jméno hráče, který se připojil"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "Při odchodu hráče",
+    "menuDisplayName": "Odchod",
+    "description": "Spustí se, když hráč opustí svět",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "jméno_hráče",
+        "description": "Jméno hráče, který odešel"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "Při přesunu hráče",
+    "menuDisplayName": "Přesunut",
+    "description": "Spustí se při každém pohybu hráče",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "vzdálenost",
+        "description": "Uražená vzdálenost (metry)"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      },
+      "underwater": {
+        "name": "pod_vodou",
+        "description": "Zda se přesouvá pod vodou (true/false)"
+      },
+      "biome": {
+        "name": "biom",
+        "description": "Název aktuálního biomu"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Název způsobu přesunu"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "Při teleportaci hráče",
+    "menuDisplayName": "Teleportován",
+    "description": "Spustí se, když se hráč teleportuje",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Název příčiny teleportace"
+      },
+      "distance": {
+        "name": "vzdálenost",
+        "description": "Vzdálenost teleportace (metry)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "Při získání titulu",
+    "menuDisplayName": "Titul",
+    "description": "Spustí se, když hráč obdrží titul",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "odesílatel",
+        "description": "Jméno hráče, který odeslal titul"
+      },
+      "message": {
+        "name": "zpráva",
+        "description": "Obsah zprávy titulu"
+      },
+      "recipient": {
+        "name": "příjemce",
+        "description": "Jméno hráče, který titul obdržel"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "Při zprávě hráče",
+    "menuDisplayName": "Zpráva",
+    "description": "Spustí se, když hráč odešle jakýkoli typ zprávy",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "odesílatel",
+        "description": "Jméno hráče, který odeslal zprávu"
+      },
+      "message": {
+        "name": "zpráva",
+        "description": "Obsah zprávy"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Typ zprávy (chat / tell atd.)"
+      },
+      "recipient": {
+        "name": "příjemce",
+        "description": "[nullable] Jméno příjemce. null pro zprávy jiné než tell"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "Při odrazu hráče",
+    "menuDisplayName": "Odraz",
+    "description": "Spustí se, když se hráč odrazí od bloku slizu apod.",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "výška",
+        "description": "Výška odrazu (bloky)"
+      },
+      "block": {
+        "name": "blok",
+        "description": "Objekt BlockType (blok odrazu) → připojte k uzlu informací o bloku"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "Při rozbití bloku",
+    "menuDisplayName": "Rozbít blok",
+    "description": "Spustí se, když je blok rozbit",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blok",
+        "description": "Objekt BlockType → připojte k uzlu informací o bloku"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Název způsobu zničení"
+      },
+      "item": {
+        "name": "předmět",
+        "description": "[nullable] Držený předmět před rozbitím. null, pokud holýma rukama"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "Při položení bloku",
+    "menuDisplayName": "Položit blok",
+    "description": "Spustí se, když je blok položen",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blok",
+        "description": "Objekt BlockType → připojte k uzlu informací o bloku"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      },
+      "underwater": {
+        "name": "pod_vodou",
+        "description": "Zda byl položen pod vodou (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Název způsobu položení"
+      },
+      "item": {
+        "name": "předmět",
+        "description": "Držený předmět před položením → připojte k uzlu informací o předmětu"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "Při použití předmětu",
+    "menuDisplayName": "Předmět použit",
+    "description": "Spustí se, když hráč použije předmět",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "předmět",
+        "description": "[nullable] Držený předmět. null, pokud žádný předmět"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Název způsobu použití předmětu"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "Při získání předmětu",
+    "menuDisplayName": "Předmět získán",
+    "description": "Spustí se, když hráč získá předmět",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "počet",
+        "description": "Počet získaných předmětů"
+      },
+      "item": {
+        "name": "předmět",
+        "description": "Typ předmětu → připojte k uzlu informací o typu předmětu"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Název způsobu získání předmětu"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "Při vyrobení předmětu",
+    "menuDisplayName": "Vyroben",
+    "description": "Spustí se, když hráč vyrobí předmět",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "předmět",
+        "description": "Hromádka předmětů (vyrobený předmět) → připojte k uzlu informací o hromádce předmětů"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      },
+      "used_table": {
+        "name": "použit_stůl",
+        "description": "Zda byl použit výrobní stůl (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "Při nasazení předmětu",
+    "menuDisplayName": "Nasazen",
+    "description": "Spustí se, když hráč nasadí předmět",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "předmět",
+        "description": "Hromádka předmětů → připojte k uzlu informací o hromádce předmětů"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      },
+      "equip_slot": {
+        "name": "slot_výbavy",
+        "description": "Název slotu výbavy"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "Při přetavení předmětu",
+    "menuDisplayName": "Přetaven",
+    "description": "Spustí se, když hráč přetaví předmět",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "předmět",
+        "description": "Typ předmětu (přetavený) → připojte k uzlu informací o typu předmětu"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      },
+      "fuel": {
+        "name": "palivo",
+        "description": "Typ předmětu (palivo) → připojte k uzlu informací o typu předmětu"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "Při směně předmětu",
+    "menuDisplayName": "Směněn",
+    "description": "Spustí se, když hráč dokončí směnu s vesničanem",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "předmět",
+        "description": "Hromádka předmětů (obdržený předmět) → připojte k uzlu informací o hromádce předmětů"
+      },
+      "villager": {
+        "name": "vesničan",
+        "description": "Objekt WorldVillager → připojte k uzlu informací o vesničanovi"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      },
+      "payment_a": {
+        "name": "platba_a",
+        "description": "Typ předmětu (platba A) → připojte k uzlu informací o typu předmětu"
+      },
+      "payment_b": {
+        "name": "platba_b",
+        "description": "[nullable] Typ předmětu (platba B). null, pokud nepoužito"
+      },
+      "player_xp": {
+        "name": "smaragdy_hráče",
+        "description": "Smaragdy hráče po směně"
+      },
+      "villager_xp": {
+        "name": "smaragdy_vesničana",
+        "description": "Smaragdy vesničana po směně"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "Při interakci s mobem",
+    "menuDisplayName": "Interakce mob",
+    "description": "Spustí se, když hráč interaguje s mobem",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "mob",
+        "description": "Objekt WorldMob (mob interakce)"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Název typu interakce s mobem"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "Při zásahu terče",
+    "menuDisplayName": "Zásah terče",
+    "description": "Spustí se, když je zasažen blok terče",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "síla",
+        "description": "Síla signálu redstone (0–15)"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Spustit příkaz",
+    "menuDisplayName": "Spust. příkaz",
+    "description": "Spustí libovolný příkaz Minecraftu (bez úvodního /)",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "command": {
+        "name": "příkaz",
+        "description": "Příkaz Minecraftu ke spuštění (bez úvodního /)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vyšle true po dokončení"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Získat herní čas",
+    "menuDisplayName": "Herní čas",
+    "description": "Získá herní čas ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Typ času k dotazu",
+        "options": {
+          "time": "Čas (0–24000)",
+          "day": "Počet dnů",
+          "tick": "Počet ticků"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "hodnota",
+        "description": "Dotázaná hodnota času"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Je den",
+    "menuDisplayName": "Den?",
+    "description": "Zkontroluje, zda je aktuálně den (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "je_den",
+        "description": "true ve dne, false v noci"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Získat počasí",
+    "menuDisplayName": "Počasí",
+    "description": "Získá aktuální počasí",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "počasí",
+        "description": "Název počasí (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Vyplnit bloky",
+    "menuDisplayName": "Vyplnit",
+    "description": "Vyplní oblast mezi dvěma pozicemi určeným blokem",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "from": {
+        "name": "od",
+        "description": "Počáteční roh {x, y, z}"
+      },
+      "to": {
+        "name": "do",
+        "description": "Koncový roh {x, y, z}"
+      },
+      "block_id": {
+        "name": "id_bloku",
+        "description": "ID bloku (např. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vyšle true po dokončení vyplnění"
+      },
+      "count": {
+        "name": "počet",
+        "description": "Počet vyplněných bloků"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Získat výšku terénu",
+    "menuDisplayName": "Terén",
+    "description": "Získá pozici a typ nejvyššího pevného bloku",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozice",
+        "description": "Pozice terénu {x, y, z}"
+      },
+      "block_name": {
+        "name": "název_bloku",
+        "description": "Název nejvyššího pevného bloku"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Dotaz na svět",
+    "menuDisplayName": "Dotaz na svět",
+    "description": "Dotáže se na seznam {{type}} ve světě",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Kategorie k dotazu",
+        "options": {
+          "mob": "Entita",
+          "block": "Blok",
+          "item": "Předmět"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "seznam",
+        "description": "Seznam výsledků dotazu"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Získat pozici hráče",
+    "menuDisplayName": "Poz. hráče",
+    "description": "Získá aktuální pozici a směr pohledu hráče",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozice",
+        "description": "Pozice hráče {x, y, z}"
+      },
+      "direction": {
+        "name": "směr",
+        "description": "Směr pohledu hráče (rotace kolem osy Y)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Získat orientaci hráče",
+    "menuDisplayName": "Směr hráče",
+    "description": "Získá úhel kamery hráče (sklon a vybočení)",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "úhel",
+        "description": "Úhel pohledu hráče {x, y} (stupně)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Získat tagy hráče",
+    "menuDisplayName": "Tagy hráče",
+    "description": "Získá všechny tagy přiřazené hráči",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "tagy",
+        "description": "Pole řetězců s názvy tagů"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "Hráč má tag",
+    "menuDisplayName": "Má tag?",
+    "description": "Zkontroluje, zda hráč má určený tag",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "tag": {
+        "name": "tag",
+        "description": "Název tagu ke kontrole"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "výsledek",
+        "description": "true, pokud hráč má tag"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Získat úroveň hráče",
+    "menuDisplayName": "Úr. hráče",
+    "description": "Získá aktuální úroveň zkušeností hráče",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "úroveň",
+        "description": "Úroveň hráče (číslo)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Získat herní režim",
+    "menuDisplayName": "Herní režim",
+    "description": "Získá aktuální herní režim hráče",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "herní_režim",
+        "description": "Název herního režimu (např. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Získat schopnosti hráče",
+    "menuDisplayName": "Schopnosti",
+    "description": "Získá aktuální nastavení schopností hráče",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "schopnosti",
+        "description": "Objekt schopností hráče"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Získat hráče",
+    "menuDisplayName": "Hráči",
+    "description": "Získá seznam všech hráčů ve světě",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "hráči",
+        "description": "Pole objektů hráčů"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Získat místního hráče",
+    "menuDisplayName": "Místní hráč",
+    "description": "Získá objekt místního hráče (sebe)",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "hráč",
+        "description": "Objekt místního hráče"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Získat z entity",
+    "menuDisplayName": "Info entity",
+    "description": "Extrahuje pozici, směr, dimenzi a další pole z objektu entity",
+    "inputs": {
+      "entity": {
+        "name": "entita",
+        "description": "Objekt hráče nebo vesničana (výstup player / villager)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozice",
+        "description": "Pozice entity (position)"
+      },
+      "direction": {
+        "name": "směr",
+        "description": "Rotace kolem osy Y (yRot)"
+      },
+      "dimension": {
+        "name": "dimenze",
+        "description": "Číslo dimenze (dimension)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Řetězec typu (type)"
+      },
+      "variant": {
+        "name": "varianta",
+        "description": "Číslo varianty (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Číslo ID entity (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Získat z hráče",
+    "menuDisplayName": "Info hráče",
+    "description": "Extrahuje jméno, barvu a informace o entitě z objektu snímku hráče",
+    "inputs": {
+      "player": {
+        "name": "hráč",
+        "description": "Objekt hráče z výstupu player uzlu události"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "jméno",
+        "description": "Jméno hráče (name)"
+      },
+      "color": {
+        "name": "barva",
+        "description": "Barva značky na mapě (color)"
+      },
+      "entity": {
+        "name": "entita",
+        "description": "Připojte k uzlu informací o entitě"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Získat z typu předmětu",
+    "menuDisplayName": "Info typu předm.",
+    "description": "Extrahuje ID předmětu a hodnotu dat z objektu typu předmětu",
+    "inputs": {
+      "item": {
+        "name": "předmět",
+        "description": "Typ předmětu (výstup item z událostí získání / přetavení)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_předmětu",
+        "description": "Řetězec ID předmětu (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Hodnota dat (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Získat z hromádky předmětů",
+    "menuDisplayName": "Info hromádky",
+    "description": "Extrahuje ID předmětu, počet, max. počet a hodnotu dat z objektu hromádky předmětů",
+    "inputs": {
+      "item": {
+        "name": "předmět",
+        "description": "Hromádka předmětů (výstup item z událostí použití / nasazení / výroby / směny)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_předmětu",
+        "description": "Řetězec ID předmětu (typeId)"
+      },
+      "count": {
+        "name": "počet",
+        "description": "Velikost hromádky (amount)"
+      },
+      "max_count": {
+        "name": "max_počet",
+        "description": "Max. velikost hromádky (maxAmount)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Hodnota dat (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Získat z typu bloku",
+    "menuDisplayName": "Info bloku",
+    "description": "Extrahuje ID bloku a hodnotu dat z objektu typu bloku",
+    "inputs": {
+      "block": {
+        "name": "blok",
+        "description": "Objekt typu bloku (výstup block z událostí block / bounce)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "id_bloku",
+        "description": "Řetězec ID bloku (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Hodnota dat (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Získat z cíle ST",
+    "menuDisplayName": "Info cíle ST",
+    "description": "Extrahuje ID a zobrazovaný název z objektu cíle skóre tabule",
+    "inputs": {
+      "objective": {
+        "name": "cíl",
+        "description": "Cíl z uzlu přidání / získání cíle"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "id_cíle",
+        "description": "Řetězec ID cíle (id)"
+      },
+      "display_name": {
+        "name": "zobrazovaný_název",
+        "description": "Zobrazovaný název (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Získat z moba",
+    "menuDisplayName": "Info moba",
+    "description": "Extrahuje čísla typu, barvy a varianty z objektu moba",
+    "inputs": {
+      "mob": {
+        "name": "mob",
+        "description": "Objekt moba (výstup mob z události interakce s mobem)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "typ",
+        "description": "Číslo typu moba (type)"
+      },
+      "color": {
+        "name": "barva",
+        "description": "Číslo barvy (color)"
+      },
+      "variant": {
+        "name": "varianta",
+        "description": "Číslo varianty (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Získat z vesničana",
+    "menuDisplayName": "Info vesničana",
+    "description": "Extrahuje jméno, hodnost a informace o entitě z objektu vesničana",
+    "inputs": {
+      "villager": {
+        "name": "vesničan",
+        "description": "Objekt vesničana (výstup villager z události směny)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "jméno",
+        "description": "Jméno vesničana (trader.name)"
+      },
+      "rank": {
+        "name": "hodnost",
+        "description": "Obchodní hodnost (trader.tier)"
+      },
+      "entity": {
+        "name": "entita",
+        "description": "Připojte k uzlu informací o entitě"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Selektor",
+    "menuDisplayName": "Selektor",
+    "description": "Vybírá ze seznamu {{type}}",
+    "inputs": {
+      "type": {
+        "name": "typ",
+        "description": "Kategorie k výběru",
+        "options": {
+          "block": "🧱 Blok",
+          "item": "🎒 Předmět",
+          "mob": "🐾 Mob",
+          "TravelMethod": "🚶 Způsob přesunu",
+          "TeleportCause": "✨ Příčina teleportace",
+          "MobInteraction": "🐄 Interakce s mobem",
+          "ItemUseMethod": "🤚 Způsob použití předmětu",
+          "ItemAcqMethod": "📦 Způsob získání",
+          "EquipSlot": "🪖 Slot výbavy",
+          "BlockBreakMethod": "⛏️ Způsob rozbití",
+          "BlockPlaceMethod": "🏗️ Způsob položení"
+        }
+      },
+      "block": {
+        "name": "blok",
+        "description": "ID bloku"
+      },
+      "item": {
+        "name": "předmět",
+        "description": "ID předmětu"
+      },
+      "mob": {
+        "name": "mob",
+        "description": "ID moba (entity)"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Způsob přesunu"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Příčina teleportace"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Typ interakce s mobem"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Způsob použití předmětu"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Způsob získání předmětu"
+      },
+      "EquipSlot": {
+        "name": "slot_výbavy",
+        "description": "Slot výbavy"
+      },
+      "BlockBreakMethod": {
+        "name": "způsob_rozbití",
+        "description": "Způsob rozbití bloku"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Způsob položení bloku"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "hodnota",
+        "description": "Vybrané ID nebo hodnota výčtu"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Lokalizovaný název",
+    "menuDisplayName": "Lokalizovaný název",
+    "description": "Převede {{type}} na lokalizovaný název",
+    "inputs": {
+      "value": {
+        "name": "hodnota",
+        "description": "ID Minecraftu (např. \"minecraft:stone\") nebo hodnota události (např. \"Walk\")"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Kategorie k převodu",
+        "options": {
+          "block": "ID bloku",
+          "item": "ID předmětu",
+          "mob": "ID moba",
+          "TravelMethod": "Způsob přesunu",
+          "TeleportCause": "Příčina teleportace",
+          "MobInteraction": "Interakce s mobem",
+          "ItemUseMethod": "Způsob použití předmětu",
+          "ItemAcqMethod": "Způsob získání",
+          "EquipSlot": "Slot výbavy",
+          "BlockBreakMethod": "Způsob rozbití bloku",
+          "BlockPlaceMethod": "Způsob položení bloku"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "jméno",
+        "description": "Lokalizovaný název (vrátí vstupní hodnotu, pokud nenalezeno)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Operace Vector3",
+    "menuDisplayName": "Op. Vec3",
+    "description": "Provede {{op}} na 3D pozici",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Typ operace",
+        "options": {
+          "assemble": "🔧 Sestavit",
+          "add": "➕ Sečíst",
+          "subtract": "➖ Odečíst",
+          "scale": "✖️ Škálovat",
+          "floor": "⬇️ Zaokr. dolů",
+          "ceil": "⬆️ Zaokr. nahoru",
+          "fill_y": "📐 Vyplnit Y"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "Souřadnice X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Souřadnice Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Souřadnice Z"
+      },
+      "pos_a": {
+        "name": "poz_a",
+        "description": "Základní pozice {x,y,z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "Jiná pozice {x,y,z}"
+      },
+      "position": {
+        "name": "pozice",
+        "description": "Pozice {x,y,z}"
+      },
+      "scale": {
+        "name": "měřítko",
+        "description": "Skalární násobitel (např. 2 pro dvojnásobek)"
+      },
+      "pos_xz": {
+        "name": "poz_xz",
+        "description": "2D pozice {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Hodnota souřadnice Y"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "výsledek",
+        "description": "Výsledná pozice {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Vzdálenost Vector3",
+    "menuDisplayName": "Vzdálenost",
+    "description": "Vypočítá eukleidovskou vzdálenost mezi dvěma 3D pozicemi",
+    "inputs": {
+      "pos_a": {
+        "name": "poz_a",
+        "description": "Počáteční pozice {x,y,z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "Koncová pozice {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "vzdálenost",
+        "description": "Vzdálenost mezi dvěma body (metry)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 na řetězec",
+    "menuDisplayName": "Vec3→Řetězec",
+    "description": "Převede objekt pozice na řetězec ve formátu \"x y z\"",
+    "inputs": {
+      "position": {
+        "name": "pozice",
+        "description": "Pozice k převodu {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "text",
+        "description": "Řetězec ve formátu \"x y z\""
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Rozdělit Vector3",
+    "menuDisplayName": "Rozděl Vec3",
+    "description": "Rozdělí objekt pozice na samostatné hodnoty x, y a z",
+    "inputs": {
+      "position": {
+        "name": "pozice",
+        "description": "Pozice k rozdělení {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "Souřadnice X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Souřadnice Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Souřadnice Z"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Omezit číslo",
+    "menuDisplayName": "Omezit",
+    "description": "Omezí číslo mezi minimální a maximální hodnotou",
+    "inputs": {
+      "value": {
+        "name": "hodnota",
+        "description": "Číslo k omezení"
+      },
+      "min": {
+        "name": "min",
+        "description": "Dolní mez"
+      },
+      "max": {
+        "name": "max",
+        "description": "Horní mez"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "výsledek",
+        "description": "Omezená hodnota"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Vytvořit oblast",
+    "menuDisplayName": "Vytvořit AABB",
+    "description": "Vytvoří osově zarovnaný ohraničující kvádr (AABB) ze dvou rohů",
+    "inputs": {
+      "corner_a": {
+        "name": "roh_a",
+        "description": "Roh 1 oblasti {x,y,z} (na pořadí nezáleží)"
+      },
+      "corner_b": {
+        "name": "roh_b",
+        "description": "Roh 2 oblasti {x,y,z} (na pořadí nezáleží)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "oblast",
+        "description": "Objekt oblasti AABB {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Je v oblasti",
+    "menuDisplayName": "Uvnitř AABB",
+    "description": "Zkontroluje, zda je pozice uvnitř oblasti AABB",
+    "inputs": {
+      "area": {
+        "name": "oblast",
+        "description": "Oblast AABB {min, max}"
+      },
+      "position": {
+        "name": "pozice",
+        "description": "Pozice k otestování {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "výsledek",
+        "description": "true, pokud je pozice uvnitř oblasti"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "Při transformaci hráče",
+    "menuDisplayName": "TransfHráče",
+    "description": "Spustí se, když se změní pozice nebo rotace hráče (vysoká frekvence)",
+    "inputs": {
+      "world": {
+        "name": "svět",
+        "description": "Výstup World z uzlu MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozice",
+        "description": "Pozice hráče {x, y, z}"
+      },
+      "direction": {
+        "name": "směr",
+        "description": "Směr pohledu hráče (rotace kolem osy Y)"
+      },
+      "player": {
+        "name": "hráč",
+        "description": "Objekt WorldPlayer → připojte k uzlu informací o hráči"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Pohyb agenta",
+    "menuDisplayName": "AgentMove",
+    "description": "Přesune agenta {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "direction": {
+        "name": "směr",
+        "description": "Směr pohybu",
+        "options": {
+          "forward": "Vpřed",
+          "back": "Vzad",
+          "left": "Vlevo",
+          "right": "Vpravo",
+          "up": "Nahoru",
+          "down": "Dolů"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vyšle true po přesunu"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Otočení agenta",
+    "menuDisplayName": "AgentTurn",
+    "description": "Otočí agenta {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "direction": {
+        "name": "směr",
+        "description": "Směr otočení",
+        "options": {
+          "left": "Vlevo",
+          "right": "Vpravo"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vyšle true po otočení"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Teleport agenta",
+    "menuDisplayName": "AgentTP",
+    "description": "Teleportuje agenta na pozici (vynechte pro použití aktuální polohy hráče)",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "position": {
+        "name": "pozice",
+        "description": "Cílová pozice {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vyšle true po teleportaci"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Akce agenta",
+    "menuDisplayName": "AgentAction",
+    "description": "Agent provede {{action}} (směr: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "action": {
+        "name": "akce",
+        "description": "Akce k provedení",
+        "options": {
+          "attack": "Zaútočit",
+          "destroyBlock": "Zničit",
+          "till": "Zorat",
+          "dropAllItems": "Zahodit vše"
+        }
+      },
+      "direction": {
+        "name": "směr",
+        "description": "Směr akce",
+        "options": {
+          "forward": "Vpřed",
+          "back": "Vzad",
+          "left": "Vlevo",
+          "right": "Vpravo",
+          "up": "Nahoru",
+          "down": "Dolů"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vyšle true po dokončení"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Agent položí blok",
+    "menuDisplayName": "AgentPolož",
+    "description": "Položí blok ze slotu {{slot}} ve směru {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "direction": {
+        "name": "směr",
+        "description": "Směr položení",
+        "options": {
+          "forward": "Vpřed",
+          "back": "Vzad",
+          "left": "Vlevo",
+          "right": "Vpravo",
+          "up": "Nahoru",
+          "down": "Dolů"
+        }
+      },
+      "slot": {
+        "name": "slot",
+        "description": "Číslo slotu inventáře (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vyšle true po položení"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Agent zahodí předmět",
+    "menuDisplayName": "AgentZahoď",
+    "description": "Zahodí předmět ze slotu {{slot}} ve směru {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "direction": {
+        "name": "směr",
+        "description": "Směr zahození",
+        "options": {
+          "forward": "Vpřed",
+          "back": "Vzad",
+          "left": "Vlevo",
+          "right": "Vpravo",
+          "up": "Nahoru",
+          "down": "Dolů"
+        }
+      },
+      "slot": {
+        "name": "slot",
+        "description": "Číslo slotu inventáře (1–27)"
+      },
+      "amount": {
+        "name": "množství",
+        "description": "Počet předmětů k zahození"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vyšle true po zahození"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Agent přesune předmět",
+    "menuDisplayName": "AgentPřesPředm",
+    "description": "Přesune předměty mezi sloty v inventáři agenta",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "from_slot": {
+        "name": "zdrojový_slot",
+        "description": "Číslo zdrojového slotu (1–27)"
+      },
+      "to_slot": {
+        "name": "cílový_slot",
+        "description": "Číslo cílového slotu (1–27)"
+      },
+      "amount": {
+        "name": "množství",
+        "description": "Počet předmětů k přesunu"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vyšle true po přesunu"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Agent nastaví předmět",
+    "menuDisplayName": "AgentNastPředm",
+    "description": "Nastaví předmět v určeném slotu inventáře agenta",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "slot": {
+        "name": "slot",
+        "description": "Číslo slotu k nastavení (1–27)"
+      },
+      "item_id": {
+        "name": "id_předmětu",
+        "description": "ID předmětu (např. minecraft:apple)"
+      },
+      "amount": {
+        "name": "množství",
+        "description": "Počet předmětů k nastavení"
+      },
+      "data": {
+        "name": "data",
+        "description": "Hodnota dat (obvykle 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vyšle true po nastavení"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Agent sbírá",
+    "menuDisplayName": "AgentSbírej",
+    "description": "Sbírá určený typ předmětu v okolí agenta",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "item_id": {
+        "name": "id_předmětu",
+        "description": "ID předmětu ke sběru"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vyšle true po sběru"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Agent detekuje",
+    "menuDisplayName": "AG Detekuj",
+    "description": "Detekuje {{type}} {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "spouštěč",
+        "description": "Spouštěč (volitelné)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Co detekovat",
+        "options": {
+          "block": "Blok",
+          "redstone": "Redstone"
+        }
+      },
+      "direction": {
+        "name": "směr",
+        "description": "Směr detekce",
+        "options": {
+          "forward": "Vpřed",
+          "back": "Vzad",
+          "left": "Vlevo",
+          "right": "Vpravo",
+          "up": "Nahoru",
+          "down": "Dolů"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "detekováno",
+        "description": "true, pokud je něco detekováno"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Interpolace Vector3",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Lineárně interpoluje mezi dvěma pozicemi (t=0 je začátek, t=1 je konec)",
+    "inputs": {
+      "pos_a": {
+        "name": "poz_a",
+        "description": "Počáteční pozice {x, y, z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "Koncová pozice {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Faktor interpolace (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "výsledek",
+        "description": "Interpolovaná pozice {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Normalizace Vector3",
+    "menuDisplayName": "Vec3Norm",
+    "description": "Normalizuje vektor na jednotkovou délku (délka = 1)",
+    "inputs": {
+      "position": {
+        "name": "pozice",
+        "description": "Vektor k normalizaci {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "výsledek",
+        "description": "Jednotkový vektor o délce 1 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Skalární součin Vector3",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Vypočítá skalární součin dvou vektorů",
+    "inputs": {
+      "pos_a": {
+        "name": "poz_a",
+        "description": "Vektor A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "Vektor B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "hodnota",
+        "description": "Skalární součin (skalár)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "Posun AABB",
+    "menuDisplayName": "AABBPosun",
+    "description": "Posune oblast AABB o daný vektor",
+    "inputs": {
+      "area": {
+        "name": "oblast",
+        "description": "Oblast k posunu {min, max}"
+      },
+      "delta": {
+        "name": "delta",
+        "description": "Vektor posunu {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "oblast",
+        "description": "Objekt posunuté oblasti"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "Průnik AABB",
+    "menuDisplayName": "AABBProtíná",
+    "description": "Zkontroluje, zda se dvě oblasti AABB překrývají",
+    "inputs": {
+      "area_a": {
+        "name": "oblast_a",
+        "description": "Oblast A {min, max}"
+      },
+      "area_b": {
+        "name": "oblast_b",
+        "description": "Oblast B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "výsledek",
+        "description": "true, pokud se dvě oblasti překrývají"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Assert",
+    "menuDisplayName": "Assert",
+    "description": "Porovná skutečnou hodnotu s očekávanou a zapíše PASS/FAIL. Vždy vyšle done pro zřetězení.",
+    "inputs": {
+      "actual": {
+        "name": "skutečná",
+        "description": "Hodnota k otestování"
+      },
+      "expected": {
+        "name": "očekávaná",
+        "description": "Očekávaná hodnota"
+      },
+      "op": {
+        "name": "op",
+        "description": "Operátor porovnání",
+        "options": {
+          "eq": "Rovno (===)",
+          "neq": "Nerovno (!==)",
+          "deep": "Hluboká rovnost (JSON)",
+          "lt": "Menší než (<)",
+          "gt": "Větší než (>)",
+          "lte": "Menší nebo rovno (≤)",
+          "gte": "Větší nebo rovno (≥)",
+          "approx": "Přibl. (±tolerance)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "ID testovacího případu (např. TC-111)"
+      },
+      "tolerance": {
+        "name": "tolerance",
+        "description": "Tolerance pro přibližné porovnání"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "hotovo",
+        "description": "Vždy vyšle true (pro zřetězení)"
+      },
+      "passed": {
+        "name": "prošlo",
+        "description": "Vyšle true, když test projde"
+      },
+      "failed": {
+        "name": "selhalo",
+        "description": "Vyšle skutečnou hodnotu, když test selže"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Odešle text do Gemini AI a získá odpověď",
+    "inputs": {
+      "apiKey": {
+        "name": "Klíč API",
+        "description": "Klíč API z Google AI Studio"
+      },
+      "model": {
+        "name": "Model",
+        "description": "Model Gemini k použití",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (doporučeno)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Prompt",
+        "description": "Text promptu uživatele"
+      },
+      "systemInstruction": {
+        "name": "Systémová instrukce",
+        "description": "Systémový prompt definující roli/chování AI (volitelné)"
+      },
+      "temperature": {
+        "name": "Teplota",
+        "description": "Náhodnost 0.0–1.0 (nižší = deterministrovanější)"
+      },
+      "trigger": {
+        "name": "Spouštěč",
+        "description": "Spouštěč (volitelné)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Odpověď",
+        "description": "Text vygenerovaný Gemini"
+      }
+    }
+  }
+}

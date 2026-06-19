@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Połącz",
+    "description": "Uruchamia serwer WebSocket i łączy się z Minecraft Education Edition",
+    "inputs": {
+      "port": {
+        "name": "port",
+        "description": "Numer portu WebSocket (domyślnie: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "świat",
+        "description": "Obiekt World (używany wewnętrznie; nie trzeba łączyć z węzłami poleceń)"
+      },
+      "error": {
+        "name": "błąd",
+        "description": "Informacje o błędzie połączenia"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Rozłącz",
+    "menuDisplayName": "MC Rozłącz",
+    "description": "Rozłącza z Minecraftem i wyłącza serwer WebSocket",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (np. czat 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Pobierz pozycję agenta",
+    "menuDisplayName": "Poz. agenta",
+    "description": "Pobiera bieżącą pozycję agenta",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozycja",
+        "description": "Pozycja agenta {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "Pobierz cele TW",
+    "menuDisplayName": "Cele TW",
+    "description": "Pobiera listę wszystkich celów tablicy wyników",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "cele",
+        "description": "Tablica obiektów celów tablicy wyników"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "Pobierz cel TW",
+    "menuDisplayName": "Cel TW",
+    "description": "Pobiera cel tablicy wyników po jego ID",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "objective_id": {
+        "name": "id_celu",
+        "description": "ID celu tablicy wyników"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "cel",
+        "description": "Cel tablicy wyników → połącz z węzłem informacji o celu TW"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "Dodaj cel TW",
+    "menuDisplayName": "Dodaj cel TW",
+    "description": "Dodaje nowy cel do tablicy wyników",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "objective_id": {
+        "name": "id_celu",
+        "description": "ID celu tablicy wyników"
+      },
+      "display_name": {
+        "name": "nazwa_wyświetlana",
+        "description": "Nazwa wyświetlana (opcjonalna)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "cel",
+        "description": "Dodany cel → połącz z węzłem informacji o celu TW"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "Usuń cel TW",
+    "menuDisplayName": "Usuń cel TW",
+    "description": "Usuwa cel tablicy wyników po jego ID",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "objective_id": {
+        "name": "id_celu",
+        "description": "ID celu tablicy wyników"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "wynik",
+        "description": "Wynik usunięcia"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Pobierz wszystkie wyniki",
+    "menuDisplayName": "Wszystkie wyniki",
+    "description": "Pobiera wszystkie wyniki gracza",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "player_name": {
+        "name": "nazwa_gracza",
+        "description": "Nazwa gracza"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "wyniki",
+        "description": "Tablica wszystkich wyników"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Pobierz wynik",
+    "menuDisplayName": "Pobierz wynik",
+    "description": "Pobiera wynik gracza dla określonego celu",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "player_name": {
+        "name": "nazwa_gracza",
+        "description": "Nazwa gracza"
+      },
+      "objective_id": {
+        "name": "id_celu",
+        "description": "ID celu tablicy wyników"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "wynik",
+        "description": "Wartość wyniku (liczba)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Operacja na wyniku",
+    "menuDisplayName": "Op. wyniku",
+    "description": "Wykonuje {{operation}} na wyniku gracza",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "operation": {
+        "name": "operacja",
+        "description": "Typ operacji",
+        "options": {
+          "add": "Dodaj",
+          "remove": "Odejmij",
+          "set": "Ustaw"
+        }
+      },
+      "player_name": {
+        "name": "nazwa_gracza",
+        "description": "Nazwa gracza"
+      },
+      "objective_id": {
+        "name": "id_celu",
+        "description": "ID celu tablicy wyników"
+      },
+      "value": {
+        "name": "wartość",
+        "description": "Wartość do operacji"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Nowa wartość wyniku po operacji"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "Gdy gracz pisze",
+    "menuDisplayName": "Czat",
+    "description": "Uruchamia się, gdy gracz wysyła wiadomość na czacie",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "nadawca",
+        "description": "Nazwa gracza, który wysłał wiadomość"
+      },
+      "message": {
+        "name": "wiadomość",
+        "description": "Treść wiadomości czatu"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "Gdy gracz dołącza",
+    "menuDisplayName": "Dołączenie",
+    "description": "Uruchamia się, gdy gracz dołącza do świata",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "nazwa_gracza",
+        "description": "Nazwa gracza, który dołączył"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "Gdy gracz wychodzi",
+    "menuDisplayName": "Wyjście",
+    "description": "Uruchamia się, gdy gracz opuszcza świat",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "nazwa_gracza",
+        "description": "Nazwa gracza, który wyszedł"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "Gdy gracz się przemieszcza",
+    "menuDisplayName": "Przemieszczony",
+    "description": "Uruchamia się przy każdym ruchu gracza",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "odległość",
+        "description": "Przebyta odległość (metry)"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      },
+      "underwater": {
+        "name": "pod_wodą",
+        "description": "Czy przemieszcza się pod wodą (true/false)"
+      },
+      "biome": {
+        "name": "biom",
+        "description": "Nazwa bieżącego biomu"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Nazwa metody przemieszczania"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "Gdy gracz się teleportuje",
+    "menuDisplayName": "Teleportowany",
+    "description": "Uruchamia się, gdy gracz się teleportuje",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Nazwa przyczyny teleportacji"
+      },
+      "distance": {
+        "name": "odległość",
+        "description": "Odległość teleportacji (metry)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "Gdy gracz otrzymuje tytuł",
+    "menuDisplayName": "Tytuł",
+    "description": "Uruchamia się, gdy gracz otrzymuje tytuł",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "nadawca",
+        "description": "Nazwa gracza, który wysłał tytuł"
+      },
+      "message": {
+        "name": "wiadomość",
+        "description": "Treść wiadomości tytułu"
+      },
+      "recipient": {
+        "name": "odbiorca",
+        "description": "Nazwa gracza, który otrzymał tytuł"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "Gdy gracz wysyła wiadomość",
+    "menuDisplayName": "Wiadomość",
+    "description": "Uruchamia się, gdy gracz wysyła dowolny typ wiadomości",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "nadawca",
+        "description": "Nazwa gracza, który wysłał wiadomość"
+      },
+      "message": {
+        "name": "wiadomość",
+        "description": "Treść wiadomości"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Typ wiadomości (chat / tell itp.)"
+      },
+      "recipient": {
+        "name": "odbiorca",
+        "description": "[nullable] Nazwa odbiorcy. null dla wiadomości innych niż tell"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "Gdy gracz się odbija",
+    "menuDisplayName": "Odbicie",
+    "description": "Uruchamia się, gdy gracz odbija się od bloku szlamu itp.",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "wysokość",
+        "description": "Wysokość odbicia (bloki)"
+      },
+      "block": {
+        "name": "blok",
+        "description": "Obiekt BlockType (blok odbicia) → połącz z węzłem informacji o bloku"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "Gdy blok zostaje zniszczony",
+    "menuDisplayName": "Zniszcz blok",
+    "description": "Uruchamia się, gdy blok zostaje zniszczony",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blok",
+        "description": "Obiekt BlockType → połącz z węzłem informacji o bloku"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Nazwa metody zniszczenia"
+      },
+      "item": {
+        "name": "przedmiot",
+        "description": "[nullable] Trzymany przedmiot przed zniszczeniem. null, jeśli gołymi rękami"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "Gdy blok zostaje postawiony",
+    "menuDisplayName": "Postaw blok",
+    "description": "Uruchamia się, gdy blok zostaje postawiony",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blok",
+        "description": "Obiekt BlockType → połącz z węzłem informacji o bloku"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      },
+      "underwater": {
+        "name": "pod_wodą",
+        "description": "Czy postawiono pod wodą (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Nazwa metody stawiania"
+      },
+      "item": {
+        "name": "przedmiot",
+        "description": "Trzymany przedmiot przed postawieniem → połącz z węzłem informacji o przedmiocie"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "Gdy przedmiot jest użyty",
+    "menuDisplayName": "Przedmiot użyty",
+    "description": "Uruchamia się, gdy gracz używa przedmiotu",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "przedmiot",
+        "description": "[nullable] Trzymany przedmiot. null, jeśli brak przedmiotu"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Nazwa metody użycia przedmiotu"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "Gdy przedmiot jest zdobyty",
+    "menuDisplayName": "Przedmiot zdob.",
+    "description": "Uruchamia się, gdy gracz zdobywa przedmiot",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "ilość",
+        "description": "Liczba zdobytych przedmiotów"
+      },
+      "item": {
+        "name": "przedmiot",
+        "description": "Typ przedmiotu → połącz z węzłem informacji o typie przedmiotu"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Nazwa metody zdobycia przedmiotu"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "Gdy przedmiot jest wytworzony",
+    "menuDisplayName": "Wytworzony",
+    "description": "Uruchamia się, gdy gracz wytwarza przedmiot",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "przedmiot",
+        "description": "Stos przedmiotów (wytworzony przedmiot) → połącz z węzłem informacji o stosie przedmiotów"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      },
+      "used_table": {
+        "name": "użyto_stołu",
+        "description": "Czy użyto stołu rzemieślniczego (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "Gdy przedmiot jest założony",
+    "menuDisplayName": "Założony",
+    "description": "Uruchamia się, gdy gracz zakłada przedmiot",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "przedmiot",
+        "description": "Stos przedmiotów → połącz z węzłem informacji o stosie przedmiotów"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      },
+      "equip_slot": {
+        "name": "slot_ekwip",
+        "description": "Nazwa slotu ekwipunku"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "Gdy przedmiot jest przetopiony",
+    "menuDisplayName": "Przetopiony",
+    "description": "Uruchamia się, gdy gracz przetapia przedmiot",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "przedmiot",
+        "description": "Typ przedmiotu (przetopiony) → połącz z węzłem informacji o typie przedmiotu"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      },
+      "fuel": {
+        "name": "paliwo",
+        "description": "Typ przedmiotu (paliwo) → połącz z węzłem informacji o typie przedmiotu"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "Gdy przedmiot jest wymieniony",
+    "menuDisplayName": "Wymieniony",
+    "description": "Uruchamia się, gdy gracz kończy handel z wieśniakiem",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "przedmiot",
+        "description": "Stos przedmiotów (otrzymany przedmiot) → połącz z węzłem informacji o stosie przedmiotów"
+      },
+      "villager": {
+        "name": "wieśniak",
+        "description": "Obiekt WorldVillager → połącz z węzłem informacji o wieśniaku"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      },
+      "payment_a": {
+        "name": "zapłata_a",
+        "description": "Typ przedmiotu (zapłata A) → połącz z węzłem informacji o typie przedmiotu"
+      },
+      "payment_b": {
+        "name": "zapłata_b",
+        "description": "[nullable] Typ przedmiotu (zapłata B). null, jeśli nieużyte"
+      },
+      "player_xp": {
+        "name": "szmaragdy_gracza",
+        "description": "Szmaragdy gracza po wymianie"
+      },
+      "villager_xp": {
+        "name": "szmaragdy_wieśniaka",
+        "description": "Szmaragdy wieśniaka po wymianie"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "Gdy nastąpi interakcja z mobem",
+    "menuDisplayName": "Interakcja mob",
+    "description": "Uruchamia się, gdy gracz wchodzi w interakcję z mobem",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "mob",
+        "description": "Obiekt WorldMob (mob interakcji)"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Nazwa typu interakcji z mobem"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "Gdy cel zostanie trafiony",
+    "menuDisplayName": "Cel trafiony",
+    "description": "Uruchamia się, gdy blok-cel zostaje trafiony",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "siła",
+        "description": "Siła sygnału redstone (0–15)"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Wykonaj polecenie",
+    "menuDisplayName": "Wyk. polec.",
+    "description": "Wykonuje dowolne polecenie Minecrafta (bez początkowego /)",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "command": {
+        "name": "polecenie",
+        "description": "Polecenie Minecrafta do wykonania (bez początkowego /)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Wysyła true po zakończeniu"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Pobierz czas gry",
+    "menuDisplayName": "Czas gry",
+    "description": "Pobiera czas gry ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Typ czasu do odpytania",
+        "options": {
+          "time": "Czas (0–24000)",
+          "day": "Liczba dni",
+          "tick": "Liczba tików"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "wartość",
+        "description": "Odpytana wartość czasu"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Czy jest dzień",
+    "menuDisplayName": "Dzień?",
+    "description": "Sprawdza, czy jest obecnie dzień (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "jest_dzień",
+        "description": "true w dzień, false w nocy"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Pobierz pogodę",
+    "menuDisplayName": "Pogoda",
+    "description": "Pobiera bieżącą pogodę",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "pogoda",
+        "description": "Nazwa pogody (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Wypełnij blokami",
+    "menuDisplayName": "Wypełnij",
+    "description": "Wypełnia obszar między dwiema pozycjami określonym blokiem",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "from": {
+        "name": "od",
+        "description": "Narożnik początkowy {x, y, z}"
+      },
+      "to": {
+        "name": "do",
+        "description": "Narożnik końcowy {x, y, z}"
+      },
+      "block_id": {
+        "name": "id_bloku",
+        "description": "ID bloku (np. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Wysyła true po zakończeniu wypełniania"
+      },
+      "count": {
+        "name": "ilość",
+        "description": "Liczba wypełnionych bloków"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Pobierz wysokość gruntu",
+    "menuDisplayName": "Grunt",
+    "description": "Pobiera pozycję i typ najwyższego stałego bloku",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozycja",
+        "description": "Pozycja gruntu {x, y, z}"
+      },
+      "block_name": {
+        "name": "nazwa_bloku",
+        "description": "Nazwa najwyższego stałego bloku"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Zapytanie świata",
+    "menuDisplayName": "Zapytanie świata",
+    "description": "Odpytuje listę {{type}} w świecie",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Kategoria do odpytania",
+        "options": {
+          "mob": "Encja",
+          "block": "Blok",
+          "item": "Przedmiot"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "lista",
+        "description": "Lista wyników zapytania"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Pobierz pozycję gracza",
+    "menuDisplayName": "Poz. gracza",
+    "description": "Pobiera bieżącą pozycję i kierunek patrzenia gracza",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozycja",
+        "description": "Pozycja gracza {x, y, z}"
+      },
+      "direction": {
+        "name": "kierunek",
+        "description": "Kierunek patrzenia gracza (obrót wokół osi Y)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Pobierz orientację gracza",
+    "menuDisplayName": "Kier. gracza",
+    "description": "Pobiera kąt kamery gracza (pochylenie i odchylenie)",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "kąt",
+        "description": "Kąt patrzenia gracza {x, y} (stopnie)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Pobierz tagi gracza",
+    "menuDisplayName": "Tagi gracza",
+    "description": "Pobiera wszystkie tagi przypisane graczowi",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "tagi",
+        "description": "Tablica ciągów z nazwami tagów"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "Gracz ma tag",
+    "menuDisplayName": "Ma tag?",
+    "description": "Sprawdza, czy gracz ma określony tag",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "tag": {
+        "name": "tag",
+        "description": "Nazwa tagu do sprawdzenia"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "wynik",
+        "description": "true, jeśli gracz ma tag"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Pobierz poziom gracza",
+    "menuDisplayName": "Poz. gracza",
+    "description": "Pobiera bieżący poziom doświadczenia gracza",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "poziom",
+        "description": "Poziom gracza (liczba)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Pobierz tryb gry",
+    "menuDisplayName": "Tryb gry",
+    "description": "Pobiera bieżący tryb gry gracza",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "tryb_gry",
+        "description": "Nazwa trybu gry (np. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Pobierz zdolności gracza",
+    "menuDisplayName": "Zdolności",
+    "description": "Pobiera bieżące ustawienia zdolności gracza",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "zdolności",
+        "description": "Obiekt zdolności gracza"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Pobierz graczy",
+    "menuDisplayName": "Gracze",
+    "description": "Pobiera listę wszystkich graczy w świecie",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "gracze",
+        "description": "Tablica obiektów graczy"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Pobierz gracza lokalnego",
+    "menuDisplayName": "Gracz lokalny",
+    "description": "Pobiera obiekt gracza lokalnego (siebie)",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt gracza lokalnego"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Wyodrębnij z encji",
+    "menuDisplayName": "Info encji",
+    "description": "Wyodrębnia pozycję, kierunek, wymiar i inne pola z obiektu encji",
+    "inputs": {
+      "entity": {
+        "name": "encja",
+        "description": "Obiekt gracza lub wieśniaka (wyjście player / villager)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozycja",
+        "description": "Pozycja encji (position)"
+      },
+      "direction": {
+        "name": "kierunek",
+        "description": "Obrót wokół osi Y (yRot)"
+      },
+      "dimension": {
+        "name": "wymiar",
+        "description": "Numer wymiaru (dimension)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Ciąg typu (type)"
+      },
+      "variant": {
+        "name": "wariant",
+        "description": "Numer wariantu (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Numer ID encji (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Wyodrębnij z gracza",
+    "menuDisplayName": "Info gracza",
+    "description": "Wyodrębnia nazwę, kolor i informacje o encji z obiektu migawki gracza",
+    "inputs": {
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt gracza z wyjścia player węzła zdarzenia"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nazwa",
+        "description": "Nazwa gracza (name)"
+      },
+      "color": {
+        "name": "kolor",
+        "description": "Kolor znacznika mapy (color)"
+      },
+      "entity": {
+        "name": "encja",
+        "description": "Połącz z węzłem informacji o encji"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Wyodrębnij z typu przedmiotu",
+    "menuDisplayName": "Info typu przedm.",
+    "description": "Wyodrębnia ID przedmiotu i wartość danych z obiektu typu przedmiotu",
+    "inputs": {
+      "item": {
+        "name": "przedmiot",
+        "description": "Typ przedmiotu (wyjście item ze zdarzeń zdobycia / przetopienia)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_przedmiotu",
+        "description": "Ciąg ID przedmiotu (id)"
+      },
+      "data": {
+        "name": "dane",
+        "description": "Wartość danych (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Wyodrębnij ze stosu przedmiotów",
+    "menuDisplayName": "Info stosu przedm.",
+    "description": "Wyodrębnia ID przedmiotu, ilość, maks. ilość i wartość danych z obiektu stosu przedmiotów",
+    "inputs": {
+      "item": {
+        "name": "przedmiot",
+        "description": "Stos przedmiotów (wyjście item ze zdarzeń użycia / założenia / wytworzenia / wymiany)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_przedmiotu",
+        "description": "Ciąg ID przedmiotu (typeId)"
+      },
+      "count": {
+        "name": "ilość",
+        "description": "Rozmiar stosu (amount)"
+      },
+      "max_count": {
+        "name": "maks_ilość",
+        "description": "Maks. rozmiar stosu (maxAmount)"
+      },
+      "data": {
+        "name": "dane",
+        "description": "Wartość danych (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Wyodrębnij z typu bloku",
+    "menuDisplayName": "Info bloku",
+    "description": "Wyodrębnia ID bloku i wartość danych z obiektu typu bloku",
+    "inputs": {
+      "block": {
+        "name": "blok",
+        "description": "Obiekt typu bloku (wyjście block ze zdarzeń block / bounce)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "id_bloku",
+        "description": "Ciąg ID bloku (id)"
+      },
+      "data": {
+        "name": "dane",
+        "description": "Wartość danych (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Wyodrębnij z celu TW",
+    "menuDisplayName": "Info celu TW",
+    "description": "Wyodrębnia ID i nazwę wyświetlaną z obiektu celu tablicy wyników",
+    "inputs": {
+      "objective": {
+        "name": "cel",
+        "description": "Cel z węzła dodawania / pobierania celu"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "id_celu",
+        "description": "Ciąg ID celu (id)"
+      },
+      "display_name": {
+        "name": "nazwa_wyświetlana",
+        "description": "Nazwa wyświetlana (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Wyodrębnij z moba",
+    "menuDisplayName": "Info moba",
+    "description": "Wyodrębnia numery typu, koloru i wariantu z obiektu moba",
+    "inputs": {
+      "mob": {
+        "name": "mob",
+        "description": "Obiekt moba (wyjście mob ze zdarzenia interakcji z mobem)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "typ",
+        "description": "Numer typu moba (type)"
+      },
+      "color": {
+        "name": "kolor",
+        "description": "Numer koloru (color)"
+      },
+      "variant": {
+        "name": "wariant",
+        "description": "Numer wariantu (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Wyodrębnij z wieśniaka",
+    "menuDisplayName": "Info wieśniaka",
+    "description": "Wyodrębnia nazwę, rangę i informacje o encji z obiektu wieśniaka",
+    "inputs": {
+      "villager": {
+        "name": "wieśniak",
+        "description": "Obiekt wieśniaka (wyjście villager ze zdarzenia wymiany)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nazwa",
+        "description": "Nazwa wieśniaka (trader.name)"
+      },
+      "rank": {
+        "name": "ranga",
+        "description": "Ranga handlowa (trader.tier)"
+      },
+      "entity": {
+        "name": "encja",
+        "description": "Połącz z węzłem informacji o encji"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Selektor",
+    "menuDisplayName": "Selektor",
+    "description": "Wybiera z listy {{type}}",
+    "inputs": {
+      "type": {
+        "name": "typ",
+        "description": "Kategoria do wyboru",
+        "options": {
+          "block": "🧱 Blok",
+          "item": "🎒 Przedmiot",
+          "mob": "🐾 Mob",
+          "TravelMethod": "🚶 Metoda przemieszczania",
+          "TeleportCause": "✨ Przyczyna teleportacji",
+          "MobInteraction": "🐄 Interakcja z mobem",
+          "ItemUseMethod": "🤚 Metoda użycia przedmiotu",
+          "ItemAcqMethod": "📦 Metoda zdobycia",
+          "EquipSlot": "🪖 Slot ekwipunku",
+          "BlockBreakMethod": "⛏️ Metoda niszczenia",
+          "BlockPlaceMethod": "🏗️ Metoda stawiania"
+        }
+      },
+      "block": {
+        "name": "blok",
+        "description": "ID bloku"
+      },
+      "item": {
+        "name": "przedmiot",
+        "description": "ID przedmiotu"
+      },
+      "mob": {
+        "name": "mob",
+        "description": "ID moba (encji)"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Metoda przemieszczania"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Przyczyna teleportacji"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Typ interakcji z mobem"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Metoda użycia przedmiotu"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Metoda zdobycia przedmiotu"
+      },
+      "EquipSlot": {
+        "name": "slot_ekwip",
+        "description": "Slot ekwipunku"
+      },
+      "BlockBreakMethod": {
+        "name": "metoda_niszcz",
+        "description": "Metoda niszczenia bloku"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Metoda stawiania bloku"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "wartość",
+        "description": "Wybrane ID lub wartość wyliczeniowa"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Nazwa zlokalizowana",
+    "menuDisplayName": "Nazwa zlokalizowana",
+    "description": "Konwertuje {{type}} na nazwę zlokalizowaną",
+    "inputs": {
+      "value": {
+        "name": "wartość",
+        "description": "ID Minecrafta (np. \"minecraft:stone\") lub wartość zdarzenia (np. \"Walk\")"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Kategoria do konwersji",
+        "options": {
+          "block": "ID bloku",
+          "item": "ID przedmiotu",
+          "mob": "ID moba",
+          "TravelMethod": "Metoda przemieszczania",
+          "TeleportCause": "Przyczyna teleportacji",
+          "MobInteraction": "Interakcja z mobem",
+          "ItemUseMethod": "Metoda użycia przedmiotu",
+          "ItemAcqMethod": "Metoda zdobycia",
+          "EquipSlot": "Slot ekwipunku",
+          "BlockBreakMethod": "Metoda niszczenia bloku",
+          "BlockPlaceMethod": "Metoda stawiania bloku"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nazwa",
+        "description": "Nazwa zlokalizowana (zwraca wartość wejściową, jeśli nie znaleziono)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Operacja Vector3",
+    "menuDisplayName": "Op. Vec3",
+    "description": "Wykonuje {{op}} na pozycji 3D",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Typ operacji",
+        "options": {
+          "assemble": "🔧 Złóż",
+          "add": "➕ Dodaj",
+          "subtract": "➖ Odejmij",
+          "scale": "✖️ Skaluj",
+          "floor": "⬇️ Zaokrągl. w dół",
+          "ceil": "⬆️ Zaokrągl. w górę",
+          "fill_y": "📐 Wypełnij Y"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "Współrzędna X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Współrzędna Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Współrzędna Z"
+      },
+      "pos_a": {
+        "name": "poz_a",
+        "description": "Pozycja bazowa {x,y,z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "Inna pozycja {x,y,z}"
+      },
+      "position": {
+        "name": "pozycja",
+        "description": "Pozycja {x,y,z}"
+      },
+      "scale": {
+        "name": "skala",
+        "description": "Mnożnik skalarny (np. 2 dla podwojenia)"
+      },
+      "pos_xz": {
+        "name": "poz_xz",
+        "description": "Pozycja 2D {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Wartość współrzędnej Y"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "wynik",
+        "description": "Pozycja wynikowa {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Odległość Vector3",
+    "menuDisplayName": "Odległość",
+    "description": "Oblicza odległość euklidesową między dwiema pozycjami 3D",
+    "inputs": {
+      "pos_a": {
+        "name": "poz_a",
+        "description": "Pozycja początkowa {x,y,z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "Pozycja końcowa {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "odległość",
+        "description": "Odległość między dwoma punktami (metry)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 na ciąg",
+    "menuDisplayName": "Vec3→Ciąg",
+    "description": "Konwertuje obiekt pozycji na ciąg w formacie \"x y z\"",
+    "inputs": {
+      "position": {
+        "name": "pozycja",
+        "description": "Pozycja do konwersji {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "tekst",
+        "description": "Ciąg w formacie \"x y z\""
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Podziel Vector3",
+    "menuDisplayName": "Podziel Vec3",
+    "description": "Dzieli obiekt pozycji na osobne wartości x, y i z",
+    "inputs": {
+      "position": {
+        "name": "pozycja",
+        "description": "Pozycja do podziału {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "Współrzędna X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Współrzędna Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Współrzędna Z"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Ogranicz liczbę",
+    "menuDisplayName": "Ogranicz",
+    "description": "Ogranicza liczbę między wartością minimalną a maksymalną",
+    "inputs": {
+      "value": {
+        "name": "wartość",
+        "description": "Liczba do ograniczenia"
+      },
+      "min": {
+        "name": "min",
+        "description": "Dolna granica"
+      },
+      "max": {
+        "name": "maks",
+        "description": "Górna granica"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "wynik",
+        "description": "Wartość ograniczona"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Utwórz obszar",
+    "menuDisplayName": "Utwórz AABB",
+    "description": "Tworzy prostopadłościan ograniczający wyrównany do osi (AABB) z dwóch narożników",
+    "inputs": {
+      "corner_a": {
+        "name": "narożnik_a",
+        "description": "Narożnik 1 obszaru {x,y,z} (kolejność nie ma znaczenia)"
+      },
+      "corner_b": {
+        "name": "narożnik_b",
+        "description": "Narożnik 2 obszaru {x,y,z} (kolejność nie ma znaczenia)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "obszar",
+        "description": "Obiekt obszaru AABB {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Czy w obszarze",
+    "menuDisplayName": "Wewnątrz AABB",
+    "description": "Sprawdza, czy pozycja znajduje się wewnątrz obszaru AABB",
+    "inputs": {
+      "area": {
+        "name": "obszar",
+        "description": "Obszar AABB {min, max}"
+      },
+      "position": {
+        "name": "pozycja",
+        "description": "Pozycja do sprawdzenia {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "wynik",
+        "description": "true, jeśli pozycja jest wewnątrz obszaru"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "Gdy gracz się przekształca",
+    "menuDisplayName": "PrzeksztGracza",
+    "description": "Uruchamia się, gdy pozycja lub obrót gracza się zmienia (wysoka częstotliwość)",
+    "inputs": {
+      "world": {
+        "name": "świat",
+        "description": "Wyjście World z węzła MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozycja",
+        "description": "Pozycja gracza {x, y, z}"
+      },
+      "direction": {
+        "name": "kierunek",
+        "description": "Kierunek patrzenia gracza (obrót wokół osi Y)"
+      },
+      "player": {
+        "name": "gracz",
+        "description": "Obiekt WorldPlayer → połącz z węzłem informacji o graczu"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Ruch agenta",
+    "menuDisplayName": "AgentMove",
+    "description": "Przemieszcza agenta {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "direction": {
+        "name": "kierunek",
+        "description": "Kierunek ruchu",
+        "options": {
+          "forward": "Naprzód",
+          "back": "W tył",
+          "left": "W lewo",
+          "right": "W prawo",
+          "up": "W górę",
+          "down": "W dół"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Wysyła true po ruchu"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Obrót agenta",
+    "menuDisplayName": "AgentTurn",
+    "description": "Obraca agenta {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "direction": {
+        "name": "kierunek",
+        "description": "Kierunek obrotu",
+        "options": {
+          "left": "W lewo",
+          "right": "W prawo"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Wysyła true po obrocie"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Teleport agenta",
+    "menuDisplayName": "AgentTP",
+    "description": "Teleportuje agenta na pozycję (pomiń, aby użyć bieżącej lokalizacji gracza)",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "position": {
+        "name": "pozycja",
+        "description": "Pozycja docelowa {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Wysyła true po teleportacji"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Akcja agenta",
+    "menuDisplayName": "AgentAction",
+    "description": "Agent wykonuje {{action}} (kierunek: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "action": {
+        "name": "akcja",
+        "description": "Akcja do wykonania",
+        "options": {
+          "attack": "Atakuj",
+          "destroyBlock": "Zniszcz",
+          "till": "Zaoraj",
+          "dropAllItems": "Upuść wszystko"
+        }
+      },
+      "direction": {
+        "name": "kierunek",
+        "description": "Kierunek akcji",
+        "options": {
+          "forward": "Naprzód",
+          "back": "W tył",
+          "left": "W lewo",
+          "right": "W prawo",
+          "up": "W górę",
+          "down": "W dół"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Wysyła true po zakończeniu"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Agent stawia blok",
+    "menuDisplayName": "AgentStaw",
+    "description": "Stawia blok ze slotu {{slot}} w kierunku {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "direction": {
+        "name": "kierunek",
+        "description": "Kierunek stawiania",
+        "options": {
+          "forward": "Naprzód",
+          "back": "W tył",
+          "left": "W lewo",
+          "right": "W prawo",
+          "up": "W górę",
+          "down": "W dół"
+        }
+      },
+      "slot": {
+        "name": "slot",
+        "description": "Numer slotu ekwipunku (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Wysyła true po postawieniu"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Agent upuszcza przedmiot",
+    "menuDisplayName": "AgentUpuść",
+    "description": "Upuszcza przedmiot ze slotu {{slot}} w kierunku {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "direction": {
+        "name": "kierunek",
+        "description": "Kierunek upuszczenia",
+        "options": {
+          "forward": "Naprzód",
+          "back": "W tył",
+          "left": "W lewo",
+          "right": "W prawo",
+          "up": "W górę",
+          "down": "W dół"
+        }
+      },
+      "slot": {
+        "name": "slot",
+        "description": "Numer slotu ekwipunku (1–27)"
+      },
+      "amount": {
+        "name": "ilość",
+        "description": "Liczba przedmiotów do upuszczenia"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Wysyła true po upuszczeniu"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Agent przenosi przedmiot",
+    "menuDisplayName": "AgentPrzenPrzedm",
+    "description": "Przenosi przedmioty między slotami w ekwipunku agenta",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "from_slot": {
+        "name": "slot_źródłowy",
+        "description": "Numer slotu źródłowego (1–27)"
+      },
+      "to_slot": {
+        "name": "slot_docelowy",
+        "description": "Numer slotu docelowego (1–27)"
+      },
+      "amount": {
+        "name": "ilość",
+        "description": "Liczba przedmiotów do przeniesienia"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Wysyła true po ruchu"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Agent ustawia przedmiot",
+    "menuDisplayName": "AgentUstPrzedm",
+    "description": "Ustawia przedmiot w określonym slocie ekwipunku agenta",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "slot": {
+        "name": "slot",
+        "description": "Numer slotu do ustawienia (1–27)"
+      },
+      "item_id": {
+        "name": "id_przedmiotu",
+        "description": "ID przedmiotu (np. minecraft:apple)"
+      },
+      "amount": {
+        "name": "ilość",
+        "description": "Liczba przedmiotów do ustawienia"
+      },
+      "data": {
+        "name": "dane",
+        "description": "Wartość danych (zwykle 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Wysyła true po ustawieniu"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Agent zbiera",
+    "menuDisplayName": "AgentZbierz",
+    "description": "Zbiera określony typ przedmiotu wokół agenta",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "item_id": {
+        "name": "id_przedmiotu",
+        "description": "ID przedmiotu do zebrania"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Wysyła true po zebraniu"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Agent wykrywa",
+    "menuDisplayName": "AG Wykryj",
+    "description": "Wykrywa {{type}} {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Co wykryć",
+        "options": {
+          "block": "Blok",
+          "redstone": "Redstone"
+        }
+      },
+      "direction": {
+        "name": "kierunek",
+        "description": "Kierunek wykrywania",
+        "options": {
+          "forward": "Naprzód",
+          "back": "W tył",
+          "left": "W lewo",
+          "right": "W prawo",
+          "up": "W górę",
+          "down": "W dół"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "wykryto",
+        "description": "true, jeśli coś wykryto"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Interpolacja Vector3",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Interpoluje liniowo między dwiema pozycjami (t=0 to początek, t=1 to koniec)",
+    "inputs": {
+      "pos_a": {
+        "name": "poz_a",
+        "description": "Pozycja początkowa {x, y, z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "Pozycja końcowa {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Współczynnik interpolacji (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "wynik",
+        "description": "Pozycja interpolowana {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Normalizacja Vector3",
+    "menuDisplayName": "Vec3Norm",
+    "description": "Normalizuje wektor do długości jednostkowej (długość = 1)",
+    "inputs": {
+      "position": {
+        "name": "pozycja",
+        "description": "Wektor do normalizacji {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "wynik",
+        "description": "Wektor jednostkowy o długości 1 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Iloczyn skalarny Vector3",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Oblicza iloczyn skalarny dwóch wektorów",
+    "inputs": {
+      "pos_a": {
+        "name": "poz_a",
+        "description": "Wektor A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "Wektor B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "wartość",
+        "description": "Iloczyn skalarny (skalar)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "Przesuń AABB",
+    "menuDisplayName": "AABBPrzesuń",
+    "description": "Przesuwa obszar AABB o zadany wektor",
+    "inputs": {
+      "area": {
+        "name": "obszar",
+        "description": "Obszar do przesunięcia {min, max}"
+      },
+      "delta": {
+        "name": "delta",
+        "description": "Wektor przesunięcia {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "obszar",
+        "description": "Obiekt przesuniętego obszaru"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "Przecięcie AABB",
+    "menuDisplayName": "AABBPrzecina",
+    "description": "Sprawdza, czy dwa obszary AABB się nakładają",
+    "inputs": {
+      "area_a": {
+        "name": "obszar_a",
+        "description": "Obszar A {min, max}"
+      },
+      "area_b": {
+        "name": "obszar_b",
+        "description": "Obszar B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "wynik",
+        "description": "true, jeśli dwa obszary się nakładają"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Asercja",
+    "menuDisplayName": "Asercja",
+    "description": "Porównuje wartość rzeczywistą z oczekiwaną i zapisuje PASS/FAIL. Zawsze wysyła done do łączenia.",
+    "inputs": {
+      "actual": {
+        "name": "rzeczywista",
+        "description": "Wartość do przetestowania"
+      },
+      "expected": {
+        "name": "oczekiwana",
+        "description": "Wartość oczekiwana"
+      },
+      "op": {
+        "name": "op",
+        "description": "Operator porównania",
+        "options": {
+          "eq": "Równe (===)",
+          "neq": "Różne (!==)",
+          "deep": "Głęboka równość (JSON)",
+          "lt": "Mniejsze niż (<)",
+          "gt": "Większe niż (>)",
+          "lte": "Mniejsze lub równe (≤)",
+          "gte": "Większe lub równe (≥)",
+          "approx": "W przybliżeniu (±tolerancja)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "ID przypadku testowego (np. TC-111)"
+      },
+      "tolerance": {
+        "name": "tolerancja",
+        "description": "Tolerancja dla porównania przybliżonego"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "gotowe",
+        "description": "Zawsze wysyła true (do łączenia)"
+      },
+      "passed": {
+        "name": "zaliczony",
+        "description": "Wysyła true, gdy test przechodzi"
+      },
+      "failed": {
+        "name": "niezaliczony",
+        "description": "Wysyła wartość rzeczywistą, gdy test się nie powiedzie"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Wysyła tekst do Gemini AI i otrzymuje odpowiedź",
+    "inputs": {
+      "apiKey": {
+        "name": "Klucz API",
+        "description": "Klucz API z Google AI Studio"
+      },
+      "model": {
+        "name": "Model",
+        "description": "Model Gemini do użycia",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (zalecany)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Prompt",
+        "description": "Tekst promptu użytkownika"
+      },
+      "systemInstruction": {
+        "name": "Instrukcja systemowa",
+        "description": "Prompt systemowy definiujący rolę/zachowanie AI (opcjonalny)"
+      },
+      "temperature": {
+        "name": "Temperatura",
+        "description": "Losowość 0.0–1.0 (niższa = bardziej deterministyczna)"
+      },
+      "trigger": {
+        "name": "Wyzwalacz",
+        "description": "Wyzwalacz (opcjonalny)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Odpowiedź",
+        "description": "Tekst wygenerowany przez Gemini"
+      }
+    }
+  }
+}

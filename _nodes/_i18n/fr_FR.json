@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Connexion",
+    "description": "Démarre un serveur WebSocket et se connecte à Minecraft Education Edition",
+    "inputs": {
+      "port": {
+        "name": "port",
+        "description": "Numéro de port WebSocket (par défaut : 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "monde",
+        "description": "Objet World (usage interne ; inutile de le relier aux nœuds de commande)"
+      },
+      "error": {
+        "name": "erreur",
+        "description": "Infos d'erreur de connexion"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Déconnexion",
+    "menuDisplayName": "MC Déconnexion",
+    "description": "Se déconnecte de Minecraft et arrête le serveur WebSocket",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (p. ex. chat 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Obtenir la position de l'agent",
+    "menuDisplayName": "Pos. agent",
+    "description": "Obtient la position actuelle de l'agent",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "position",
+        "description": "Position de l'agent {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "Obtenir les objectifs SB",
+    "menuDisplayName": "Objectifs SB",
+    "description": "Obtient la liste de tous les objectifs du tableau des scores",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "objectifs",
+        "description": "Tableau d'objets objectif du tableau des scores"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "Obtenir un objectif SB",
+    "menuDisplayName": "Objectif SB",
+    "description": "Obtient un objectif du tableau des scores par son ID",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "objective_id": {
+        "name": "id_objectif",
+        "description": "ID de l'objectif du tableau des scores"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "objectif",
+        "description": "Objectif du tableau des scores → relier au nœud d'infos d'objectif SB"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "Ajouter un objectif SB",
+    "menuDisplayName": "Ajout obj. SB",
+    "description": "Ajoute un nouvel objectif au tableau des scores",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "objective_id": {
+        "name": "id_objectif",
+        "description": "ID de l'objectif du tableau des scores"
+      },
+      "display_name": {
+        "name": "nom_affiché",
+        "description": "Nom affiché (facultatif)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "objectif",
+        "description": "Objectif ajouté → relier au nœud d'infos d'objectif SB"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "Supprimer un objectif SB",
+    "menuDisplayName": "Suppr. obj. SB",
+    "description": "Supprime un objectif du tableau des scores par son ID",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "objective_id": {
+        "name": "id_objectif",
+        "description": "ID de l'objectif du tableau des scores"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "résultat",
+        "description": "Résultat de la suppression"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Obtenir tous les scores",
+    "menuDisplayName": "Tous scores",
+    "description": "Obtient tous les scores d'un joueur",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "player_name": {
+        "name": "nom_joueur",
+        "description": "Nom du joueur"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "scores",
+        "description": "Tableau de tous les scores"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Obtenir un score",
+    "menuDisplayName": "Obtenir un score",
+    "description": "Obtient le score d'un joueur pour un objectif donné",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "player_name": {
+        "name": "nom_joueur",
+        "description": "Nom du joueur"
+      },
+      "objective_id": {
+        "name": "id_objectif",
+        "description": "ID de l'objectif du tableau des scores"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "score",
+        "description": "Valeur du score (nombre)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Opération de score",
+    "menuDisplayName": "Op. score",
+    "description": "Effectue {{operation}} sur le score d'un joueur",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "operation": {
+        "name": "opération",
+        "description": "Type d'opération",
+        "options": {
+          "add": "Ajouter",
+          "remove": "Retirer",
+          "set": "Définir"
+        }
+      },
+      "player_name": {
+        "name": "nom_joueur",
+        "description": "Nom du joueur"
+      },
+      "objective_id": {
+        "name": "id_objectif",
+        "description": "ID de l'objectif du tableau des scores"
+      },
+      "value": {
+        "name": "valeur",
+        "description": "Valeur de l'opération"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Nouvelle valeur du score après l'opération"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "Quand le joueur écrit",
+    "menuDisplayName": "Chat",
+    "description": "Se déclenche quand un joueur envoie un message de chat",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "expéditeur",
+        "description": "Nom du joueur ayant envoyé le chat"
+      },
+      "message": {
+        "name": "message",
+        "description": "Contenu du message de chat"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "Quand le joueur rejoint",
+    "menuDisplayName": "Rejoindre",
+    "description": "Se déclenche quand un joueur rejoint le monde",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "nom_joueur",
+        "description": "Nom du joueur ayant rejoint"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "Quand le joueur quitte",
+    "menuDisplayName": "Quitter",
+    "description": "Se déclenche quand un joueur quitte le monde",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "nom_joueur",
+        "description": "Nom du joueur ayant quitté"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "Quand le joueur se déplace",
+    "menuDisplayName": "Déplacé",
+    "description": "Se déclenche à chaque déplacement d'un joueur",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "distance",
+        "description": "Distance parcourue (mètres)"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      },
+      "underwater": {
+        "name": "sous_eau",
+        "description": "Si le déplacement est sous l'eau (true/false)"
+      },
+      "biome": {
+        "name": "biome",
+        "description": "Nom du biome actuel"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Nom du mode de déplacement"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "Quand le joueur se téléporte",
+    "menuDisplayName": "Téléporté",
+    "description": "Se déclenche quand un joueur se téléporte",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Nom de la cause de téléportation"
+      },
+      "distance": {
+        "name": "distance",
+        "description": "Distance de téléportation (mètres)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "Quand le joueur reçoit un titre",
+    "menuDisplayName": "Titre",
+    "description": "Se déclenche quand un joueur reçoit un titre",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "expéditeur",
+        "description": "Nom du joueur ayant envoyé le titre"
+      },
+      "message": {
+        "name": "message",
+        "description": "Contenu du message de titre"
+      },
+      "recipient": {
+        "name": "destinataire",
+        "description": "Nom du joueur ayant reçu le titre"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "Quand le joueur envoie un message",
+    "menuDisplayName": "Message",
+    "description": "Se déclenche quand un joueur envoie tout type de message",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "expéditeur",
+        "description": "Nom du joueur ayant envoyé le message"
+      },
+      "message": {
+        "name": "message",
+        "description": "Contenu du message"
+      },
+      "type": {
+        "name": "type",
+        "description": "Type de message (chat / tell, etc.)"
+      },
+      "recipient": {
+        "name": "destinataire",
+        "description": "[nullable] Nom du destinataire. null pour les messages autres que tell"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "Quand le joueur rebondit",
+    "menuDisplayName": "Rebond",
+    "description": "Se déclenche quand un joueur rebondit sur un bloc de slime ou similaire",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "hauteur",
+        "description": "Hauteur du rebond (blocs)"
+      },
+      "block": {
+        "name": "bloc",
+        "description": "Objet BlockType (bloc du rebond) → relier au nœud d'infos du bloc"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "Quand un bloc est cassé",
+    "menuDisplayName": "Casse bloc",
+    "description": "Se déclenche quand un bloc est cassé",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "bloc",
+        "description": "Objet BlockType → relier au nœud d'infos du bloc"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Nom de la méthode de destruction"
+      },
+      "item": {
+        "name": "objet",
+        "description": "[nullable] Objet en main avant de casser. null si à mains nues"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "Quand un bloc est placé",
+    "menuDisplayName": "Pose bloc",
+    "description": "Se déclenche quand un bloc est placé",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "bloc",
+        "description": "Objet BlockType → relier au nœud d'infos du bloc"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      },
+      "underwater": {
+        "name": "sous_eau",
+        "description": "Si placé sous l'eau (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Nom de la méthode de pose"
+      },
+      "item": {
+        "name": "objet",
+        "description": "Objet en main avant la pose → relier au nœud d'infos de l'objet"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "Quand un objet est utilisé",
+    "menuDisplayName": "Objet utilisé",
+    "description": "Se déclenche quand un joueur utilise un objet",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "objet",
+        "description": "[nullable] Objet en main. null s'il n'y a pas d'objet"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Nom de la méthode d'utilisation de l'objet"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "Quand un objet est obtenu",
+    "menuDisplayName": "Obj. obtenu",
+    "description": "Se déclenche quand un joueur obtient un objet",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "quantité",
+        "description": "Nombre d'objets obtenus"
+      },
+      "item": {
+        "name": "objet",
+        "description": "Type d'objet → relier au nœud d'infos de type d'objet"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Nom de la méthode d'obtention de l'objet"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "Quand un objet est fabriqué",
+    "menuDisplayName": "Fabriqué",
+    "description": "Se déclenche quand un joueur fabrique un objet",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "objet",
+        "description": "Pile d'objets (objet fabriqué) → relier au nœud d'infos de pile d'objets"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      },
+      "used_table": {
+        "name": "table_utilisée",
+        "description": "Si l'établi a été utilisé (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "Quand un objet est équipé",
+    "menuDisplayName": "Équipé",
+    "description": "Se déclenche quand un joueur équipe un objet",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "objet",
+        "description": "Pile d'objets → relier au nœud d'infos de pile d'objets"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      },
+      "equip_slot": {
+        "name": "emplacement_équip",
+        "description": "Nom de l'emplacement d'équipement"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "Quand un objet est fondu",
+    "menuDisplayName": "Fondu",
+    "description": "Se déclenche quand un joueur fond un objet",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "objet",
+        "description": "Type d'objet (objet fondu) → relier au nœud d'infos de type d'objet"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      },
+      "fuel": {
+        "name": "combustible",
+        "description": "Type d'objet (combustible) → relier au nœud d'infos de type d'objet"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "Quand un objet est échangé",
+    "menuDisplayName": "Échangé",
+    "description": "Se déclenche quand un joueur conclut un échange avec un villageois",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "objet",
+        "description": "Pile d'objets (objet reçu) → relier au nœud d'infos de pile d'objets"
+      },
+      "villager": {
+        "name": "villageois",
+        "description": "Objet WorldVillager → relier au nœud d'infos du villageois"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      },
+      "payment_a": {
+        "name": "paiement_a",
+        "description": "Type d'objet (paiement A) → relier au nœud d'infos de type d'objet"
+      },
+      "payment_b": {
+        "name": "paiement_b",
+        "description": "[nullable] Type d'objet (paiement B). null si inutilisé"
+      },
+      "player_xp": {
+        "name": "émeraudes_joueur",
+        "description": "Émeraudes que possède le joueur après l'échange"
+      },
+      "villager_xp": {
+        "name": "émeraudes_villageois",
+        "description": "Émeraudes que possède le villageois après l'échange"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "Quand on interagit avec une créature",
+    "menuDisplayName": "Interac. créature",
+    "description": "Se déclenche quand un joueur interagit avec une créature",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "créature",
+        "description": "Objet WorldMob (créature concernée)"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Nom du type d'interaction avec la créature"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "Quand une cible est touchée",
+    "menuDisplayName": "Cible touchée",
+    "description": "Se déclenche quand un bloc-cible est touché",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "intensité",
+        "description": "Intensité du signal de redstone (0–15)"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Exécuter une commande",
+    "menuDisplayName": "Exéc. cmd",
+    "description": "Exécute n'importe quelle commande Minecraft (sans le / initial)",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "command": {
+        "name": "commande",
+        "description": "Commande Minecraft à exécuter (sans le / initial)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet true une fois terminé"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Obtenir l'heure du jeu",
+    "menuDisplayName": "Heure du jeu",
+    "description": "Obtient l'heure du jeu ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Type de temps à interroger",
+        "options": {
+          "time": "Heure (0–24000)",
+          "day": "Nombre de jours",
+          "tick": "Nombre de ticks"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "valeur",
+        "description": "Valeur de temps interrogée"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Fait-il jour ?",
+    "menuDisplayName": "Jour ?",
+    "description": "Vérifie s'il fait actuellement jour (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "est_jour",
+        "description": "true s'il fait jour, false s'il fait nuit"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Obtenir la météo",
+    "menuDisplayName": "Météo",
+    "description": "Obtient la météo actuelle",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "météo",
+        "description": "Nom de la météo (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Remplir de blocs",
+    "menuDisplayName": "Remplir",
+    "description": "Remplit une zone entre deux positions avec un bloc donné",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "from": {
+        "name": "de",
+        "description": "Coin de départ {x, y, z}"
+      },
+      "to": {
+        "name": "à",
+        "description": "Coin de fin {x, y, z}"
+      },
+      "block_id": {
+        "name": "id_bloc",
+        "description": "ID du bloc (p. ex. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet true une fois le remplissage terminé"
+      },
+      "count": {
+        "name": "quantité",
+        "description": "Nombre de blocs remplis"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Obtenir la hauteur du sol",
+    "menuDisplayName": "Sol",
+    "description": "Obtient la position et le type du bloc solide le plus haut",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "position",
+        "description": "Position du sol {x, y, z}"
+      },
+      "block_name": {
+        "name": "nom_bloc",
+        "description": "Nom du bloc solide le plus haut"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Requête du monde",
+    "menuDisplayName": "Requête du monde",
+    "description": "Interroge la liste des {{type}} dans le monde",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Catégorie à interroger",
+        "options": {
+          "mob": "Entité",
+          "block": "Bloc",
+          "item": "Objet"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "liste",
+        "description": "Liste des résultats de la requête"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Obtenir la position du joueur",
+    "menuDisplayName": "Pos. joueur",
+    "description": "Obtient la position actuelle et l'orientation du joueur",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "position",
+        "description": "Position du joueur {x, y, z}"
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Direction du regard du joueur (rotation axe Y)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Obtenir l'orientation du joueur",
+    "menuDisplayName": "Dir. joueur",
+    "description": "Obtient l'angle de caméra du joueur (tangage et lacet)",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "angle",
+        "description": "Angle de visée du joueur {x, y} (degrés)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Obtenir les tags du joueur",
+    "menuDisplayName": "Tags joueur",
+    "description": "Obtient tous les tags attachés au joueur",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "tags",
+        "description": "Tableau de chaînes de noms de tags"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "Le joueur a le tag",
+    "menuDisplayName": "A le tag ?",
+    "description": "Vérifie si le joueur possède un tag donné",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "tag": {
+        "name": "tag",
+        "description": "Nom du tag à vérifier"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "résultat",
+        "description": "true si le joueur possède le tag"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Obtenir le niveau du joueur",
+    "menuDisplayName": "Niv. joueur",
+    "description": "Obtient le niveau d'expérience actuel du joueur",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "niveau",
+        "description": "Niveau du joueur (nombre)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Obtenir le mode de jeu",
+    "menuDisplayName": "Mode de jeu",
+    "description": "Obtient le mode de jeu actuel du joueur",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "mode_jeu",
+        "description": "Nom du mode de jeu (p. ex. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Obtenir les capacités du joueur",
+    "menuDisplayName": "Capacités",
+    "description": "Obtient les réglages de capacités actuels du joueur",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "capacités",
+        "description": "Objet de capacités du joueur"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Obtenir les joueurs",
+    "menuDisplayName": "Joueurs",
+    "description": "Obtient la liste de tous les joueurs du monde",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "joueurs",
+        "description": "Tableau d'objets joueur"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Obtenir le joueur local",
+    "menuDisplayName": "Joueur local",
+    "description": "Obtient l'objet du joueur local (soi-même)",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "joueur",
+        "description": "Objet du joueur local"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Extraire d'une entité",
+    "menuDisplayName": "Infos entité",
+    "description": "Extrait la position, la direction, la dimension et d'autres champs d'un objet entité",
+    "inputs": {
+      "entity": {
+        "name": "entité",
+        "description": "Objet joueur ou villageois (sortie player / villager)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "position",
+        "description": "Position de l'entité (position)"
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Rotation de l'axe Y (yRot)"
+      },
+      "dimension": {
+        "name": "dimension",
+        "description": "Numéro de dimension (dimension)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Chaîne de type (type)"
+      },
+      "variant": {
+        "name": "variante",
+        "description": "Numéro de variante (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Numéro d'ID de l'entité (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Extraire d'un joueur",
+    "menuDisplayName": "Infos joueur",
+    "description": "Extrait le nom, la couleur et les infos d'entité d'un objet instantané de joueur",
+    "inputs": {
+      "player": {
+        "name": "joueur",
+        "description": "Objet joueur issu de la sortie player d'un nœud d'événement"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nom",
+        "description": "Nom du joueur (name)"
+      },
+      "color": {
+        "name": "couleur",
+        "description": "Couleur du marqueur de carte (color)"
+      },
+      "entity": {
+        "name": "entité",
+        "description": "Relier au nœud d'infos d'entité"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Extraire d'un type d'objet",
+    "menuDisplayName": "Infos type objet",
+    "description": "Extrait l'ID de l'objet et la valeur de données d'un objet de type d'objet",
+    "inputs": {
+      "item": {
+        "name": "objet",
+        "description": "Type d'objet (sortie item des événements obtenir / fondre)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_objet",
+        "description": "Chaîne d'ID de l'objet (id)"
+      },
+      "data": {
+        "name": "données",
+        "description": "Valeur de données (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Extraire d'une pile d'objets",
+    "menuDisplayName": "Infos pile objets",
+    "description": "Extrait l'ID de l'objet, la quantité, la quantité max. et la valeur de données d'un objet pile d'objets",
+    "inputs": {
+      "item": {
+        "name": "objet",
+        "description": "Pile d'objets (sortie item des événements utiliser / équiper / fabriquer / échanger)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_objet",
+        "description": "Chaîne d'ID de l'objet (typeId)"
+      },
+      "count": {
+        "name": "quantité",
+        "description": "Taille de la pile (amount)"
+      },
+      "max_count": {
+        "name": "quantité_max",
+        "description": "Taille max. de la pile (maxAmount)"
+      },
+      "data": {
+        "name": "données",
+        "description": "Valeur de données (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Extraire d'un type de bloc",
+    "menuDisplayName": "Infos bloc",
+    "description": "Extrait l'ID du bloc et la valeur de données d'un objet de type de bloc",
+    "inputs": {
+      "block": {
+        "name": "bloc",
+        "description": "Objet de type de bloc (sortie block des événements block / bounce)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "id_bloc",
+        "description": "Chaîne d'ID du bloc (id)"
+      },
+      "data": {
+        "name": "données",
+        "description": "Valeur de données (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Extraire d'un objectif SB",
+    "menuDisplayName": "Infos obj. SB",
+    "description": "Extrait l'ID et le nom affiché d'un objet objectif du tableau des scores",
+    "inputs": {
+      "objective": {
+        "name": "objectif",
+        "description": "Objectif issu d'un nœud d'ajout / d'obtention d'objectif"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "id_objectif",
+        "description": "Chaîne d'ID de l'objectif (id)"
+      },
+      "display_name": {
+        "name": "nom_affiché",
+        "description": "Nom affiché (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Extraire d'une créature",
+    "menuDisplayName": "Infos créature",
+    "description": "Extrait les numéros de type, de couleur et de variante d'un objet créature",
+    "inputs": {
+      "mob": {
+        "name": "créature",
+        "description": "Objet créature (sortie mob de l'événement d'interaction avec une créature)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "type",
+        "description": "Numéro de type de créature (type)"
+      },
+      "color": {
+        "name": "couleur",
+        "description": "Numéro de couleur (color)"
+      },
+      "variant": {
+        "name": "variante",
+        "description": "Numéro de variante (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Extraire d'un villageois",
+    "menuDisplayName": "Infos villageois",
+    "description": "Extrait le nom, le rang et les infos d'entité d'un objet villageois",
+    "inputs": {
+      "villager": {
+        "name": "villageois",
+        "description": "Objet villageois (sortie villager de l'événement d'échange)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nom",
+        "description": "Nom du villageois (trader.name)"
+      },
+      "rank": {
+        "name": "rang",
+        "description": "Rang d'échange (trader.tier)"
+      },
+      "entity": {
+        "name": "entité",
+        "description": "Relier au nœud d'infos d'entité"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Sélecteur",
+    "menuDisplayName": "Sélecteur",
+    "description": "Sélectionne dans la liste des {{type}}",
+    "inputs": {
+      "type": {
+        "name": "type",
+        "description": "Catégorie à sélectionner",
+        "options": {
+          "block": "🧱 Bloc",
+          "item": "🎒 Objet",
+          "mob": "🐾 Créature",
+          "TravelMethod": "🚶 Mode de déplacement",
+          "TeleportCause": "✨ Cause de téléportation",
+          "MobInteraction": "🐄 Interaction créature",
+          "ItemUseMethod": "🤚 Mode d'utilisation d'objet",
+          "ItemAcqMethod": "📦 Mode d'obtention",
+          "EquipSlot": "🪖 Emplacement d'équip.",
+          "BlockBreakMethod": "⛏️ Méthode de casse",
+          "BlockPlaceMethod": "🏗️ Méthode de pose"
+        }
+      },
+      "block": {
+        "name": "bloc",
+        "description": "ID de bloc"
+      },
+      "item": {
+        "name": "objet",
+        "description": "ID d'objet"
+      },
+      "mob": {
+        "name": "créature",
+        "description": "ID de créature (entité)"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Mode de déplacement"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Cause de téléportation"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Type d'interaction avec créature"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Mode d'utilisation d'objet"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Mode d'obtention d'objet"
+      },
+      "EquipSlot": {
+        "name": "emplacement_équip",
+        "description": "Emplacement d'équipement"
+      },
+      "BlockBreakMethod": {
+        "name": "méthode_casse",
+        "description": "Méthode de casse de bloc"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Méthode de pose de bloc"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "valeur",
+        "description": "ID ou valeur d'énumération sélectionné"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Nom localisé",
+    "menuDisplayName": "Nom localisé",
+    "description": "Convertit {{type}} en nom localisé",
+    "inputs": {
+      "value": {
+        "name": "valeur",
+        "description": "ID Minecraft (p. ex. \"minecraft:stone\") ou valeur d'événement (p. ex. \"Walk\")"
+      },
+      "type": {
+        "name": "type",
+        "description": "Catégorie à convertir",
+        "options": {
+          "block": "ID de bloc",
+          "item": "ID d'objet",
+          "mob": "ID de créature",
+          "TravelMethod": "Mode de déplacement",
+          "TeleportCause": "Cause de téléportation",
+          "MobInteraction": "Interaction avec créature",
+          "ItemUseMethod": "Mode d'utilisation d'objet",
+          "ItemAcqMethod": "Mode d'obtention",
+          "EquipSlot": "Emplacement d'équipement",
+          "BlockBreakMethod": "Méthode de casse de bloc",
+          "BlockPlaceMethod": "Méthode de pose de bloc"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nom",
+        "description": "Nom localisé (renvoie la valeur d'entrée si introuvable)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Opération Vector3",
+    "menuDisplayName": "Op. Vec3",
+    "description": "Effectue {{op}} sur une position 3D",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Type d'opération",
+        "options": {
+          "assemble": "🔧 Assembler",
+          "add": "➕ Additionner",
+          "subtract": "➖ Soustraire",
+          "scale": "✖️ Mettre à l'échelle",
+          "floor": "⬇️ Arrondi inf.",
+          "ceil": "⬆️ Arrondi sup.",
+          "fill_y": "📐 Remplir Y"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "Coordonnée X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Coordonnée Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Coordonnée Z"
+      },
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Position de base {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Autre position {x,y,z}"
+      },
+      "position": {
+        "name": "position",
+        "description": "Position {x,y,z}"
+      },
+      "scale": {
+        "name": "échelle",
+        "description": "Multiplicateur scalaire (p. ex. 2 pour doubler)"
+      },
+      "pos_xz": {
+        "name": "pos_xz",
+        "description": "Position 2D {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Valeur de la coordonnée Y"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "résultat",
+        "description": "Position résultante {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Distance Vector3",
+    "menuDisplayName": "Distance",
+    "description": "Calcule la distance euclidienne entre deux positions 3D",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Position de départ {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Position de fin {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "distance",
+        "description": "Distance entre les deux points (mètres)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 en chaîne",
+    "menuDisplayName": "Vec3→Chaîne",
+    "description": "Convertit un objet position en chaîne au format \"x y z\"",
+    "inputs": {
+      "position": {
+        "name": "position",
+        "description": "Position à convertir {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "texte",
+        "description": "Chaîne au format \"x y z\""
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Diviser Vector3",
+    "menuDisplayName": "Diviser Vec3",
+    "description": "Divise un objet position en valeurs x, y et z distinctes",
+    "inputs": {
+      "position": {
+        "name": "position",
+        "description": "Position à diviser {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "Coordonnée X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Coordonnée Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Coordonnée Z"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Borner un nombre",
+    "menuDisplayName": "Borner",
+    "description": "Borne un nombre entre une valeur minimale et maximale",
+    "inputs": {
+      "value": {
+        "name": "valeur",
+        "description": "Nombre à borner"
+      },
+      "min": {
+        "name": "min",
+        "description": "Borne inférieure"
+      },
+      "max": {
+        "name": "max",
+        "description": "Borne supérieure"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "résultat",
+        "description": "Valeur bornée"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Créer une zone",
+    "menuDisplayName": "Créer AABB",
+    "description": "Crée une boîte englobante alignée sur les axes (AABB) à partir de deux coins",
+    "inputs": {
+      "corner_a": {
+        "name": "coin_a",
+        "description": "Coin 1 de la zone {x,y,z} (l'ordre importe peu)"
+      },
+      "corner_b": {
+        "name": "coin_b",
+        "description": "Coin 2 de la zone {x,y,z} (l'ordre importe peu)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "zone",
+        "description": "Objet zone AABB {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Est dans la zone",
+    "menuDisplayName": "Dans AABB",
+    "description": "Vérifie si une position se trouve dans une zone AABB",
+    "inputs": {
+      "area": {
+        "name": "zone",
+        "description": "Zone AABB {min, max}"
+      },
+      "position": {
+        "name": "position",
+        "description": "Position à tester {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "résultat",
+        "description": "true si la position est dans la zone"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "Quand le joueur se transforme",
+    "menuDisplayName": "TransfoJoueur",
+    "description": "Se déclenche quand la position ou la rotation d'un joueur change (haute fréquence)",
+    "inputs": {
+      "world": {
+        "name": "monde",
+        "description": "Sortie World du nœud MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "position",
+        "description": "Position du joueur {x, y, z}"
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Direction du regard du joueur (rotation axe Y)"
+      },
+      "player": {
+        "name": "joueur",
+        "description": "Objet WorldPlayer → relier au nœud d'infos du joueur"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Déplacer l'agent",
+    "menuDisplayName": "AgentMove",
+    "description": "Déplace l'agent vers {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Direction du déplacement",
+        "options": {
+          "forward": "Avant",
+          "back": "Arrière",
+          "left": "Gauche",
+          "right": "Droite",
+          "up": "Haut",
+          "down": "Bas"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet true une fois déplacé"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Tourner l'agent",
+    "menuDisplayName": "AgentTurn",
+    "description": "Tourne l'agent vers {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Direction du virage",
+        "options": {
+          "left": "Gauche",
+          "right": "Droite"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet true une fois tourné"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Téléporter l'agent",
+    "menuDisplayName": "AgentTP",
+    "description": "Téléporte l'agent à une position (omettre pour utiliser la position actuelle du joueur)",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "position": {
+        "name": "position",
+        "description": "Position de destination {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet true une fois téléporté"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Action de l'agent",
+    "menuDisplayName": "AgentAction",
+    "description": "L'agent effectue {{action}} (direction : {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "action": {
+        "name": "action",
+        "description": "Action à effectuer",
+        "options": {
+          "attack": "Attaquer",
+          "destroyBlock": "Détruire",
+          "till": "Labourer",
+          "dropAllItems": "Tout lâcher"
+        }
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Direction de l'action",
+        "options": {
+          "forward": "Avant",
+          "back": "Arrière",
+          "left": "Gauche",
+          "right": "Droite",
+          "up": "Haut",
+          "down": "Bas"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet true une fois terminé"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "L'agent place un bloc",
+    "menuDisplayName": "AgentPoser",
+    "description": "Place le bloc de l'emplacement {{slot}} vers {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Direction de pose",
+        "options": {
+          "forward": "Avant",
+          "back": "Arrière",
+          "left": "Gauche",
+          "right": "Droite",
+          "up": "Haut",
+          "down": "Bas"
+        }
+      },
+      "slot": {
+        "name": "emplacement",
+        "description": "Numéro d'emplacement d'inventaire (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet true une fois placé"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "L'agent lâche un objet",
+    "menuDisplayName": "AgentLâcher",
+    "description": "Lâche l'objet de l'emplacement {{slot}} vers {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Direction du lâcher",
+        "options": {
+          "forward": "Avant",
+          "back": "Arrière",
+          "left": "Gauche",
+          "right": "Droite",
+          "up": "Haut",
+          "down": "Bas"
+        }
+      },
+      "slot": {
+        "name": "emplacement",
+        "description": "Numéro d'emplacement d'inventaire (1–27)"
+      },
+      "amount": {
+        "name": "quantité",
+        "description": "Nombre d'objets à lâcher"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet true une fois lâché"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "L'agent déplace un objet",
+    "menuDisplayName": "AgentDéplObj",
+    "description": "Déplace des objets entre les emplacements de l'inventaire de l'agent",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "from_slot": {
+        "name": "emplacement_source",
+        "description": "Numéro d'emplacement source (1–27)"
+      },
+      "to_slot": {
+        "name": "emplacement_cible",
+        "description": "Numéro d'emplacement de destination (1–27)"
+      },
+      "amount": {
+        "name": "quantité",
+        "description": "Nombre d'objets à déplacer"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet true une fois déplacé"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "L'agent définit un objet",
+    "menuDisplayName": "AgentDéfObj",
+    "description": "Définit un objet dans l'emplacement d'inventaire indiqué de l'agent",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "slot": {
+        "name": "emplacement",
+        "description": "Numéro d'emplacement à définir (1–27)"
+      },
+      "item_id": {
+        "name": "id_objet",
+        "description": "ID de l'objet (p. ex. minecraft:apple)"
+      },
+      "amount": {
+        "name": "quantité",
+        "description": "Nombre d'objets à définir"
+      },
+      "data": {
+        "name": "données",
+        "description": "Valeur de données (généralement 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet true une fois défini"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "L'agent collecte",
+    "menuDisplayName": "AgentCollect",
+    "description": "Collecte un type d'objet donné autour de l'agent",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "item_id": {
+        "name": "id_objet",
+        "description": "ID de l'objet à collecter"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet true une fois collecté"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "L'agent détecte",
+    "menuDisplayName": "AG Détect",
+    "description": "Détecte {{type}} vers {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "déclencheur",
+        "description": "Déclencheur (facultatif)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Quoi détecter",
+        "options": {
+          "block": "Bloc",
+          "redstone": "Redstone"
+        }
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Direction de détection",
+        "options": {
+          "forward": "Avant",
+          "back": "Arrière",
+          "left": "Gauche",
+          "right": "Droite",
+          "up": "Haut",
+          "down": "Bas"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "détecté",
+        "description": "true si quelque chose est détecté"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Interpolation Vector3",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Interpole linéairement entre deux positions (t=0 au début, t=1 à la fin)",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Position de départ {x, y, z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Position de fin {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Facteur d'interpolation (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "résultat",
+        "description": "Position interpolée {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Normaliser Vector3",
+    "menuDisplayName": "Vec3Norm",
+    "description": "Normalise un vecteur à une longueur unitaire (longueur = 1)",
+    "inputs": {
+      "position": {
+        "name": "position",
+        "description": "Vecteur à normaliser {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "résultat",
+        "description": "Vecteur unitaire de longueur 1 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Produit scalaire Vector3",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Calcule le produit scalaire de deux vecteurs",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Vecteur A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Vecteur B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "valeur",
+        "description": "Produit scalaire (scalaire)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "Translater AABB",
+    "menuDisplayName": "AABBTranslater",
+    "description": "Translate une zone AABB selon un vecteur donné",
+    "inputs": {
+      "area": {
+        "name": "zone",
+        "description": "Zone à translater {min, max}"
+      },
+      "delta": {
+        "name": "delta",
+        "description": "Vecteur de translation {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "zone",
+        "description": "Objet zone translatée"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "Intersection AABB",
+    "menuDisplayName": "AABBIntersec",
+    "description": "Vérifie si deux zones AABB se chevauchent",
+    "inputs": {
+      "area_a": {
+        "name": "zone_a",
+        "description": "Zone A {min, max}"
+      },
+      "area_b": {
+        "name": "zone_b",
+        "description": "Zone B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "résultat",
+        "description": "true si les deux zones se chevauchent"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Assertion",
+    "menuDisplayName": "Assertion",
+    "description": "Compare la valeur réelle à la valeur attendue et journalise PASS/FAIL. Émet toujours done pour le chaînage.",
+    "inputs": {
+      "actual": {
+        "name": "réel",
+        "description": "Valeur à tester"
+      },
+      "expected": {
+        "name": "attendu",
+        "description": "Valeur attendue"
+      },
+      "op": {
+        "name": "op",
+        "description": "Opérateur de comparaison",
+        "options": {
+          "eq": "Égal (===)",
+          "neq": "Différent (!==)",
+          "deep": "Égalité profonde (JSON)",
+          "lt": "Inférieur à (<)",
+          "gt": "Supérieur à (>)",
+          "lte": "Inférieur ou égal (≤)",
+          "gte": "Supérieur ou égal (≥)",
+          "approx": "Approx. (±tolérance)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "ID du cas de test (p. ex. TC-111)"
+      },
+      "tolerance": {
+        "name": "tolérance",
+        "description": "Tolérance pour la comparaison approximative"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "terminé",
+        "description": "Émet toujours true (pour le chaînage)"
+      },
+      "passed": {
+        "name": "réussi",
+        "description": "Émet true quand le test réussit"
+      },
+      "failed": {
+        "name": "échoué",
+        "description": "Émet la valeur réelle quand le test échoue"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Envoie du texte à Gemini AI et obtient une réponse",
+    "inputs": {
+      "apiKey": {
+        "name": "Clé API",
+        "description": "Clé API de Google AI Studio"
+      },
+      "model": {
+        "name": "Modèle",
+        "description": "Modèle Gemini à utiliser",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (recommandé)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Prompt",
+        "description": "Texte du prompt utilisateur"
+      },
+      "systemInstruction": {
+        "name": "Instruction système",
+        "description": "Prompt système définissant le rôle/comportement de l'IA (facultatif)"
+      },
+      "temperature": {
+        "name": "Température",
+        "description": "Aléa 0.0–1.0 (plus bas = plus déterministe)"
+      },
+      "trigger": {
+        "name": "Déclencheur",
+        "description": "Déclencheur (facultatif)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Réponse",
+        "description": "Texte généré par Gemini"
+      }
+    }
+  }
+}

@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Verbinden",
+    "description": "Start een WebSocket-server en maakt verbinding met Minecraft Education Edition",
+    "inputs": {
+      "port": {
+        "name": "poort",
+        "description": "WebSocket-poortnummer (standaard: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-object (intern gebruikt; hoeft niet aan commandoknooppunten gekoppeld te worden)"
+      },
+      "error": {
+        "name": "fout",
+        "description": "Informatie over verbindingsfout"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Verbinding verbreken",
+    "menuDisplayName": "MC Verbreken",
+    "description": "Verbreekt de verbinding met Minecraft en sluit de WebSocket-server af",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (bv. chat 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Agentpositie ophalen",
+    "menuDisplayName": "Agent-pos",
+    "description": "Haalt de huidige positie van de agent op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "positie",
+        "description": "Agentpositie {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "SB-doelen ophalen",
+    "menuDisplayName": "SB-doelen",
+    "description": "Haalt de lijst van alle scorebord-doelen op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "doelen",
+        "description": "Array van scorebord-doelobjecten"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "SB-doel ophalen",
+    "menuDisplayName": "SB-doel",
+    "description": "Haalt een scorebord-doel op via zijn ID",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "objective_id": {
+        "name": "doel_id",
+        "description": "Scorebord-doel-ID"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "doel",
+        "description": "Scorebord-doel → koppel aan SB-doelinfoknooppunt"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "SB-doel toevoegen",
+    "menuDisplayName": "SB doel +",
+    "description": "Voegt een nieuw doel toe aan het scorebord",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "objective_id": {
+        "name": "doel_id",
+        "description": "Scorebord-doel-ID"
+      },
+      "display_name": {
+        "name": "weergavenaam",
+        "description": "Weergavenaam (optioneel)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "doel",
+        "description": "Toegevoegd doel → koppel aan SB-doelinfoknooppunt"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "SB-doel verwijderen",
+    "menuDisplayName": "SB doel -",
+    "description": "Verwijdert een scorebord-doel via zijn ID",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "objective_id": {
+        "name": "doel_id",
+        "description": "Scorebord-doel-ID"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultaat",
+        "description": "Resultaat van verwijdering"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Alle scores ophalen",
+    "menuDisplayName": "Alle scores",
+    "description": "Haalt alle scores van een speler op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "player_name": {
+        "name": "spelernaam",
+        "description": "Spelernaam"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "scores",
+        "description": "Array van alle scores"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Score ophalen",
+    "menuDisplayName": "Score ophalen",
+    "description": "Haalt de score van een speler voor een specifiek doel op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "player_name": {
+        "name": "spelernaam",
+        "description": "Spelernaam"
+      },
+      "objective_id": {
+        "name": "doel_id",
+        "description": "Scorebord-doel-ID"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "score",
+        "description": "Scorewaarde (getal)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Score-bewerking",
+    "menuDisplayName": "Score-bew.",
+    "description": "Voert {{operation}} uit op een spelerscore",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "operation": {
+        "name": "bewerking",
+        "description": "Type bewerking",
+        "options": {
+          "add": "Optellen",
+          "remove": "Aftrekken",
+          "set": "Instellen"
+        }
+      },
+      "player_name": {
+        "name": "spelernaam",
+        "description": "Spelernaam"
+      },
+      "objective_id": {
+        "name": "doel_id",
+        "description": "Scorebord-doel-ID"
+      },
+      "value": {
+        "name": "waarde",
+        "description": "Waarde om mee te rekenen"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Nieuwe scorewaarde na de bewerking"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "Bij spelerchat",
+    "menuDisplayName": "Chat",
+    "description": "Wordt geactiveerd wanneer een speler een chatbericht stuurt",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "afzender",
+        "description": "Naam van de speler die de chat verstuurde"
+      },
+      "message": {
+        "name": "bericht",
+        "description": "Inhoud van het chatbericht"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "Bij spelerdeelname",
+    "menuDisplayName": "Deelnemen",
+    "description": "Wordt geactiveerd wanneer een speler de wereld betreedt",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "spelernaam",
+        "description": "Naam van de speler die deelnam"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "Bij vertrek speler",
+    "menuDisplayName": "Vertrekken",
+    "description": "Wordt geactiveerd wanneer een speler de wereld verlaat",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "spelernaam",
+        "description": "Naam van de speler die vertrok"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "Bij verplaatsing speler",
+    "menuDisplayName": "Verplaatst",
+    "description": "Wordt elke keer geactiveerd wanneer een speler beweegt",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "afstand",
+        "description": "Afgelegde afstand (meter)"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      },
+      "underwater": {
+        "name": "onderwater",
+        "description": "Of de verplaatsing onder water is (true/false)"
+      },
+      "biome": {
+        "name": "bioom",
+        "description": "Naam van het huidige bioom"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Naam van de verplaatsingsmethode"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "Bij teleportatie speler",
+    "menuDisplayName": "Geteleporteerd",
+    "description": "Wordt geactiveerd wanneer een speler teleporteert",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Naam van de teleportatie-oorzaak"
+      },
+      "distance": {
+        "name": "afstand",
+        "description": "Teleportatie-afstand (meter)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "Bij speler-titel",
+    "menuDisplayName": "Titel",
+    "description": "Wordt geactiveerd wanneer een speler een titel ontvangt",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "afzender",
+        "description": "Naam van de speler die de titel verstuurde"
+      },
+      "message": {
+        "name": "bericht",
+        "description": "Inhoud van het titelbericht"
+      },
+      "recipient": {
+        "name": "ontvanger",
+        "description": "Naam van de speler die de titel ontving"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "Bij spelerbericht",
+    "menuDisplayName": "Bericht",
+    "description": "Wordt geactiveerd wanneer een speler een bericht van welk type dan ook stuurt",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "afzender",
+        "description": "Naam van de speler die het bericht verstuurde"
+      },
+      "message": {
+        "name": "bericht",
+        "description": "Berichtinhoud"
+      },
+      "type": {
+        "name": "type",
+        "description": "Berichttype (chat / tell enz.)"
+      },
+      "recipient": {
+        "name": "ontvanger",
+        "description": "[nullable] Ontvangernaam. null voor niet-tell-berichten"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "Bij stuiteren speler",
+    "menuDisplayName": "Gestuiterd",
+    "description": "Wordt geactiveerd wanneer een speler op een slijmblok o.i.d. stuitert",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "hoogte",
+        "description": "Stuiterhoogte (blokken)"
+      },
+      "block": {
+        "name": "blok",
+        "description": "BlockType-object (blok waarop gestuiterd) → koppel aan blokinfoknooppunt"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "Bij blok breken",
+    "menuDisplayName": "Blok breken",
+    "description": "Wordt geactiveerd wanneer een blok wordt gebroken",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blok",
+        "description": "BlockType-object → koppel aan blokinfoknooppunt"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Naam van de vernietigingsmethode"
+      },
+      "item": {
+        "name": "voorwerp",
+        "description": "[nullable] Vastgehouden voorwerp vóór het breken. null als met blote handen"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "Bij blok plaatsen",
+    "menuDisplayName": "Blok plaatsen",
+    "description": "Wordt geactiveerd wanneer een blok wordt geplaatst",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blok",
+        "description": "BlockType-object → koppel aan blokinfoknooppunt"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      },
+      "underwater": {
+        "name": "onderwater",
+        "description": "Of het onder water is geplaatst (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Naam van de plaatsingsmethode"
+      },
+      "item": {
+        "name": "voorwerp",
+        "description": "Vastgehouden voorwerp vóór het plaatsen → koppel aan voorwerpinfoknooppunt"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "Bij voorwerp gebruiken",
+    "menuDisplayName": "Voorwerp gebr.",
+    "description": "Wordt geactiveerd wanneer een speler een voorwerp gebruikt",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "voorwerp",
+        "description": "[nullable] Vastgehouden voorwerp. null als er geen voorwerp is"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Naam van de gebruiksmethode van het voorwerp"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "Bij voorwerp verkrijgen",
+    "menuDisplayName": "Voorwerp verkr.",
+    "description": "Wordt geactiveerd wanneer een speler een voorwerp verkrijgt",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "aantal",
+        "description": "Aantal verkregen voorwerpen"
+      },
+      "item": {
+        "name": "voorwerp",
+        "description": "Voorwerptype → koppel aan voorwerptype-infoknooppunt"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Naam van de verkrijgingsmethode van het voorwerp"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "Bij voorwerp maken",
+    "menuDisplayName": "Gemaakt",
+    "description": "Wordt geactiveerd wanneer een speler een voorwerp maakt",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "voorwerp",
+        "description": "Voorwerpstapel (gemaakt voorwerp) → koppel aan voorwerpstapel-infoknooppunt"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      },
+      "used_table": {
+        "name": "tafel_gebruikt",
+        "description": "Of de werkbank is gebruikt (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "Bij voorwerp uitrusten",
+    "menuDisplayName": "Uitgerust",
+    "description": "Wordt geactiveerd wanneer een speler een voorwerp uitrust",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "voorwerp",
+        "description": "Voorwerpstapel → koppel aan voorwerpstapel-infoknooppunt"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      },
+      "equip_slot": {
+        "name": "uitrust_slot",
+        "description": "Naam van de uitrustingssleuf"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "Bij voorwerp smelten",
+    "menuDisplayName": "Gesmolten",
+    "description": "Wordt geactiveerd wanneer een speler een voorwerp smelt",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "voorwerp",
+        "description": "Voorwerptype (gesmolten voorwerp) → koppel aan voorwerptype-infoknooppunt"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      },
+      "fuel": {
+        "name": "brandstof",
+        "description": "Voorwerptype (brandstof) → koppel aan voorwerptype-infoknooppunt"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "Bij voorwerp ruilen",
+    "menuDisplayName": "Geruild",
+    "description": "Wordt geactiveerd wanneer een speler een dorpelingruil voltooit",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "voorwerp",
+        "description": "Voorwerpstapel (ontvangen voorwerp) → koppel aan voorwerpstapel-infoknooppunt"
+      },
+      "villager": {
+        "name": "dorpeling",
+        "description": "WorldVillager-object → koppel aan dorpelinginfoknooppunt"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      },
+      "payment_a": {
+        "name": "betaling_a",
+        "description": "Voorwerptype (betaling A) → koppel aan voorwerptype-infoknooppunt"
+      },
+      "payment_b": {
+        "name": "betaling_b",
+        "description": "[nullable] Voorwerptype (betaling B). null indien ongebruikt"
+      },
+      "player_xp": {
+        "name": "smaragden_speler",
+        "description": "Smaragden die de speler heeft na de ruil"
+      },
+      "villager_xp": {
+        "name": "smaragden_dorpeling",
+        "description": "Smaragden die de dorpeling heeft na de ruil"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "Bij mob-interactie",
+    "menuDisplayName": "Mob-interactie",
+    "description": "Wordt geactiveerd wanneer een speler met een mob interacteert",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "mob",
+        "description": "WorldMob-object (mob waarmee geïnteracteerd)"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Naam van het mob-interactietype"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "Bij doelwit raken",
+    "menuDisplayName": "Doelwit geraakt",
+    "description": "Wordt geactiveerd wanneer een doelwitblok wordt geraakt",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "sterkte",
+        "description": "Redstone-signaalsterkte (0–15)"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Commando uitvoeren",
+    "menuDisplayName": "Cmd uitv.",
+    "description": "Voert elk Minecraft-commando uit (zonder de voorloop-/)",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "command": {
+        "name": "commando",
+        "description": "Uit te voeren Minecraft-commando (zonder voorloop-/)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft true wanneer klaar"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Speltijd ophalen",
+    "menuDisplayName": "Speltijd",
+    "description": "Haalt de speltijd op ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Op te vragen tijdtype",
+        "options": {
+          "time": "Tijd (0–24000)",
+          "day": "Aantal dagen",
+          "tick": "Aantal ticks"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "waarde",
+        "description": "Opgevraagde tijdwaarde"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Is het dag",
+    "menuDisplayName": "Dag?",
+    "description": "Controleert of het momenteel dag is (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "is_dag",
+        "description": "true overdag, false 's nachts"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Weer ophalen",
+    "menuDisplayName": "Weer",
+    "description": "Haalt het huidige weer op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "weer",
+        "description": "Weernaam (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Blokken vullen",
+    "menuDisplayName": "Vullen",
+    "description": "Vult een gebied tussen twee posities met een opgegeven blok",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "from": {
+        "name": "van",
+        "description": "Beginhoek {x, y, z}"
+      },
+      "to": {
+        "name": "naar",
+        "description": "Eindhoek {x, y, z}"
+      },
+      "block_id": {
+        "name": "blok_id",
+        "description": "Blok-ID (bv. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft true wanneer het vullen voltooid is"
+      },
+      "count": {
+        "name": "aantal",
+        "description": "Aantal gevulde blokken"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Grondhoogte ophalen",
+    "menuDisplayName": "Grond",
+    "description": "Haalt de positie en het type van het bovenste vaste blok op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "positie",
+        "description": "Grondpositie {x, y, z}"
+      },
+      "block_name": {
+        "name": "bloknaam",
+        "description": "Naam van het bovenste vaste blok"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Wereldquery",
+    "menuDisplayName": "Wereldquery",
+    "description": "Vraagt de lijst van {{type}} in de wereld op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Op te vragen categorie",
+        "options": {
+          "mob": "Entiteit",
+          "block": "Blok",
+          "item": "Voorwerp"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "lijst",
+        "description": "Lijst met queryresultaten"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Spelerpositie ophalen",
+    "menuDisplayName": "Speler-pos",
+    "description": "Haalt de huidige positie en kijkrichting van de speler op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "positie",
+        "description": "Spelerpositie {x, y, z}"
+      },
+      "direction": {
+        "name": "richting",
+        "description": "Kijkrichting van de speler (rotatie om Y-as)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Speleroriëntatie ophalen",
+    "menuDisplayName": "Speler-richt",
+    "description": "Haalt de camerahoek van de speler op (pitch en yaw)",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "hoek",
+        "description": "Kijkhoek van de speler {x, y} (graden)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Spelertags ophalen",
+    "menuDisplayName": "Spelertags",
+    "description": "Haalt alle aan de speler toegekende tags op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "tags",
+        "description": "Array van strings met tagnamen"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "Speler heeft tag",
+    "menuDisplayName": "Heeft tag?",
+    "description": "Controleert of de speler een opgegeven tag heeft",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "tag": {
+        "name": "tag",
+        "description": "Te controleren tagnaam"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultaat",
+        "description": "true als de speler de tag heeft"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Spelerniveau ophalen",
+    "menuDisplayName": "Speler-niv",
+    "description": "Haalt het huidige ervaringsniveau van de speler op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "niveau",
+        "description": "Spelerniveau (getal)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Spelmodus ophalen",
+    "menuDisplayName": "Spelmodus",
+    "description": "Haalt de huidige spelmodus van de speler op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "spelmodus",
+        "description": "Naam van de spelmodus (bv. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Spelervaardigheden ophalen",
+    "menuDisplayName": "Vaardigheden",
+    "description": "Haalt de huidige vaardigheidsinstellingen van de speler op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "vaardigheden",
+        "description": "Spelervaardigheden-object"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Spelers ophalen",
+    "menuDisplayName": "Spelers",
+    "description": "Haalt een lijst van alle spelers in de wereld op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "spelers",
+        "description": "Array van spelerobjecten"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Lokale speler ophalen",
+    "menuDisplayName": "Lokale speler",
+    "description": "Haalt het lokale (eigen) spelerobject op",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "speler",
+        "description": "Lokaal spelerobject"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Uit entiteit halen",
+    "menuDisplayName": "Entiteitinfo",
+    "description": "Haalt positie, richting, dimensie en andere velden uit een entiteitobject",
+    "inputs": {
+      "entity": {
+        "name": "entiteit",
+        "description": "Speler- of dorpelingobject (player / villager-uitvoer)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "positie",
+        "description": "Entiteitpositie (position)"
+      },
+      "direction": {
+        "name": "richting",
+        "description": "Rotatie om Y-as (yRot)"
+      },
+      "dimension": {
+        "name": "dimensie",
+        "description": "Dimensienummer (dimension)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Type-string (type)"
+      },
+      "variant": {
+        "name": "variant",
+        "description": "Variantnummer (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Entiteit-ID-nummer (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Uit speler halen",
+    "menuDisplayName": "Spelerinfo",
+    "description": "Haalt naam, kleur en entiteitinfo uit een speler-snapshotobject",
+    "inputs": {
+      "player": {
+        "name": "speler",
+        "description": "Spelerobject uit de player-uitvoer van een gebeurtenisknooppunt"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "naam",
+        "description": "Spelernaam (name)"
+      },
+      "color": {
+        "name": "kleur",
+        "description": "Kleur van de kaartmarkering (color)"
+      },
+      "entity": {
+        "name": "entiteit",
+        "description": "Koppel aan entiteitinfoknooppunt"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Uit voorwerptype halen",
+    "menuDisplayName": "Voorwerptype-info",
+    "description": "Haalt voorwerp-ID en datawaarde uit een voorwerptype-object",
+    "inputs": {
+      "item": {
+        "name": "voorwerp",
+        "description": "Voorwerptype (item-uitvoer van verkrijg-/smeltgebeurtenissen)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "voorwerp_id",
+        "description": "Voorwerp-ID-string (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Datawaarde (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Uit voorwerpstapel halen",
+    "menuDisplayName": "Voorwerpstapel-info",
+    "description": "Haalt voorwerp-ID, aantal, max. aantal en datawaarde uit een voorwerpstapel-object",
+    "inputs": {
+      "item": {
+        "name": "voorwerp",
+        "description": "Voorwerpstapel (item-uitvoer van gebruik-/uitrust-/maak-/ruilgebeurtenissen)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "voorwerp_id",
+        "description": "Voorwerp-ID-string (typeId)"
+      },
+      "count": {
+        "name": "aantal",
+        "description": "Stapelgrootte (amount)"
+      },
+      "max_count": {
+        "name": "max_aantal",
+        "description": "Max. stapelgrootte (maxAmount)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Datawaarde (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Uit bloktype halen",
+    "menuDisplayName": "Blokinfo",
+    "description": "Haalt blok-ID en datawaarde uit een bloktype-object",
+    "inputs": {
+      "block": {
+        "name": "blok",
+        "description": "Bloktype-object (block-uitvoer van block-/bounce-gebeurtenissen)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "blok_id",
+        "description": "Blok-ID-string (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Datawaarde (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Uit SB-doel halen",
+    "menuDisplayName": "SB-doelinfo",
+    "description": "Haalt de ID en weergavenaam uit een scorebord-doelobject",
+    "inputs": {
+      "objective": {
+        "name": "doel",
+        "description": "Doel uit een doel-toevoegen-/-ophalen-knooppunt"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "doel_id",
+        "description": "Doel-ID-string (id)"
+      },
+      "display_name": {
+        "name": "weergavenaam",
+        "description": "Weergavenaam (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Uit mob halen",
+    "menuDisplayName": "Mobinfo",
+    "description": "Haalt type-, kleur- en variantnummers uit een mobobject",
+    "inputs": {
+      "mob": {
+        "name": "mob",
+        "description": "Mobobject (mob-uitvoer van de mob-interactiegebeurtenis)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "type",
+        "description": "Mobtype-nummer (type)"
+      },
+      "color": {
+        "name": "kleur",
+        "description": "Kleurnummer (color)"
+      },
+      "variant": {
+        "name": "variant",
+        "description": "Variantnummer (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Uit dorpeling halen",
+    "menuDisplayName": "Dorpelinginfo",
+    "description": "Haalt naam, rang en entiteitinfo uit een dorpelingobject",
+    "inputs": {
+      "villager": {
+        "name": "dorpeling",
+        "description": "Dorpelingobject (villager-uitvoer van de ruilgebeurtenis)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "naam",
+        "description": "Dorpelingnaam (trader.name)"
+      },
+      "rank": {
+        "name": "rang",
+        "description": "Handelsrang (trader.tier)"
+      },
+      "entity": {
+        "name": "entiteit",
+        "description": "Koppel aan entiteitinfoknooppunt"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Selector",
+    "menuDisplayName": "Selector",
+    "description": "Selecteert uit de {{type}}-lijst",
+    "inputs": {
+      "type": {
+        "name": "type",
+        "description": "Te selecteren categorie",
+        "options": {
+          "block": "🧱 Blok",
+          "item": "🎒 Voorwerp",
+          "mob": "🐾 Mob",
+          "TravelMethod": "🚶 Verplaatsingsmethode",
+          "TeleportCause": "✨ Teleportatie-oorzaak",
+          "MobInteraction": "🐄 Mob-interactie",
+          "ItemUseMethod": "🤚 Voorwerpgebruiksmethode",
+          "ItemAcqMethod": "📦 Verkrijgingsmethode",
+          "EquipSlot": "🪖 Uitrustingssleuf",
+          "BlockBreakMethod": "⛏️ Breekmethode",
+          "BlockPlaceMethod": "🏗️ Plaatsingsmethode"
+        }
+      },
+      "block": {
+        "name": "blok",
+        "description": "Blok-ID"
+      },
+      "item": {
+        "name": "voorwerp",
+        "description": "Voorwerp-ID"
+      },
+      "mob": {
+        "name": "mob",
+        "description": "Mob-(entiteit)-ID"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Verplaatsingsmethode"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Teleportatie-oorzaak"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Mob-interactietype"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Voorwerpgebruiksmethode"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Voorwerpverkrijgingsmethode"
+      },
+      "EquipSlot": {
+        "name": "uitrust_slot",
+        "description": "Uitrustingssleuf"
+      },
+      "BlockBreakMethod": {
+        "name": "breekmethode",
+        "description": "Blokbreekmethode"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Blokplaatsingsmethode"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "waarde",
+        "description": "Geselecteerde ID of enum-waarde"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Gelokaliseerde naam",
+    "menuDisplayName": "Gelokaliseerde naam",
+    "description": "Zet {{type}} om naar gelokaliseerde naam",
+    "inputs": {
+      "value": {
+        "name": "waarde",
+        "description": "Minecraft-ID (bv. \"minecraft:stone\") of gebeurteniswaarde (bv. \"Walk\")"
+      },
+      "type": {
+        "name": "type",
+        "description": "Om te zetten categorie",
+        "options": {
+          "block": "Blok-ID",
+          "item": "Voorwerp-ID",
+          "mob": "Mob-ID",
+          "TravelMethod": "Verplaatsingsmethode",
+          "TeleportCause": "Teleportatie-oorzaak",
+          "MobInteraction": "Mob-interactie",
+          "ItemUseMethod": "Voorwerpgebruiksmethode",
+          "ItemAcqMethod": "Verkrijgingsmethode",
+          "EquipSlot": "Uitrustingssleuf",
+          "BlockBreakMethod": "Blokbreekmethode",
+          "BlockPlaceMethod": "Blokplaatsingsmethode"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "naam",
+        "description": "Gelokaliseerde naam (geeft de invoerwaarde terug indien niet gevonden)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Vector3-bewerking",
+    "menuDisplayName": "Vec3-bew.",
+    "description": "Voert {{op}} uit op een 3D-positie",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Type bewerking",
+        "options": {
+          "assemble": "🔧 Samenstellen",
+          "add": "➕ Optellen",
+          "subtract": "➖ Aftrekken",
+          "scale": "✖️ Schalen",
+          "floor": "⬇️ Afronden omlaag",
+          "ceil": "⬆️ Afronden omhoog",
+          "fill_y": "📐 Y vullen"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "X-coördinaat"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y-coördinaat"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z-coördinaat"
+      },
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Basispositie {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Andere positie {x,y,z}"
+      },
+      "position": {
+        "name": "positie",
+        "description": "Positie {x,y,z}"
+      },
+      "scale": {
+        "name": "schaal",
+        "description": "Scalaire vermenigvuldiger (bv. 2 voor dubbel)"
+      },
+      "pos_xz": {
+        "name": "pos_xz",
+        "description": "2D-positie {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Y-coördinaatwaarde"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultaat",
+        "description": "Resulterende positie {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Vector3-afstand",
+    "menuDisplayName": "Afstand",
+    "description": "Berekent de euclidische afstand tussen twee 3D-posities",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Beginpositie {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Eindpositie {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "afstand",
+        "description": "Afstand tussen de twee punten (meter)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 naar string",
+    "menuDisplayName": "Vec3→String",
+    "description": "Zet een positieobject om naar een string in de notatie \"x y z\"",
+    "inputs": {
+      "position": {
+        "name": "positie",
+        "description": "Om te zetten positie {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "tekst",
+        "description": "String in de notatie \"x y z\""
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Vector3 splitsen",
+    "menuDisplayName": "Vec3 splits",
+    "description": "Splitst een positieobject in afzonderlijke x-, y- en z-waarden",
+    "inputs": {
+      "position": {
+        "name": "positie",
+        "description": "Te splitsen positie {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "X-coördinaat"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y-coördinaat"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z-coördinaat"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Getal begrenzen",
+    "menuDisplayName": "Begrenzen",
+    "description": "Begrenst een getal tussen een minimum- en maximumwaarde",
+    "inputs": {
+      "value": {
+        "name": "waarde",
+        "description": "Te begrenzen getal"
+      },
+      "min": {
+        "name": "min",
+        "description": "Ondergrens"
+      },
+      "max": {
+        "name": "max",
+        "description": "Bovengrens"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultaat",
+        "description": "Begrensde waarde"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Gebied maken",
+    "menuDisplayName": "AABB maken",
+    "description": "Maakt een asuitgelijnde begrenzingsbox (AABB) uit twee hoekposities",
+    "inputs": {
+      "corner_a": {
+        "name": "hoek_a",
+        "description": "Gebiedshoek 1 {x,y,z} (volgorde maakt niet uit)"
+      },
+      "corner_b": {
+        "name": "hoek_b",
+        "description": "Gebiedshoek 2 {x,y,z} (volgorde maakt niet uit)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "gebied",
+        "description": "AABB-gebiedobject {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Is in gebied",
+    "menuDisplayName": "In AABB",
+    "description": "Controleert of een positie binnen een AABB-gebied ligt",
+    "inputs": {
+      "area": {
+        "name": "gebied",
+        "description": "AABB-gebied {min, max}"
+      },
+      "position": {
+        "name": "positie",
+        "description": "Te testen positie {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultaat",
+        "description": "true als de positie binnen het gebied ligt"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "Bij spelertransformatie",
+    "menuDisplayName": "SpelerTransf",
+    "description": "Wordt geactiveerd wanneer de positie of rotatie van een speler verandert (hoge frequentie)",
+    "inputs": {
+      "world": {
+        "name": "wereld",
+        "description": "World-uitvoer van het MinecraftConnect-knooppunt"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "positie",
+        "description": "Spelerpositie {x, y, z}"
+      },
+      "direction": {
+        "name": "richting",
+        "description": "Kijkrichting van de speler (rotatie om Y-as)"
+      },
+      "player": {
+        "name": "speler",
+        "description": "WorldPlayer-object → koppel aan spelerinfoknooppunt"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Agent verplaatsen",
+    "menuDisplayName": "AgentMove",
+    "description": "Verplaatst de agent {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "direction": {
+        "name": "richting",
+        "description": "Verplaatsingsrichting",
+        "options": {
+          "forward": "Vooruit",
+          "back": "Achteruit",
+          "left": "Links",
+          "right": "Rechts",
+          "up": "Omhoog",
+          "down": "Omlaag"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft true na het verplaatsen"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Agent draaien",
+    "menuDisplayName": "AgentTurn",
+    "description": "Draait de agent {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "direction": {
+        "name": "richting",
+        "description": "Draairichting",
+        "options": {
+          "left": "Links",
+          "right": "Rechts"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft true na het draaien"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Agent teleporteren",
+    "menuDisplayName": "AgentTP",
+    "description": "Teleporteert de agent naar een positie (laat weg om de huidige locatie van de speler te gebruiken)",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "position": {
+        "name": "positie",
+        "description": "Bestemmingspositie {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft true na het teleporteren"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Agentactie",
+    "menuDisplayName": "AgentAction",
+    "description": "De agent voert {{action}} uit (richting: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "action": {
+        "name": "actie",
+        "description": "Uit te voeren actie",
+        "options": {
+          "attack": "Aanvallen",
+          "destroyBlock": "Vernietigen",
+          "till": "Ploegen",
+          "dropAllItems": "Alles laten vallen"
+        }
+      },
+      "direction": {
+        "name": "richting",
+        "description": "Actierichting",
+        "options": {
+          "forward": "Vooruit",
+          "back": "Achteruit",
+          "left": "Links",
+          "right": "Rechts",
+          "up": "Omhoog",
+          "down": "Omlaag"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft true wanneer klaar"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Agent plaatst blok",
+    "menuDisplayName": "AgentPlaats",
+    "description": "Plaatst het blok uit sleuf {{slot}} richting {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "direction": {
+        "name": "richting",
+        "description": "Plaatsingsrichting",
+        "options": {
+          "forward": "Vooruit",
+          "back": "Achteruit",
+          "left": "Links",
+          "right": "Rechts",
+          "up": "Omhoog",
+          "down": "Omlaag"
+        }
+      },
+      "slot": {
+        "name": "sleuf",
+        "description": "Inventarissleufnummer (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft true na het plaatsen"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Agent laat voorwerp vallen",
+    "menuDisplayName": "AgentVallen",
+    "description": "Laat het voorwerp uit sleuf {{slot}} vallen richting {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "direction": {
+        "name": "richting",
+        "description": "Valrichting",
+        "options": {
+          "forward": "Vooruit",
+          "back": "Achteruit",
+          "left": "Links",
+          "right": "Rechts",
+          "up": "Omhoog",
+          "down": "Omlaag"
+        }
+      },
+      "slot": {
+        "name": "sleuf",
+        "description": "Inventarissleufnummer (1–27)"
+      },
+      "amount": {
+        "name": "hoeveelheid",
+        "description": "Aantal te laten vallen voorwerpen"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft true na het laten vallen"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Agent verplaatst voorwerp",
+    "menuDisplayName": "AgentVerplVoorw",
+    "description": "Verplaatst voorwerpen tussen sleuven in de inventaris van de agent",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "from_slot": {
+        "name": "bron_sleuf",
+        "description": "Bronsleufnummer (1–27)"
+      },
+      "to_slot": {
+        "name": "doel_sleuf",
+        "description": "Doelsleufnummer (1–27)"
+      },
+      "amount": {
+        "name": "hoeveelheid",
+        "description": "Aantal te verplaatsen voorwerpen"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft true na het verplaatsen"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Agent stelt voorwerp in",
+    "menuDisplayName": "AgentStelVoorw",
+    "description": "Stelt een voorwerp in de opgegeven agent-inventarissleuf in",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "slot": {
+        "name": "sleuf",
+        "description": "In te stellen sleufnummer (1–27)"
+      },
+      "item_id": {
+        "name": "voorwerp_id",
+        "description": "Voorwerp-ID (bv. minecraft:apple)"
+      },
+      "amount": {
+        "name": "hoeveelheid",
+        "description": "Aantal in te stellen voorwerpen"
+      },
+      "data": {
+        "name": "data",
+        "description": "Datawaarde (meestal 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft true na het instellen"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Agent verzamelt",
+    "menuDisplayName": "AgentVerzamel",
+    "description": "Verzamelt een opgegeven voorwerptype rondom de agent",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "item_id": {
+        "name": "voorwerp_id",
+        "description": "Te verzamelen voorwerp-ID"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft true na het verzamelen"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Agent detecteert",
+    "menuDisplayName": "AG Detect",
+    "description": "Detecteert {{type}} {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (optioneel)"
+      },
+      "type": {
+        "name": "type",
+        "description": "Wat te detecteren",
+        "options": {
+          "block": "Blok",
+          "redstone": "Redstone"
+        }
+      },
+      "direction": {
+        "name": "richting",
+        "description": "Detectierichting",
+        "options": {
+          "forward": "Vooruit",
+          "back": "Achteruit",
+          "left": "Links",
+          "right": "Rechts",
+          "up": "Omhoog",
+          "down": "Omlaag"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "gedetecteerd",
+        "description": "true als er iets wordt gedetecteerd"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Vector3-interpolatie",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Interpoleert lineair tussen twee posities (t=0 is begin, t=1 is eind)",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Beginpositie {x, y, z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Eindpositie {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Interpolatiefactor (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultaat",
+        "description": "Geïnterpoleerde positie {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Vector3 normaliseren",
+    "menuDisplayName": "Vec3Norm",
+    "description": "Normaliseert een vector naar eenheidslengte (lengte = 1)",
+    "inputs": {
+      "position": {
+        "name": "positie",
+        "description": "Te normaliseren vector {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultaat",
+        "description": "Eenheidsvector met lengte 1 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Vector3-inproduct",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Berekent het inproduct van twee vectoren",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Vector A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Vector B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "waarde",
+        "description": "Inproduct (scalair)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "AABB verschuiven",
+    "menuDisplayName": "AABBVerschuif",
+    "description": "Verschuift een AABB-gebied met een gegeven vector",
+    "inputs": {
+      "area": {
+        "name": "gebied",
+        "description": "Te verschuiven gebied {min, max}"
+      },
+      "delta": {
+        "name": "delta",
+        "description": "Verschuivingsvector {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "gebied",
+        "description": "Verschoven gebiedobject"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "AABB-overlap",
+    "menuDisplayName": "AABBOverlap",
+    "description": "Controleert of twee AABB-gebieden overlappen",
+    "inputs": {
+      "area_a": {
+        "name": "gebied_a",
+        "description": "Gebied A {min, max}"
+      },
+      "area_b": {
+        "name": "gebied_b",
+        "description": "Gebied B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultaat",
+        "description": "true als de twee gebieden overlappen"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Assert",
+    "menuDisplayName": "Assert",
+    "description": "Vergelijkt werkelijk met verwacht en logt PASS/FAIL. Geeft altijd done voor koppeling.",
+    "inputs": {
+      "actual": {
+        "name": "werkelijk",
+        "description": "Te testen waarde"
+      },
+      "expected": {
+        "name": "verwacht",
+        "description": "Verwachte waarde"
+      },
+      "op": {
+        "name": "op",
+        "description": "Vergelijkingsoperator",
+        "options": {
+          "eq": "Gelijk (===)",
+          "neq": "Niet gelijk (!==)",
+          "deep": "Diepe gelijkheid (JSON)",
+          "lt": "Kleiner dan (<)",
+          "gt": "Groter dan (>)",
+          "lte": "Kleiner of gelijk (≤)",
+          "gte": "Groter of gelijk (≥)",
+          "approx": "Bij benadering (±tolerantie)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "Testcase-ID (bv. TC-111)"
+      },
+      "tolerance": {
+        "name": "tolerantie",
+        "description": "Tolerantie voor de benaderende vergelijking"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klaar",
+        "description": "Geeft altijd true (voor koppeling)"
+      },
+      "passed": {
+        "name": "geslaagd",
+        "description": "Geeft true wanneer de test slaagt"
+      },
+      "failed": {
+        "name": "mislukt",
+        "description": "Geeft de werkelijke waarde wanneer de test mislukt"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Stuurt tekst naar Gemini AI en krijgt een antwoord",
+    "inputs": {
+      "apiKey": {
+        "name": "API-sleutel",
+        "description": "API-sleutel van Google AI Studio"
+      },
+      "model": {
+        "name": "Model",
+        "description": "Te gebruiken Gemini-model",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (aanbevolen)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Prompt",
+        "description": "Tekst van de gebruikersprompt"
+      },
+      "systemInstruction": {
+        "name": "Systeeminstructie",
+        "description": "Systeemprompt die de rol/het gedrag van de AI definieert (optioneel)"
+      },
+      "temperature": {
+        "name": "Temperatuur",
+        "description": "Willekeur 0.0–1.0 (lager = deterministischer)"
+      },
+      "trigger": {
+        "name": "Trigger",
+        "description": "Trigger (optioneel)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Antwoord",
+        "description": "Door Gemini gegenereerde tekst"
+      }
+    }
+  }
+}

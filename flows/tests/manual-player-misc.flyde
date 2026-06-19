@@ -301,14 +301,14 @@ node:
       to:
         insId: disconnect
         pinId: トリガー
-  id: TestPlayerQuery3
+  id: ManualPlayerMisc
   inputs: {}
   outputs: {}
   inputsPosition: {}
   outputsPosition: {}
   completionOutputs: []
   description: |
-    プレイヤー追加クエリテスト（TC-077, TC-078, TC-081）チャット送信1回で自動実行
+    手動テスト（プレイヤー追加クエリ TC-077, TC-078, TC-081）チャット送信1回で自動実行
     TC-077: tag add → GetPlayerTags → MCチャットに ["__flyde_test__"] を表示（目視確認）
     TC-078: PlayerHasTag("__flyde_test__") = true を Assert（正常系・自動）
     自動: tag remove でクリーンアップ

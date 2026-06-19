@@ -577,6 +577,49 @@ node:
         data: ../../build/index.flyde.js
     - pos:
         x: 50
+        y: 3100
+      id: agent-collect
+      inputConfig: {}
+      nodeId: AgentCollect
+      config:
+        アイテムID:
+          type: string
+          value: minecraft:stone
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 3100
+      id: assert-146
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-146
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
         y: 2900
       id: agent-action-destroy
       inputConfig: {}
@@ -758,6 +801,18 @@ node:
         insId: assert-144
         pinId: 完了
       to:
+        insId: agent-collect
+        pinId: トリガー
+    - from:
+        insId: agent-collect
+        pinId: 完了
+      to:
+        insId: assert-146
+        pinId: 実際値
+    - from:
+        insId: assert-146
+        pinId: 完了
+      to:
         insId: agent-action-destroy
         pinId: トリガー
     - from:
@@ -772,14 +827,14 @@ node:
       to:
         insId: agent-move-fwd
         pinId: トリガー
-  id: TestAgents
+  id: ManualAgents
   inputs: {}
   outputs: {}
   inputsPosition: {}
   outputsPosition: {}
   completionOutputs: []
   description: |
-    エージェント系テスト（TC-131〜138/142〜145）※ Education Edition 専用
+    手動テスト（エージェント系 TC-131〜138/142〜146）※ Education Edition 専用
     【1回目】チャット送信 → TC-131（AgentTP）・TC-132（AG座標）が自動実行
     【2回目】フロー再起動 → TC-133〜145 がフロー起動と同時に自動実行
     ※ コンテキスト（プレイヤー情報）が process に保持されるため2回目から動作する
@@ -794,4 +849,5 @@ node:
     TC-142: AgentMoveItem(1→2, 1個) → 完了=true
     TC-143: AgentPlaceBlock(前, スロット2) → 完了=true
     TC-144: AgentDropItem(前, スロット1, 1個) → 完了=true
+    TC-146: AgentCollect(minecraft:stone) → 完了=true（TC-144 でドロップしたアイテムを収集）
     TC-145: AgentAction(破壊, 前) → 完了=true

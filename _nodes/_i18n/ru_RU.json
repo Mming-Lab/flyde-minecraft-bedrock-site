@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Подключить",
+    "description": "Запускает сервер WebSocket и подключается к Minecraft Education Edition",
+    "inputs": {
+      "port": {
+        "name": "порт",
+        "description": "Номер порта WebSocket (по умолчанию: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "мир",
+        "description": "Объект World (для внутреннего использования; подключать к командным узлам не нужно)"
+      },
+      "error": {
+        "name": "ошибка",
+        "description": "Сведения об ошибке подключения"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Отключить",
+    "menuDisplayName": "MC Отключить",
+    "description": "Отключается от Minecraft и останавливает сервер WebSocket",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (напр. в чате 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Получить позицию агента",
+    "menuDisplayName": "Поз. агента",
+    "description": "Получает текущую позицию агента",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "позиция",
+        "description": "Позиция агента {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "Получить цели ТР",
+    "menuDisplayName": "Цели ТР",
+    "description": "Получает список всех целей таблицы рекордов",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "цели",
+        "description": "Массив объектов целей таблицы рекордов"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "Получить цель ТР",
+    "menuDisplayName": "Цель ТР",
+    "description": "Получает цель таблицы рекордов по её ID",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "objective_id": {
+        "name": "id_цели",
+        "description": "ID цели таблицы рекордов"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "цель",
+        "description": "Цель таблицы рекордов → подключите к узлу сведений о цели ТР"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "Добавить цель ТР",
+    "menuDisplayName": "Доб. цель ТР",
+    "description": "Добавляет новую цель в таблицу рекордов",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "objective_id": {
+        "name": "id_цели",
+        "description": "ID цели таблицы рекордов"
+      },
+      "display_name": {
+        "name": "отображаемое_имя",
+        "description": "Отображаемое имя (необязательно)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "цель",
+        "description": "Добавленная цель → подключите к узлу сведений о цели ТР"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "Удалить цель ТР",
+    "menuDisplayName": "Удал. цель ТР",
+    "description": "Удаляет цель таблицы рекордов по её ID",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "objective_id": {
+        "name": "id_цели",
+        "description": "ID цели таблицы рекордов"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "Результат удаления"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Получить все очки",
+    "menuDisplayName": "Все очки",
+    "description": "Получает все очки игрока",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "player_name": {
+        "name": "имя_игрока",
+        "description": "Имя игрока"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "очки",
+        "description": "Массив всех очков"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Получить очки",
+    "menuDisplayName": "Получить очки",
+    "description": "Получает очки игрока для конкретной цели",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "player_name": {
+        "name": "имя_игрока",
+        "description": "Имя игрока"
+      },
+      "objective_id": {
+        "name": "id_цели",
+        "description": "ID цели таблицы рекордов"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "очки",
+        "description": "Значение очков (число)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Операция с очками",
+    "menuDisplayName": "Опер. очков",
+    "description": "Выполняет {{operation}} над очками игрока",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "operation": {
+        "name": "операция",
+        "description": "Тип операции",
+        "options": {
+          "add": "Прибавить",
+          "remove": "Убавить",
+          "set": "Установить"
+        }
+      },
+      "player_name": {
+        "name": "имя_игрока",
+        "description": "Имя игрока"
+      },
+      "objective_id": {
+        "name": "id_цели",
+        "description": "ID цели таблицы рекордов"
+      },
+      "value": {
+        "name": "значение",
+        "description": "Значение для операции"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Новое значение очков после операции"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "При сообщении игрока",
+    "menuDisplayName": "Чат",
+    "description": "Срабатывает, когда игрок отправляет сообщение в чат",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "отправитель",
+        "description": "Имя игрока, отправившего сообщение"
+      },
+      "message": {
+        "name": "сообщение",
+        "description": "Содержимое сообщения чата"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "При входе игрока",
+    "menuDisplayName": "Вход",
+    "description": "Срабатывает, когда игрок входит в мир",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "имя_игрока",
+        "description": "Имя вошедшего игрока"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "При выходе игрока",
+    "menuDisplayName": "Выход",
+    "description": "Срабатывает, когда игрок покидает мир",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "имя_игрока",
+        "description": "Имя вышедшего игрока"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "При перемещении игрока",
+    "menuDisplayName": "Переместился",
+    "description": "Срабатывает каждый раз при движении игрока",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "расстояние",
+        "description": "Пройденное расстояние (метры)"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      },
+      "underwater": {
+        "name": "под_водой",
+        "description": "Перемещается ли под водой (true/false)"
+      },
+      "biome": {
+        "name": "биом",
+        "description": "Название текущего биома"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Название способа перемещения"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "При телепортации игрока",
+    "menuDisplayName": "Телепортирован",
+    "description": "Срабатывает, когда игрок телепортируется",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Название причины телепортации"
+      },
+      "distance": {
+        "name": "расстояние",
+        "description": "Расстояние телепортации (метры)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "При получении титула",
+    "menuDisplayName": "Титул",
+    "description": "Срабатывает, когда игрок получает титул",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "отправитель",
+        "description": "Имя игрока, отправившего титул"
+      },
+      "message": {
+        "name": "сообщение",
+        "description": "Содержимое сообщения титула"
+      },
+      "recipient": {
+        "name": "получатель",
+        "description": "Имя игрока, получившего титул"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "При сообщении игрока (любом)",
+    "menuDisplayName": "Сообщение",
+    "description": "Срабатывает, когда игрок отправляет любое сообщение",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "отправитель",
+        "description": "Имя игрока, отправившего сообщение"
+      },
+      "message": {
+        "name": "сообщение",
+        "description": "Содержимое сообщения"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Тип сообщения (chat / tell и т. д.)"
+      },
+      "recipient": {
+        "name": "получатель",
+        "description": "[nullable] Имя получателя. null для сообщений, кроме tell"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "При отскоке игрока",
+    "menuDisplayName": "Отскок",
+    "description": "Срабатывает, когда игрок отскакивает от блока слизи и т. п.",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "высота",
+        "description": "Высота отскока (блоки)"
+      },
+      "block": {
+        "name": "блок",
+        "description": "Объект BlockType (блок отскока) → подключите к узлу сведений о блоке"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "При разрушении блока",
+    "menuDisplayName": "Разруш. блока",
+    "description": "Срабатывает, когда блок разрушается",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "блок",
+        "description": "Объект BlockType → подключите к узлу сведений о блоке"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Название способа разрушения"
+      },
+      "item": {
+        "name": "предмет",
+        "description": "[nullable] Предмет в руке до разрушения. null, если голыми руками"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "При установке блока",
+    "menuDisplayName": "Установка блока",
+    "description": "Срабатывает, когда блок устанавливается",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "блок",
+        "description": "Объект BlockType → подключите к узлу сведений о блоке"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      },
+      "underwater": {
+        "name": "под_водой",
+        "description": "Установлен ли под водой (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Название способа установки"
+      },
+      "item": {
+        "name": "предмет",
+        "description": "Предмет в руке до установки → подключите к узлу сведений о предмете"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "При использовании предмета",
+    "menuDisplayName": "Предмет исп.",
+    "description": "Срабатывает, когда игрок использует предмет",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "предмет",
+        "description": "[nullable] Предмет в руке. null, если предмета нет"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Название способа использования предмета"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "При получении предмета",
+    "menuDisplayName": "Предмет получен",
+    "description": "Срабатывает, когда игрок получает предмет",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "количество",
+        "description": "Количество полученных предметов"
+      },
+      "item": {
+        "name": "предмет",
+        "description": "Тип предмета → подключите к узлу сведений о типе предмета"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Название способа получения предмета"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "При изготовлении предмета",
+    "menuDisplayName": "Изготовлен",
+    "description": "Срабатывает, когда игрок изготавливает предмет",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Стак предметов (изготовленный предмет) → подключите к узлу сведений о стаке предметов"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      },
+      "used_table": {
+        "name": "исп_верстак",
+        "description": "Использовался ли верстак (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "При экипировке предмета",
+    "menuDisplayName": "Экипирован",
+    "description": "Срабатывает, когда игрок экипирует предмет",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Стак предметов → подключите к узлу сведений о стаке предметов"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      },
+      "equip_slot": {
+        "name": "слот_экип",
+        "description": "Название слота экипировки"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "При переплавке предмета",
+    "menuDisplayName": "Переплавлен",
+    "description": "Срабатывает, когда игрок переплавляет предмет",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Тип предмета (переплавленный) → подключите к узлу сведений о типе предмета"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      },
+      "fuel": {
+        "name": "топливо",
+        "description": "Тип предмета (топливо) → подключите к узлу сведений о типе предмета"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "При обмене предмета",
+    "menuDisplayName": "Обменян",
+    "description": "Срабатывает, когда игрок завершает обмен с жителем",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Стак предметов (полученный предмет) → подключите к узлу сведений о стаке предметов"
+      },
+      "villager": {
+        "name": "житель",
+        "description": "Объект WorldVillager → подключите к узлу сведений о жителе"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      },
+      "payment_a": {
+        "name": "оплата_a",
+        "description": "Тип предмета (оплата A) → подключите к узлу сведений о типе предмета"
+      },
+      "payment_b": {
+        "name": "оплата_b",
+        "description": "[nullable] Тип предмета (оплата B). null, если не используется"
+      },
+      "player_xp": {
+        "name": "изумруды_игрока",
+        "description": "Изумруды у игрока после обмена"
+      },
+      "villager_xp": {
+        "name": "изумруды_жителя",
+        "description": "Изумруды у жителя после обмена"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "При взаимодействии с мобом",
+    "menuDisplayName": "Взаимод. моб",
+    "description": "Срабатывает, когда игрок взаимодействует с мобом",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "моб",
+        "description": "Объект WorldMob (моб взаимодействия)"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Название типа взаимодействия с мобом"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "При попадании в мишень",
+    "menuDisplayName": "Попадание",
+    "description": "Срабатывает, когда поражён блок-мишень",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "сила",
+        "description": "Сила сигнала редстоуна (0–15)"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Выполнить команду",
+    "menuDisplayName": "Вып. команду",
+    "description": "Выполняет любую команду Minecraft (без начального /)",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "command": {
+        "name": "команда",
+        "description": "Команда Minecraft для выполнения (без начального /)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Выдаёт true по завершении"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Получить игровое время",
+    "menuDisplayName": "Игр. время",
+    "description": "Получает игровое время ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Тип запрашиваемого времени",
+        "options": {
+          "time": "Время (0–24000)",
+          "day": "Число дней",
+          "tick": "Число тиков"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "значение",
+        "description": "Запрошенное значение времени"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Сейчас день",
+    "menuDisplayName": "День?",
+    "description": "Проверяет, день ли сейчас (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "день",
+        "description": "true днём, false ночью"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Получить погоду",
+    "menuDisplayName": "Погода",
+    "description": "Получает текущую погоду",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "погода",
+        "description": "Название погоды (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Заполнить блоками",
+    "menuDisplayName": "Заполнить",
+    "description": "Заполняет область между двумя позициями указанным блоком",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "from": {
+        "name": "от",
+        "description": "Начальный угол {x, y, z}"
+      },
+      "to": {
+        "name": "до",
+        "description": "Конечный угол {x, y, z}"
+      },
+      "block_id": {
+        "name": "id_блока",
+        "description": "ID блока (напр. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Выдаёт true по завершении заполнения"
+      },
+      "count": {
+        "name": "количество",
+        "description": "Количество заполненных блоков"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Получить высоту земли",
+    "menuDisplayName": "Земля",
+    "description": "Получает позицию и тип самого верхнего твёрдого блока",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "позиция",
+        "description": "Позиция земли {x, y, z}"
+      },
+      "block_name": {
+        "name": "имя_блока",
+        "description": "Название самого верхнего твёрдого блока"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Запрос мира",
+    "menuDisplayName": "Запрос мира",
+    "description": "Запрашивает список {{type}} в мире",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Категория запроса",
+        "options": {
+          "mob": "Сущность",
+          "block": "Блок",
+          "item": "Предмет"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "список",
+        "description": "Список результатов запроса"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Получить позицию игрока",
+    "menuDisplayName": "Поз. игрока",
+    "description": "Получает текущую позицию и направление взгляда игрока",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "позиция",
+        "description": "Позиция игрока {x, y, z}"
+      },
+      "direction": {
+        "name": "направление",
+        "description": "Направление взгляда игрока (поворот по оси Y)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Получить ориентацию игрока",
+    "menuDisplayName": "Напр. игрока",
+    "description": "Получает угол камеры игрока (тангаж и рыскание)",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "угол",
+        "description": "Угол взгляда игрока {x, y} (градусы)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Получить теги игрока",
+    "menuDisplayName": "Теги игрока",
+    "description": "Получает все теги, назначенные игроку",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "теги",
+        "description": "Массив строк с именами тегов"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "У игрока есть тег",
+    "menuDisplayName": "Есть тег?",
+    "description": "Проверяет, есть ли у игрока указанный тег",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "tag": {
+        "name": "тег",
+        "description": "Имя проверяемого тега"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "true, если у игрока есть тег"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Получить уровень игрока",
+    "menuDisplayName": "Ур. игрока",
+    "description": "Получает текущий уровень опыта игрока",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "уровень",
+        "description": "Уровень игрока (число)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Получить режим игры",
+    "menuDisplayName": "Режим игры",
+    "description": "Получает текущий режим игры игрока",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "режим_игры",
+        "description": "Название режима игры (напр. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Получить способности игрока",
+    "menuDisplayName": "Способности",
+    "description": "Получает текущие настройки способностей игрока",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "способности",
+        "description": "Объект способностей игрока"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Получить игроков",
+    "menuDisplayName": "Игроки",
+    "description": "Получает список всех игроков в мире",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "игроки",
+        "description": "Массив объектов игроков"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Получить локального игрока",
+    "menuDisplayName": "Лок. игрок",
+    "description": "Получает объект локального игрока (себя)",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "игрок",
+        "description": "Объект локального игрока"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Извлечь из сущности",
+    "menuDisplayName": "Инфо сущности",
+    "description": "Извлекает позицию, направление, измерение и другие поля из объекта сущности",
+    "inputs": {
+      "entity": {
+        "name": "сущность",
+        "description": "Объект игрока или жителя (выход player / villager)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "позиция",
+        "description": "Позиция сущности (position)"
+      },
+      "direction": {
+        "name": "направление",
+        "description": "Поворот по оси Y (yRot)"
+      },
+      "dimension": {
+        "name": "измерение",
+        "description": "Номер измерения (dimension)"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Строка типа (type)"
+      },
+      "variant": {
+        "name": "вариант",
+        "description": "Номер варианта (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Номер ID сущности (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Извлечь из игрока",
+    "menuDisplayName": "Инфо игрока",
+    "description": "Извлекает имя, цвет и сведения о сущности из объекта снимка игрока",
+    "inputs": {
+      "player": {
+        "name": "игрок",
+        "description": "Объект игрока из выхода player узла события"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "имя",
+        "description": "Имя игрока (name)"
+      },
+      "color": {
+        "name": "цвет",
+        "description": "Цвет метки на карте (color)"
+      },
+      "entity": {
+        "name": "сущность",
+        "description": "Подключите к узлу сведений о сущности"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Извлечь из типа предмета",
+    "menuDisplayName": "Инфо типа предмета",
+    "description": "Извлекает ID предмета и значение данных из объекта типа предмета",
+    "inputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Тип предмета (выход item из событий получения / переплавки)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_предмета",
+        "description": "Строка ID предмета (id)"
+      },
+      "data": {
+        "name": "данные",
+        "description": "Значение данных (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Извлечь из стака предметов",
+    "menuDisplayName": "Инфо стака",
+    "description": "Извлекает ID предмета, количество, макс. количество и значение данных из объекта стака предметов",
+    "inputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Стак предметов (выход item из событий использования / экипировки / изготовления / обмена)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_предмета",
+        "description": "Строка ID предмета (typeId)"
+      },
+      "count": {
+        "name": "количество",
+        "description": "Размер стака (amount)"
+      },
+      "max_count": {
+        "name": "макс_количество",
+        "description": "Макс. размер стака (maxAmount)"
+      },
+      "data": {
+        "name": "данные",
+        "description": "Значение данных (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Извлечь из типа блока",
+    "menuDisplayName": "Инфо блока",
+    "description": "Извлекает ID блока и значение данных из объекта типа блока",
+    "inputs": {
+      "block": {
+        "name": "блок",
+        "description": "Объект типа блока (выход block из событий block / bounce)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "id_блока",
+        "description": "Строка ID блока (id)"
+      },
+      "data": {
+        "name": "данные",
+        "description": "Значение данных (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Извлечь из цели ТР",
+    "menuDisplayName": "Инфо цели ТР",
+    "description": "Извлекает ID и отображаемое имя из объекта цели таблицы рекордов",
+    "inputs": {
+      "objective": {
+        "name": "цель",
+        "description": "Цель из узла добавления / получения цели"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "id_цели",
+        "description": "Строка ID цели (id)"
+      },
+      "display_name": {
+        "name": "отображаемое_имя",
+        "description": "Отображаемое имя (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Извлечь из моба",
+    "menuDisplayName": "Инфо моба",
+    "description": "Извлекает номера типа, цвета и варианта из объекта моба",
+    "inputs": {
+      "mob": {
+        "name": "моб",
+        "description": "Объект моба (выход mob из события взаимодействия с мобом)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "тип",
+        "description": "Номер типа моба (type)"
+      },
+      "color": {
+        "name": "цвет",
+        "description": "Номер цвета (color)"
+      },
+      "variant": {
+        "name": "вариант",
+        "description": "Номер варианта (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Извлечь из жителя",
+    "menuDisplayName": "Инфо жителя",
+    "description": "Извлекает имя, ранг и сведения о сущности из объекта жителя",
+    "inputs": {
+      "villager": {
+        "name": "житель",
+        "description": "Объект жителя (выход villager из события обмена)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "имя",
+        "description": "Имя жителя (trader.name)"
+      },
+      "rank": {
+        "name": "ранг",
+        "description": "Ранг торговли (trader.tier)"
+      },
+      "entity": {
+        "name": "сущность",
+        "description": "Подключите к узлу сведений о сущности"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Селектор",
+    "menuDisplayName": "Селектор",
+    "description": "Выбор из списка {{type}}",
+    "inputs": {
+      "type": {
+        "name": "тип",
+        "description": "Категория для выбора",
+        "options": {
+          "block": "🧱 Блок",
+          "item": "🎒 Предмет",
+          "mob": "🐾 Моб",
+          "TravelMethod": "🚶 Способ перемещения",
+          "TeleportCause": "✨ Причина телепортации",
+          "MobInteraction": "🐄 Взаимодействие с мобом",
+          "ItemUseMethod": "🤚 Способ использования предмета",
+          "ItemAcqMethod": "📦 Способ получения",
+          "EquipSlot": "🪖 Слот экипировки",
+          "BlockBreakMethod": "⛏️ Способ разрушения",
+          "BlockPlaceMethod": "🏗️ Способ установки"
+        }
+      },
+      "block": {
+        "name": "блок",
+        "description": "ID блока"
+      },
+      "item": {
+        "name": "предмет",
+        "description": "ID предмета"
+      },
+      "mob": {
+        "name": "моб",
+        "description": "ID моба (сущности)"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Способ перемещения"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Причина телепортации"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Тип взаимодействия с мобом"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Способ использования предмета"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Способ получения предмета"
+      },
+      "EquipSlot": {
+        "name": "слот_экип",
+        "description": "Слот экипировки"
+      },
+      "BlockBreakMethod": {
+        "name": "способ_разруш",
+        "description": "Способ разрушения блока"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Способ установки блока"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "значение",
+        "description": "Выбранный ID или значение перечисления"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Локализованное имя",
+    "menuDisplayName": "Локализованное имя",
+    "description": "Преобразует {{type}} в локализованное имя",
+    "inputs": {
+      "value": {
+        "name": "значение",
+        "description": "ID Minecraft (напр. \"minecraft:stone\") или значение события (напр. \"Walk\")"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Категория для преобразования",
+        "options": {
+          "block": "ID блока",
+          "item": "ID предмета",
+          "mob": "ID моба",
+          "TravelMethod": "Способ перемещения",
+          "TeleportCause": "Причина телепортации",
+          "MobInteraction": "Взаимодействие с мобом",
+          "ItemUseMethod": "Способ использования предмета",
+          "ItemAcqMethod": "Способ получения",
+          "EquipSlot": "Слот экипировки",
+          "BlockBreakMethod": "Способ разрушения блока",
+          "BlockPlaceMethod": "Способ установки блока"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "имя",
+        "description": "Локализованное имя (возвращает входное значение, если не найдено)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Операция Vector3",
+    "menuDisplayName": "Опер. Vec3",
+    "description": "Выполняет {{op}} над 3D-позицией",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Тип операции",
+        "options": {
+          "assemble": "🔧 Собрать",
+          "add": "➕ Сложить",
+          "subtract": "➖ Вычесть",
+          "scale": "✖️ Масштаб",
+          "floor": "⬇️ Округл. вниз",
+          "ceil": "⬆️ Округл. вверх",
+          "fill_y": "📐 Заполнить Y"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "Координата X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Координата Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Координата Z"
+      },
+      "pos_a": {
+        "name": "поз_a",
+        "description": "Базовая позиция {x,y,z}"
+      },
+      "pos_b": {
+        "name": "поз_b",
+        "description": "Другая позиция {x,y,z}"
+      },
+      "position": {
+        "name": "позиция",
+        "description": "Позиция {x,y,z}"
+      },
+      "scale": {
+        "name": "масштаб",
+        "description": "Скалярный множитель (напр. 2 для удвоения)"
+      },
+      "pos_xz": {
+        "name": "поз_xz",
+        "description": "2D-позиция {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Значение координаты Y"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "Результирующая позиция {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Расстояние Vector3",
+    "menuDisplayName": "Расстояние",
+    "description": "Вычисляет евклидово расстояние между двумя 3D-позициями",
+    "inputs": {
+      "pos_a": {
+        "name": "поз_a",
+        "description": "Начальная позиция {x,y,z}"
+      },
+      "pos_b": {
+        "name": "поз_b",
+        "description": "Конечная позиция {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "расстояние",
+        "description": "Расстояние между двумя точками (метры)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 в строку",
+    "menuDisplayName": "Vec3→Строка",
+    "description": "Преобразует объект позиции в строку формата \"x y z\"",
+    "inputs": {
+      "position": {
+        "name": "позиция",
+        "description": "Позиция для преобразования {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "текст",
+        "description": "Строка в формате \"x y z\""
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Разделить Vector3",
+    "menuDisplayName": "Разд. Vec3",
+    "description": "Разделяет объект позиции на отдельные значения x, y и z",
+    "inputs": {
+      "position": {
+        "name": "позиция",
+        "description": "Позиция для разделения {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "Координата X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Координата Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Координата Z"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Ограничить число",
+    "menuDisplayName": "Ограничить",
+    "description": "Ограничивает число между минимальным и максимальным значением",
+    "inputs": {
+      "value": {
+        "name": "значение",
+        "description": "Число для ограничения"
+      },
+      "min": {
+        "name": "мин",
+        "description": "Нижняя граница"
+      },
+      "max": {
+        "name": "макс",
+        "description": "Верхняя граница"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "Ограниченное значение"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Создать область",
+    "menuDisplayName": "Создать AABB",
+    "description": "Создаёт ограничивающий параллелепипед по осям (AABB) из двух углов",
+    "inputs": {
+      "corner_a": {
+        "name": "угол_a",
+        "description": "Угол 1 области {x,y,z} (порядок не важен)"
+      },
+      "corner_b": {
+        "name": "угол_b",
+        "description": "Угол 2 области {x,y,z} (порядок не важен)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "область",
+        "description": "Объект области AABB {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Внутри области",
+    "menuDisplayName": "Внутри AABB",
+    "description": "Проверяет, находится ли позиция внутри области AABB",
+    "inputs": {
+      "area": {
+        "name": "область",
+        "description": "Область AABB {min, max}"
+      },
+      "position": {
+        "name": "позиция",
+        "description": "Позиция для проверки {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "true, если позиция внутри области"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "При изменении положения игрока",
+    "menuDisplayName": "ТрансфИгрока",
+    "description": "Срабатывает при изменении позиции или поворота игрока (высокая частота)",
+    "inputs": {
+      "world": {
+        "name": "мир",
+        "description": "Выход World узла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "позиция",
+        "description": "Позиция игрока {x, y, z}"
+      },
+      "direction": {
+        "name": "направление",
+        "description": "Направление взгляда игрока (поворот по оси Y)"
+      },
+      "player": {
+        "name": "игрок",
+        "description": "Объект WorldPlayer → подключите к узлу сведений об игроке"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Движение агента",
+    "menuDisplayName": "AgentMove",
+    "description": "Перемещает агента {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "direction": {
+        "name": "направление",
+        "description": "Направление движения",
+        "options": {
+          "forward": "Вперёд",
+          "back": "Назад",
+          "left": "Влево",
+          "right": "Вправо",
+          "up": "Вверх",
+          "down": "Вниз"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Выдаёт true после движения"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Поворот агента",
+    "menuDisplayName": "AgentTurn",
+    "description": "Поворачивает агента {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "direction": {
+        "name": "направление",
+        "description": "Направление поворота",
+        "options": {
+          "left": "Влево",
+          "right": "Вправо"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Выдаёт true после поворота"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Телепорт агента",
+    "menuDisplayName": "АгентТП",
+    "description": "Телепортирует агента в позицию (опустите, чтобы использовать текущее положение игрока)",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "position": {
+        "name": "позиция",
+        "description": "Позиция назначения {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Выдаёт true после телепортации"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Действие агента",
+    "menuDisplayName": "AgentAction",
+    "description": "Агент выполняет {{action}} (направление: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "action": {
+        "name": "действие",
+        "description": "Выполняемое действие",
+        "options": {
+          "attack": "Атаковать",
+          "destroyBlock": "Разрушить",
+          "till": "Вспахать",
+          "dropAllItems": "Бросить всё"
+        }
+      },
+      "direction": {
+        "name": "направление",
+        "description": "Направление действия",
+        "options": {
+          "forward": "Вперёд",
+          "back": "Назад",
+          "left": "Влево",
+          "right": "Вправо",
+          "up": "Вверх",
+          "down": "Вниз"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Выдаёт true по завершении"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Агент ставит блок",
+    "menuDisplayName": "АгентСтавит",
+    "description": "Ставит блок из слота {{slot}} в направлении {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "direction": {
+        "name": "направление",
+        "description": "Направление установки",
+        "options": {
+          "forward": "Вперёд",
+          "back": "Назад",
+          "left": "Влево",
+          "right": "Вправо",
+          "up": "Вверх",
+          "down": "Вниз"
+        }
+      },
+      "slot": {
+        "name": "слот",
+        "description": "Номер слота инвентаря (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Выдаёт true после установки"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Агент бросает предмет",
+    "menuDisplayName": "АгентБросает",
+    "description": "Бросает предмет из слота {{slot}} в направлении {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "direction": {
+        "name": "направление",
+        "description": "Направление броска",
+        "options": {
+          "forward": "Вперёд",
+          "back": "Назад",
+          "left": "Влево",
+          "right": "Вправо",
+          "up": "Вверх",
+          "down": "Вниз"
+        }
+      },
+      "slot": {
+        "name": "слот",
+        "description": "Номер слота инвентаря (1–27)"
+      },
+      "amount": {
+        "name": "количество",
+        "description": "Количество предметов для броска"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Выдаёт true после броска"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Агент перемещает предмет",
+    "menuDisplayName": "АгентПеремПредм",
+    "description": "Перемещает предметы между слотами инвентаря агента",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "from_slot": {
+        "name": "слот_источник",
+        "description": "Номер исходного слота (1–27)"
+      },
+      "to_slot": {
+        "name": "слот_назначения",
+        "description": "Номер слота назначения (1–27)"
+      },
+      "amount": {
+        "name": "количество",
+        "description": "Количество предметов для перемещения"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Выдаёт true после движения"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Агент задаёт предмет",
+    "menuDisplayName": "АгентЗадаётПредм",
+    "description": "Задаёт предмет в указанном слоте инвентаря агента",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "slot": {
+        "name": "слот",
+        "description": "Номер задаваемого слота (1–27)"
+      },
+      "item_id": {
+        "name": "id_предмета",
+        "description": "ID предмета (напр. minecraft:apple)"
+      },
+      "amount": {
+        "name": "количество",
+        "description": "Количество задаваемых предметов"
+      },
+      "data": {
+        "name": "данные",
+        "description": "Значение данных (обычно 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Выдаёт true после задания"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Агент собирает",
+    "menuDisplayName": "АгентСобирает",
+    "description": "Собирает указанный тип предмета вокруг агента",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "item_id": {
+        "name": "id_предмета",
+        "description": "ID собираемого предмета"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Выдаёт true после сбора"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Агент обнаруживает",
+    "menuDisplayName": "АГ Обнаруж",
+    "description": "Обнаруживает {{type}} {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "триггер",
+        "description": "Триггер (необязательно)"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Что обнаруживать",
+        "options": {
+          "block": "Блок",
+          "redstone": "Редстоун"
+        }
+      },
+      "direction": {
+        "name": "направление",
+        "description": "Направление обнаружения",
+        "options": {
+          "forward": "Вперёд",
+          "back": "Назад",
+          "left": "Влево",
+          "right": "Вправо",
+          "up": "Вверх",
+          "down": "Вниз"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "обнаружено",
+        "description": "true, если что-то обнаружено"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Интерполяция Vector3",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Линейно интерполирует между двумя позициями (t=0 — начало, t=1 — конец)",
+    "inputs": {
+      "pos_a": {
+        "name": "поз_a",
+        "description": "Начальная позиция {x, y, z}"
+      },
+      "pos_b": {
+        "name": "поз_b",
+        "description": "Конечная позиция {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Коэффициент интерполяции (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "Интерполированная позиция {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Нормализация Vector3",
+    "menuDisplayName": "Vec3Норм",
+    "description": "Нормализует вектор до единичной длины (длина = 1)",
+    "inputs": {
+      "position": {
+        "name": "позиция",
+        "description": "Вектор для нормализации {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "Единичный вектор длины 1 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Скалярное произв. Vector3",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Вычисляет скалярное произведение двух векторов",
+    "inputs": {
+      "pos_a": {
+        "name": "поз_a",
+        "description": "Вектор A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "поз_b",
+        "description": "Вектор B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "значение",
+        "description": "Скалярное произведение (скаляр)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "Сдвиг AABB",
+    "menuDisplayName": "AABBСдвиг",
+    "description": "Сдвигает область AABB на заданный вектор",
+    "inputs": {
+      "area": {
+        "name": "область",
+        "description": "Область для сдвига {min, max}"
+      },
+      "delta": {
+        "name": "дельта",
+        "description": "Вектор сдвига {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "область",
+        "description": "Объект сдвинутой области"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "Пересечение AABB",
+    "menuDisplayName": "AABBПересеч",
+    "description": "Проверяет, пересекаются ли две области AABB",
+    "inputs": {
+      "area_a": {
+        "name": "область_a",
+        "description": "Область A {min, max}"
+      },
+      "area_b": {
+        "name": "область_b",
+        "description": "Область B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "true, если две области пересекаются"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Проверка",
+    "menuDisplayName": "Проверка",
+    "description": "Сравнивает фактическое значение с ожидаемым и записывает PASS/FAIL. Всегда выдаёт done для сцепления.",
+    "inputs": {
+      "actual": {
+        "name": "фактическое",
+        "description": "Проверяемое значение"
+      },
+      "expected": {
+        "name": "ожидаемое",
+        "description": "Ожидаемое значение"
+      },
+      "op": {
+        "name": "op",
+        "description": "Оператор сравнения",
+        "options": {
+          "eq": "Равно (===)",
+          "neq": "Не равно (!==)",
+          "deep": "Глубокое равенство (JSON)",
+          "lt": "Меньше (<)",
+          "gt": "Больше (>)",
+          "lte": "Меньше или равно (≤)",
+          "gte": "Больше или равно (≥)",
+          "approx": "Прибл. (±допуск)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "ID тест-кейса (напр. TC-111)"
+      },
+      "tolerance": {
+        "name": "допуск",
+        "description": "Допуск для приблизительного сравнения"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Всегда выдаёт true (для сцепления)"
+      },
+      "passed": {
+        "name": "пройдено",
+        "description": "Выдаёт true при прохождении теста"
+      },
+      "failed": {
+        "name": "провалено",
+        "description": "Выдаёт фактическое значение при провале теста"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Отправляет текст в Gemini AI и получает ответ",
+    "inputs": {
+      "apiKey": {
+        "name": "Ключ API",
+        "description": "Ключ API из Google AI Studio"
+      },
+      "model": {
+        "name": "Модель",
+        "description": "Используемая модель Gemini",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (рекомендуется)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Запрос",
+        "description": "Текст запроса пользователя"
+      },
+      "systemInstruction": {
+        "name": "Системная инструкция",
+        "description": "Системный запрос, задающий роль/поведение ИИ (необязательно)"
+      },
+      "temperature": {
+        "name": "Температура",
+        "description": "Случайность 0.0–1.0 (ниже = детерминированнее)"
+      },
+      "trigger": {
+        "name": "Триггер",
+        "description": "Триггер (необязательно)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Ответ",
+        "description": "Текст, сгенерированный Gemini"
+      }
+    }
+  }
+}

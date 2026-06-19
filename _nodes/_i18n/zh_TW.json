@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC連線",
+    "description": "啟動WebSocket伺服器並連線到Minecraft教育版",
+    "inputs": {
+      "port": {
+        "name": "埠",
+        "description": "WebSocket埠號（預設：8080）"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "世界",
+        "description": "World物件（內部使用；無需連線到命令節點）"
+      },
+      "error": {
+        "name": "錯誤",
+        "description": "連線錯誤資訊"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft斷開",
+    "menuDisplayName": "MC斷開",
+    "description": "斷開與Minecraft的連線並關閉WebSocket伺服器",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（例如在聊天中輸入'stop'）"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "獲取代理座標",
+    "menuDisplayName": "代理座標",
+    "description": "獲取代理的當前座標",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "座標",
+        "description": "代理座標 {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "獲取計分板目標列表",
+    "menuDisplayName": "計分板目標列表",
+    "description": "獲取所有計分板目標的列表",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "目標列表",
+        "description": "計分板目標物件的陣列"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "獲取計分板目標",
+    "menuDisplayName": "計分板目標",
+    "description": "按ID獲取計分板目標",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "objective_id": {
+        "name": "目標ID",
+        "description": "計分板目標ID"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "目標",
+        "description": "計分板目標 → 連線到計分板目標資訊節點"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "新增計分板目標",
+    "menuDisplayName": "新增目標",
+    "description": "向計分板新增新目標",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "objective_id": {
+        "name": "目標ID",
+        "description": "計分板目標ID"
+      },
+      "display_name": {
+        "name": "顯示名稱",
+        "description": "顯示名稱（可選）"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "目標",
+        "description": "已新增的目標 → 連線到計分板目標資訊節點"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "刪除計分板目標",
+    "menuDisplayName": "刪除目標",
+    "description": "按ID刪除計分板目標",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "objective_id": {
+        "name": "目標ID",
+        "description": "計分板目標ID"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "結果",
+        "description": "刪除結果"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "獲取所有分數",
+    "menuDisplayName": "所有分數",
+    "description": "獲取某玩家的所有分數",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "player_name": {
+        "name": "玩家名",
+        "description": "玩家名"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "分數列表",
+        "description": "所有分數的陣列"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "獲取分數",
+    "menuDisplayName": "獲取分數",
+    "description": "獲取玩家在指定目標上的分數",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "player_name": {
+        "name": "玩家名",
+        "description": "玩家名"
+      },
+      "objective_id": {
+        "name": "目標ID",
+        "description": "計分板目標ID"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "分數",
+        "description": "分數值（數字）"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "分數操作",
+    "menuDisplayName": "分數操作",
+    "description": "對玩家分數執行{{operation}}",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "operation": {
+        "name": "操作",
+        "description": "操作型別",
+        "options": {
+          "add": "增加",
+          "remove": "減少",
+          "set": "設定"
+        }
+      },
+      "player_name": {
+        "name": "玩家名",
+        "description": "玩家名"
+      },
+      "objective_id": {
+        "name": "目標ID",
+        "description": "計分板目標ID"
+      },
+      "value": {
+        "name": "值",
+        "description": "用於操作的值"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "操作後的新分數值"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "當玩家聊天",
+    "menuDisplayName": "聊天",
+    "description": "當玩家傳送聊天訊息時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "傳送者",
+        "description": "傳送聊天的玩家名"
+      },
+      "message": {
+        "name": "訊息",
+        "description": "聊天訊息內容"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "當玩家加入",
+    "menuDisplayName": "加入",
+    "description": "當玩家加入世界時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "玩家名",
+        "description": "加入的玩家名"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "當玩家離開",
+    "menuDisplayName": "離開",
+    "description": "當玩家離開世界時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "玩家名",
+        "description": "離開的玩家名"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "當玩家移動",
+    "menuDisplayName": "移動",
+    "description": "每次玩家移動時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "距離",
+        "description": "移動距離（米）"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      },
+      "underwater": {
+        "name": "水下",
+        "description": "是否在水下移動（true/false）"
+      },
+      "biome": {
+        "name": "生態域",
+        "description": "當前生態域名稱"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "移動方式名稱"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "當玩家傳送",
+    "menuDisplayName": "傳送",
+    "description": "當玩家傳送時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "傳送原因名稱"
+      },
+      "distance": {
+        "name": "距離",
+        "description": "傳送距離（米）"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "當玩家標題",
+    "menuDisplayName": "標題",
+    "description": "當玩家收到標題時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "傳送者",
+        "description": "傳送標題的玩家名"
+      },
+      "message": {
+        "name": "訊息",
+        "description": "標題訊息內容"
+      },
+      "recipient": {
+        "name": "接收者",
+        "description": "收到標題的玩家名"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "當玩家訊息",
+    "menuDisplayName": "訊息",
+    "description": "當玩家傳送任意型別訊息時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "傳送者",
+        "description": "傳送訊息的玩家名"
+      },
+      "message": {
+        "name": "訊息",
+        "description": "訊息內容"
+      },
+      "type": {
+        "name": "型別",
+        "description": "訊息型別（chat / tell 等）"
+      },
+      "recipient": {
+        "name": "接收者",
+        "description": "[可空] 接收者名稱。非tell訊息時為null"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "當玩家彈跳",
+    "menuDisplayName": "彈跳",
+    "description": "當玩家在黏液塊等上彈跳時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "高度",
+        "description": "彈跳高度（方塊）"
+      },
+      "block": {
+        "name": "方塊",
+        "description": "BlockType物件（彈跳所在方塊）→ 連線到方塊資訊節點"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "當方塊被破壞",
+    "menuDisplayName": "破壞方塊",
+    "description": "當方塊被破壞時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "方塊",
+        "description": "BlockType物件 → 連線到方塊資訊節點"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "破壞方式名稱"
+      },
+      "item": {
+        "name": "物品",
+        "description": "[可空] 破壞前手持的物品。空手時為null"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "當方塊被放置",
+    "menuDisplayName": "放置方塊",
+    "description": "當方塊被放置時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "方塊",
+        "description": "BlockType物件 → 連線到方塊資訊節點"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      },
+      "underwater": {
+        "name": "水下",
+        "description": "是否在水下放置（true/false）"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "放置方式名稱"
+      },
+      "item": {
+        "name": "物品",
+        "description": "放置前手持的物品 → 連線到物品資訊節點"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "當使用物品",
+    "menuDisplayName": "使用物品",
+    "description": "當玩家使用物品時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "物品",
+        "description": "[可空] 手持的物品。無物品時為null"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "物品使用方式名稱"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "當獲得物品",
+    "menuDisplayName": "獲得物品",
+    "description": "當玩家獲得物品時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "數量",
+        "description": "獲得的物品數量"
+      },
+      "item": {
+        "name": "物品",
+        "description": "物品型別 → 連線到物品型別資訊節點"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "物品獲得方式名稱"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "當合成物品",
+    "menuDisplayName": "合成",
+    "description": "當玩家合成物品時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "物品",
+        "description": "物品堆疊（合成的物品）→ 連線到物品堆疊資訊節點"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      },
+      "used_table": {
+        "name": "使用了工作臺",
+        "description": "是否使用了工作臺（true/false）"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "當裝備物品",
+    "menuDisplayName": "裝備",
+    "description": "當玩家裝備物品時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "物品",
+        "description": "物品堆疊 → 連線到物品堆疊資訊節點"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      },
+      "equip_slot": {
+        "name": "裝備槽",
+        "description": "裝備槽名稱"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "當熔煉物品",
+    "menuDisplayName": "熔煉",
+    "description": "當玩家熔煉物品時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "物品",
+        "description": "物品型別（熔煉的物品）→ 連線到物品型別資訊節點"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      },
+      "fuel": {
+        "name": "燃料",
+        "description": "物品型別（燃料）→ 連線到物品型別資訊節點"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "當交易物品",
+    "menuDisplayName": "交易",
+    "description": "當玩家完成村民交易時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "物品",
+        "description": "物品堆疊（獲得的物品）→ 連線到物品堆疊資訊節點"
+      },
+      "villager": {
+        "name": "村民",
+        "description": "WorldVillager物件 → 連線到村民資訊節點"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      },
+      "payment_a": {
+        "name": "支付物A",
+        "description": "物品型別（支付物A）→ 連線到物品型別資訊節點"
+      },
+      "payment_b": {
+        "name": "支付物B",
+        "description": "[可空] 物品型別（支付物B）。未使用時為null"
+      },
+      "player_xp": {
+        "name": "玩家綠寶石",
+        "description": "交易後玩家持有的綠寶石"
+      },
+      "villager_xp": {
+        "name": "村民綠寶石",
+        "description": "交易後村民持有的綠寶石"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "當生物互動",
+    "menuDisplayName": "生物互動",
+    "description": "當玩家與生物互動時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "生物",
+        "description": "WorldMob物件（互動的生物）"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "生物互動型別名稱"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "當命中標靶",
+    "menuDisplayName": "命中標靶",
+    "description": "當標靶方塊被命中時觸發",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "強度",
+        "description": "紅石訊號強度（0–15）"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "執行命令",
+    "menuDisplayName": "執行命令",
+    "description": "執行任意Minecraft命令（不含開頭的/）",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "command": {
+        "name": "命令",
+        "description": "要執行的Minecraft命令（不含開頭的/）"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "完成時輸出true"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "獲取遊戲時間",
+    "menuDisplayName": "遊戲時間",
+    "description": "獲取遊戲時間（{{type}}）",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "type": {
+        "name": "型別",
+        "description": "要查詢的時間型別",
+        "options": {
+          "time": "時間（0–24000）",
+          "day": "天數",
+          "tick": "刻數"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "值",
+        "description": "查詢到的時間值"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "是否白天",
+    "menuDisplayName": "白天？",
+    "description": "檢查當前是否為白天（time < 12000）",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "是否白天",
+        "description": "白天為true，夜晚為false"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "獲取天氣",
+    "menuDisplayName": "天氣",
+    "description": "獲取當前天氣",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "天氣",
+        "description": "天氣名稱（\"Clear\" / \"Rain\" / \"Thunder\"）"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "填充方塊",
+    "menuDisplayName": "填充",
+    "description": "用指定方塊填充兩個座標之間的區域",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "from": {
+        "name": "起點",
+        "description": "起始角 {x, y, z}"
+      },
+      "to": {
+        "name": "終點",
+        "description": "結束角 {x, y, z}"
+      },
+      "block_id": {
+        "name": "方塊ID",
+        "description": "方塊ID（例如 minecraft:stone）"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "填充完成時輸出true"
+      },
+      "count": {
+        "name": "數量",
+        "description": "填充的方塊數量"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "獲取地面高度",
+    "menuDisplayName": "地面",
+    "description": "獲取最頂部固體方塊的座標和型別",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "座標",
+        "description": "地面座標 {x, y, z}"
+      },
+      "block_name": {
+        "name": "方塊名稱",
+        "description": "最頂部固體方塊的名稱"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "世界查詢",
+    "menuDisplayName": "世界查詢",
+    "description": "查詢世界中的{{type}}列表",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "type": {
+        "name": "型別",
+        "description": "要查詢的類別",
+        "options": {
+          "mob": "實體",
+          "block": "方塊",
+          "item": "物品"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "列表",
+        "description": "查詢結果列表"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "獲取玩家座標",
+    "menuDisplayName": "玩家座標",
+    "description": "獲取玩家的當前座標和朝向",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "座標",
+        "description": "玩家座標 {x, y, z}"
+      },
+      "direction": {
+        "name": "朝向",
+        "description": "玩家朝向（Y軸旋轉）"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "獲取玩家視角",
+    "menuDisplayName": "玩家視角",
+    "description": "獲取玩家的攝像機角度（俯仰角和偏航角）",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "角度",
+        "description": "玩家視角 {x, y}（度）"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "獲取玩家標籤",
+    "menuDisplayName": "玩家標籤",
+    "description": "獲取附加在玩家上的所有標籤",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "標籤",
+        "description": "標籤名稱字串的陣列"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "玩家是否有標籤",
+    "menuDisplayName": "有標籤？",
+    "description": "檢查玩家是否擁有指定標籤",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "tag": {
+        "name": "標籤",
+        "description": "要檢查的標籤名稱"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "結果",
+        "description": "玩家擁有該標籤時為true"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "獲取玩家等級",
+    "menuDisplayName": "玩家等級",
+    "description": "獲取玩家當前的經驗等級",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "等級",
+        "description": "玩家等級（數字）"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "獲取遊戲模式",
+    "menuDisplayName": "遊戲模式",
+    "description": "獲取玩家當前的遊戲模式",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "遊戲模式",
+        "description": "遊戲模式名稱（例如 \"Survival\"）"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "獲取玩家能力",
+    "menuDisplayName": "能力",
+    "description": "獲取玩家當前的能力設定",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "能力",
+        "description": "玩家能力物件"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "獲取玩家列表",
+    "menuDisplayName": "玩家列表",
+    "description": "獲取世界中所有玩家的列表",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "玩家列表",
+        "description": "玩家物件的陣列"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "獲取本地玩家",
+    "menuDisplayName": "本地玩家",
+    "description": "獲取本地（自身）玩家物件",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "玩家",
+        "description": "本地玩家物件"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "從實體提取",
+    "menuDisplayName": "實體資訊",
+    "description": "從實體物件提取座標、朝向、維度等欄位",
+    "inputs": {
+      "entity": {
+        "name": "實體",
+        "description": "玩家或村民物件（player / villager 輸出）"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "座標",
+        "description": "實體座標（position）"
+      },
+      "direction": {
+        "name": "朝向",
+        "description": "Y軸旋轉（yRot）"
+      },
+      "dimension": {
+        "name": "維度",
+        "description": "維度編號（dimension）"
+      },
+      "type": {
+        "name": "型別",
+        "description": "型別字串（type）"
+      },
+      "variant": {
+        "name": "變種",
+        "description": "變種編號（variant）"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "實體ID編號（id）"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "從玩家提取",
+    "menuDisplayName": "玩家資訊",
+    "description": "從玩家快照物件提取名稱、顏色和實體資訊",
+    "inputs": {
+      "player": {
+        "name": "玩家",
+        "description": "事件節點player輸出的玩家物件"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "名稱",
+        "description": "玩家名（name）"
+      },
+      "color": {
+        "name": "顏色",
+        "description": "地圖示記顏色（color）"
+      },
+      "entity": {
+        "name": "實體",
+        "description": "連線到實體資訊節點"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "從物品型別提取",
+    "menuDisplayName": "物品型別資訊",
+    "description": "從物品型別物件提取物品ID和資料值",
+    "inputs": {
+      "item": {
+        "name": "物品",
+        "description": "物品型別（獲得/熔煉事件的item輸出）"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "物品ID",
+        "description": "物品ID字串（id）"
+      },
+      "data": {
+        "name": "資料",
+        "description": "資料值（data）"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "從物品堆疊提取",
+    "menuDisplayName": "物品堆疊資訊",
+    "description": "從物品堆疊物件提取物品ID、數量、最大數量和資料值",
+    "inputs": {
+      "item": {
+        "name": "物品",
+        "description": "物品堆疊（使用/裝備/合成/交易事件的item輸出）"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "物品ID",
+        "description": "物品ID字串（typeId）"
+      },
+      "count": {
+        "name": "數量",
+        "description": "堆疊數量（amount）"
+      },
+      "max_count": {
+        "name": "最大數量",
+        "description": "最大堆疊數量（maxAmount）"
+      },
+      "data": {
+        "name": "資料",
+        "description": "資料值（data）"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "從方塊型別提取",
+    "menuDisplayName": "方塊資訊",
+    "description": "從方塊型別物件提取方塊ID和資料值",
+    "inputs": {
+      "block": {
+        "name": "方塊",
+        "description": "方塊型別物件（block/bounce事件的block輸出）"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "方塊ID",
+        "description": "方塊ID字串（id）"
+      },
+      "data": {
+        "name": "資料",
+        "description": "資料值（data）"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "從計分板目標提取",
+    "menuDisplayName": "計分板目標資訊",
+    "description": "從計分板目標物件提取ID和顯示名稱",
+    "inputs": {
+      "objective": {
+        "name": "目標",
+        "description": "新增/獲取目標節點的目標"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "目標ID",
+        "description": "目標ID字串（id）"
+      },
+      "display_name": {
+        "name": "顯示名稱",
+        "description": "顯示名稱（displayName）"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "從生物提取",
+    "menuDisplayName": "生物資訊",
+    "description": "從生物物件提取型別、顏色和變種編號",
+    "inputs": {
+      "mob": {
+        "name": "生物",
+        "description": "生物物件（生物互動事件的mob輸出）"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "型別",
+        "description": "生物型別編號（type）"
+      },
+      "color": {
+        "name": "顏色",
+        "description": "顏色編號（color）"
+      },
+      "variant": {
+        "name": "變種",
+        "description": "變種編號（variant）"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "從村民提取",
+    "menuDisplayName": "村民資訊",
+    "description": "從村民物件提取名稱、等級和實體資訊",
+    "inputs": {
+      "villager": {
+        "name": "村民",
+        "description": "村民物件（交易事件的villager輸出）"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "名稱",
+        "description": "村民名稱（trader.name）"
+      },
+      "rank": {
+        "name": "等級",
+        "description": "交易等級（trader.tier）"
+      },
+      "entity": {
+        "name": "實體",
+        "description": "連線到實體資訊節點"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "選擇器",
+    "menuDisplayName": "選擇器",
+    "description": "從{{type}}列表中選擇",
+    "inputs": {
+      "type": {
+        "name": "型別",
+        "description": "要選擇的類別",
+        "options": {
+          "block": "🧱 方塊",
+          "item": "🎒 物品",
+          "mob": "🐾 生物",
+          "TravelMethod": "🚶 移動方式",
+          "TeleportCause": "✨ 傳送原因",
+          "MobInteraction": "🐄 生物互動",
+          "ItemUseMethod": "🤚 物品使用方式",
+          "ItemAcqMethod": "📦 物品獲得方式",
+          "EquipSlot": "🪖 裝備槽",
+          "BlockBreakMethod": "⛏️ 破壞方式",
+          "BlockPlaceMethod": "🏗️ 放置方式"
+        }
+      },
+      "block": {
+        "name": "方塊",
+        "description": "方塊ID"
+      },
+      "item": {
+        "name": "物品",
+        "description": "物品ID"
+      },
+      "mob": {
+        "name": "生物",
+        "description": "生物（實體）ID"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "移動方式"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "傳送原因"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "生物互動型別"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "物品使用方式"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "物品獲得方式"
+      },
+      "EquipSlot": {
+        "name": "裝備槽",
+        "description": "裝備槽"
+      },
+      "BlockBreakMethod": {
+        "name": "破壞方式",
+        "description": "方塊破壞方式"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "方塊放置方式"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "值",
+        "description": "選中的ID或列舉值"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "本地化名稱",
+    "menuDisplayName": "本地化名稱",
+    "description": "將{{type}}轉換為本地化名稱",
+    "inputs": {
+      "value": {
+        "name": "值",
+        "description": "Minecraft ID（例如 \"minecraft:stone\"）或事件值（例如 \"Walk\"）"
+      },
+      "type": {
+        "name": "型別",
+        "description": "要轉換的類別",
+        "options": {
+          "block": "方塊ID",
+          "item": "物品ID",
+          "mob": "生物ID",
+          "TravelMethod": "移動方式",
+          "TeleportCause": "傳送原因",
+          "MobInteraction": "生物互動",
+          "ItemUseMethod": "物品使用方式",
+          "ItemAcqMethod": "物品獲得方式",
+          "EquipSlot": "裝備槽",
+          "BlockBreakMethod": "方塊破壞方式",
+          "BlockPlaceMethod": "方塊放置方式"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "名稱",
+        "description": "本地化名稱（未找到時返回輸入值）"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Vector3運算",
+    "menuDisplayName": "Vec3運算",
+    "description": "對3D座標執行{{op}}",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "操作型別",
+        "options": {
+          "assemble": "🔧 組裝",
+          "add": "➕ 相加",
+          "subtract": "➖ 相減",
+          "scale": "✖️ 縮放",
+          "floor": "⬇️ 向下取整",
+          "ceil": "⬆️ 向上取整",
+          "fill_y": "📐 填充Y"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "X座標"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y座標"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z座標"
+      },
+      "pos_a": {
+        "name": "座標A",
+        "description": "基準座標 {x,y,z}"
+      },
+      "pos_b": {
+        "name": "座標B",
+        "description": "另一座標 {x,y,z}"
+      },
+      "position": {
+        "name": "座標",
+        "description": "座標 {x,y,z}"
+      },
+      "scale": {
+        "name": "縮放",
+        "description": "標量倍數（例如2表示翻倍）"
+      },
+      "pos_xz": {
+        "name": "座標xz",
+        "description": "2D座標 {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Y座標值"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "結果",
+        "description": "結果座標 {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Vector3距離",
+    "menuDisplayName": "距離",
+    "description": "計算兩個3D座標之間的歐幾里得距離",
+    "inputs": {
+      "pos_a": {
+        "name": "座標A",
+        "description": "起始座標 {x,y,z}"
+      },
+      "pos_b": {
+        "name": "座標B",
+        "description": "結束座標 {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "距離",
+        "description": "兩點之間的距離（米）"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3轉字串",
+    "menuDisplayName": "Vec3→字串",
+    "description": "將座標物件轉換為\"x y z\"格式的字串",
+    "inputs": {
+      "position": {
+        "name": "座標",
+        "description": "要轉換的座標 {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "文本",
+        "description": "\"x y z\"格式的字串"
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Vector3拆分",
+    "menuDisplayName": "Vec3拆分",
+    "description": "將座標物件拆分為單獨的x、y、z值",
+    "inputs": {
+      "position": {
+        "name": "座標",
+        "description": "要拆分的座標 {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "X座標"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y座標"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z座標"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "數值鉗制",
+    "menuDisplayName": "鉗制",
+    "description": "將數值限制在最小值和最大值之間",
+    "inputs": {
+      "value": {
+        "name": "值",
+        "description": "要鉗制的數值"
+      },
+      "min": {
+        "name": "最小值",
+        "description": "下限"
+      },
+      "max": {
+        "name": "最大值",
+        "description": "上限"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "結果",
+        "description": "鉗制後的值"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "建立區域",
+    "menuDisplayName": "建立AABB",
+    "description": "由兩個角座標建立軸對齊包圍盒（AABB）",
+    "inputs": {
+      "corner_a": {
+        "name": "角A",
+        "description": "區域角1 {x,y,z}（順序無關）"
+      },
+      "corner_b": {
+        "name": "角B",
+        "description": "區域角2 {x,y,z}（順序無關）"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "區域",
+        "description": "AABB區域物件 {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "是否在區域內",
+    "menuDisplayName": "AABB內",
+    "description": "檢查座標是否在AABB區域內",
+    "inputs": {
+      "area": {
+        "name": "區域",
+        "description": "AABB區域 {min, max}"
+      },
+      "position": {
+        "name": "座標",
+        "description": "要測試的座標 {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "結果",
+        "description": "座標在區域內時為true"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "當玩家變換",
+    "menuDisplayName": "玩家變換",
+    "description": "當玩家座標或旋轉改變時觸發（高頻）",
+    "inputs": {
+      "world": {
+        "name": "世界",
+        "description": "MinecraftConnect節點的World輸出"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "座標",
+        "description": "玩家座標 {x, y, z}"
+      },
+      "direction": {
+        "name": "朝向",
+        "description": "玩家朝向（Y軸旋轉）"
+      },
+      "player": {
+        "name": "玩家",
+        "description": "WorldPlayer物件 → 連線到玩家資訊節點"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "代理移動",
+    "menuDisplayName": "AgentMove",
+    "description": "使代理{{direction}}移動",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "direction": {
+        "name": "朝向",
+        "description": "移動方向",
+        "options": {
+          "forward": "前",
+          "back": "後",
+          "left": "左",
+          "right": "右",
+          "up": "上",
+          "down": "下"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "移動後輸出true"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "代理轉向",
+    "menuDisplayName": "AgentTurn",
+    "description": "使代理{{direction}}轉向",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "direction": {
+        "name": "朝向",
+        "description": "轉向方向",
+        "options": {
+          "left": "左",
+          "right": "右"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "轉向後輸出true"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "代理傳送",
+    "menuDisplayName": "代理傳送",
+    "description": "將代理傳送到某座標（省略則使用玩家當前位置）",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "position": {
+        "name": "座標",
+        "description": "目標座標 {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "傳送後輸出true"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "代理動作",
+    "menuDisplayName": "AgentAction",
+    "description": "代理執行{{action}}（方向：{{direction}}）",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "action": {
+        "name": "動作",
+        "description": "要執行的動作",
+        "options": {
+          "attack": "攻擊",
+          "destroyBlock": "破壞",
+          "till": "耕地",
+          "dropAllItems": "全部丟棄"
+        }
+      },
+      "direction": {
+        "name": "朝向",
+        "description": "動作方向",
+        "options": {
+          "forward": "前",
+          "back": "後",
+          "left": "左",
+          "right": "右",
+          "up": "上",
+          "down": "下"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "完成時輸出true"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "代理放置方塊",
+    "menuDisplayName": "代理放置",
+    "description": "從槽位{{slot}}向{{direction}}放置方塊",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "direction": {
+        "name": "朝向",
+        "description": "放置方向",
+        "options": {
+          "forward": "前",
+          "back": "後",
+          "left": "左",
+          "right": "右",
+          "up": "上",
+          "down": "下"
+        }
+      },
+      "slot": {
+        "name": "槽位",
+        "description": "物品欄槽位編號（1–27）"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "放置後輸出true"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "代理丟棄物品",
+    "menuDisplayName": "代理丟棄",
+    "description": "從槽位{{slot}}向{{direction}}丟棄物品",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "direction": {
+        "name": "朝向",
+        "description": "丟棄方向",
+        "options": {
+          "forward": "前",
+          "back": "後",
+          "left": "左",
+          "right": "右",
+          "up": "上",
+          "down": "下"
+        }
+      },
+      "slot": {
+        "name": "槽位",
+        "description": "物品欄槽位編號（1–27）"
+      },
+      "amount": {
+        "name": "數量",
+        "description": "要丟棄的物品數量"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "丟棄後輸出true"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "代理移動物品",
+    "menuDisplayName": "代理移動物品",
+    "description": "在代理物品欄的槽位之間移動物品",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "from_slot": {
+        "name": "源槽位",
+        "description": "源槽位編號（1–27）"
+      },
+      "to_slot": {
+        "name": "目標槽位",
+        "description": "目標槽位編號（1–27）"
+      },
+      "amount": {
+        "name": "數量",
+        "description": "要移動的物品數量"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "移動後輸出true"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "代理設定物品",
+    "menuDisplayName": "代理設定物品",
+    "description": "在指定的代理物品欄槽位設定物品",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "slot": {
+        "name": "槽位",
+        "description": "要設定的槽位編號（1–27）"
+      },
+      "item_id": {
+        "name": "物品ID",
+        "description": "物品ID（例如 minecraft:apple）"
+      },
+      "amount": {
+        "name": "數量",
+        "description": "要設定的物品數量"
+      },
+      "data": {
+        "name": "資料",
+        "description": "資料值（通常為0）"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "設定後輸出true"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "代理收集",
+    "menuDisplayName": "代理收集",
+    "description": "從代理周圍收集指定型別的物品",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "item_id": {
+        "name": "物品ID",
+        "description": "要收集的物品ID"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "收集後輸出true"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "代理檢測",
+    "menuDisplayName": "代理檢測",
+    "description": "檢測{{direction}}的{{type}}",
+    "inputs": {
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      },
+      "type": {
+        "name": "型別",
+        "description": "要檢測的內容",
+        "options": {
+          "block": "方塊",
+          "redstone": "紅石"
+        }
+      },
+      "direction": {
+        "name": "朝向",
+        "description": "檢測方向",
+        "options": {
+          "forward": "前",
+          "back": "後",
+          "left": "左",
+          "right": "右",
+          "up": "上",
+          "down": "下"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "已檢測",
+        "description": "檢測到時為true"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Vector3插值",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "在兩個座標之間線性插值（t=0為起點，t=1為終點）",
+    "inputs": {
+      "pos_a": {
+        "name": "座標A",
+        "description": "起始座標 {x, y, z}"
+      },
+      "pos_b": {
+        "name": "座標B",
+        "description": "結束座標 {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "插值係數（0.0–1.0）"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "結果",
+        "description": "插值後的座標 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Vector3歸一化",
+    "menuDisplayName": "Vec3歸一化",
+    "description": "將向量歸一化為單位長度（長度=1）",
+    "inputs": {
+      "position": {
+        "name": "座標",
+        "description": "要歸一化的向量 {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "結果",
+        "description": "長度為1的單位向量 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Vector3內積",
+    "menuDisplayName": "Vec3內積",
+    "description": "計算兩個向量的內積",
+    "inputs": {
+      "pos_a": {
+        "name": "座標A",
+        "description": "向量A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "座標B",
+        "description": "向量B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "值",
+        "description": "內積（標量）"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "AABB平移",
+    "menuDisplayName": "AABB平移",
+    "description": "按給定向量平移AABB區域",
+    "inputs": {
+      "area": {
+        "name": "區域",
+        "description": "要平移的區域 {min, max}"
+      },
+      "delta": {
+        "name": "增量",
+        "description": "平移向量 {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "區域",
+        "description": "平移後的區域物件"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "AABB相交",
+    "menuDisplayName": "AABB相交",
+    "description": "檢查兩個AABB區域是否重疊",
+    "inputs": {
+      "area_a": {
+        "name": "區域A",
+        "description": "區域A {min, max}"
+      },
+      "area_b": {
+        "name": "區域B",
+        "description": "區域B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "結果",
+        "description": "兩個區域重疊時為true"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "斷言",
+    "menuDisplayName": "斷言",
+    "description": "比較實際值與期望值並記錄PASS/FAIL。始終輸出done以便連結。",
+    "inputs": {
+      "actual": {
+        "name": "實際值",
+        "description": "要測試的值"
+      },
+      "expected": {
+        "name": "期望值",
+        "description": "期望值"
+      },
+      "op": {
+        "name": "op",
+        "description": "比較運算子",
+        "options": {
+          "eq": "相等（===）",
+          "neq": "不相等（!==）",
+          "deep": "深度相等（JSON）",
+          "lt": "小於（<）",
+          "gt": "大於（>）",
+          "lte": "小於或等於（≤）",
+          "gte": "大於或等於（≥）",
+          "approx": "近似（±容差）"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "測試用例ID（例如 TC-111）"
+      },
+      "tolerance": {
+        "name": "容差",
+        "description": "近似比較的容差"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "完成",
+        "description": "始終輸出true（用於連結）"
+      },
+      "passed": {
+        "name": "通過",
+        "description": "測試通過時輸出true"
+      },
+      "failed": {
+        "name": "失敗",
+        "description": "測試失敗時輸出實際值"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "向Gemini AI傳送文本並獲取響應",
+    "inputs": {
+      "apiKey": {
+        "name": "API金鑰",
+        "description": "來自Google AI Studio的API金鑰"
+      },
+      "model": {
+        "name": "模型",
+        "description": "要使用的Gemini模型",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash（推薦）",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "提示詞",
+        "description": "使用者提示詞文本"
+      },
+      "systemInstruction": {
+        "name": "系統指令",
+        "description": "定義AI角色/行為的系統提示詞（可選）"
+      },
+      "temperature": {
+        "name": "溫度",
+        "description": "隨機性 0.0–1.0（越低越確定）"
+      },
+      "trigger": {
+        "name": "觸發",
+        "description": "觸發（可選）"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "響應",
+        "description": "Gemini生成的文本"
+      }
+    }
+  }
+}

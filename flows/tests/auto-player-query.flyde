@@ -3,34 +3,6 @@ node:
   instances:
     - pos:
         x: 50
-        y: 100
-      id: mc-connect
-      inputConfig: {}
-      nodeId: MinecraftConnect
-      config:
-        ポート:
-          type: dynamic
-          value: "{{ポート}}"
-      type: code
-      source:
-        type: file
-        data: ../../build/index.flyde.js
-    - pos:
-        x: 350
-        y: 100
-      id: on-chat
-      inputConfig: {}
-      nodeId: OnPlayerChat
-      config:
-        ワールド:
-          type: dynamic
-          value: "{{ワールド}}"
-      type: code
-      source:
-        type: file
-        data: ../../build/index.flyde.js
-    - pos:
-        x: 50
         y: 300
       id: get-local-player
       inputConfig: {}
@@ -66,7 +38,7 @@ node:
       config:
         比較:
           type: select
-          value: eq
+          value: neq
         ID:
           type: string
           value: TC-071
@@ -74,8 +46,8 @@ node:
           type: dynamic
           value: "{{実際値}}"
         期待値:
-          type: dynamic
-          value: "{{期待値}}"
+          type: string
+          value: ""
         許容差:
           type: number
           value: 0.001
@@ -178,11 +150,11 @@ node:
         type: file
         data: ../../build/index.flyde.js
     - pos:
-        x: 350
+        x: 50
         y: 900
-      id: disconnect
+      id: get-orientation
       inputConfig: {}
-      nodeId: MinecraftDisconnect
+      nodeId: GetPlayerOrientation
       config:
         トリガー:
           type: dynamic
@@ -191,25 +163,122 @@ node:
       source:
         type: file
         data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 900
+      id: assert-073
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: -180
+        比較:
+          type: select
+          value: gte
+        ID:
+          type: string
+          value: TC-073
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 1100
+      id: player-has-tag
+      inputConfig: {}
+      nodeId: PlayerHasTag
+      config:
+        タグ:
+          type: string
+          value: __flyde_test_tag__
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 1100
+      id: assert-078
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: false
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-078
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 1300
+      id: get-players
+      inputConfig: {}
+      nodeId: GetPlayers
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 1300
+      id: assert-083
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: json
+          value: null
+        比較:
+          type: select
+          value: neq
+        ID:
+          type: string
+          value: TC-083
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
   connections:
     - from:
-        insId: mc-connect
-        pinId: ワールド
-      to:
-        insId: on-chat
-        pinId: ワールド
-    - from:
-        insId: on-chat
-        pinId: 送信者名
+        insId: __this
+        pinId: トリガー
       to:
         insId: get-local-player
         pinId: トリガー
-    - from:
-        insId: on-chat
-        pinId: 送信者名
-      to:
-        insId: assert-071
-        pinId: 期待値
     - from:
         insId: get-local-player
         pinId: プレイヤー
@@ -256,12 +325,58 @@ node:
         insId: assert-079
         pinId: 完了
       to:
-        insId: disconnect
+        insId: get-orientation
         pinId: トリガー
-  id: TestPlayer
-  inputs: {}
-  outputs: {}
-  inputsPosition: {}
-  outputsPosition: {}
-  completionOutputs: []
-  description: プレイヤークエリノードテスト（TC-071/072/079）チャット送信1回で自動実行
+    - from:
+        insId: get-orientation
+        pinId: 角度
+      to:
+        insId: assert-073
+        pinId: 実際値
+    - from:
+        insId: assert-073
+        pinId: 完了
+      to:
+        insId: player-has-tag
+        pinId: トリガー
+    - from:
+        insId: player-has-tag
+        pinId: 結果
+      to:
+        insId: assert-078
+        pinId: 実際値
+    - from:
+        insId: assert-078
+        pinId: 完了
+      to:
+        insId: get-players
+        pinId: トリガー
+    - from:
+        insId: get-players
+        pinId: プレイヤー一覧
+      to:
+        insId: assert-083
+        pinId: 実際値
+    - from:
+        insId: assert-083
+        pinId: 完了
+      to:
+        insId: __this
+        pinId: 完了
+  id: AutoPlayerQuery
+  inputs:
+    トリガー: required
+  outputs:
+    完了: {}
+  inputsPosition:
+    トリガー:
+      x: -100
+      y: 200
+  outputsPosition:
+    完了:
+      x: 666.8593986034393
+      y: 1350.364013671875
+  completionOutputs:
+    - 完了
+  description: |
+    自動プレイヤークエリテスト（TC-071〜073/078a/079/083）

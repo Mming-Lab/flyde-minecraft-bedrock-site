@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Σύνδεση",
+    "description": "Εκκινεί έναν διακομιστή WebSocket και συνδέεται στο Minecraft Education Edition",
+    "inputs": {
+      "port": {
+        "name": "θύρα",
+        "description": "Αριθμός θύρας WebSocket (προεπιλογή: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Αντικείμενο World (χρήση εσωτερικά· δεν χρειάζεται σύνδεση σε κόμβους εντολών)"
+      },
+      "error": {
+        "name": "σφάλμα",
+        "description": "Πληροφορίες σφάλματος σύνδεσης"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Αποσύνδεση",
+    "menuDisplayName": "MC Αποσύνδεση",
+    "description": "Αποσυνδέεται από το Minecraft και τερματίζει τον διακομιστή WebSocket",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (π.χ. chat 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Λήψη θέσης πράκτορα",
+    "menuDisplayName": "Θέση πράκτ.",
+    "description": "Επιστρέφει την τρέχουσα θέση του πράκτορα",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "θέση",
+        "description": "Θέση πράκτορα {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "Λήψη στόχων ΠΒ",
+    "menuDisplayName": "Στόχοι ΠΒ",
+    "description": "Επιστρέφει τη λίστα όλων των στόχων του πίνακα βαθμολογίας",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "στόχοι",
+        "description": "Πίνακας αντικειμένων στόχων πίνακα βαθμολογίας"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "Λήψη στόχου ΠΒ",
+    "menuDisplayName": "Στόχος ΠΒ",
+    "description": "Επιστρέφει έναν στόχο πίνακα βαθμολογίας με το ID του",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "objective_id": {
+        "name": "id_στόχου",
+        "description": "ID στόχου πίνακα βαθμολογίας"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "στόχος",
+        "description": "Στόχος πίνακα βαθμολογίας → συνδέστε στον κόμβο πληροφοριών στόχου ΠΒ"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "Προσθήκη στόχου ΠΒ",
+    "menuDisplayName": "Προσθ. στόχου",
+    "description": "Προσθέτει έναν νέο στόχο στον πίνακα βαθμολογίας",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "objective_id": {
+        "name": "id_στόχου",
+        "description": "ID στόχου πίνακα βαθμολογίας"
+      },
+      "display_name": {
+        "name": "εμφανιζόμενο_όνομα",
+        "description": "Εμφανιζόμενο όνομα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "στόχος",
+        "description": "Προστιθέμενος στόχος → συνδέστε στον κόμβο πληροφοριών στόχου ΠΒ"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "Αφαίρεση στόχου ΠΒ",
+    "menuDisplayName": "Αφαίρ. στόχου",
+    "description": "Αφαιρεί έναν στόχο πίνακα βαθμολογίας με το ID του",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "objective_id": {
+        "name": "id_στόχου",
+        "description": "ID στόχου πίνακα βαθμολογίας"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "αποτέλεσμα",
+        "description": "Αποτέλεσμα αφαίρεσης"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Λήψη όλων των βαθμών",
+    "menuDisplayName": "Όλοι οι βαθμοί",
+    "description": "Επιστρέφει όλους τους βαθμούς ενός παίκτη",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "player_name": {
+        "name": "όνομα_παίκτη",
+        "description": "Όνομα παίκτη"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "βαθμοί",
+        "description": "Πίνακας όλων των βαθμών"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Λήψη βαθμού",
+    "menuDisplayName": "Λήψη βαθμού",
+    "description": "Επιστρέφει τον βαθμό ενός παίκτη για συγκεκριμένο στόχο",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "player_name": {
+        "name": "όνομα_παίκτη",
+        "description": "Όνομα παίκτη"
+      },
+      "objective_id": {
+        "name": "id_στόχου",
+        "description": "ID στόχου πίνακα βαθμολογίας"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "βαθμός",
+        "description": "Τιμή βαθμού (αριθμός)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Πράξη βαθμού",
+    "menuDisplayName": "Πράξη βαθμ.",
+    "description": "Εκτελεί {{operation}} σε βαθμό παίκτη",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "operation": {
+        "name": "πράξη",
+        "description": "Τύπος πράξης",
+        "options": {
+          "add": "Πρόσθεση",
+          "remove": "Αφαίρεση",
+          "set": "Ορισμός"
+        }
+      },
+      "player_name": {
+        "name": "όνομα_παίκτη",
+        "description": "Όνομα παίκτη"
+      },
+      "objective_id": {
+        "name": "id_στόχου",
+        "description": "ID στόχου πίνακα βαθμολογίας"
+      },
+      "value": {
+        "name": "τιμή",
+        "description": "Τιμή για την πράξη"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Νέα τιμή βαθμού μετά την πράξη"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "Σε συνομιλία παίκτη",
+    "menuDisplayName": "Συνομιλία",
+    "description": "Ενεργοποιείται όταν ένας παίκτης στέλνει μήνυμα συνομιλίας",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "αποστολέας",
+        "description": "Όνομα του παίκτη που έστειλε τη συνομιλία"
+      },
+      "message": {
+        "name": "μήνυμα",
+        "description": "Περιεχόμενο μηνύματος συνομιλίας"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "Σε είσοδο παίκτη",
+    "menuDisplayName": "Είσοδος",
+    "description": "Ενεργοποιείται όταν ένας παίκτης μπαίνει στον κόσμο",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "όνομα_παίκτη",
+        "description": "Όνομα του παίκτη που μπήκε"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "Σε αποχώρηση παίκτη",
+    "menuDisplayName": "Αποχώρηση",
+    "description": "Ενεργοποιείται όταν ένας παίκτης φεύγει από τον κόσμο",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "όνομα_παίκτη",
+        "description": "Όνομα του παίκτη που έφυγε"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "Σε μετακίνηση παίκτη",
+    "menuDisplayName": "Μετακινήθηκε",
+    "description": "Ενεργοποιείται κάθε φορά που ένας παίκτης κινείται",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "απόσταση",
+        "description": "Απόσταση που διανύθηκε (μέτρα)"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      },
+      "underwater": {
+        "name": "υποβρύχια",
+        "description": "Αν κινείται υποβρύχια (true/false)"
+      },
+      "biome": {
+        "name": "βιότοπος",
+        "description": "Όνομα τρέχοντος βιοτόπου"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Όνομα μεθόδου μετακίνησης"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "Σε τηλεμεταφορά παίκτη",
+    "menuDisplayName": "Τηλεμεταφέρθηκε",
+    "description": "Ενεργοποιείται όταν ένας παίκτης τηλεμεταφέρεται",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Όνομα αιτίας τηλεμεταφοράς"
+      },
+      "distance": {
+        "name": "απόσταση",
+        "description": "Απόσταση τηλεμεταφοράς (μέτρα)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "Σε τίτλο παίκτη",
+    "menuDisplayName": "Τίτλος",
+    "description": "Ενεργοποιείται όταν ένας παίκτης λαμβάνει τίτλο",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "αποστολέας",
+        "description": "Όνομα του παίκτη που έστειλε τον τίτλο"
+      },
+      "message": {
+        "name": "μήνυμα",
+        "description": "Περιεχόμενο μηνύματος τίτλου"
+      },
+      "recipient": {
+        "name": "παραλήπτης",
+        "description": "Όνομα του παίκτη που έλαβε τον τίτλο"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "Σε μήνυμα παίκτη",
+    "menuDisplayName": "Μήνυμα",
+    "description": "Ενεργοποιείται όταν ένας παίκτης στέλνει οποιονδήποτε τύπο μηνύματος",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "αποστολέας",
+        "description": "Όνομα του παίκτη που έστειλε το μήνυμα"
+      },
+      "message": {
+        "name": "μήνυμα",
+        "description": "Περιεχόμενο μηνύματος"
+      },
+      "type": {
+        "name": "τύπος",
+        "description": "Τύπος μηνύματος (chat / tell κ.λπ.)"
+      },
+      "recipient": {
+        "name": "παραλήπτης",
+        "description": "[nullable] Όνομα παραλήπτη. null για μηνύματα εκτός tell"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "Σε αναπήδηση παίκτη",
+    "menuDisplayName": "Αναπήδησε",
+    "description": "Ενεργοποιείται όταν ένας παίκτης αναπηδά σε μπλοκ γλίτσας ή παρόμοιο",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "ύψος",
+        "description": "Ύψος αναπήδησης (μπλοκ)"
+      },
+      "block": {
+        "name": "μπλοκ",
+        "description": "Αντικείμενο BlockType (μπλοκ αναπήδησης) → συνδέστε στον κόμβο πληροφοριών μπλοκ"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "Σε σπάσιμο μπλοκ",
+    "menuDisplayName": "Σπάσιμο μπλοκ",
+    "description": "Ενεργοποιείται όταν ένα μπλοκ σπάει",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "μπλοκ",
+        "description": "Αντικείμενο BlockType → συνδέστε στον κόμβο πληροφοριών μπλοκ"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Όνομα μεθόδου καταστροφής"
+      },
+      "item": {
+        "name": "αντικείμενο",
+        "description": "[nullable] Αντικείμενο στο χέρι πριν το σπάσιμο. null αν με γυμνά χέρια"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "Σε τοποθέτηση μπλοκ",
+    "menuDisplayName": "Τοποθ. μπλοκ",
+    "description": "Ενεργοποιείται όταν ένα μπλοκ τοποθετείται",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "μπλοκ",
+        "description": "Αντικείμενο BlockType → συνδέστε στον κόμβο πληροφοριών μπλοκ"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      },
+      "underwater": {
+        "name": "υποβρύχια",
+        "description": "Αν τοποθετήθηκε υποβρύχια (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Όνομα μεθόδου τοποθέτησης"
+      },
+      "item": {
+        "name": "αντικείμενο",
+        "description": "Αντικείμενο στο χέρι πριν την τοποθέτηση → συνδέστε στον κόμβο πληροφοριών αντικειμένου"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "Σε χρήση αντικειμένου",
+    "menuDisplayName": "Αντικ. χρήση",
+    "description": "Ενεργοποιείται όταν ένας παίκτης χρησιμοποιεί αντικείμενο",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "αντικείμενο",
+        "description": "[nullable] Αντικείμενο στο χέρι. null αν δεν υπάρχει αντικείμενο"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Όνομα μεθόδου χρήσης αντικειμένου"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "Σε απόκτηση αντικειμένου",
+    "menuDisplayName": "Αντικ. απόκτ.",
+    "description": "Ενεργοποιείται όταν ένας παίκτης αποκτά αντικείμενο",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "πλήθος",
+        "description": "Αριθμός αντικειμένων που αποκτήθηκαν"
+      },
+      "item": {
+        "name": "αντικείμενο",
+        "description": "Τύπος αντικειμένου → συνδέστε στον κόμβο πληροφοριών τύπου αντικειμένου"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Όνομα μεθόδου απόκτησης αντικειμένου"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "Σε κατασκευή αντικειμένου",
+    "menuDisplayName": "Κατασκευάστηκε",
+    "description": "Ενεργοποιείται όταν ένας παίκτης κατασκευάζει αντικείμενο",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "αντικείμενο",
+        "description": "Στοίβα αντικειμένων (κατασκευασμένο αντικείμενο) → συνδέστε στον κόμβο πληροφοριών στοίβας αντικειμένων"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      },
+      "used_table": {
+        "name": "χρήση_πάγκου",
+        "description": "Αν χρησιμοποιήθηκε πάγκος κατασκευής (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "Σε εξοπλισμό αντικειμένου",
+    "menuDisplayName": "Εξοπλίστηκε",
+    "description": "Ενεργοποιείται όταν ένας παίκτης εξοπλίζει αντικείμενο",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "αντικείμενο",
+        "description": "Στοίβα αντικειμένων → συνδέστε στον κόμβο πληροφοριών στοίβας αντικειμένων"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      },
+      "equip_slot": {
+        "name": "θέση_εξοπλ",
+        "description": "Όνομα θέσης εξοπλισμού"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "Σε τήξη αντικειμένου",
+    "menuDisplayName": "Λιώθηκε",
+    "description": "Ενεργοποιείται όταν ένας παίκτης λιώνει αντικείμενο",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "αντικείμενο",
+        "description": "Τύπος αντικειμένου (λιωμένο) → συνδέστε στον κόμβο πληροφοριών τύπου αντικειμένου"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      },
+      "fuel": {
+        "name": "καύσιμο",
+        "description": "Τύπος αντικειμένου (καύσιμο) → συνδέστε στον κόμβο πληροφοριών τύπου αντικειμένου"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "Σε ανταλλαγή αντικειμένου",
+    "menuDisplayName": "Ανταλλάχθηκε",
+    "description": "Ενεργοποιείται όταν ένας παίκτης ολοκληρώνει ανταλλαγή με χωρικό",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "αντικείμενο",
+        "description": "Στοίβα αντικειμένων (ληφθέν αντικείμενο) → συνδέστε στον κόμβο πληροφοριών στοίβας αντικειμένων"
+      },
+      "villager": {
+        "name": "χωρικός",
+        "description": "Αντικείμενο WorldVillager → συνδέστε στον κόμβο πληροφοριών χωρικού"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      },
+      "payment_a": {
+        "name": "πληρωμή_a",
+        "description": "Τύπος αντικειμένου (πληρωμή A) → συνδέστε στον κόμβο πληροφοριών τύπου αντικειμένου"
+      },
+      "payment_b": {
+        "name": "πληρωμή_b",
+        "description": "[nullable] Τύπος αντικειμένου (πληρωμή B). null αν δεν χρησιμοποιείται"
+      },
+      "player_xp": {
+        "name": "σμαράγδια_παίκτη",
+        "description": "Σμαράγδια του παίκτη μετά την ανταλλαγή"
+      },
+      "villager_xp": {
+        "name": "σμαράγδια_χωρικού",
+        "description": "Σμαράγδια του χωρικού μετά την ανταλλαγή"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "Σε αλληλεπίδραση με πλάσμα",
+    "menuDisplayName": "Αλληλεπ. πλάσμα",
+    "description": "Ενεργοποιείται όταν ένας παίκτης αλληλεπιδρά με πλάσμα",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "πλάσμα",
+        "description": "Αντικείμενο WorldMob (πλάσμα αλληλεπίδρασης)"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Όνομα τύπου αλληλεπίδρασης με πλάσμα"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "Σε χτύπημα στόχου",
+    "menuDisplayName": "Χτύπημα στόχου",
+    "description": "Ενεργοποιείται όταν χτυπιέται μπλοκ στόχου",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "ισχύς",
+        "description": "Ισχύς σήματος redstone (0–15)"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Εκτέλεση εντολής",
+    "menuDisplayName": "Εκτ. εντολής",
+    "description": "Εκτελεί οποιαδήποτε εντολή Minecraft (χωρίς την αρχική /)",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "command": {
+        "name": "εντολή",
+        "description": "Εντολή Minecraft προς εκτέλεση (χωρίς αρχική /)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Στέλνει true όταν ολοκληρωθεί"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Λήψη χρόνου παιχνιδιού",
+    "menuDisplayName": "Χρόνος παιχν.",
+    "description": "Επιστρέφει τον χρόνο παιχνιδιού ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "type": {
+        "name": "τύπος",
+        "description": "Τύπος χρόνου προς ερώτημα",
+        "options": {
+          "time": "Χρόνος (0–24000)",
+          "day": "Πλήθος ημερών",
+          "tick": "Πλήθος tick"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "τιμή",
+        "description": "Τιμή χρόνου ερωτήματος"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Είναι μέρα",
+    "menuDisplayName": "Μέρα;",
+    "description": "Ελέγχει αν είναι αυτή τη στιγμή μέρα (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "είναι_μέρα",
+        "description": "true τη μέρα, false τη νύχτα"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Λήψη καιρού",
+    "menuDisplayName": "Καιρός",
+    "description": "Επιστρέφει τον τρέχοντα καιρό",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "καιρός",
+        "description": "Όνομα καιρού (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Γέμισμα με μπλοκ",
+    "menuDisplayName": "Γέμισμα",
+    "description": "Γεμίζει μια περιοχή μεταξύ δύο θέσεων με καθορισμένο μπλοκ",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "from": {
+        "name": "από",
+        "description": "Αρχική γωνία {x, y, z}"
+      },
+      "to": {
+        "name": "έως",
+        "description": "Τελική γωνία {x, y, z}"
+      },
+      "block_id": {
+        "name": "id_μπλοκ",
+        "description": "ID μπλοκ (π.χ. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Στέλνει true όταν ολοκληρωθεί το γέμισμα"
+      },
+      "count": {
+        "name": "πλήθος",
+        "description": "Αριθμός μπλοκ που γεμίστηκαν"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Λήψη ύψους εδάφους",
+    "menuDisplayName": "Έδαφος",
+    "description": "Επιστρέφει τη θέση και τον τύπο του ανώτατου συμπαγούς μπλοκ",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "θέση",
+        "description": "Θέση εδάφους {x, y, z}"
+      },
+      "block_name": {
+        "name": "όνομα_μπλοκ",
+        "description": "Όνομα του ανώτατου συμπαγούς μπλοκ"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Ερώτημα κόσμου",
+    "menuDisplayName": "Ερώτημα κόσμου",
+    "description": "Ζητά τη λίστα {{type}} στον κόσμο",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "type": {
+        "name": "τύπος",
+        "description": "Κατηγορία ερωτήματος",
+        "options": {
+          "mob": "Οντότητα",
+          "block": "Μπλοκ",
+          "item": "Αντικείμενο"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "λίστα",
+        "description": "Λίστα αποτελεσμάτων ερωτήματος"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Λήψη θέσης παίκτη",
+    "menuDisplayName": "Θέση παίκτη",
+    "description": "Επιστρέφει την τρέχουσα θέση και την κατεύθυνση βλέμματος του παίκτη",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "θέση",
+        "description": "Θέση παίκτη {x, y, z}"
+      },
+      "direction": {
+        "name": "κατεύθυνση",
+        "description": "Κατεύθυνση βλέμματος παίκτη (περιστροφή άξονα Y)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Λήψη προσανατολισμού παίκτη",
+    "menuDisplayName": "Κατεύθ. παίκτη",
+    "description": "Επιστρέφει τη γωνία κάμερας του παίκτη (κλίση και εκτροπή)",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "γωνία",
+        "description": "Γωνία βλέμματος παίκτη {x, y} (μοίρες)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Λήψη ετικετών παίκτη",
+    "menuDisplayName": "Ετικέτες παίκτη",
+    "description": "Επιστρέφει όλες τις ετικέτες που έχουν αποδοθεί στον παίκτη",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "ετικέτες",
+        "description": "Πίνακας συμβολοσειρών ονομάτων ετικετών"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "Ο παίκτης έχει ετικέτα",
+    "menuDisplayName": "Έχει ετικέτα;",
+    "description": "Ελέγχει αν ο παίκτης έχει καθορισμένη ετικέτα",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "tag": {
+        "name": "ετικέτα",
+        "description": "Όνομα ετικέτας προς έλεγχο"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "αποτέλεσμα",
+        "description": "true αν ο παίκτης έχει την ετικέτα"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Λήψη επιπέδου παίκτη",
+    "menuDisplayName": "Επίπ. παίκτη",
+    "description": "Επιστρέφει το τρέχον επίπεδο εμπειρίας του παίκτη",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "επίπεδο",
+        "description": "Επίπεδο παίκτη (αριθμός)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Λήψη λειτουργίας παιχνιδιού",
+    "menuDisplayName": "Λειτ. παιχν.",
+    "description": "Επιστρέφει την τρέχουσα λειτουργία παιχνιδιού του παίκτη",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "λειτουργία_παιχν",
+        "description": "Όνομα λειτουργίας παιχνιδιού (π.χ. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Λήψη ικανοτήτων παίκτη",
+    "menuDisplayName": "Ικανότητες",
+    "description": "Επιστρέφει τις τρέχουσες ρυθμίσεις ικανοτήτων του παίκτη",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "ικανότητες",
+        "description": "Αντικείμενο ικανοτήτων παίκτη"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Λήψη παικτών",
+    "menuDisplayName": "Παίκτες",
+    "description": "Επιστρέφει λίστα όλων των παικτών στον κόσμο",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "παίκτες",
+        "description": "Πίνακας αντικειμένων παικτών"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Λήψη τοπικού παίκτη",
+    "menuDisplayName": "Τοπικός παίκτης",
+    "description": "Επιστρέφει το αντικείμενο του τοπικού παίκτη (εαυτού)",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο τοπικού παίκτη"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Εξαγωγή από οντότητα",
+    "menuDisplayName": "Πληρ. οντότητας",
+    "description": "Εξάγει θέση, κατεύθυνση, διάσταση και άλλα πεδία από αντικείμενο οντότητας",
+    "inputs": {
+      "entity": {
+        "name": "οντότητα",
+        "description": "Αντικείμενο παίκτη ή χωρικού (έξοδος player / villager)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "θέση",
+        "description": "Θέση οντότητας (position)"
+      },
+      "direction": {
+        "name": "κατεύθυνση",
+        "description": "Περιστροφή άξονα Y (yRot)"
+      },
+      "dimension": {
+        "name": "διάσταση",
+        "description": "Αριθμός διάστασης (dimension)"
+      },
+      "type": {
+        "name": "τύπος",
+        "description": "Συμβολοσειρά τύπου (type)"
+      },
+      "variant": {
+        "name": "παραλλαγή",
+        "description": "Αριθμός παραλλαγής (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Αριθμός ID οντότητας (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Εξαγωγή από παίκτη",
+    "menuDisplayName": "Πληρ. παίκτη",
+    "description": "Εξάγει όνομα, χρώμα και πληροφορίες οντότητας από αντικείμενο στιγμιότυπου παίκτη",
+    "inputs": {
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο παίκτη από την έξοδο player κόμβου συμβάντος"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "όνομα",
+        "description": "Όνομα παίκτη (name)"
+      },
+      "color": {
+        "name": "χρώμα",
+        "description": "Χρώμα δείκτη χάρτη (color)"
+      },
+      "entity": {
+        "name": "οντότητα",
+        "description": "Συνδέστε στον κόμβο πληροφοριών οντότητας"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Εξαγωγή από τύπο αντικειμένου",
+    "menuDisplayName": "Πληρ. τύπου αντικ.",
+    "description": "Εξάγει ID αντικειμένου και τιμή δεδομένων από αντικείμενο τύπου αντικειμένου",
+    "inputs": {
+      "item": {
+        "name": "αντικείμενο",
+        "description": "Τύπος αντικειμένου (έξοδος item από συμβάντα απόκτησης / τήξης)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_αντικειμένου",
+        "description": "Συμβολοσειρά ID αντικειμένου (id)"
+      },
+      "data": {
+        "name": "δεδομένα",
+        "description": "Τιμή δεδομένων (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Εξαγωγή από στοίβα αντικειμένων",
+    "menuDisplayName": "Πληρ. στοίβας",
+    "description": "Εξάγει ID αντικειμένου, πλήθος, μέγ. πλήθος και τιμή δεδομένων από αντικείμενο στοίβας αντικειμένων",
+    "inputs": {
+      "item": {
+        "name": "αντικείμενο",
+        "description": "Στοίβα αντικειμένων (έξοδος item από συμβάντα χρήσης / εξοπλισμού / κατασκευής / ανταλλαγής)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_αντικειμένου",
+        "description": "Συμβολοσειρά ID αντικειμένου (typeId)"
+      },
+      "count": {
+        "name": "πλήθος",
+        "description": "Μέγεθος στοίβας (amount)"
+      },
+      "max_count": {
+        "name": "μέγ_πλήθος",
+        "description": "Μέγ. μέγεθος στοίβας (maxAmount)"
+      },
+      "data": {
+        "name": "δεδομένα",
+        "description": "Τιμή δεδομένων (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Εξαγωγή από τύπο μπλοκ",
+    "menuDisplayName": "Πληρ. μπλοκ",
+    "description": "Εξάγει ID μπλοκ και τιμή δεδομένων από αντικείμενο τύπου μπλοκ",
+    "inputs": {
+      "block": {
+        "name": "μπλοκ",
+        "description": "Αντικείμενο τύπου μπλοκ (έξοδος block από συμβάντα block / bounce)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "id_μπλοκ",
+        "description": "Συμβολοσειρά ID μπλοκ (id)"
+      },
+      "data": {
+        "name": "δεδομένα",
+        "description": "Τιμή δεδομένων (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Εξαγωγή από στόχο ΠΒ",
+    "menuDisplayName": "Πληρ. στόχου ΠΒ",
+    "description": "Εξάγει το ID και το εμφανιζόμενο όνομα από αντικείμενο στόχου πίνακα βαθμολογίας",
+    "inputs": {
+      "objective": {
+        "name": "στόχος",
+        "description": "Στόχος από κόμβο προσθήκης / λήψης στόχου"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "id_στόχου",
+        "description": "Συμβολοσειρά ID στόχου (id)"
+      },
+      "display_name": {
+        "name": "εμφανιζόμενο_όνομα",
+        "description": "Εμφανιζόμενο όνομα (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Εξαγωγή από πλάσμα",
+    "menuDisplayName": "Πληρ. πλάσματος",
+    "description": "Εξάγει αριθμούς τύπου, χρώματος και παραλλαγής από αντικείμενο πλάσματος",
+    "inputs": {
+      "mob": {
+        "name": "πλάσμα",
+        "description": "Αντικείμενο πλάσματος (έξοδος mob από συμβάν αλληλεπίδρασης με πλάσμα)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "τύπος",
+        "description": "Αριθμός τύπου πλάσματος (type)"
+      },
+      "color": {
+        "name": "χρώμα",
+        "description": "Αριθμός χρώματος (color)"
+      },
+      "variant": {
+        "name": "παραλλαγή",
+        "description": "Αριθμός παραλλαγής (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Εξαγωγή από χωρικό",
+    "menuDisplayName": "Πληρ. χωρικού",
+    "description": "Εξάγει όνομα, βαθμίδα και πληροφορίες οντότητας από αντικείμενο χωρικού",
+    "inputs": {
+      "villager": {
+        "name": "χωρικός",
+        "description": "Αντικείμενο χωρικού (έξοδος villager από συμβάν ανταλλαγής)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "όνομα",
+        "description": "Όνομα χωρικού (trader.name)"
+      },
+      "rank": {
+        "name": "βαθμίδα",
+        "description": "Βαθμίδα εμπορίου (trader.tier)"
+      },
+      "entity": {
+        "name": "οντότητα",
+        "description": "Συνδέστε στον κόμβο πληροφοριών οντότητας"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Επιλογέας",
+    "menuDisplayName": "Επιλογέας",
+    "description": "Επιλέγει από τη λίστα {{type}}",
+    "inputs": {
+      "type": {
+        "name": "τύπος",
+        "description": "Κατηγορία προς επιλογή",
+        "options": {
+          "block": "🧱 Μπλοκ",
+          "item": "🎒 Αντικείμενο",
+          "mob": "🐾 Πλάσμα",
+          "TravelMethod": "🚶 Μέθοδος μετακίνησης",
+          "TeleportCause": "✨ Αιτία τηλεμεταφοράς",
+          "MobInteraction": "🐄 Αλληλεπίδραση με πλάσμα",
+          "ItemUseMethod": "🤚 Μέθοδος χρήσης αντικειμένου",
+          "ItemAcqMethod": "📦 Μέθοδος απόκτησης",
+          "EquipSlot": "🪖 Θέση εξοπλισμού",
+          "BlockBreakMethod": "⛏️ Μέθοδος σπασίματος",
+          "BlockPlaceMethod": "🏗️ Μέθοδος τοποθέτησης"
+        }
+      },
+      "block": {
+        "name": "μπλοκ",
+        "description": "ID μπλοκ"
+      },
+      "item": {
+        "name": "αντικείμενο",
+        "description": "ID αντικειμένου"
+      },
+      "mob": {
+        "name": "πλάσμα",
+        "description": "ID πλάσματος (οντότητας)"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Μέθοδος μετακίνησης"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Αιτία τηλεμεταφοράς"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Τύπος αλληλεπίδρασης με πλάσμα"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Μέθοδος χρήσης αντικειμένου"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Μέθοδος απόκτησης αντικειμένου"
+      },
+      "EquipSlot": {
+        "name": "θέση_εξοπλ",
+        "description": "Θέση εξοπλισμού"
+      },
+      "BlockBreakMethod": {
+        "name": "μέθοδος_σπασ",
+        "description": "Μέθοδος σπασίματος μπλοκ"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Μέθοδος τοποθέτησης μπλοκ"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "τιμή",
+        "description": "Επιλεγμένο ID ή τιμή απαρίθμησης"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Τοπικό όνομα",
+    "menuDisplayName": "Τοπικό όνομα",
+    "description": "Μετατρέπει το {{type}} σε τοπικό όνομα",
+    "inputs": {
+      "value": {
+        "name": "τιμή",
+        "description": "ID Minecraft (π.χ. \"minecraft:stone\") ή τιμή συμβάντος (π.χ. \"Walk\")"
+      },
+      "type": {
+        "name": "τύπος",
+        "description": "Κατηγορία προς μετατροπή",
+        "options": {
+          "block": "ID μπλοκ",
+          "item": "ID αντικειμένου",
+          "mob": "ID πλάσματος",
+          "TravelMethod": "Μέθοδος μετακίνησης",
+          "TeleportCause": "Αιτία τηλεμεταφοράς",
+          "MobInteraction": "Αλληλεπίδραση με πλάσμα",
+          "ItemUseMethod": "Μέθοδος χρήσης αντικειμένου",
+          "ItemAcqMethod": "Μέθοδος απόκτησης",
+          "EquipSlot": "Θέση εξοπλισμού",
+          "BlockBreakMethod": "Μέθοδος σπασίματος μπλοκ",
+          "BlockPlaceMethod": "Μέθοδος τοποθέτησης μπλοκ"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "όνομα",
+        "description": "Τοπικό όνομα (επιστρέφει την τιμή εισόδου αν δεν βρεθεί)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Πράξη Vector3",
+    "menuDisplayName": "Πράξη Vec3",
+    "description": "Εκτελεί {{op}} σε θέση 3D",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Τύπος πράξης",
+        "options": {
+          "assemble": "🔧 Συναρμολόγηση",
+          "add": "➕ Πρόσθεση",
+          "subtract": "➖ Αφαίρεση",
+          "scale": "✖️ Κλιμάκωση",
+          "floor": "⬇️ Στρογγ. προς τα κάτω",
+          "ceil": "⬆️ Στρογγ. προς τα πάνω",
+          "fill_y": "📐 Γέμισμα Y"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "Συντεταγμένη X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Συντεταγμένη Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Συντεταγμένη Z"
+      },
+      "pos_a": {
+        "name": "θέση_a",
+        "description": "Βασική θέση {x,y,z}"
+      },
+      "pos_b": {
+        "name": "θέση_b",
+        "description": "Άλλη θέση {x,y,z}"
+      },
+      "position": {
+        "name": "θέση",
+        "description": "Θέση {x,y,z}"
+      },
+      "scale": {
+        "name": "κλίμακα",
+        "description": "Βαθμωτός πολλαπλασιαστής (π.χ. 2 για διπλασιασμό)"
+      },
+      "pos_xz": {
+        "name": "θέση_xz",
+        "description": "Θέση 2D {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Τιμή συντεταγμένης Y"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "αποτέλεσμα",
+        "description": "Θέση αποτελέσματος {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Απόσταση Vector3",
+    "menuDisplayName": "Απόσταση",
+    "description": "Υπολογίζει την ευκλείδεια απόσταση μεταξύ δύο θέσεων 3D",
+    "inputs": {
+      "pos_a": {
+        "name": "θέση_a",
+        "description": "Αρχική θέση {x,y,z}"
+      },
+      "pos_b": {
+        "name": "θέση_b",
+        "description": "Τελική θέση {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "απόσταση",
+        "description": "Απόσταση μεταξύ των δύο σημείων (μέτρα)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 σε συμβολοσειρά",
+    "menuDisplayName": "Vec3→Συμβολ.",
+    "description": "Μετατρέπει αντικείμενο θέσης σε συμβολοσειρά μορφής \"x y z\"",
+    "inputs": {
+      "position": {
+        "name": "θέση",
+        "description": "Θέση προς μετατροπή {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "κείμενο",
+        "description": "Συμβολοσειρά σε μορφή \"x y z\""
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Διαχωρισμός Vector3",
+    "menuDisplayName": "Διαχ. Vec3",
+    "description": "Διαχωρίζει αντικείμενο θέσης σε ξεχωριστές τιμές x, y και z",
+    "inputs": {
+      "position": {
+        "name": "θέση",
+        "description": "Θέση προς διαχωρισμό {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "Συντεταγμένη X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Συντεταγμένη Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Συντεταγμένη Z"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Περιορισμός αριθμού",
+    "menuDisplayName": "Περιορισμός",
+    "description": "Περιορίζει έναν αριθμό μεταξύ ελάχιστης και μέγιστης τιμής",
+    "inputs": {
+      "value": {
+        "name": "τιμή",
+        "description": "Αριθμός προς περιορισμό"
+      },
+      "min": {
+        "name": "ελάχ",
+        "description": "Κάτω όριο"
+      },
+      "max": {
+        "name": "μέγ",
+        "description": "Άνω όριο"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "αποτέλεσμα",
+        "description": "Περιορισμένη τιμή"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Δημιουργία περιοχής",
+    "menuDisplayName": "Δημιουργία AABB",
+    "description": "Δημιουργεί ένα ευθυγραμμισμένο στους άξονες οριοθετικό πλαίσιο (AABB) από δύο γωνίες",
+    "inputs": {
+      "corner_a": {
+        "name": "γωνία_a",
+        "description": "Γωνία 1 περιοχής {x,y,z} (η σειρά δεν έχει σημασία)"
+      },
+      "corner_b": {
+        "name": "γωνία_b",
+        "description": "Γωνία 2 περιοχής {x,y,z} (η σειρά δεν έχει σημασία)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "περιοχή",
+        "description": "Αντικείμενο περιοχής AABB {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Εντός περιοχής",
+    "menuDisplayName": "Εντός AABB",
+    "description": "Ελέγχει αν μια θέση βρίσκεται εντός περιοχής AABB",
+    "inputs": {
+      "area": {
+        "name": "περιοχή",
+        "description": "Περιοχή AABB {min, max}"
+      },
+      "position": {
+        "name": "θέση",
+        "description": "Θέση προς έλεγχο {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "αποτέλεσμα",
+        "description": "true αν η θέση είναι εντός της περιοχής"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "Σε μετασχηματισμό παίκτη",
+    "menuDisplayName": "ΜετασχΠαίκτη",
+    "description": "Ενεργοποιείται όταν αλλάζει η θέση ή η περιστροφή ενός παίκτη (υψηλή συχνότητα)",
+    "inputs": {
+      "world": {
+        "name": "κόσμος",
+        "description": "Έξοδος World από τον κόμβο MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "θέση",
+        "description": "Θέση παίκτη {x, y, z}"
+      },
+      "direction": {
+        "name": "κατεύθυνση",
+        "description": "Κατεύθυνση βλέμματος παίκτη (περιστροφή άξονα Y)"
+      },
+      "player": {
+        "name": "παίκτης",
+        "description": "Αντικείμενο WorldPlayer → συνδέστε στον κόμβο πληροφοριών παίκτη"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Μετακίνηση πράκτορα",
+    "menuDisplayName": "AgentMove",
+    "description": "Μετακινεί τον πράκτορα {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "direction": {
+        "name": "κατεύθυνση",
+        "description": "Κατεύθυνση μετακίνησης",
+        "options": {
+          "forward": "Εμπρός",
+          "back": "Πίσω",
+          "left": "Αριστερά",
+          "right": "Δεξιά",
+          "up": "Πάνω",
+          "down": "Κάτω"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Στέλνει true μετά τη μετακίνηση"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Στροφή πράκτορα",
+    "menuDisplayName": "AgentTurn",
+    "description": "Στρέφει τον πράκτορα {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "direction": {
+        "name": "κατεύθυνση",
+        "description": "Κατεύθυνση στροφής",
+        "options": {
+          "left": "Αριστερά",
+          "right": "Δεξιά"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Στέλνει true μετά τη στροφή"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Τηλεμεταφορά πράκτορα",
+    "menuDisplayName": "ΠράκτοραςTP",
+    "description": "Τηλεμεταφέρει τον πράκτορα σε μια θέση (παραλείψτε για χρήση της τρέχουσας θέσης του παίκτη)",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "position": {
+        "name": "θέση",
+        "description": "Θέση προορισμού {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Στέλνει true μετά την τηλεμεταφορά"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Ενέργεια πράκτορα",
+    "menuDisplayName": "AgentAction",
+    "description": "Ο πράκτορας εκτελεί {{action}} (κατεύθυνση: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "action": {
+        "name": "ενέργεια",
+        "description": "Ενέργεια προς εκτέλεση",
+        "options": {
+          "attack": "Επίθεση",
+          "destroyBlock": "Καταστροφή",
+          "till": "Όργωμα",
+          "dropAllItems": "Απόρριψη όλων"
+        }
+      },
+      "direction": {
+        "name": "κατεύθυνση",
+        "description": "Κατεύθυνση ενέργειας",
+        "options": {
+          "forward": "Εμπρός",
+          "back": "Πίσω",
+          "left": "Αριστερά",
+          "right": "Δεξιά",
+          "up": "Πάνω",
+          "down": "Κάτω"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Στέλνει true όταν ολοκληρωθεί"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Πράκτορας τοποθετεί μπλοκ",
+    "menuDisplayName": "ΠράκτοραςΤοποθ",
+    "description": "Τοποθετεί μπλοκ από τη θέση {{slot}} προς {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "direction": {
+        "name": "κατεύθυνση",
+        "description": "Κατεύθυνση τοποθέτησης",
+        "options": {
+          "forward": "Εμπρός",
+          "back": "Πίσω",
+          "left": "Αριστερά",
+          "right": "Δεξιά",
+          "up": "Πάνω",
+          "down": "Κάτω"
+        }
+      },
+      "slot": {
+        "name": "θέση",
+        "description": "Αριθμός θέσης αποθέματος (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Στέλνει true μετά την τοποθέτηση"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Πράκτορας απορρίπτει αντικείμενο",
+    "menuDisplayName": "ΠράκτοραςΑπόρρ",
+    "description": "Απορρίπτει αντικείμενο από τη θέση {{slot}} προς {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "direction": {
+        "name": "κατεύθυνση",
+        "description": "Κατεύθυνση απόρριψης",
+        "options": {
+          "forward": "Εμπρός",
+          "back": "Πίσω",
+          "left": "Αριστερά",
+          "right": "Δεξιά",
+          "up": "Πάνω",
+          "down": "Κάτω"
+        }
+      },
+      "slot": {
+        "name": "θέση",
+        "description": "Αριθμός θέσης αποθέματος (1–27)"
+      },
+      "amount": {
+        "name": "ποσότητα",
+        "description": "Αριθμός αντικειμένων προς απόρριψη"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Στέλνει true μετά την απόρριψη"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Πράκτορας μετακινεί αντικείμενο",
+    "menuDisplayName": "ΠράκτΜετακΑντικ",
+    "description": "Μετακινεί αντικείμενα μεταξύ θέσεων στο απόθεμα του πράκτορα",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "from_slot": {
+        "name": "θέση_πηγής",
+        "description": "Αριθμός θέσης πηγής (1–27)"
+      },
+      "to_slot": {
+        "name": "θέση_προορισμού",
+        "description": "Αριθμός θέσης προορισμού (1–27)"
+      },
+      "amount": {
+        "name": "ποσότητα",
+        "description": "Αριθμός αντικειμένων προς μετακίνηση"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Στέλνει true μετά τη μετακίνηση"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Πράκτορας ορίζει αντικείμενο",
+    "menuDisplayName": "ΠράκτΟρισΑντικ",
+    "description": "Ορίζει ένα αντικείμενο στην καθορισμένη θέση αποθέματος του πράκτορα",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "slot": {
+        "name": "θέση",
+        "description": "Αριθμός θέσης προς ορισμό (1–27)"
+      },
+      "item_id": {
+        "name": "id_αντικειμένου",
+        "description": "ID αντικειμένου (π.χ. minecraft:apple)"
+      },
+      "amount": {
+        "name": "ποσότητα",
+        "description": "Αριθμός αντικειμένων προς ορισμό"
+      },
+      "data": {
+        "name": "δεδομένα",
+        "description": "Τιμή δεδομένων (συνήθως 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Στέλνει true μετά τον ορισμό"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Πράκτορας συλλέγει",
+    "menuDisplayName": "ΠράκτΣυλλογή",
+    "description": "Συλλέγει έναν καθορισμένο τύπο αντικειμένου γύρω από τον πράκτορα",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "item_id": {
+        "name": "id_αντικειμένου",
+        "description": "ID αντικειμένου προς συλλογή"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Στέλνει true μετά τη συλλογή"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Πράκτορας ανιχνεύει",
+    "menuDisplayName": "ΠΡ Ανίχν",
+    "description": "Ανιχνεύει {{type}} {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      },
+      "type": {
+        "name": "τύπος",
+        "description": "Τι να ανιχνεύσει",
+        "options": {
+          "block": "Μπλοκ",
+          "redstone": "Redstone"
+        }
+      },
+      "direction": {
+        "name": "κατεύθυνση",
+        "description": "Κατεύθυνση ανίχνευσης",
+        "options": {
+          "forward": "Εμπρός",
+          "back": "Πίσω",
+          "left": "Αριστερά",
+          "right": "Δεξιά",
+          "up": "Πάνω",
+          "down": "Κάτω"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "ανιχνεύθηκε",
+        "description": "true αν ανιχνευθεί κάτι"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Παρεμβολή Vector3",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Παρεμβάλλει γραμμικά μεταξύ δύο θέσεων (t=0 αρχή, t=1 τέλος)",
+    "inputs": {
+      "pos_a": {
+        "name": "θέση_a",
+        "description": "Αρχική θέση {x, y, z}"
+      },
+      "pos_b": {
+        "name": "θέση_b",
+        "description": "Τελική θέση {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Συντελεστής παρεμβολής (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "αποτέλεσμα",
+        "description": "Παρεμβαλλόμενη θέση {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Κανονικοποίηση Vector3",
+    "menuDisplayName": "Vec3Norm",
+    "description": "Κανονικοποιεί ένα διάνυσμα σε μοναδιαίο μήκος (μήκος = 1)",
+    "inputs": {
+      "position": {
+        "name": "θέση",
+        "description": "Διάνυσμα προς κανονικοποίηση {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "αποτέλεσμα",
+        "description": "Μοναδιαίο διάνυσμα μήκους 1 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Εσωτερικό γινόμενο Vector3",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Υπολογίζει το εσωτερικό γινόμενο δύο διανυσμάτων",
+    "inputs": {
+      "pos_a": {
+        "name": "θέση_a",
+        "description": "Διάνυσμα A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "θέση_b",
+        "description": "Διάνυσμα B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "τιμή",
+        "description": "Εσωτερικό γινόμενο (βαθμωτό)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "Μετάθεση AABB",
+    "menuDisplayName": "AABBΜετάθ",
+    "description": "Μεταθέτει μια περιοχή AABB κατά ένα δοθέν διάνυσμα",
+    "inputs": {
+      "area": {
+        "name": "περιοχή",
+        "description": "Περιοχή προς μετάθεση {min, max}"
+      },
+      "delta": {
+        "name": "δέλτα",
+        "description": "Διάνυσμα μετάθεσης {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "περιοχή",
+        "description": "Αντικείμενο μετατεθειμένης περιοχής"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "Τομή AABB",
+    "menuDisplayName": "AABBΤομή",
+    "description": "Ελέγχει αν δύο περιοχές AABB επικαλύπτονται",
+    "inputs": {
+      "area_a": {
+        "name": "περιοχή_a",
+        "description": "Περιοχή A {min, max}"
+      },
+      "area_b": {
+        "name": "περιοχή_b",
+        "description": "Περιοχή B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "αποτέλεσμα",
+        "description": "true αν οι δύο περιοχές επικαλύπτονται"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Assert",
+    "menuDisplayName": "Assert",
+    "description": "Συγκρίνει την πραγματική με την αναμενόμενη τιμή και καταγράφει PASS/FAIL. Πάντα στέλνει done για αλυσίδωση.",
+    "inputs": {
+      "actual": {
+        "name": "πραγματική",
+        "description": "Τιμή προς έλεγχο"
+      },
+      "expected": {
+        "name": "αναμενόμενη",
+        "description": "Αναμενόμενη τιμή"
+      },
+      "op": {
+        "name": "op",
+        "description": "Τελεστής σύγκρισης",
+        "options": {
+          "eq": "Ίσο (===)",
+          "neq": "Άνισο (!==)",
+          "deep": "Βαθιά ισότητα (JSON)",
+          "lt": "Μικρότερο από (<)",
+          "gt": "Μεγαλύτερο από (>)",
+          "lte": "Μικρότερο ή ίσο (≤)",
+          "gte": "Μεγαλύτερο ή ίσο (≥)",
+          "approx": "Κατά προσέγγιση (±ανοχή)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "ID περίπτωσης δοκιμής (π.χ. TC-111)"
+      },
+      "tolerance": {
+        "name": "ανοχή",
+        "description": "Ανοχή για κατά προσέγγιση σύγκριση"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "έτοιμο",
+        "description": "Πάντα στέλνει true (για αλυσίδωση)"
+      },
+      "passed": {
+        "name": "πέρασε",
+        "description": "Στέλνει true όταν η δοκιμή περνά"
+      },
+      "failed": {
+        "name": "απέτυχε",
+        "description": "Στέλνει την πραγματική τιμή όταν η δοκιμή αποτυγχάνει"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Στέλνει κείμενο στο Gemini AI και λαμβάνει απάντηση",
+    "inputs": {
+      "apiKey": {
+        "name": "Κλειδί API",
+        "description": "Κλειδί API από το Google AI Studio"
+      },
+      "model": {
+        "name": "Μοντέλο",
+        "description": "Μοντέλο Gemini προς χρήση",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (συνιστάται)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Προτροπή",
+        "description": "Κείμενο προτροπής χρήστη"
+      },
+      "systemInstruction": {
+        "name": "Οδηγία συστήματος",
+        "description": "Προτροπή συστήματος που ορίζει τον ρόλο/συμπεριφορά του AI (προαιρετικό)"
+      },
+      "temperature": {
+        "name": "Θερμοκρασία",
+        "description": "Τυχαιότητα 0.0–1.0 (χαμηλότερη = πιο ντετερμινιστική)"
+      },
+      "trigger": {
+        "name": "Έναυσμα",
+        "description": "Έναυσμα (προαιρετικό)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Απάντηση",
+        "description": "Κείμενο που δημιουργήθηκε από το Gemini"
+      }
+    }
+  }
+}

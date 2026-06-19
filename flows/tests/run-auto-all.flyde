@@ -1,0 +1,184 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: -4.650848388671875
+        y: 86.0088701248169
+      id: mc-connect
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 300
+      id: on-chat
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 500
+      id: auto-cmd
+      inputConfig: {}
+      nodeId: AutoCommand
+      type: visual
+      source:
+        type: file
+        data: ./auto-command.flyde
+    - pos:
+        x: 50
+        y: 700
+      id: auto-player
+      inputConfig: {}
+      nodeId: AutoPlayerQuery
+      type: visual
+      source:
+        type: file
+        data: ./auto-player-query.flyde
+    - pos:
+        x: 50
+        y: 900
+      id: auto-info
+      inputConfig: {}
+      nodeId: AutoInfo
+      type: visual
+      source:
+        type: file
+        data: ./auto-info.flyde
+    - pos:
+        x: 50
+        y: 1100
+      id: auto-selector
+      inputConfig: {}
+      nodeId: AutoSelector
+      type: visual
+      source:
+        type: file
+        data: ./auto-selector.flyde
+    - pos:
+        x: 50
+        y: 1300
+      id: auto-math
+      inputConfig: {}
+      nodeId: AutoMath
+      type: visual
+      source:
+        type: file
+        data: ./auto-math.flyde
+    - pos:
+        x: 50
+        y: 1500
+      id: auto-scoreboard
+      inputConfig: {}
+      nodeId: AutoScoreboard
+      type: visual
+      source:
+        type: file
+        data: ./auto-scoreboard.flyde
+    - pos:
+        x: 50
+        y: 1700
+      id: mc-disconnect
+      inputConfig: {}
+      nodeId: MinecraftDisconnect
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: -420.40074157714844
+        y: 714.3064980506897
+      id: Delay-nz8eg2ke
+      inputConfig: {}
+      nodeId: Delay
+      config:
+        value:
+          type: dynamic
+          value: "{{value}}"
+        delayMs:
+          type: number
+          value: 1000
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: mc-connect
+        pinId: ワールド
+      to:
+        insId: on-chat
+        pinId: ワールド
+    - from:
+        insId: on-chat
+        pinId: 送信者名
+      to:
+        insId: auto-cmd
+        pinId: トリガー
+    - from:
+        insId: auto-cmd
+        pinId: 完了
+      to:
+        insId: auto-player
+        pinId: トリガー
+    - from:
+        insId: auto-player
+        pinId: 完了
+      to:
+        insId: auto-info
+        pinId: トリガー
+    - from:
+        insId: auto-info
+        pinId: 完了
+      to:
+        insId: auto-selector
+        pinId: トリガー
+    - from:
+        insId: auto-selector
+        pinId: 完了
+      to:
+        insId: auto-math
+        pinId: トリガー
+    - from:
+        insId: auto-math
+        pinId: 完了
+      to:
+        insId: auto-scoreboard
+        pinId: トリガー
+    - from:
+        insId: auto-scoreboard
+        pinId: 完了
+      to:
+        insId: mc-disconnect
+        pinId: トリガー
+  id: RunAutoAll
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
+  completionOutputs: []
+  description: >
+    全自動テストランナー（TC-051〜064/071〜083/091〜092/101〜102/111〜127/151〜157）
+
+    チャットを1回送信するだけで全自動テストが順番に実行される
+
+    MinecraftConnect → OnPlayerChat(トリガー) → AutoCommand → AutoPlayerQuery →
+    AutoInfo → AutoSelector → AutoMath → AutoScoreboard → MinecraftDisconnect

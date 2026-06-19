@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Yhdistä",
+    "description": "Käynnistää WebSocket-palvelimen ja yhdistää Minecraft Education Editioniin",
+    "inputs": {
+      "port": {
+        "name": "portti",
+        "description": "WebSocket-portin numero (oletus: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "maailma",
+        "description": "World-objekti (käytetään sisäisesti; ei tarvitse yhdistää komentosolmuihin)"
+      },
+      "error": {
+        "name": "virhe",
+        "description": "Yhteysvirheen tiedot"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Katkaise",
+    "menuDisplayName": "MC Katkaise",
+    "description": "Katkaisee yhteyden Minecraftiin ja sammuttaa WebSocket-palvelimen",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (esim. chat 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Hae agentin sijainti",
+    "menuDisplayName": "Agentin sij.",
+    "description": "Hakee agentin nykyisen sijainnin",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "sijainti",
+        "description": "Agentin sijainti {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "Hae TT-tavoitteet",
+    "menuDisplayName": "TT-tavoitteet",
+    "description": "Hakee luettelon kaikista tulostaulun tavoitteista",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "tavoitteet",
+        "description": "Taulukko tulostaulun tavoiteolioista"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "Hae TT-tavoite",
+    "menuDisplayName": "TT-tavoite",
+    "description": "Hakee tulostaulun tavoitteen sen ID:n perusteella",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "objective_id": {
+        "name": "tavoite_id",
+        "description": "Tulostaulun tavoitteen ID"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "tavoite",
+        "description": "Tulostaulun tavoite → yhdistä TT-tavoitteen infosolmuun"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "Lisää TT-tavoite",
+    "menuDisplayName": "Lisää TT-tav.",
+    "description": "Lisää uuden tavoitteen tulostauluun",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "objective_id": {
+        "name": "tavoite_id",
+        "description": "Tulostaulun tavoitteen ID"
+      },
+      "display_name": {
+        "name": "näyttönimi",
+        "description": "Näyttönimi (valinnainen)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "tavoite",
+        "description": "Lisätty tavoite → yhdistä TT-tavoitteen infosolmuun"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "Poista TT-tavoite",
+    "menuDisplayName": "Poista TT-tav.",
+    "description": "Poistaa tulostaulun tavoitteen sen ID:n perusteella",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "objective_id": {
+        "name": "tavoite_id",
+        "description": "Tulostaulun tavoitteen ID"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "tulos",
+        "description": "Poiston tulos"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Hae kaikki pisteet",
+    "menuDisplayName": "Kaikki pisteet",
+    "description": "Hakee kaikki pelaajan pisteet",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "player_name": {
+        "name": "pelaajan_nimi",
+        "description": "Pelaajan nimi"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "pisteet",
+        "description": "Taulukko kaikista pisteistä"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Hae pisteet",
+    "menuDisplayName": "Hae pisteet",
+    "description": "Hakee pelaajan pisteet tiettyä tavoitetta varten",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "player_name": {
+        "name": "pelaajan_nimi",
+        "description": "Pelaajan nimi"
+      },
+      "objective_id": {
+        "name": "tavoite_id",
+        "description": "Tulostaulun tavoitteen ID"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "pisteet",
+        "description": "Pistearvo (luku)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Pisteoperaatio",
+    "menuDisplayName": "Pisteop.",
+    "description": "Suorittaa {{operation}} pelaajan pisteille",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "operation": {
+        "name": "operaatio",
+        "description": "Operaation tyyppi",
+        "options": {
+          "add": "Lisää",
+          "remove": "Vähennä",
+          "set": "Aseta"
+        }
+      },
+      "player_name": {
+        "name": "pelaajan_nimi",
+        "description": "Pelaajan nimi"
+      },
+      "objective_id": {
+        "name": "tavoite_id",
+        "description": "Tulostaulun tavoitteen ID"
+      },
+      "value": {
+        "name": "arvo",
+        "description": "Operaatiossa käytettävä arvo"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Uusi pistearvo operaation jälkeen"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "Pelaajan chatatessa",
+    "menuDisplayName": "Chat",
+    "description": "Laukeaa, kun pelaaja lähettää chat-viestin",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "lähettäjä",
+        "description": "Chatin lähettäneen pelaajan nimi"
+      },
+      "message": {
+        "name": "viesti",
+        "description": "Chat-viestin sisältö"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "Pelaajan liittyessä",
+    "menuDisplayName": "Liittyminen",
+    "description": "Laukeaa, kun pelaaja liittyy maailmaan",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "pelaajan_nimi",
+        "description": "Liittyneen pelaajan nimi"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "Pelaajan poistuessa",
+    "menuDisplayName": "Poistuminen",
+    "description": "Laukeaa, kun pelaaja poistuu maailmasta",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "pelaajan_nimi",
+        "description": "Poistuneen pelaajan nimi"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "Pelaajan liikkuessa",
+    "menuDisplayName": "Liikkui",
+    "description": "Laukeaa aina, kun pelaaja liikkuu",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "etäisyys",
+        "description": "Kuljettu matka (metriä)"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      },
+      "underwater": {
+        "name": "veden_alla",
+        "description": "Liikutaanko veden alla (true/false)"
+      },
+      "biome": {
+        "name": "biomi",
+        "description": "Nykyisen biomin nimi"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Liikkumistavan nimi"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "Pelaajan teleportatessa",
+    "menuDisplayName": "Teleportattu",
+    "description": "Laukeaa, kun pelaaja teleporttaa",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Teleportin syyn nimi"
+      },
+      "distance": {
+        "name": "etäisyys",
+        "description": "Teleportin etäisyys (metriä)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "Pelaajan tittelitapahtuma",
+    "menuDisplayName": "Titteli",
+    "description": "Laukeaa, kun pelaaja saa tittelin",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "lähettäjä",
+        "description": "Tittelin lähettäneen pelaajan nimi"
+      },
+      "message": {
+        "name": "viesti",
+        "description": "Titteliviestin sisältö"
+      },
+      "recipient": {
+        "name": "vastaanottaja",
+        "description": "Tittelin saaneen pelaajan nimi"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "Pelaajan viestiessä",
+    "menuDisplayName": "Viesti",
+    "description": "Laukeaa, kun pelaaja lähettää minkä tahansa tyyppisen viestin",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "lähettäjä",
+        "description": "Viestin lähettäneen pelaajan nimi"
+      },
+      "message": {
+        "name": "viesti",
+        "description": "Viestin sisältö"
+      },
+      "type": {
+        "name": "tyyppi",
+        "description": "Viestin tyyppi (chat / tell jne.)"
+      },
+      "recipient": {
+        "name": "vastaanottaja",
+        "description": "[nullable] Vastaanottajan nimi. null muille kuin tell-viesteille"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "Pelaajan pomppiessa",
+    "menuDisplayName": "Pomppi",
+    "description": "Laukeaa, kun pelaaja pomppii limalohkolla tai vastaavalla",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "korkeus",
+        "description": "Pompun korkeus (lohkot)"
+      },
+      "block": {
+        "name": "lohko",
+        "description": "BlockType-objekti (lohko, jolla pompittiin) → yhdistä lohkon infosolmuun"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "Lohkon rikkoutuessa",
+    "menuDisplayName": "Riko lohko",
+    "description": "Laukeaa, kun lohko rikotaan",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "lohko",
+        "description": "BlockType-objekti → yhdistä lohkon infosolmuun"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Tuhoamistavan nimi"
+      },
+      "item": {
+        "name": "esine",
+        "description": "[nullable] Kädessä pidetty esine ennen rikkomista. null jos paljain käsin"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "Lohkon asettuessa",
+    "menuDisplayName": "Aseta lohko",
+    "description": "Laukeaa, kun lohko asetetaan",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "lohko",
+        "description": "BlockType-objekti → yhdistä lohkon infosolmuun"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      },
+      "underwater": {
+        "name": "veden_alla",
+        "description": "Asetettiinko veden alle (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Asettamistavan nimi"
+      },
+      "item": {
+        "name": "esine",
+        "description": "Kädessä pidetty esine ennen asettamista → yhdistä esineen infosolmuun"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "Esineen käytössä",
+    "menuDisplayName": "Esine käytetty",
+    "description": "Laukeaa, kun pelaaja käyttää esinettä",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "esine",
+        "description": "[nullable] Kädessä pidetty esine. null jos ei esinettä"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Esineen käyttötavan nimi"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "Esineen hankinnassa",
+    "menuDisplayName": "Esine hankittu",
+    "description": "Laukeaa, kun pelaaja hankkii esineen",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "määrä",
+        "description": "Hankittujen esineiden määrä"
+      },
+      "item": {
+        "name": "esine",
+        "description": "Esinetyyppi → yhdistä esinetyypin infosolmuun"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Esineen hankintatavan nimi"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "Esineen valmistuksessa",
+    "menuDisplayName": "Valmistettu",
+    "description": "Laukeaa, kun pelaaja valmistaa esineen",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "esine",
+        "description": "Esinepino (valmistettu esine) → yhdistä esinepinon infosolmuun"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      },
+      "used_table": {
+        "name": "käytti_pöytää",
+        "description": "Käytettiinkö työpöytää (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "Esineen varustamisessa",
+    "menuDisplayName": "Varustettu",
+    "description": "Laukeaa, kun pelaaja varustaa esineen",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "esine",
+        "description": "Esinepino → yhdistä esinepinon infosolmuun"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      },
+      "equip_slot": {
+        "name": "varuste_paikka",
+        "description": "Varustepaikan nimi"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "Esineen sulatuksessa",
+    "menuDisplayName": "Sulatettu",
+    "description": "Laukeaa, kun pelaaja sulattaa esineen",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "esine",
+        "description": "Esinetyyppi (sulatettu) → yhdistä esinetyypin infosolmuun"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      },
+      "fuel": {
+        "name": "polttoaine",
+        "description": "Esinetyyppi (polttoaine) → yhdistä esinetyypin infosolmuun"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "Esineen vaihdossa",
+    "menuDisplayName": "Vaihdettu",
+    "description": "Laukeaa, kun pelaaja suorittaa kyläläiskaupan",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "esine",
+        "description": "Esinepino (vastaanotettu esine) → yhdistä esinepinon infosolmuun"
+      },
+      "villager": {
+        "name": "kyläläinen",
+        "description": "WorldVillager-objekti → yhdistä kyläläisen infosolmuun"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      },
+      "payment_a": {
+        "name": "maksu_a",
+        "description": "Esinetyyppi (maksu A) → yhdistä esinetyypin infosolmuun"
+      },
+      "payment_b": {
+        "name": "maksu_b",
+        "description": "[nullable] Esinetyyppi (maksu B). null jos ei käytössä"
+      },
+      "player_xp": {
+        "name": "pelaajan_smaragdit",
+        "description": "Pelaajan smaragdit kaupan jälkeen"
+      },
+      "villager_xp": {
+        "name": "kyläläisen_smaragdit",
+        "description": "Kyläläisen smaragdit kaupan jälkeen"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "Mob-vuorovaikutuksessa",
+    "menuDisplayName": "Mob-vuorovaik.",
+    "description": "Laukeaa, kun pelaaja on vuorovaikutuksessa mobin kanssa",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "mob",
+        "description": "WorldMob-objekti (vuorovaikutuksen mob)"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Mob-vuorovaikutuksen tyypin nimi"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "Maalin osumassa",
+    "menuDisplayName": "Maali osuttu",
+    "description": "Laukeaa, kun maalilohkoon osutaan",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "voimakkuus",
+        "description": "Redstone-signaalin voimakkuus (0–15)"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Suorita komento",
+    "menuDisplayName": "Suor. komento",
+    "description": "Suorittaa minkä tahansa Minecraft-komennon (ilman alkavaa /)",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "command": {
+        "name": "komento",
+        "description": "Suoritettava Minecraft-komento (ilman alkavaa /)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää true:n, kun valmis"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Hae peliaika",
+    "menuDisplayName": "Peliaika",
+    "description": "Hakee peliajan ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "type": {
+        "name": "tyyppi",
+        "description": "Kyselyn aikatyyppi",
+        "options": {
+          "time": "Aika (0–24000)",
+          "day": "Päivien määrä",
+          "tick": "Tickien määrä"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "arvo",
+        "description": "Kysytty aika-arvo"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Onko päivä",
+    "menuDisplayName": "Päivä?",
+    "description": "Tarkistaa, onko parhaillaan päivä (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "on_päivä",
+        "description": "true päivällä, false yöllä"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Hae sää",
+    "menuDisplayName": "Sää",
+    "description": "Hakee nykyisen sään",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "sää",
+        "description": "Sään nimi (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Täytä lohkoilla",
+    "menuDisplayName": "Täytä",
+    "description": "Täyttää kahden sijainnin välisen alueen määritetyllä lohkolla",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "from": {
+        "name": "alkaen",
+        "description": "Alkukulma {x, y, z}"
+      },
+      "to": {
+        "name": "asti",
+        "description": "Loppukulma {x, y, z}"
+      },
+      "block_id": {
+        "name": "lohko_id",
+        "description": "Lohkon ID (esim. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää true:n, kun täyttö on valmis"
+      },
+      "count": {
+        "name": "määrä",
+        "description": "Täytettyjen lohkojen määrä"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Hae maanpinnan korkeus",
+    "menuDisplayName": "Maa",
+    "description": "Hakee ylimmän kiinteän lohkon sijainnin ja tyypin",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "sijainti",
+        "description": "Maanpinnan sijainti {x, y, z}"
+      },
+      "block_name": {
+        "name": "lohkon_nimi",
+        "description": "Ylimmän kiinteän lohkon nimi"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Maailmakysely",
+    "menuDisplayName": "Maailmakysely",
+    "description": "Kysyy {{type}}-luettelon maailmasta",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "type": {
+        "name": "tyyppi",
+        "description": "Kysyttävä luokka",
+        "options": {
+          "mob": "Entiteetti",
+          "block": "Lohko",
+          "item": "Esine"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "luettelo",
+        "description": "Kyselyn tulosluettelo"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Hae pelaajan sijainti",
+    "menuDisplayName": "Pelaajan sij.",
+    "description": "Hakee pelaajan nykyisen sijainnin ja katselusuunnan",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "sijainti",
+        "description": "Pelaajan sijainti {x, y, z}"
+      },
+      "direction": {
+        "name": "suunta",
+        "description": "Pelaajan katselusuunta (Y-akselin kierto)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Hae pelaajan suuntaus",
+    "menuDisplayName": "Pelaajan suunta",
+    "description": "Hakee pelaajan kamerakulman (nyökkäys ja kääntö)",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "kulma",
+        "description": "Pelaajan katselukulma {x, y} (astetta)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Hae pelaajan tagit",
+    "menuDisplayName": "Pelaajan tagit",
+    "description": "Hakee kaikki pelaajaan liitetyt tagit",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "tagit",
+        "description": "Taulukko tagien nimimerkkijonoista"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "Pelaajalla on tagi",
+    "menuDisplayName": "On tagi?",
+    "description": "Tarkistaa, onko pelaajalla määritetty tagi",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "tag": {
+        "name": "tagi",
+        "description": "Tarkistettavan tagin nimi"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "tulos",
+        "description": "true, jos pelaajalla on tagi"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Hae pelaajan taso",
+    "menuDisplayName": "Pelaajan taso",
+    "description": "Hakee pelaajan nykyisen kokemustason",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "taso",
+        "description": "Pelaajan taso (luku)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Hae pelitila",
+    "menuDisplayName": "Pelitila",
+    "description": "Hakee pelaajan nykyisen pelitilan",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "pelitila",
+        "description": "Pelitilan nimi (esim. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Hae pelaajan kyvyt",
+    "menuDisplayName": "Kyvyt",
+    "description": "Hakee pelaajan nykyiset kykyasetukset",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "kyvyt",
+        "description": "Pelaajan kyvyt -objekti"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Hae pelaajat",
+    "menuDisplayName": "Pelaajat",
+    "description": "Hakee luettelon kaikista maailman pelaajista",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "pelaajat",
+        "description": "Taulukko pelaajaolioista"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Hae paikallinen pelaaja",
+    "menuDisplayName": "Paik. pelaaja",
+    "description": "Hakee paikallisen (oman) pelaajaolion",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "pelaaja",
+        "description": "Paikallinen pelaajaolio"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Pura entiteetistä",
+    "menuDisplayName": "Entiteetti-info",
+    "description": "Purkaa sijainnin, suunnan, ulottuvuuden ja muut kentät entiteettioliosta",
+    "inputs": {
+      "entity": {
+        "name": "entiteetti",
+        "description": "Pelaaja- tai kyläläisolio (player / villager -ulostulo)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "sijainti",
+        "description": "Entiteetin sijainti (position)"
+      },
+      "direction": {
+        "name": "suunta",
+        "description": "Y-akselin kierto (yRot)"
+      },
+      "dimension": {
+        "name": "ulottuvuus",
+        "description": "Ulottuvuuden numero (dimension)"
+      },
+      "type": {
+        "name": "tyyppi",
+        "description": "Tyyppimerkkijono (type)"
+      },
+      "variant": {
+        "name": "variantti",
+        "description": "Variantin numero (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Entiteetin ID-numero (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Pura pelaajasta",
+    "menuDisplayName": "Pelaaja-info",
+    "description": "Purkaa nimen, värin ja entiteettitiedot pelaajan tilannekuvaoliosta",
+    "inputs": {
+      "player": {
+        "name": "pelaaja",
+        "description": "Pelaajaolio tapahtumasolmun player-ulostulosta"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nimi",
+        "description": "Pelaajan nimi (name)"
+      },
+      "color": {
+        "name": "väri",
+        "description": "Karttamerkin väri (color)"
+      },
+      "entity": {
+        "name": "entiteetti",
+        "description": "Yhdistä entiteetin infosolmuun"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Pura esinetyypistä",
+    "menuDisplayName": "Esinetyyppi-info",
+    "description": "Purkaa esineen ID:n ja data-arvon esinetyyppioliosta",
+    "inputs": {
+      "item": {
+        "name": "esine",
+        "description": "Esinetyyppi (item-ulostulo hankinta-/sulatustapahtumista)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "esine_id",
+        "description": "Esineen ID-merkkijono (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Data-arvo (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Pura esinepinosta",
+    "menuDisplayName": "Esinepino-info",
+    "description": "Purkaa esineen ID:n, määrän, enimmäismäärän ja data-arvon esinepino-oliosta",
+    "inputs": {
+      "item": {
+        "name": "esine",
+        "description": "Esinepino (item-ulostulo käyttö-/varustus-/valmistus-/vaihtotapahtumista)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "esine_id",
+        "description": "Esineen ID-merkkijono (typeId)"
+      },
+      "count": {
+        "name": "määrä",
+        "description": "Pinon koko (amount)"
+      },
+      "max_count": {
+        "name": "enimmäismäärä",
+        "description": "Pinon enimmäiskoko (maxAmount)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Data-arvo (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Pura lohkotyypistä",
+    "menuDisplayName": "Lohko-info",
+    "description": "Purkaa lohkon ID:n ja data-arvon lohkotyyppioliosta",
+    "inputs": {
+      "block": {
+        "name": "lohko",
+        "description": "Lohkotyyppiolio (block-ulostulo block-/bounce-tapahtumista)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "lohko_id",
+        "description": "Lohkon ID-merkkijono (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Data-arvo (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Pura TT-tavoitteesta",
+    "menuDisplayName": "TT-tav.-info",
+    "description": "Purkaa ID:n ja näyttönimen tulostaulun tavoiteoliosta",
+    "inputs": {
+      "objective": {
+        "name": "tavoite",
+        "description": "Tavoite lisää-/hae-tavoite-solmusta"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "tavoite_id",
+        "description": "Tavoitteen ID-merkkijono (id)"
+      },
+      "display_name": {
+        "name": "näyttönimi",
+        "description": "Näyttönimi (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Pura mobista",
+    "menuDisplayName": "Mob-info",
+    "description": "Purkaa tyyppi-, väri- ja varianttinumerot mob-oliosta",
+    "inputs": {
+      "mob": {
+        "name": "mob",
+        "description": "Mob-olio (mob-ulostulo mob-vuorovaikutustapahtumasta)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "tyyppi",
+        "description": "Mobin tyyppinumero (type)"
+      },
+      "color": {
+        "name": "väri",
+        "description": "Värinumero (color)"
+      },
+      "variant": {
+        "name": "variantti",
+        "description": "Variantin numero (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Pura kyläläisestä",
+    "menuDisplayName": "Kyläläis-info",
+    "description": "Purkaa nimen, arvon ja entiteettitiedot kyläläisoliosta",
+    "inputs": {
+      "villager": {
+        "name": "kyläläinen",
+        "description": "Kyläläisolio (villager-ulostulo vaihtotapahtumasta)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nimi",
+        "description": "Kyläläisen nimi (trader.name)"
+      },
+      "rank": {
+        "name": "arvo",
+        "description": "Kauppa-arvo (trader.tier)"
+      },
+      "entity": {
+        "name": "entiteetti",
+        "description": "Yhdistä entiteetin infosolmuun"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Valitsin",
+    "menuDisplayName": "Valitsin",
+    "description": "Valitsee {{type}}-luettelosta",
+    "inputs": {
+      "type": {
+        "name": "tyyppi",
+        "description": "Valittava luokka",
+        "options": {
+          "block": "🧱 Lohko",
+          "item": "🎒 Esine",
+          "mob": "🐾 Mob",
+          "TravelMethod": "🚶 Liikkumistapa",
+          "TeleportCause": "✨ Teleportin syy",
+          "MobInteraction": "🐄 Mob-vuorovaikutus",
+          "ItemUseMethod": "🤚 Esineen käyttötapa",
+          "ItemAcqMethod": "📦 Hankintatapa",
+          "EquipSlot": "🪖 Varustepaikka",
+          "BlockBreakMethod": "⛏️ Rikkomistapa",
+          "BlockPlaceMethod": "🏗️ Asettamistapa"
+        }
+      },
+      "block": {
+        "name": "lohko",
+        "description": "Lohkon ID"
+      },
+      "item": {
+        "name": "esine",
+        "description": "Esineen ID"
+      },
+      "mob": {
+        "name": "mob",
+        "description": "Mobin (entiteetin) ID"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Liikkumistapa"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Teleportin syy"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Mob-vuorovaikutuksen tyyppi"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Esineen käyttötapa"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Esineen hankintatapa"
+      },
+      "EquipSlot": {
+        "name": "varuste_paikka",
+        "description": "Varustepaikka"
+      },
+      "BlockBreakMethod": {
+        "name": "rikkomistapa",
+        "description": "Lohkon rikkomistapa"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Lohkon asettamistapa"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "arvo",
+        "description": "Valittu ID tai enum-arvo"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Lokalisoitu nimi",
+    "menuDisplayName": "Lokalisoitu nimi",
+    "description": "Muuntaa {{type}} lokalisoiduksi nimeksi",
+    "inputs": {
+      "value": {
+        "name": "arvo",
+        "description": "Minecraft-ID (esim. \"minecraft:stone\") tai tapahtuma-arvo (esim. \"Walk\")"
+      },
+      "type": {
+        "name": "tyyppi",
+        "description": "Muunnettava luokka",
+        "options": {
+          "block": "Lohkon ID",
+          "item": "Esineen ID",
+          "mob": "Mobin ID",
+          "TravelMethod": "Liikkumistapa",
+          "TeleportCause": "Teleportin syy",
+          "MobInteraction": "Mob-vuorovaikutus",
+          "ItemUseMethod": "Esineen käyttötapa",
+          "ItemAcqMethod": "Hankintatapa",
+          "EquipSlot": "Varustepaikka",
+          "BlockBreakMethod": "Lohkon rikkomistapa",
+          "BlockPlaceMethod": "Lohkon asettamistapa"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nimi",
+        "description": "Lokalisoitu nimi (palauttaa syötearvon, jos ei löydy)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Vector3-operaatio",
+    "menuDisplayName": "Vec3-op.",
+    "description": "Suorittaa {{op}} 3D-sijainnille",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Operaation tyyppi",
+        "options": {
+          "assemble": "🔧 Kokoa",
+          "add": "➕ Lisää",
+          "subtract": "➖ Vähennä",
+          "scale": "✖️ Skaalaa",
+          "floor": "⬇️ Pyöristä alas",
+          "ceil": "⬆️ Pyöristä ylös",
+          "fill_y": "📐 Täytä Y"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "X-koordinaatti"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y-koordinaatti"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z-koordinaatti"
+      },
+      "pos_a": {
+        "name": "sij_a",
+        "description": "Perussijainti {x,y,z}"
+      },
+      "pos_b": {
+        "name": "sij_b",
+        "description": "Toinen sijainti {x,y,z}"
+      },
+      "position": {
+        "name": "sijainti",
+        "description": "Sijainti {x,y,z}"
+      },
+      "scale": {
+        "name": "skaala",
+        "description": "Skalaarikerroin (esim. 2 kaksinkertaistamiseen)"
+      },
+      "pos_xz": {
+        "name": "sij_xz",
+        "description": "2D-sijainti {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Y-koordinaatin arvo"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "tulos",
+        "description": "Tulossijainti {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Vector3-etäisyys",
+    "menuDisplayName": "Etäisyys",
+    "description": "Laskee euklidisen etäisyyden kahden 3D-sijainnin välillä",
+    "inputs": {
+      "pos_a": {
+        "name": "sij_a",
+        "description": "Alkusijainti {x,y,z}"
+      },
+      "pos_b": {
+        "name": "sij_b",
+        "description": "Loppusijainti {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "etäisyys",
+        "description": "Kahden pisteen välinen etäisyys (metriä)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 merkkijonoksi",
+    "menuDisplayName": "Vec3→Merkkij.",
+    "description": "Muuntaa sijaintiolion \"x y z\" -muotoiseksi merkkijonoksi",
+    "inputs": {
+      "position": {
+        "name": "sijainti",
+        "description": "Muunnettava sijainti {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "teksti",
+        "description": "Merkkijono \"x y z\" -muodossa"
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Jaa Vector3",
+    "menuDisplayName": "Jaa Vec3",
+    "description": "Jakaa sijaintiolion erillisiksi x-, y- ja z-arvoiksi",
+    "inputs": {
+      "position": {
+        "name": "sijainti",
+        "description": "Jaettava sijainti {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "X-koordinaatti"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y-koordinaatti"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z-koordinaatti"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Rajoita luku",
+    "menuDisplayName": "Rajoita",
+    "description": "Rajoittaa luvun vähimmäis- ja enimmäisarvon väliin",
+    "inputs": {
+      "value": {
+        "name": "arvo",
+        "description": "Rajoitettava luku"
+      },
+      "min": {
+        "name": "min",
+        "description": "Alaraja"
+      },
+      "max": {
+        "name": "max",
+        "description": "Yläraja"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "tulos",
+        "description": "Rajoitettu arvo"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Luo alue",
+    "menuDisplayName": "Luo AABB",
+    "description": "Luo akseliin kohdistetun rajauslaatikon (AABB) kahdesta kulmasta",
+    "inputs": {
+      "corner_a": {
+        "name": "kulma_a",
+        "description": "Alueen kulma 1 {x,y,z} (järjestyksellä ei ole väliä)"
+      },
+      "corner_b": {
+        "name": "kulma_b",
+        "description": "Alueen kulma 2 {x,y,z} (järjestyksellä ei ole väliä)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "alue",
+        "description": "AABB-alueolio {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Onko alueella",
+    "menuDisplayName": "AABB:n sisällä",
+    "description": "Tarkistaa, onko sijainti AABB-alueen sisällä",
+    "inputs": {
+      "area": {
+        "name": "alue",
+        "description": "AABB-alue {min, max}"
+      },
+      "position": {
+        "name": "sijainti",
+        "description": "Testattava sijainti {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "tulos",
+        "description": "true, jos sijainti on alueen sisällä"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "Pelaajan muunnoksessa",
+    "menuDisplayName": "PelaajaMuunnos",
+    "description": "Laukeaa, kun pelaajan sijainti tai kierto muuttuu (suuri taajuus)",
+    "inputs": {
+      "world": {
+        "name": "maailma",
+        "description": "MinecraftConnect-solmun World-ulostulo"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "sijainti",
+        "description": "Pelaajan sijainti {x, y, z}"
+      },
+      "direction": {
+        "name": "suunta",
+        "description": "Pelaajan katselusuunta (Y-akselin kierto)"
+      },
+      "player": {
+        "name": "pelaaja",
+        "description": "WorldPlayer-objekti → yhdistä pelaajan infosolmuun"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Liikuta agenttia",
+    "menuDisplayName": "AgentMove",
+    "description": "Liikuttaa agenttia {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "direction": {
+        "name": "suunta",
+        "description": "Liikkumissuunta",
+        "options": {
+          "forward": "Eteenpäin",
+          "back": "Taaksepäin",
+          "left": "Vasemmalle",
+          "right": "Oikealle",
+          "up": "Ylös",
+          "down": "Alas"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää true:n liikkumisen jälkeen"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Käännä agenttia",
+    "menuDisplayName": "AgentTurn",
+    "description": "Kääntää agenttia {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "direction": {
+        "name": "suunta",
+        "description": "Kääntymissuunta",
+        "options": {
+          "left": "Vasemmalle",
+          "right": "Oikealle"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää true:n kääntymisen jälkeen"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Teleporttaa agentti",
+    "menuDisplayName": "AgenttiTP",
+    "description": "Teleporttaa agentin sijaintiin (jätä pois käyttääksesi pelaajan nykyistä sijaintia)",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "position": {
+        "name": "sijainti",
+        "description": "Kohdesijainti {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää true:n teleportin jälkeen"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Agentin toiminto",
+    "menuDisplayName": "AgentAction",
+    "description": "Agentti suorittaa {{action}} (suunta: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "action": {
+        "name": "toiminto",
+        "description": "Suoritettava toiminto",
+        "options": {
+          "attack": "Hyökkää",
+          "destroyBlock": "Tuhoa",
+          "till": "Muokkaa maata",
+          "dropAllItems": "Pudota kaikki"
+        }
+      },
+      "direction": {
+        "name": "suunta",
+        "description": "Toiminnan suunta",
+        "options": {
+          "forward": "Eteenpäin",
+          "back": "Taaksepäin",
+          "left": "Vasemmalle",
+          "right": "Oikealle",
+          "up": "Ylös",
+          "down": "Alas"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää true:n, kun valmis"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Agentti asettaa lohkon",
+    "menuDisplayName": "AgenttiAseta",
+    "description": "Asettaa lohkon paikasta {{slot}} suuntaan {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "direction": {
+        "name": "suunta",
+        "description": "Asettamissuunta",
+        "options": {
+          "forward": "Eteenpäin",
+          "back": "Taaksepäin",
+          "left": "Vasemmalle",
+          "right": "Oikealle",
+          "up": "Ylös",
+          "down": "Alas"
+        }
+      },
+      "slot": {
+        "name": "paikka",
+        "description": "Reppupaikan numero (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää true:n asettamisen jälkeen"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Agentti pudottaa esineen",
+    "menuDisplayName": "AgenttiPudota",
+    "description": "Pudottaa esineen paikasta {{slot}} suuntaan {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "direction": {
+        "name": "suunta",
+        "description": "Pudotussuunta",
+        "options": {
+          "forward": "Eteenpäin",
+          "back": "Taaksepäin",
+          "left": "Vasemmalle",
+          "right": "Oikealle",
+          "up": "Ylös",
+          "down": "Alas"
+        }
+      },
+      "slot": {
+        "name": "paikka",
+        "description": "Reppupaikan numero (1–27)"
+      },
+      "amount": {
+        "name": "määrä",
+        "description": "Pudotettavien esineiden määrä"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää true:n pudotuksen jälkeen"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Agentti siirtää esineen",
+    "menuDisplayName": "AgenttiSiirräEs",
+    "description": "Siirtää esineitä agentin repun paikkojen välillä",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "from_slot": {
+        "name": "lähde_paikka",
+        "description": "Lähdepaikan numero (1–27)"
+      },
+      "to_slot": {
+        "name": "kohde_paikka",
+        "description": "Kohdepaikan numero (1–27)"
+      },
+      "amount": {
+        "name": "määrä",
+        "description": "Siirrettävien esineiden määrä"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää true:n liikkumisen jälkeen"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Agentti asettaa esineen",
+    "menuDisplayName": "AgenttiAsetaEs",
+    "description": "Asettaa esineen määritettyyn agentin reppupaikkaan",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "slot": {
+        "name": "paikka",
+        "description": "Asetettavan paikan numero (1–27)"
+      },
+      "item_id": {
+        "name": "esine_id",
+        "description": "Esineen ID (esim. minecraft:apple)"
+      },
+      "amount": {
+        "name": "määrä",
+        "description": "Asetettavien esineiden määrä"
+      },
+      "data": {
+        "name": "data",
+        "description": "Data-arvo (yleensä 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää true:n asettamisen jälkeen"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Agentti kerää",
+    "menuDisplayName": "AgenttiKerää",
+    "description": "Kerää määritetyn esinetyypin agentin ympäriltä",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "item_id": {
+        "name": "esine_id",
+        "description": "Kerättävän esineen ID"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää true:n keräämisen jälkeen"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Agentti havaitsee",
+    "menuDisplayName": "AG Havaitse",
+    "description": "Havaitsee {{type}} {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      },
+      "type": {
+        "name": "tyyppi",
+        "description": "Mitä havaita",
+        "options": {
+          "block": "Lohko",
+          "redstone": "Redstone"
+        }
+      },
+      "direction": {
+        "name": "suunta",
+        "description": "Havaitsemissuunta",
+        "options": {
+          "forward": "Eteenpäin",
+          "back": "Taaksepäin",
+          "left": "Vasemmalle",
+          "right": "Oikealle",
+          "up": "Ylös",
+          "down": "Alas"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "havaittu",
+        "description": "true, jos jotain havaitaan"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Vector3-interpolointi",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Interpoloi lineaarisesti kahden sijainnin välillä (t=0 on alku, t=1 on loppu)",
+    "inputs": {
+      "pos_a": {
+        "name": "sij_a",
+        "description": "Alkusijainti {x, y, z}"
+      },
+      "pos_b": {
+        "name": "sij_b",
+        "description": "Loppusijainti {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Interpolointikerroin (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "tulos",
+        "description": "Interpoloitu sijainti {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Vector3-normalisointi",
+    "menuDisplayName": "Vec3Norm",
+    "description": "Normalisoi vektorin yksikköpituuteen (pituus = 1)",
+    "inputs": {
+      "position": {
+        "name": "sijainti",
+        "description": "Normalisoitava vektori {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "tulos",
+        "description": "Yksikkövektori, jonka pituus on 1 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Vector3-pistetulo",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Laskee kahden vektorin pistetulon",
+    "inputs": {
+      "pos_a": {
+        "name": "sij_a",
+        "description": "Vektori A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "sij_b",
+        "description": "Vektori B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "arvo",
+        "description": "Pistetulo (skalaari)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "Siirrä AABB",
+    "menuDisplayName": "AABBSiirrä",
+    "description": "Siirtää AABB-aluetta annetulla vektorilla",
+    "inputs": {
+      "area": {
+        "name": "alue",
+        "description": "Siirrettävä alue {min, max}"
+      },
+      "delta": {
+        "name": "delta",
+        "description": "Siirtovektori {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "alue",
+        "description": "Siirretty alueolio"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "AABB-leikkaus",
+    "menuDisplayName": "AABBLeikkaa",
+    "description": "Tarkistaa, ovatko kaksi AABB-aluetta päällekkäin",
+    "inputs": {
+      "area_a": {
+        "name": "alue_a",
+        "description": "Alue A {min, max}"
+      },
+      "area_b": {
+        "name": "alue_b",
+        "description": "Alue B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "tulos",
+        "description": "true, jos kaksi aluetta ovat päällekkäin"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Assert",
+    "menuDisplayName": "Assert",
+    "description": "Vertaa todellista odotettuun ja kirjaa PASS/FAIL. Lähettää aina done ketjutusta varten.",
+    "inputs": {
+      "actual": {
+        "name": "todellinen",
+        "description": "Testattava arvo"
+      },
+      "expected": {
+        "name": "odotettu",
+        "description": "Odotettu arvo"
+      },
+      "op": {
+        "name": "op",
+        "description": "Vertailuoperaattori",
+        "options": {
+          "eq": "Yhtä suuri (===)",
+          "neq": "Eri suuri (!==)",
+          "deep": "Syvä yhtäsuuruus (JSON)",
+          "lt": "Pienempi kuin (<)",
+          "gt": "Suurempi kuin (>)",
+          "lte": "Pienempi tai yhtä suuri (≤)",
+          "gte": "Suurempi tai yhtä suuri (≥)",
+          "approx": "Likimäärin (±toleranssi)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "Testitapauksen ID (esim. TC-111)"
+      },
+      "tolerance": {
+        "name": "toleranssi",
+        "description": "Toleranssi likimääräiselle vertailulle"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "valmis",
+        "description": "Lähettää aina true:n (ketjutusta varten)"
+      },
+      "passed": {
+        "name": "läpäisi",
+        "description": "Lähettää true:n, kun testi läpäisee"
+      },
+      "failed": {
+        "name": "epäonnistui",
+        "description": "Lähettää todellisen arvon, kun testi epäonnistuu"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Lähettää tekstiä Gemini AI:lle ja saa vastauksen",
+    "inputs": {
+      "apiKey": {
+        "name": "API-avain",
+        "description": "API-avain Google AI Studiosta"
+      },
+      "model": {
+        "name": "Malli",
+        "description": "Käytettävä Gemini-malli",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (suositeltu)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Kehote",
+        "description": "Käyttäjän kehotteen teksti"
+      },
+      "systemInstruction": {
+        "name": "Järjestelmäohje",
+        "description": "Järjestelmäkehote, joka määrittää tekoälyn roolin/käyttäytymisen (valinnainen)"
+      },
+      "temperature": {
+        "name": "Lämpötila",
+        "description": "Satunnaisuus 0.0–1.0 (pienempi = deterministisempi)"
+      },
+      "trigger": {
+        "name": "Liipaisin",
+        "description": "Liipaisin (valinnainen)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Vastaus",
+        "description": "Geminin luoma teksti"
+      }
+    }
+  }
+}

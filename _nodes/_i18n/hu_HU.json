@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Csatlakozás",
+    "description": "WebSocket-kiszolgálót indít, és csatlakozik a Minecraft Education Editionhöz",
+    "inputs": {
+      "port": {
+        "name": "port",
+        "description": "WebSocket portszáma (alapértelmezett: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "világ",
+        "description": "World objektum (belső használatra; nem kell parancscsomópontokhoz kötni)"
+      },
+      "error": {
+        "name": "hiba",
+        "description": "Kapcsolati hiba adatai"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Lecsatlakozás",
+    "menuDisplayName": "MC Lecsatlakozás",
+    "description": "Lecsatlakozik a Minecraftról, és leállítja a WebSocket-kiszolgálót",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (pl. chat 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Ágens pozíciójának lekérése",
+    "menuDisplayName": "Ágens poz.",
+    "description": "Lekéri az ágens aktuális pozícióját",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozíció",
+        "description": "Ágens pozíciója {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "ET-célok lekérése",
+    "menuDisplayName": "ET-célok",
+    "description": "Lekéri az összes eredménytábla-cél listáját",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "célok",
+        "description": "Eredménytábla-cél objektumok tömbje"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "ET-cél lekérése",
+    "menuDisplayName": "ET-cél",
+    "description": "Lekér egy eredménytábla-célt az azonosítója alapján",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "objective_id": {
+        "name": "cél_id",
+        "description": "Eredménytábla-cél azonosítója"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "cél",
+        "description": "Eredménytábla-cél → kösd az ET-cél infócsomóponthoz"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "ET-cél hozzáadása",
+    "menuDisplayName": "ET-cél +",
+    "description": "Új célt ad az eredménytáblához",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "objective_id": {
+        "name": "cél_id",
+        "description": "Eredménytábla-cél azonosítója"
+      },
+      "display_name": {
+        "name": "megjelenített_név",
+        "description": "Megjelenített név (opcionális)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "cél",
+        "description": "Hozzáadott cél → kösd az ET-cél infócsomóponthoz"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "ET-cél eltávolítása",
+    "menuDisplayName": "ET-cél -",
+    "description": "Eltávolít egy eredménytábla-célt az azonosítója alapján",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "objective_id": {
+        "name": "cél_id",
+        "description": "Eredménytábla-cél azonosítója"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "eredmény",
+        "description": "Az eltávolítás eredménye"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Összes pontszám lekérése",
+    "menuDisplayName": "Összes pont",
+    "description": "Lekéri egy játékos összes pontszámát",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "player_name": {
+        "name": "játékos_neve",
+        "description": "Játékos neve"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "pontszámok",
+        "description": "Az összes pontszám tömbje"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Pontszám lekérése",
+    "menuDisplayName": "Pontszám lekérése",
+    "description": "Lekéri egy játékos pontszámát egy adott célhoz",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "player_name": {
+        "name": "játékos_neve",
+        "description": "Játékos neve"
+      },
+      "objective_id": {
+        "name": "cél_id",
+        "description": "Eredménytábla-cél azonosítója"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "pontszám",
+        "description": "Pontszám értéke (szám)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Pontszám-művelet",
+    "menuDisplayName": "Pont-műv.",
+    "description": "Végrehajt egy {{operation}} műveletet egy játékos pontszámán",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "operation": {
+        "name": "művelet",
+        "description": "Művelet típusa",
+        "options": {
+          "add": "Hozzáad",
+          "remove": "Kivon",
+          "set": "Beállít"
+        }
+      },
+      "player_name": {
+        "name": "játékos_neve",
+        "description": "Játékos neve"
+      },
+      "objective_id": {
+        "name": "cél_id",
+        "description": "Eredménytábla-cél azonosítója"
+      },
+      "value": {
+        "name": "érték",
+        "description": "A művelethez használt érték"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Új pontszámérték a művelet után"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "Játékos chatelésekor",
+    "menuDisplayName": "Chat",
+    "description": "Akkor aktiválódik, amikor egy játékos chatüzenetet küld",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "küldő",
+        "description": "A chatet küldő játékos neve"
+      },
+      "message": {
+        "name": "üzenet",
+        "description": "A chatüzenet tartalma"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "Játékos csatlakozásakor",
+    "menuDisplayName": "Csatlakozás",
+    "description": "Akkor aktiválódik, amikor egy játékos belép a világba",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "játékos_neve",
+        "description": "A csatlakozott játékos neve"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "Játékos kilépésekor",
+    "menuDisplayName": "Kilépés",
+    "description": "Akkor aktiválódik, amikor egy játékos elhagyja a világot",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "játékos_neve",
+        "description": "A kilépett játékos neve"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "Játékos mozgásakor",
+    "menuDisplayName": "Elmozdult",
+    "description": "Minden alkalommal aktiválódik, amikor egy játékos mozog",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "távolság",
+        "description": "Megtett távolság (méter)"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      },
+      "underwater": {
+        "name": "víz_alatt",
+        "description": "Víz alatt mozog-e (true/false)"
+      },
+      "biome": {
+        "name": "biom",
+        "description": "Az aktuális biom neve"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "A mozgásmód neve"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "Játékos teleportálásakor",
+    "menuDisplayName": "Teleportált",
+    "description": "Akkor aktiválódik, amikor egy játékos teleportál",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "A teleportáció okának neve"
+      },
+      "distance": {
+        "name": "távolság",
+        "description": "Teleportációs távolság (méter)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "Játékos címkapásakor",
+    "menuDisplayName": "Cím",
+    "description": "Akkor aktiválódik, amikor egy játékos címet kap",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "küldő",
+        "description": "A címet küldő játékos neve"
+      },
+      "message": {
+        "name": "üzenet",
+        "description": "A címüzenet tartalma"
+      },
+      "recipient": {
+        "name": "címzett",
+        "description": "A címet kapó játékos neve"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "Játékos üzenetekor",
+    "menuDisplayName": "Üzenet",
+    "description": "Akkor aktiválódik, amikor egy játékos bármilyen üzenetet küld",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "küldő",
+        "description": "Az üzenetet küldő játékos neve"
+      },
+      "message": {
+        "name": "üzenet",
+        "description": "Az üzenet tartalma"
+      },
+      "type": {
+        "name": "típus",
+        "description": "Üzenet típusa (chat / tell stb.)"
+      },
+      "recipient": {
+        "name": "címzett",
+        "description": "[nullable] Címzett neve. null a nem tell típusú üzeneteknél"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "Játékos pattanásakor",
+    "menuDisplayName": "Pattant",
+    "description": "Akkor aktiválódik, amikor egy játékos nyálkatömbről vagy hasonlóról pattan",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "magasság",
+        "description": "Pattanás magassága (blokk)"
+      },
+      "block": {
+        "name": "blokk",
+        "description": "BlockType objektum (a pattanás blokkja) → kösd a blokk infócsomóponthoz"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "Blokk töréskor",
+    "menuDisplayName": "Blokk törése",
+    "description": "Akkor aktiválódik, amikor egy blokk eltörik",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blokk",
+        "description": "BlockType objektum → kösd a blokk infócsomóponthoz"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "A rombolási mód neve"
+      },
+      "item": {
+        "name": "tárgy",
+        "description": "[nullable] Kézben tartott tárgy a törés előtt. null, ha puszta kézzel"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "Blokk lerakásakor",
+    "menuDisplayName": "Blokk lerakása",
+    "description": "Akkor aktiválódik, amikor egy blokkot leraknak",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blokk",
+        "description": "BlockType objektum → kösd a blokk infócsomóponthoz"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      },
+      "underwater": {
+        "name": "víz_alatt",
+        "description": "Víz alatt rakták-e le (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "A lerakási mód neve"
+      },
+      "item": {
+        "name": "tárgy",
+        "description": "Kézben tartott tárgy a lerakás előtt → kösd a tárgy infócsomóponthoz"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "Tárgy használatakor",
+    "menuDisplayName": "Tárgy haszn.",
+    "description": "Akkor aktiválódik, amikor egy játékos tárgyat használ",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "tárgy",
+        "description": "[nullable] Kézben tartott tárgy. null, ha nincs tárgy"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "A tárgyhasználat módjának neve"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "Tárgy megszerzésekor",
+    "menuDisplayName": "Tárgy megszer.",
+    "description": "Akkor aktiválódik, amikor egy játékos tárgyat szerez",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "darabszám",
+        "description": "A megszerzett tárgyak száma"
+      },
+      "item": {
+        "name": "tárgy",
+        "description": "Tárgytípus → kösd a tárgytípus infócsomóponthoz"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "A tárgyszerzés módjának neve"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "Tárgy barkácsolásakor",
+    "menuDisplayName": "Barkácsolt",
+    "description": "Akkor aktiválódik, amikor egy játékos tárgyat barkácsol",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "tárgy",
+        "description": "Tárgyköteg (barkácsolt tárgy) → kösd a tárgyköteg infócsomóponthoz"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      },
+      "used_table": {
+        "name": "asztalt_használt",
+        "description": "Használtak-e barkácsasztalt (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "Tárgy felszerelésekor",
+    "menuDisplayName": "Felszerelt",
+    "description": "Akkor aktiválódik, amikor egy játékos tárgyat szerel fel",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "tárgy",
+        "description": "Tárgyköteg → kösd a tárgyköteg infócsomóponthoz"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      },
+      "equip_slot": {
+        "name": "felsz_hely",
+        "description": "A felszerelési hely neve"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "Tárgy olvasztásakor",
+    "menuDisplayName": "Olvasztott",
+    "description": "Akkor aktiválódik, amikor egy játékos tárgyat olvaszt",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "tárgy",
+        "description": "Tárgytípus (olvasztott tárgy) → kösd a tárgytípus infócsomóponthoz"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      },
+      "fuel": {
+        "name": "üzemanyag",
+        "description": "Tárgytípus (üzemanyag) → kösd a tárgytípus infócsomóponthoz"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "Tárgy cseréjekor",
+    "menuDisplayName": "Cserélt",
+    "description": "Akkor aktiválódik, amikor egy játékos befejez egy falusicserét",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "tárgy",
+        "description": "Tárgyköteg (kapott tárgy) → kösd a tárgyköteg infócsomóponthoz"
+      },
+      "villager": {
+        "name": "falusi",
+        "description": "WorldVillager objektum → kösd a falusi infócsomóponthoz"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      },
+      "payment_a": {
+        "name": "fizetség_a",
+        "description": "Tárgytípus (fizetség A) → kösd a tárgytípus infócsomóponthoz"
+      },
+      "payment_b": {
+        "name": "fizetség_b",
+        "description": "[nullable] Tárgytípus (fizetség B). null, ha nincs használva"
+      },
+      "player_xp": {
+        "name": "játékos_smaragdok",
+        "description": "A játékos smaragdjai a csere után"
+      },
+      "villager_xp": {
+        "name": "falusi_smaragdok",
+        "description": "A falusi smaragdjai a csere után"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "Lény-interakciókor",
+    "menuDisplayName": "Lény-interakció",
+    "description": "Akkor aktiválódik, amikor egy játékos egy lénnyel interakcióba lép",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "lény",
+        "description": "WorldMob objektum (az interakcióba vont lény)"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "A lény-interakció típusának neve"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "Célpont találatakor",
+    "menuDisplayName": "Célpont találat",
+    "description": "Akkor aktiválódik, amikor egy célpontblokkot eltalálnak",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "erősség",
+        "description": "Redstone-jel erőssége (0–15)"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Parancs futtatása",
+    "menuDisplayName": "Parancs fut.",
+    "description": "Bármilyen Minecraft-parancsot futtat (a kezdő / nélkül)",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "command": {
+        "name": "parancs",
+        "description": "Futtatandó Minecraft-parancs (a kezdő / nélkül)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "true-t küld, amikor kész"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Játékidő lekérése",
+    "menuDisplayName": "Játékidő",
+    "description": "Lekéri a játékidőt ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "type": {
+        "name": "típus",
+        "description": "Lekérdezendő időtípus",
+        "options": {
+          "time": "Idő (0–24000)",
+          "day": "Napok száma",
+          "tick": "Tickek száma"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "érték",
+        "description": "Lekérdezett időérték"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Nappal van-e",
+    "menuDisplayName": "Nappal?",
+    "description": "Ellenőrzi, hogy jelenleg nappal van-e (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "nappal",
+        "description": "true, ha nappal, false, ha éjszaka"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Időjárás lekérése",
+    "menuDisplayName": "Időjárás",
+    "description": "Lekéri az aktuális időjárást",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "időjárás",
+        "description": "Időjárás neve (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Blokkok kitöltése",
+    "menuDisplayName": "Kitöltés",
+    "description": "Kitölt egy területet két pozíció között a megadott blokkal",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "from": {
+        "name": "kezdet",
+        "description": "Kezdősarok {x, y, z}"
+      },
+      "to": {
+        "name": "vég",
+        "description": "Végsarok {x, y, z}"
+      },
+      "block_id": {
+        "name": "blokk_id",
+        "description": "Blokk azonosítója (pl. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "true-t küld, amikor a kitöltés kész"
+      },
+      "count": {
+        "name": "darabszám",
+        "description": "A kitöltött blokkok száma"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Talajmagasság lekérése",
+    "menuDisplayName": "Talaj",
+    "description": "Lekéri a legfelső szilárd blokk pozícióját és típusát",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozíció",
+        "description": "Talaj pozíciója {x, y, z}"
+      },
+      "block_name": {
+        "name": "blokk_neve",
+        "description": "A legfelső szilárd blokk neve"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Világ-lekérdezés",
+    "menuDisplayName": "Világ-lekérdezés",
+    "description": "Lekérdezi a {{type}} listáját a világban",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "type": {
+        "name": "típus",
+        "description": "Lekérdezendő kategória",
+        "options": {
+          "mob": "Entitás",
+          "block": "Blokk",
+          "item": "Tárgy"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "lista",
+        "description": "Lekérdezés eredménylistája"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Játékos pozíciójának lekérése",
+    "menuDisplayName": "Játékos poz.",
+    "description": "Lekéri a játékos aktuális pozícióját és nézési irányát",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozíció",
+        "description": "Játékos pozíciója {x, y, z}"
+      },
+      "direction": {
+        "name": "irány",
+        "description": "A játékos nézési iránya (Y tengely körüli forgás)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Játékos tájolásának lekérése",
+    "menuDisplayName": "Játékos irány",
+    "description": "Lekéri a játékos kameraszögét (dőlés és elfordulás)",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "szög",
+        "description": "A játékos nézési szöge {x, y} (fok)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Játékoscímkék lekérése",
+    "menuDisplayName": "Játékoscímkék",
+    "description": "Lekéri a játékoshoz rendelt összes címkét",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "címkék",
+        "description": "Címkenév-sztringek tömbje"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "Játékosnak van címkéje",
+    "menuDisplayName": "Van címke?",
+    "description": "Ellenőrzi, hogy a játékosnak van-e megadott címkéje",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "tag": {
+        "name": "címke",
+        "description": "Ellenőrizendő címke neve"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "eredmény",
+        "description": "true, ha a játékosnak van a címkéje"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Játékosszint lekérése",
+    "menuDisplayName": "Játékosszint",
+    "description": "Lekéri a játékos aktuális tapasztalati szintjét",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "szint",
+        "description": "Játékos szintje (szám)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Játékmód lekérése",
+    "menuDisplayName": "Játékmód",
+    "description": "Lekéri a játékos aktuális játékmódját",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "játékmód",
+        "description": "Játékmód neve (pl. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Játékosképességek lekérése",
+    "menuDisplayName": "Képességek",
+    "description": "Lekéri a játékos aktuális képességbeállításait",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "képességek",
+        "description": "Játékosképességek objektuma"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Játékosok lekérése",
+    "menuDisplayName": "Játékosok",
+    "description": "Lekéri a világ összes játékosának listáját",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "játékosok",
+        "description": "Játékos objektumok tömbje"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Helyi játékos lekérése",
+    "menuDisplayName": "Helyi játékos",
+    "description": "Lekéri a helyi (saját) játékos objektumát",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "játékos",
+        "description": "Helyi játékos objektuma"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Kinyerés entitásból",
+    "menuDisplayName": "Entitás info",
+    "description": "Pozíciót, irányt, dimenziót és más mezőket nyer ki egy entitásobjektumból",
+    "inputs": {
+      "entity": {
+        "name": "entitás",
+        "description": "Játékos- vagy falusiobjektum (player / villager kimenet)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozíció",
+        "description": "Entitás pozíciója (position)"
+      },
+      "direction": {
+        "name": "irány",
+        "description": "Y tengely körüli forgás (yRot)"
+      },
+      "dimension": {
+        "name": "dimenzió",
+        "description": "Dimenzió száma (dimension)"
+      },
+      "type": {
+        "name": "típus",
+        "description": "Típussztring (type)"
+      },
+      "variant": {
+        "name": "változat",
+        "description": "Változat száma (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Entitás azonosítószáma (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Kinyerés játékosból",
+    "menuDisplayName": "Játékos info",
+    "description": "Nevet, színt és entitásinfót nyer ki egy játékos-pillanatkép objektumból",
+    "inputs": {
+      "player": {
+        "name": "játékos",
+        "description": "Játékosobjektum egy eseménycsomópont player kimenetéből"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "név",
+        "description": "Játékos neve (name)"
+      },
+      "color": {
+        "name": "szín",
+        "description": "Térképjelölő színe (color)"
+      },
+      "entity": {
+        "name": "entitás",
+        "description": "Kösd az entitás infócsomóponthoz"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Kinyerés tárgytípusból",
+    "menuDisplayName": "Tárgytípus info",
+    "description": "Tárgyazonosítót és adatértéket nyer ki egy tárgytípus-objektumból",
+    "inputs": {
+      "item": {
+        "name": "tárgy",
+        "description": "Tárgytípus (item kimenet a megszerzés / olvasztás eseményekből)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "tárgy_id",
+        "description": "Tárgyazonosító-sztring (id)"
+      },
+      "data": {
+        "name": "adat",
+        "description": "Adatérték (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Kinyerés tárgykötegből",
+    "menuDisplayName": "Tárgyköteg info",
+    "description": "Tárgyazonosítót, darabszámot, max. darabszámot és adatértéket nyer ki egy tárgyköteg-objektumból",
+    "inputs": {
+      "item": {
+        "name": "tárgy",
+        "description": "Tárgyköteg (item kimenet a használat / felszerelés / barkácsolás / csere eseményekből)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "tárgy_id",
+        "description": "Tárgyazonosító-sztring (typeId)"
+      },
+      "count": {
+        "name": "darabszám",
+        "description": "Kötegméret (amount)"
+      },
+      "max_count": {
+        "name": "max_darab",
+        "description": "Max. kötegméret (maxAmount)"
+      },
+      "data": {
+        "name": "adat",
+        "description": "Adatérték (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Kinyerés blokktípusból",
+    "menuDisplayName": "Blokk info",
+    "description": "Blokkazonosítót és adatértéket nyer ki egy blokktípus-objektumból",
+    "inputs": {
+      "block": {
+        "name": "blokk",
+        "description": "Blokktípus-objektum (block kimenet a block / bounce eseményekből)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "blokk_id",
+        "description": "Blokkazonosító-sztring (id)"
+      },
+      "data": {
+        "name": "adat",
+        "description": "Adatérték (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Kinyerés ET-célból",
+    "menuDisplayName": "ET-cél info",
+    "description": "Az azonosítót és a megjelenített nevet nyeri ki egy eredménytábla-cél objektumból",
+    "inputs": {
+      "objective": {
+        "name": "cél",
+        "description": "Cél egy cél-hozzáadó / -lekérő csomópontból"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "cél_id",
+        "description": "Cél azonosító-sztringje (id)"
+      },
+      "display_name": {
+        "name": "megjelenített_név",
+        "description": "Megjelenített név (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Kinyerés lényből",
+    "menuDisplayName": "Lény info",
+    "description": "Típus-, szín- és változatszámokat nyer ki egy lényobjektumból",
+    "inputs": {
+      "mob": {
+        "name": "lény",
+        "description": "Lényobjektum (mob kimenet a lény-interakció eseményből)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "típus",
+        "description": "Lény típusszáma (type)"
+      },
+      "color": {
+        "name": "szín",
+        "description": "Színszám (color)"
+      },
+      "variant": {
+        "name": "változat",
+        "description": "Változat száma (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Kinyerés falusiból",
+    "menuDisplayName": "Falusi info",
+    "description": "Nevet, rangot és entitásinfót nyer ki egy falusiobjektumból",
+    "inputs": {
+      "villager": {
+        "name": "falusi",
+        "description": "Falusiobjektum (villager kimenet a csere eseményből)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "név",
+        "description": "Falusi neve (trader.name)"
+      },
+      "rank": {
+        "name": "rang",
+        "description": "Kereskedelmi rang (trader.tier)"
+      },
+      "entity": {
+        "name": "entitás",
+        "description": "Kösd az entitás infócsomóponthoz"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Kiválasztó",
+    "menuDisplayName": "Kiválasztó",
+    "description": "Kiválaszt a {{type}} listából",
+    "inputs": {
+      "type": {
+        "name": "típus",
+        "description": "Kiválasztandó kategória",
+        "options": {
+          "block": "🧱 Blokk",
+          "item": "🎒 Tárgy",
+          "mob": "🐾 Lény",
+          "TravelMethod": "🚶 Mozgásmód",
+          "TeleportCause": "✨ Teleportáció oka",
+          "MobInteraction": "🐄 Lény-interakció",
+          "ItemUseMethod": "🤚 Tárgyhasználat módja",
+          "ItemAcqMethod": "📦 Megszerzés módja",
+          "EquipSlot": "🪖 Felszerelési hely",
+          "BlockBreakMethod": "⛏️ Törésmód",
+          "BlockPlaceMethod": "🏗️ Lerakásmód"
+        }
+      },
+      "block": {
+        "name": "blokk",
+        "description": "Blokk azonosítója"
+      },
+      "item": {
+        "name": "tárgy",
+        "description": "Tárgy azonosítója"
+      },
+      "mob": {
+        "name": "lény",
+        "description": "Lény (entitás) azonosítója"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Mozgásmód"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Teleportáció oka"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Lény-interakció típusa"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Tárgyhasználat módja"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Tárgyszerzés módja"
+      },
+      "EquipSlot": {
+        "name": "felsz_hely",
+        "description": "Felszerelési hely"
+      },
+      "BlockBreakMethod": {
+        "name": "törésmód",
+        "description": "Blokktörés módja"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Blokklerakás módja"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "érték",
+        "description": "Kiválasztott azonosító vagy enum-érték"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Lokalizált név",
+    "menuDisplayName": "Lokalizált név",
+    "description": "Átalakítja a(z) {{type}} értéket lokalizált névvé",
+    "inputs": {
+      "value": {
+        "name": "érték",
+        "description": "Minecraft-azonosító (pl. \"minecraft:stone\") vagy eseményérték (pl. \"Walk\")"
+      },
+      "type": {
+        "name": "típus",
+        "description": "Átalakítandó kategória",
+        "options": {
+          "block": "Blokk azonosítója",
+          "item": "Tárgy azonosítója",
+          "mob": "Lény azonosítója",
+          "TravelMethod": "Mozgásmód",
+          "TeleportCause": "Teleportáció oka",
+          "MobInteraction": "Lény-interakció",
+          "ItemUseMethod": "Tárgyhasználat módja",
+          "ItemAcqMethod": "Megszerzés módja",
+          "EquipSlot": "Felszerelési hely",
+          "BlockBreakMethod": "Blokktörés módja",
+          "BlockPlaceMethod": "Blokklerakás módja"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "név",
+        "description": "Lokalizált név (a bemeneti értéket adja vissza, ha nem található)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Vector3-művelet",
+    "menuDisplayName": "Vec3-műv.",
+    "description": "Végrehajt egy {{op}} műveletet egy 3D-pozíción",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Művelet típusa",
+        "options": {
+          "assemble": "🔧 Összeállít",
+          "add": "➕ Összead",
+          "subtract": "➖ Kivon",
+          "scale": "✖️ Skáláz",
+          "floor": "⬇️ Lefelé kerekít",
+          "ceil": "⬆️ Felfelé kerekít",
+          "fill_y": "📐 Y kitöltése"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "X koordináta"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y koordináta"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z koordináta"
+      },
+      "pos_a": {
+        "name": "poz_a",
+        "description": "Alappozíció {x,y,z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "Másik pozíció {x,y,z}"
+      },
+      "position": {
+        "name": "pozíció",
+        "description": "Pozíció {x,y,z}"
+      },
+      "scale": {
+        "name": "skála",
+        "description": "Skaláris szorzó (pl. 2 a kétszerezéshez)"
+      },
+      "pos_xz": {
+        "name": "poz_xz",
+        "description": "2D-pozíció {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Y koordináta értéke"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "eredmény",
+        "description": "Eredménypozíció {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Vector3-távolság",
+    "menuDisplayName": "Távolság",
+    "description": "Kiszámítja az euklideszi távolságot két 3D-pozíció között",
+    "inputs": {
+      "pos_a": {
+        "name": "poz_a",
+        "description": "Kezdőpozíció {x,y,z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "Végpozíció {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "távolság",
+        "description": "A két pont közötti távolság (méter)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 sztringgé",
+    "menuDisplayName": "Vec3→Sztring",
+    "description": "Pozícióobjektumot \"x y z\" formátumú sztringgé alakít",
+    "inputs": {
+      "position": {
+        "name": "pozíció",
+        "description": "Átalakítandó pozíció {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "szöveg",
+        "description": "\"x y z\" formátumú sztring"
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Vector3 felosztása",
+    "menuDisplayName": "Vec3 feloszt",
+    "description": "Pozícióobjektumot külön x, y és z értékekre oszt",
+    "inputs": {
+      "position": {
+        "name": "pozíció",
+        "description": "Felosztandó pozíció {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "X koordináta"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y koordináta"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z koordináta"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Szám korlátozása",
+    "menuDisplayName": "Korlátoz",
+    "description": "Korlátoz egy számot egy minimum- és maximumérték közé",
+    "inputs": {
+      "value": {
+        "name": "érték",
+        "description": "Korlátozandó szám"
+      },
+      "min": {
+        "name": "min",
+        "description": "Alsó korlát"
+      },
+      "max": {
+        "name": "max",
+        "description": "Felső korlát"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "eredmény",
+        "description": "Korlátozott érték"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Terület létrehozása",
+    "menuDisplayName": "AABB létreh.",
+    "description": "Tengelyhez igazított befoglaló dobozt (AABB) hoz létre két sarokpozícióból",
+    "inputs": {
+      "corner_a": {
+        "name": "sarok_a",
+        "description": "Terület 1. sarka {x,y,z} (a sorrend nem számít)"
+      },
+      "corner_b": {
+        "name": "sarok_b",
+        "description": "Terület 2. sarka {x,y,z} (a sorrend nem számít)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "terület",
+        "description": "AABB-terület objektum {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Területen belül van-e",
+    "menuDisplayName": "AABB-n belül",
+    "description": "Ellenőrzi, hogy egy pozíció egy AABB-területen belül van-e",
+    "inputs": {
+      "area": {
+        "name": "terület",
+        "description": "AABB-terület {min, max}"
+      },
+      "position": {
+        "name": "pozíció",
+        "description": "Tesztelendő pozíció {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "eredmény",
+        "description": "true, ha a pozíció a területen belül van"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "Játékos transzformációjakor",
+    "menuDisplayName": "JátékosTranszf",
+    "description": "Akkor aktiválódik, amikor egy játékos pozíciója vagy forgása megváltozik (nagy gyakoriság)",
+    "inputs": {
+      "world": {
+        "name": "világ",
+        "description": "A MinecraftConnect csomópont World kimenete"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "pozíció",
+        "description": "Játékos pozíciója {x, y, z}"
+      },
+      "direction": {
+        "name": "irány",
+        "description": "A játékos nézési iránya (Y tengely körüli forgás)"
+      },
+      "player": {
+        "name": "játékos",
+        "description": "WorldPlayer objektum → kösd a játékos infócsomóponthoz"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Ágens mozgatása",
+    "menuDisplayName": "AgentMove",
+    "description": "Mozgatja az ágenst {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "direction": {
+        "name": "irány",
+        "description": "Mozgás iránya",
+        "options": {
+          "forward": "Előre",
+          "back": "Hátra",
+          "left": "Balra",
+          "right": "Jobbra",
+          "up": "Fel",
+          "down": "Le"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "true-t küld a mozgatás után"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Ágens forgatása",
+    "menuDisplayName": "AgentTurn",
+    "description": "Forgatja az ágenst {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "direction": {
+        "name": "irány",
+        "description": "Forgatás iránya",
+        "options": {
+          "left": "Balra",
+          "right": "Jobbra"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "true-t küld a forgatás után"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Ágens teleportálása",
+    "menuDisplayName": "ÁgensTP",
+    "description": "Az ágenst egy pozícióra teleportálja (hagyd üresen a játékos aktuális helyének használatához)",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "position": {
+        "name": "pozíció",
+        "description": "Célpozíció {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "true-t küld a teleportálás után"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Ágens-művelet",
+    "menuDisplayName": "AgentAction",
+    "description": "Az ágens végrehajtja: {{action}} (irány: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "action": {
+        "name": "művelet",
+        "description": "Végrehajtandó művelet",
+        "options": {
+          "attack": "Támadás",
+          "destroyBlock": "Rombolás",
+          "till": "Szántás",
+          "dropAllItems": "Mindent eldob"
+        }
+      },
+      "direction": {
+        "name": "irány",
+        "description": "Művelet iránya",
+        "options": {
+          "forward": "Előre",
+          "back": "Hátra",
+          "left": "Balra",
+          "right": "Jobbra",
+          "up": "Fel",
+          "down": "Le"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "true-t küld, amikor kész"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Ágens blokkot rak",
+    "menuDisplayName": "ÁgensRak",
+    "description": "Leraka a(z) {{slot}} rekeszben lévő blokkot {{direction}} irányba",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "direction": {
+        "name": "irány",
+        "description": "Lerakás iránya",
+        "options": {
+          "forward": "Előre",
+          "back": "Hátra",
+          "left": "Balra",
+          "right": "Jobbra",
+          "up": "Fel",
+          "down": "Le"
+        }
+      },
+      "slot": {
+        "name": "rekesz",
+        "description": "Készlet rekeszszáma (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "true-t küld a lerakás után"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Ágens tárgyat dob",
+    "menuDisplayName": "ÁgensDob",
+    "description": "Eldobja a(z) {{slot}} rekeszben lévő tárgyat {{direction}} irányba",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "direction": {
+        "name": "irány",
+        "description": "Eldobás iránya",
+        "options": {
+          "forward": "Előre",
+          "back": "Hátra",
+          "left": "Balra",
+          "right": "Jobbra",
+          "up": "Fel",
+          "down": "Le"
+        }
+      },
+      "slot": {
+        "name": "rekesz",
+        "description": "Készlet rekeszszáma (1–27)"
+      },
+      "amount": {
+        "name": "mennyiség",
+        "description": "Eldobandó tárgyak száma"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "true-t küld az eldobás után"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Ágens tárgyat mozgat",
+    "menuDisplayName": "ÁgensMozgTárgy",
+    "description": "Tárgyakat mozgat az ágens készletének rekeszei között",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "from_slot": {
+        "name": "forrás_rekesz",
+        "description": "Forrásrekesz száma (1–27)"
+      },
+      "to_slot": {
+        "name": "cél_rekesz",
+        "description": "Célrekesz száma (1–27)"
+      },
+      "amount": {
+        "name": "mennyiség",
+        "description": "Mozgatandó tárgyak száma"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "true-t küld a mozgatás után"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Ágens tárgyat állít be",
+    "menuDisplayName": "ÁgensÁllítTárgy",
+    "description": "Tárgyat állít be a megadott ágenskészlet-rekeszbe",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "slot": {
+        "name": "rekesz",
+        "description": "Beállítandó rekesz száma (1–27)"
+      },
+      "item_id": {
+        "name": "tárgy_id",
+        "description": "Tárgy azonosítója (pl. minecraft:apple)"
+      },
+      "amount": {
+        "name": "mennyiség",
+        "description": "Beállítandó tárgyak száma"
+      },
+      "data": {
+        "name": "adat",
+        "description": "Adatérték (általában 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "true-t küld a beállítás után"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Ágens gyűjt",
+    "menuDisplayName": "ÁgensGyűjt",
+    "description": "Egy megadott tárgytípust gyűjt az ágens környezetéből",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "item_id": {
+        "name": "tárgy_id",
+        "description": "Gyűjtendő tárgy azonosítója"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "true-t küld a gyűjtés után"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Ágens érzékel",
+    "menuDisplayName": "ÁG Érzékel",
+    "description": "Érzékel {{type}} {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "trigger",
+        "description": "Trigger (opcionális)"
+      },
+      "type": {
+        "name": "típus",
+        "description": "Mit érzékeljen",
+        "options": {
+          "block": "Blokk",
+          "redstone": "Redstone"
+        }
+      },
+      "direction": {
+        "name": "irány",
+        "description": "Érzékelés iránya",
+        "options": {
+          "forward": "Előre",
+          "back": "Hátra",
+          "left": "Balra",
+          "right": "Jobbra",
+          "up": "Fel",
+          "down": "Le"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "érzékelve",
+        "description": "true, ha valami érzékelve van"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Vector3-interpoláció",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Lineárisan interpolál két pozíció között (t=0 a kezdet, t=1 a vég)",
+    "inputs": {
+      "pos_a": {
+        "name": "poz_a",
+        "description": "Kezdőpozíció {x, y, z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "Végpozíció {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Interpolációs tényező (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "eredmény",
+        "description": "Interpolált pozíció {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Vector3 normalizálása",
+    "menuDisplayName": "Vec3Norm",
+    "description": "Egységhosszúságúra normalizál egy vektort (hossz = 1)",
+    "inputs": {
+      "position": {
+        "name": "pozíció",
+        "description": "Normalizálandó vektor {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "eredmény",
+        "description": "Egységvektor 1 hosszúsággal {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Vector3 skaláris szorzat",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Kiszámítja két vektor skaláris szorzatát",
+    "inputs": {
+      "pos_a": {
+        "name": "poz_a",
+        "description": "A vektor {x, y, z}"
+      },
+      "pos_b": {
+        "name": "poz_b",
+        "description": "B vektor {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "érték",
+        "description": "Skaláris szorzat (skalár)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "AABB eltolása",
+    "menuDisplayName": "AABBEltol",
+    "description": "Eltol egy AABB-területet egy adott vektorral",
+    "inputs": {
+      "area": {
+        "name": "terület",
+        "description": "Eltolandó terület {min, max}"
+      },
+      "delta": {
+        "name": "delta",
+        "description": "Eltolási vektor {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "terület",
+        "description": "Eltolt terület objektuma"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "AABB-metszet",
+    "menuDisplayName": "AABBMetsz",
+    "description": "Ellenőrzi, hogy két AABB-terület átfedi-e egymást",
+    "inputs": {
+      "area_a": {
+        "name": "terület_a",
+        "description": "A terület {min, max}"
+      },
+      "area_b": {
+        "name": "terület_b",
+        "description": "B terület {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "eredmény",
+        "description": "true, ha a két terület átfedi egymást"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Assert",
+    "menuDisplayName": "Assert",
+    "description": "Összehasonlítja a tényleges és a várt értéket, és PASS/FAIL-t naplóz. Mindig done-t küld a láncoláshoz.",
+    "inputs": {
+      "actual": {
+        "name": "tényleges",
+        "description": "Tesztelendő érték"
+      },
+      "expected": {
+        "name": "várt",
+        "description": "Várt érték"
+      },
+      "op": {
+        "name": "op",
+        "description": "Összehasonlító operátor",
+        "options": {
+          "eq": "Egyenlő (===)",
+          "neq": "Nem egyenlő (!==)",
+          "deep": "Mély egyenlőség (JSON)",
+          "lt": "Kisebb mint (<)",
+          "gt": "Nagyobb mint (>)",
+          "lte": "Kisebb vagy egyenlő (≤)",
+          "gte": "Nagyobb vagy egyenlő (≥)",
+          "approx": "Közelítő (±tűrés)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "Teszteset azonosítója (pl. TC-111)"
+      },
+      "tolerance": {
+        "name": "tűrés",
+        "description": "Tűrés a közelítő összehasonlításhoz"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "kész",
+        "description": "Mindig true-t küld (láncoláshoz)"
+      },
+      "passed": {
+        "name": "sikeres",
+        "description": "true-t küld, amikor a teszt sikeres"
+      },
+      "failed": {
+        "name": "sikertelen",
+        "description": "A tényleges értéket küldi, amikor a teszt sikertelen"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Szöveget küld a Gemini AI-nak, és választ kap",
+    "inputs": {
+      "apiKey": {
+        "name": "API-kulcs",
+        "description": "API-kulcs a Google AI Studióból"
+      },
+      "model": {
+        "name": "Modell",
+        "description": "Használandó Gemini-modell",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (ajánlott)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Prompt",
+        "description": "Felhasználói prompt szövege"
+      },
+      "systemInstruction": {
+        "name": "Rendszerutasítás",
+        "description": "Az AI szerepét/viselkedését meghatározó rendszerprompt (opcionális)"
+      },
+      "temperature": {
+        "name": "Hőmérséklet",
+        "description": "Véletlenszerűség 0.0–1.0 (alacsonyabb = determinisztikusabb)"
+      },
+      "trigger": {
+        "name": "Trigger",
+        "description": "Trigger (opcionális)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Válasz",
+        "description": "A Gemini által generált szöveg"
+      }
+    }
+  }
+}

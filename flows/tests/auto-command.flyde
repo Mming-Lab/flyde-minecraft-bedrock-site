@@ -1,0 +1,856 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 50
+        y: 200
+      id: run-cmd
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: time set day
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 200
+      id: assert-051
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-051
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 400
+      id: set-noon
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: time set 6000
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 341.3936309814453
+        y: 394.18646240234375
+      id: get-time
+      inputConfig: {}
+      nodeId: GetGameTime
+      config:
+        種別:
+          type: select
+          value: time
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 400
+      id: assert-052
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 6000
+        比較:
+          type: select
+          value: approx
+        許容差:
+          type: number
+          value: 500
+        ID:
+          type: string
+          value: TC-052
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 600
+      id: is-daytime
+      inputConfig: {}
+      nodeId: IsDaytime
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 600
+      id: assert-053
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-053
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 800
+      id: get-weather
+      inputConfig: {}
+      nodeId: GetWeather
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 800
+      id: assert-054
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: ""
+        比較:
+          type: select
+          value: neq
+        ID:
+          type: string
+          value: TC-054
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 15.057449340820312
+        y: 990.4486694335938
+      id: set-rain
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: weather rain
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 418.029541015625
+        y: 997.9237670898438
+      id: get-weather-rain
+      inputConfig: {}
+      nodeId: GetWeather
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 1000
+      id: assert-056
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: Rain
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-056
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 1200
+      id: set-clear
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: weather clear
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 1200
+      id: get-weather-clear
+      inputConfig: {}
+      nodeId: GetWeather
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 1200
+      id: assert-057
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: Clear
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-057
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 1400
+      id: set-creative
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: gamemode creative
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 1400
+      id: get-gamemode-creative
+      inputConfig: {}
+      nodeId: GetGameMode
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 1400
+      id: assert-058
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: Creative
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-058
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 1600
+      id: set-survival
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: gamemode survival
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 1600
+      id: get-gamemode-survival
+      inputConfig: {}
+      nodeId: GetGameMode
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 1600
+      id: assert-059
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: Survival
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-059
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 1800
+      id: get-top-block
+      inputConfig: {}
+      nodeId: GetTopSolidBlock
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 1800
+      id: vec-split-060
+      inputConfig: {}
+      nodeId: Vector3Split
+      config:
+        座標:
+          type: dynamic
+          value: "{{座標}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 1800
+      id: assert-060
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: -64
+        比較:
+          type: select
+          value: gte
+        ID:
+          type: string
+          value: TC-060
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 1800
+      id: world-query-mob
+      inputConfig: {}
+      nodeId: WorldQuery
+      config:
+        種別:
+          type: select
+          value: mob
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 1900
+      id: world-query-block
+      inputConfig: {}
+      nodeId: WorldQuery
+      config:
+        種別:
+          type: select
+          value: block
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 2000
+      id: world-query-item
+      inputConfig: {}
+      nodeId: WorldQuery
+      config:
+        種別:
+          type: select
+          value: item
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 2000
+      id: setblock-064
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        コマンド:
+          type: string
+          value: setblock 0 30 0 minecraft:dirt
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 2100
+      id: fill-blocks
+      inputConfig: {}
+      nodeId: FillBlocks
+      config:
+        始点:
+          type: dynamic
+        終点:
+          type: dynamic
+        ブロックID:
+          type: string
+          value: minecraft:air
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 2200
+      id: assert-064
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: gte
+        ID:
+          type: string
+          value: TC-064
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 193.26826899601878
+        y: 1002.4810086763819
+      id: Delay-ovg789hz
+      inputConfig: {}
+      nodeId: Delay
+      config:
+        value:
+          type: dynamic
+          value: "{{value}}"
+        delayMs:
+          type: number
+          value: 2000
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 203.5710338885969
+        y: 1268.541616586538
+      id: Delay-ls7qh5am
+      inputConfig: {}
+      nodeId: Delay
+      config:
+        value:
+          type: dynamic
+          value: "{{value}}"
+        delayMs:
+          type: number
+          value: 2000
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: __this
+        pinId: トリガー
+      to:
+        insId: run-cmd
+        pinId: トリガー
+    - from:
+        insId: run-cmd
+        pinId: 完了
+      to:
+        insId: assert-051
+        pinId: 実際値
+    - from:
+        insId: assert-051
+        pinId: 完了
+      to:
+        insId: set-noon
+        pinId: トリガー
+    - from:
+        insId: set-noon
+        pinId: 完了
+      to:
+        insId: get-time
+        pinId: トリガー
+    - from:
+        insId: get-time
+        pinId: 値
+      to:
+        insId: assert-052
+        pinId: 実際値
+    - from:
+        insId: assert-052
+        pinId: 完了
+      to:
+        insId: is-daytime
+        pinId: トリガー
+    - from:
+        insId: is-daytime
+        pinId: 昼
+      to:
+        insId: assert-053
+        pinId: 実際値
+    - from:
+        insId: assert-053
+        pinId: 完了
+      to:
+        insId: get-weather
+        pinId: トリガー
+    - from:
+        insId: get-weather
+        pinId: 天気
+      to:
+        insId: assert-054
+        pinId: 実際値
+    - from:
+        insId: assert-054
+        pinId: 完了
+      to:
+        insId: set-rain
+        pinId: トリガー
+    - from:
+        insId: get-weather-rain
+        pinId: 天気
+      to:
+        insId: assert-056
+        pinId: 実際値
+    - from:
+        insId: assert-056
+        pinId: 完了
+      to:
+        insId: set-clear
+        pinId: トリガー
+    - from:
+        insId: get-weather-clear
+        pinId: 天気
+      to:
+        insId: assert-057
+        pinId: 実際値
+    - from:
+        insId: assert-057
+        pinId: 完了
+      to:
+        insId: set-creative
+        pinId: トリガー
+    - from:
+        insId: set-creative
+        pinId: 完了
+      to:
+        insId: get-gamemode-creative
+        pinId: トリガー
+    - from:
+        insId: get-gamemode-creative
+        pinId: ゲームモード
+      to:
+        insId: assert-058
+        pinId: 実際値
+    - from:
+        insId: assert-058
+        pinId: 完了
+      to:
+        insId: set-survival
+        pinId: トリガー
+    - from:
+        insId: set-survival
+        pinId: 完了
+      to:
+        insId: get-gamemode-survival
+        pinId: トリガー
+    - from:
+        insId: get-gamemode-survival
+        pinId: ゲームモード
+      to:
+        insId: assert-059
+        pinId: 実際値
+    - from:
+        insId: assert-059
+        pinId: 完了
+      to:
+        insId: get-top-block
+        pinId: トリガー
+    - from:
+        insId: assert-059
+        pinId: 完了
+      to:
+        insId: world-query-mob
+        pinId: トリガー
+    - from:
+        insId: assert-059
+        pinId: 完了
+      to:
+        insId: world-query-block
+        pinId: トリガー
+    - from:
+        insId: assert-059
+        pinId: 完了
+      to:
+        insId: world-query-item
+        pinId: トリガー
+    - from:
+        insId: get-top-block
+        pinId: 座標
+      to:
+        insId: vec-split-060
+        pinId: 座標
+    - from:
+        insId: get-top-block
+        pinId: 座標
+      to:
+        insId: fill-blocks
+        pinId: 始点
+    - from:
+        insId: get-top-block
+        pinId: 座標
+      to:
+        insId: fill-blocks
+        pinId: 終点
+    - from:
+        insId: vec-split-060
+        pinId: y
+      to:
+        insId: assert-060
+        pinId: 実際値
+    - from:
+        insId: assert-060
+        pinId: 完了
+      to:
+        insId: setblock-064
+        pinId: トリガー
+    - from:
+        insId: setblock-064
+        pinId: 完了
+      to:
+        insId: fill-blocks
+        pinId: トリガー
+    - from:
+        insId: fill-blocks
+        pinId: 個数
+      to:
+        insId: assert-064
+        pinId: 実際値
+    - from:
+        insId: assert-064
+        pinId: 完了
+      to:
+        insId: __this
+        pinId: 完了
+    - from:
+        insId: set-rain
+        pinId: 完了
+      to:
+        insId: Delay-ovg789hz
+        pinId: value
+    - from:
+        insId: Delay-ovg789hz
+        pinId: delayedValue
+      to:
+        insId: get-weather-rain
+        pinId: トリガー
+    - from:
+        insId: set-clear
+        pinId: 完了
+      to:
+        insId: Delay-ls7qh5am
+        pinId: value
+    - from:
+        insId: Delay-ls7qh5am
+        pinId: delayedValue
+      to:
+        insId: get-weather-clear
+        pinId: トリガー
+  id: AutoCommand
+  inputs:
+    トリガー: required
+  outputs:
+    完了: {}
+  inputsPosition:
+    トリガー:
+      x: -100
+      y: 200
+  outputsPosition:
+    完了:
+      x: 950
+      y: 2300
+  completionOutputs:
+    - 完了
+  description: |
+    自動コマンドテスト（TC-051〜054/056〜064）トリガー入力で順番に自動実行
+    TC-051: RunCommand(time set day) → Assert(完了=true)
+    TC-052: RunCommand(time set 6000) → GetGameTime → Assert(時刻≈6000)
+    TC-053: IsDaytime → Assert(昼=true)
+    TC-054: GetWeather → Assert(天気 neq "")
+    TC-056: RunCommand(weather rain) → GetWeather → Assert(天気=Rain)
+    TC-057: RunCommand(weather clear) → GetWeather → Assert(天気=Clear)
+    TC-058: RunCommand(gamemode creative) → GetGameMode → Assert(Creative)
+    TC-059: RunCommand(gamemode survival) → GetGameMode → Assert(Survival)
+    TC-060: GetTopSolidBlock → Vector3Split → Assert(y >= -64)
+    TC-061: WorldQuery×3種別 → 例外なく完了することを確認（ログで確認）
+    TC-064: RunCommand(setblock) → FillBlocks → Assert(個数 >= 0)

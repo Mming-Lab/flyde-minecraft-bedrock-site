@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC 연결",
+    "description": "WebSocket 서버를 시작하고 Minecraft 교육용 에디션에 연결",
+    "inputs": {
+      "port": {
+        "name": "포트",
+        "description": "WebSocket 포트 번호(기본값: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "월드",
+        "description": "World 객체(내부용; 명령 노드에 연결 불필요)"
+      },
+      "error": {
+        "name": "오류",
+        "description": "연결 오류 정보"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft 연결 해제",
+    "menuDisplayName": "MC 해제",
+    "description": "Minecraft 연결을 해제하고 WebSocket 서버를 종료",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(예: 채팅에 'stop' 입력)"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "에이전트 좌표 가져오기",
+    "menuDisplayName": "에이전트 좌표",
+    "description": "에이전트의 현재 좌표를 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "좌표",
+        "description": "에이전트 좌표 {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "점수판 목표 목록",
+    "menuDisplayName": "점수판 목표 목록",
+    "description": "모든 점수판 목표의 목록을 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "목표 목록",
+        "description": "점수판 목표 객체의 배열"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "점수판 목표 가져오기",
+    "menuDisplayName": "점수판 목표",
+    "description": "ID로 점수판 목표를 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "objective_id": {
+        "name": "목표 ID",
+        "description": "점수판 목표 ID"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "목표",
+        "description": "점수판 목표 → 점수판 목표 정보 노드에 연결"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "점수판 목표 추가",
+    "menuDisplayName": "목표 추가",
+    "description": "점수판에 새 목표를 추가",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "objective_id": {
+        "name": "목표 ID",
+        "description": "점수판 목표 ID"
+      },
+      "display_name": {
+        "name": "표시 이름",
+        "description": "표시 이름(선택)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "목표",
+        "description": "추가한 목표 → 점수판 목표 정보 노드에 연결"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "점수판 목표 삭제",
+    "menuDisplayName": "목표 삭제",
+    "description": "ID로 점수판 목표를 삭제",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "objective_id": {
+        "name": "목표 ID",
+        "description": "점수판 목표 ID"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "결과",
+        "description": "삭제 결과"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "모든 점수 가져오기",
+    "menuDisplayName": "모든 점수",
+    "description": "플레이어의 모든 점수를 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "player_name": {
+        "name": "플레이어 이름",
+        "description": "플레이어 이름"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "점수 목록",
+        "description": "모든 점수의 배열"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "점수 가져오기",
+    "menuDisplayName": "점수 가져오기",
+    "description": "특정 목표에 대한 플레이어의 점수를 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "player_name": {
+        "name": "플레이어 이름",
+        "description": "플레이어 이름"
+      },
+      "objective_id": {
+        "name": "목표 ID",
+        "description": "점수판 목표 ID"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "점수",
+        "description": "점수 값(숫자)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "점수 연산",
+    "menuDisplayName": "점수 연산",
+    "description": "플레이어 점수에 {{operation}} 수행",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "operation": {
+        "name": "연산",
+        "description": "연산 종류",
+        "options": {
+          "add": "더하기",
+          "remove": "빼기",
+          "set": "설정"
+        }
+      },
+      "player_name": {
+        "name": "플레이어 이름",
+        "description": "플레이어 이름"
+      },
+      "objective_id": {
+        "name": "목표 ID",
+        "description": "점수판 목표 ID"
+      },
+      "value": {
+        "name": "값",
+        "description": "연산에 사용할 값"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "연산 후의 새 점수 값"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "플레이어 채팅 시",
+    "menuDisplayName": "채팅",
+    "description": "플레이어가 채팅 메시지를 보낼 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "발신자",
+        "description": "채팅을 보낸 플레이어 이름"
+      },
+      "message": {
+        "name": "메시지",
+        "description": "채팅 메시지 내용"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "플레이어 입장 시",
+    "menuDisplayName": "입장",
+    "description": "플레이어가 월드에 입장할 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "플레이어 이름",
+        "description": "입장한 플레이어 이름"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "플레이어 퇴장 시",
+    "menuDisplayName": "퇴장",
+    "description": "플레이어가 월드를 떠날 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "플레이어 이름",
+        "description": "퇴장한 플레이어 이름"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "플레이어 이동 시",
+    "menuDisplayName": "이동",
+    "description": "플레이어가 이동할 때마다 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "거리",
+        "description": "이동 거리(미터)"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      },
+      "underwater": {
+        "name": "수중",
+        "description": "수중 이동 여부(true/false)"
+      },
+      "biome": {
+        "name": "생물군계",
+        "description": "현재 생물군계 이름"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "이동 방식 이름"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "플레이어 순간이동 시",
+    "menuDisplayName": "순간이동",
+    "description": "플레이어가 순간이동할 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "순간이동 원인 이름"
+      },
+      "distance": {
+        "name": "거리",
+        "description": "순간이동 거리(미터)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "플레이어 타이틀 시",
+    "menuDisplayName": "타이틀",
+    "description": "플레이어가 타이틀을 받을 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "발신자",
+        "description": "타이틀을 보낸 플레이어 이름"
+      },
+      "message": {
+        "name": "메시지",
+        "description": "타이틀 메시지 내용"
+      },
+      "recipient": {
+        "name": "수신자",
+        "description": "타이틀을 받은 플레이어 이름"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "플레이어 메시지 시",
+    "menuDisplayName": "메시지",
+    "description": "플레이어가 모든 종류의 메시지를 보낼 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "발신자",
+        "description": "메시지를 보낸 플레이어 이름"
+      },
+      "message": {
+        "name": "메시지",
+        "description": "메시지 내용"
+      },
+      "type": {
+        "name": "종류",
+        "description": "메시지 종류(chat / tell 등)"
+      },
+      "recipient": {
+        "name": "수신자",
+        "description": "[nullable] 수신자 이름. tell이 아닌 메시지는 null"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "플레이어 튕김 시",
+    "menuDisplayName": "튕김",
+    "description": "플레이어가 슬라임 블록 등에서 튕길 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "높이",
+        "description": "튕긴 높이(블록)"
+      },
+      "block": {
+        "name": "블록",
+        "description": "BlockType 객체(튕긴 블록) → 블록 정보 노드에 연결"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "블록 파괴 시",
+    "menuDisplayName": "블록 파괴",
+    "description": "블록이 파괴될 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "블록",
+        "description": "BlockType 객체 → 블록 정보 노드에 연결"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "파괴 방식 이름"
+      },
+      "item": {
+        "name": "아이템",
+        "description": "[nullable] 파괴 전 들고 있던 아이템. 맨손이면 null"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "블록 설치 시",
+    "menuDisplayName": "블록 설치",
+    "description": "블록이 설치될 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "블록",
+        "description": "BlockType 객체 → 블록 정보 노드에 연결"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      },
+      "underwater": {
+        "name": "수중",
+        "description": "수중 설치 여부(true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "설치 방식 이름"
+      },
+      "item": {
+        "name": "아이템",
+        "description": "설치 전 들고 있던 아이템 → 아이템 정보 노드에 연결"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "아이템 사용 시",
+    "menuDisplayName": "아이템 사용",
+    "description": "플레이어가 아이템을 사용할 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "아이템",
+        "description": "[nullable] 들고 있던 아이템. 없으면 null"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "아이템 사용 방식 이름"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "아이템 획득 시",
+    "menuDisplayName": "아이템 획득",
+    "description": "플레이어가 아이템을 획득할 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "개수",
+        "description": "획득한 아이템 개수"
+      },
+      "item": {
+        "name": "아이템",
+        "description": "아이템 종류 → 아이템 종류 정보 노드에 연결"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "아이템 획득 방식 이름"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "아이템 제작 시",
+    "menuDisplayName": "제작",
+    "description": "플레이어가 아이템을 제작할 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "아이템",
+        "description": "아이템 스택(제작한 아이템) → 아이템 스택 정보 노드에 연결"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      },
+      "used_table": {
+        "name": "제작대 사용",
+        "description": "제작대 사용 여부(true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "아이템 장착 시",
+    "menuDisplayName": "장착",
+    "description": "플레이어가 아이템을 장착할 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "아이템",
+        "description": "아이템 스택 → 아이템 스택 정보 노드에 연결"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      },
+      "equip_slot": {
+        "name": "장비 슬롯",
+        "description": "장비 슬롯 이름"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "아이템 제련 시",
+    "menuDisplayName": "제련",
+    "description": "플레이어가 아이템을 제련할 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "아이템",
+        "description": "아이템 종류(제련한 아이템) → 아이템 종류 정보 노드에 연결"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      },
+      "fuel": {
+        "name": "연료",
+        "description": "아이템 종류(연료) → 아이템 종류 정보 노드에 연결"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "아이템 거래 시",
+    "menuDisplayName": "거래",
+    "description": "플레이어가 주민 거래를 완료할 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "아이템",
+        "description": "아이템 스택(받은 아이템) → 아이템 스택 정보 노드에 연결"
+      },
+      "villager": {
+        "name": "주민",
+        "description": "WorldVillager 객체 → 주민 정보 노드에 연결"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      },
+      "payment_a": {
+        "name": "지불 A",
+        "description": "아이템 종류(지불 A) → 아이템 종류 정보 노드에 연결"
+      },
+      "payment_b": {
+        "name": "지불 B",
+        "description": "[nullable] 아이템 종류(지불 B). 미사용 시 null"
+      },
+      "player_xp": {
+        "name": "플레이어 에메랄드",
+        "description": "거래 후 플레이어가 보유한 에메랄드"
+      },
+      "villager_xp": {
+        "name": "주민 에메랄드",
+        "description": "거래 후 주민이 보유한 에메랄드"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "몹 상호작용 시",
+    "menuDisplayName": "몹 상호작용",
+    "description": "플레이어가 몹과 상호작용할 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "몹",
+        "description": "WorldMob 객체(상호작용한 몹)"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "몹 상호작용 종류 이름"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "표적 명중 시",
+    "menuDisplayName": "표적 명중",
+    "description": "표적 블록이 명중될 때 실행",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "세기",
+        "description": "레드스톤 신호 세기(0–15)"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "명령 실행",
+    "menuDisplayName": "명령 실행",
+    "description": "임의의 Minecraft 명령 실행(앞의 / 제외)",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "command": {
+        "name": "명령",
+        "description": "실행할 Minecraft 명령(앞의 / 제외)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "완료되면 true 출력"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "게임 시간 가져오기",
+    "menuDisplayName": "게임 시간",
+    "description": "게임 시간 가져오기({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "type": {
+        "name": "종류",
+        "description": "조회할 시간 종류",
+        "options": {
+          "time": "시간(0–24000)",
+          "day": "일수",
+          "tick": "틱 수"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "값",
+        "description": "조회된 시간 값"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "낮인지 확인",
+    "menuDisplayName": "낮?",
+    "description": "현재 낮인지 확인(time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "낮 여부",
+        "description": "낮이면 true, 밤이면 false"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "날씨 가져오기",
+    "menuDisplayName": "날씨",
+    "description": "현재 날씨를 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "날씨",
+        "description": "날씨 이름(\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "블록 채우기",
+    "menuDisplayName": "채우기",
+    "description": "두 좌표 사이의 영역을 지정한 블록으로 채움",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "from": {
+        "name": "시작",
+        "description": "시작 모서리 {x, y, z}"
+      },
+      "to": {
+        "name": "끝",
+        "description": "끝 모서리 {x, y, z}"
+      },
+      "block_id": {
+        "name": "블록 ID",
+        "description": "블록 ID(예: minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "채우기 완료 시 true 출력"
+      },
+      "count": {
+        "name": "개수",
+        "description": "채운 블록 수"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "지면 높이 가져오기",
+    "menuDisplayName": "지면",
+    "description": "가장 위쪽 고체 블록의 좌표와 종류를 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "좌표",
+        "description": "지면 좌표 {x, y, z}"
+      },
+      "block_name": {
+        "name": "블록 이름",
+        "description": "가장 위쪽 고체 블록의 이름"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "월드 조회",
+    "menuDisplayName": "월드 조회",
+    "description": "월드의 {{type}} 목록을 조회",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "type": {
+        "name": "종류",
+        "description": "조회할 분류",
+        "options": {
+          "mob": "엔티티",
+          "block": "블록",
+          "item": "아이템"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "목록",
+        "description": "조회 결과 목록"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "플레이어 좌표 가져오기",
+    "menuDisplayName": "플레이어 좌표",
+    "description": "플레이어의 현재 좌표와 바라보는 방향을 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "좌표",
+        "description": "플레이어 좌표 {x, y, z}"
+      },
+      "direction": {
+        "name": "방향",
+        "description": "플레이어가 바라보는 방향(Y축 회전)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "플레이어 시점 가져오기",
+    "menuDisplayName": "플레이어 시점",
+    "description": "플레이어의 카메라 각도(피치·요)를 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "각도",
+        "description": "플레이어 시선 각도 {x, y}(도)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "플레이어 태그 가져오기",
+    "menuDisplayName": "플레이어 태그",
+    "description": "플레이어에 부여된 모든 태그를 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "태그",
+        "description": "태그 이름 문자열의 배열"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "플레이어 태그 보유",
+    "menuDisplayName": "태그 보유?",
+    "description": "플레이어가 지정한 태그를 가졌는지 확인",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "tag": {
+        "name": "태그",
+        "description": "확인할 태그 이름"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "결과",
+        "description": "플레이어가 태그를 가지면 true"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "플레이어 레벨 가져오기",
+    "menuDisplayName": "플레이어 레벨",
+    "description": "플레이어의 현재 경험치 레벨을 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "레벨",
+        "description": "플레이어 레벨(숫자)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "게임 모드 가져오기",
+    "menuDisplayName": "게임 모드",
+    "description": "플레이어의 현재 게임 모드를 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "게임 모드",
+        "description": "게임 모드 이름(예: \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "플레이어 능력 가져오기",
+    "menuDisplayName": "능력",
+    "description": "플레이어의 현재 능력 설정을 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "능력",
+        "description": "플레이어 능력 객체"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "플레이어 목록",
+    "menuDisplayName": "플레이어",
+    "description": "월드의 모든 플레이어 목록을 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "플레이어 목록",
+        "description": "플레이어 객체의 배열"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "로컬 플레이어 가져오기",
+    "menuDisplayName": "로컬 플레이어",
+    "description": "로컬(자신) 플레이어 객체를 가져옴",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "플레이어",
+        "description": "로컬 플레이어 객체"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "엔티티에서 추출",
+    "menuDisplayName": "엔티티 정보",
+    "description": "엔티티 객체에서 좌표, 방향, 차원 등의 필드를 추출",
+    "inputs": {
+      "entity": {
+        "name": "엔티티",
+        "description": "플레이어 또는 주민 객체(player / villager 출력)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "좌표",
+        "description": "엔티티 좌표(position)"
+      },
+      "direction": {
+        "name": "방향",
+        "description": "Y축 회전(yRot)"
+      },
+      "dimension": {
+        "name": "차원",
+        "description": "차원 번호(dimension)"
+      },
+      "type": {
+        "name": "종류",
+        "description": "종류 문자열(type)"
+      },
+      "variant": {
+        "name": "변종",
+        "description": "변종 번호(variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "엔티티 ID 번호(id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "플레이어에서 추출",
+    "menuDisplayName": "플레이어 정보",
+    "description": "플레이어 스냅샷 객체에서 이름, 색상, 엔티티 정보를 추출",
+    "inputs": {
+      "player": {
+        "name": "플레이어",
+        "description": "이벤트 노드 player 출력의 플레이어 객체"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "이름",
+        "description": "플레이어 이름(name)"
+      },
+      "color": {
+        "name": "색상",
+        "description": "지도 마커 색상(color)"
+      },
+      "entity": {
+        "name": "엔티티",
+        "description": "엔티티 정보 노드에 연결"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "아이템 종류에서 추출",
+    "menuDisplayName": "아이템 종류 정보",
+    "description": "아이템 종류 객체에서 아이템 ID와 데이터 값을 추출",
+    "inputs": {
+      "item": {
+        "name": "아이템",
+        "description": "아이템 종류(획득/제련 이벤트의 item 출력)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "아이템 ID",
+        "description": "아이템 ID 문자열(id)"
+      },
+      "data": {
+        "name": "데이터",
+        "description": "데이터 값(data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "아이템 스택에서 추출",
+    "menuDisplayName": "아이템 스택 정보",
+    "description": "아이템 스택 객체에서 아이템 ID, 개수, 최대 개수, 데이터 값을 추출",
+    "inputs": {
+      "item": {
+        "name": "아이템",
+        "description": "아이템 스택(사용/장착/제작/거래 이벤트의 item 출력)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "아이템 ID",
+        "description": "아이템 ID 문자열(typeId)"
+      },
+      "count": {
+        "name": "개수",
+        "description": "스택 크기(amount)"
+      },
+      "max_count": {
+        "name": "최대 개수",
+        "description": "최대 스택 크기(maxAmount)"
+      },
+      "data": {
+        "name": "데이터",
+        "description": "데이터 값(data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "블록 종류에서 추출",
+    "menuDisplayName": "블록 정보",
+    "description": "블록 종류 객체에서 블록 ID와 데이터 값을 추출",
+    "inputs": {
+      "block": {
+        "name": "블록",
+        "description": "블록 종류 객체(block/bounce 이벤트의 block 출력)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "블록 ID",
+        "description": "블록 ID 문자열(id)"
+      },
+      "data": {
+        "name": "데이터",
+        "description": "데이터 값(data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "점수판 목표에서 추출",
+    "menuDisplayName": "점수판 목표 정보",
+    "description": "점수판 목표 객체에서 ID와 표시 이름을 추출",
+    "inputs": {
+      "objective": {
+        "name": "목표",
+        "description": "목표 추가/가져오기 노드의 목표"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "목표 ID",
+        "description": "목표 ID 문자열(id)"
+      },
+      "display_name": {
+        "name": "표시 이름",
+        "description": "표시 이름(displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "몹에서 추출",
+    "menuDisplayName": "몹 정보",
+    "description": "몹 객체에서 종류, 색상, 변종 번호를 추출",
+    "inputs": {
+      "mob": {
+        "name": "몹",
+        "description": "몹 객체(몹 상호작용 이벤트의 mob 출력)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "종류",
+        "description": "몹 종류 번호(type)"
+      },
+      "color": {
+        "name": "색상",
+        "description": "색상 번호(color)"
+      },
+      "variant": {
+        "name": "변종",
+        "description": "변종 번호(variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "주민에서 추출",
+    "menuDisplayName": "주민 정보",
+    "description": "주민 객체에서 이름, 등급, 엔티티 정보를 추출",
+    "inputs": {
+      "villager": {
+        "name": "주민",
+        "description": "주민 객체(거래 이벤트의 villager 출력)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "이름",
+        "description": "주민 이름(trader.name)"
+      },
+      "rank": {
+        "name": "등급",
+        "description": "거래 등급(trader.tier)"
+      },
+      "entity": {
+        "name": "엔티티",
+        "description": "엔티티 정보 노드에 연결"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "선택기",
+    "menuDisplayName": "선택기",
+    "description": "{{type}} 목록에서 선택",
+    "inputs": {
+      "type": {
+        "name": "종류",
+        "description": "선택할 분류",
+        "options": {
+          "block": "🧱 블록",
+          "item": "🎒 아이템",
+          "mob": "🐾 몹",
+          "TravelMethod": "🚶 이동 방식",
+          "TeleportCause": "✨ 순간이동 원인",
+          "MobInteraction": "🐄 몹 상호작용",
+          "ItemUseMethod": "🤚 아이템 사용 방식",
+          "ItemAcqMethod": "📦 아이템 획득 방식",
+          "EquipSlot": "🪖 장비 슬롯",
+          "BlockBreakMethod": "⛏️ 파괴 방식",
+          "BlockPlaceMethod": "🏗️ 설치 방식"
+        }
+      },
+      "block": {
+        "name": "블록",
+        "description": "블록 ID"
+      },
+      "item": {
+        "name": "아이템",
+        "description": "아이템 ID"
+      },
+      "mob": {
+        "name": "몹",
+        "description": "몹(엔티티) ID"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "이동 방식"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "순간이동 원인"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "몹 상호작용 종류"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "아이템 사용 방식"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "아이템 획득 방식"
+      },
+      "EquipSlot": {
+        "name": "장비 슬롯",
+        "description": "장비 슬롯"
+      },
+      "BlockBreakMethod": {
+        "name": "파괴 방식",
+        "description": "블록 파괴 방식"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "블록 설치 방식"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "값",
+        "description": "선택된 ID 또는 열거 값"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "로캘 이름",
+    "menuDisplayName": "로캘 이름",
+    "description": "{{type}}을(를) 로캘 이름으로 변환",
+    "inputs": {
+      "value": {
+        "name": "값",
+        "description": "Minecraft ID(예: \"minecraft:stone\") 또는 이벤트 값(예: \"Walk\")"
+      },
+      "type": {
+        "name": "종류",
+        "description": "변환할 분류",
+        "options": {
+          "block": "블록 ID",
+          "item": "아이템 ID",
+          "mob": "몹 ID",
+          "TravelMethod": "이동 방식",
+          "TeleportCause": "순간이동 원인",
+          "MobInteraction": "몹 상호작용",
+          "ItemUseMethod": "아이템 사용 방식",
+          "ItemAcqMethod": "아이템 획득 방식",
+          "EquipSlot": "장비 슬롯",
+          "BlockBreakMethod": "블록 파괴 방식",
+          "BlockPlaceMethod": "블록 설치 방식"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "이름",
+        "description": "현지화된 이름(없으면 입력값 반환)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Vector3 연산",
+    "menuDisplayName": "Vec3 연산",
+    "description": "3D 좌표에 {{op}} 수행",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "연산 종류",
+        "options": {
+          "assemble": "🔧 조립",
+          "add": "➕ 더하기",
+          "subtract": "➖ 빼기",
+          "scale": "✖️ 배율",
+          "floor": "⬇️ 내림",
+          "ceil": "⬆️ 올림",
+          "fill_y": "📐 Y 채우기"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "X 좌표"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y 좌표"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z 좌표"
+      },
+      "pos_a": {
+        "name": "좌표 A",
+        "description": "기준 좌표 {x,y,z}"
+      },
+      "pos_b": {
+        "name": "좌표 B",
+        "description": "다른 좌표 {x,y,z}"
+      },
+      "position": {
+        "name": "좌표",
+        "description": "좌표 {x,y,z}"
+      },
+      "scale": {
+        "name": "배율",
+        "description": "스칼라 배수(예: 2면 2배)"
+      },
+      "pos_xz": {
+        "name": "좌표 xz",
+        "description": "2D 좌표 {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Y 좌표 값"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "결과",
+        "description": "결과 좌표 {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Vector3 거리",
+    "menuDisplayName": "거리",
+    "description": "두 3D 좌표 사이의 유클리드 거리 계산",
+    "inputs": {
+      "pos_a": {
+        "name": "좌표 A",
+        "description": "시작 좌표 {x,y,z}"
+      },
+      "pos_b": {
+        "name": "좌표 B",
+        "description": "끝 좌표 {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "거리",
+        "description": "두 점 사이의 거리(미터)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3→문자열",
+    "menuDisplayName": "Vec3→문자열",
+    "description": "좌표 객체를 \"x y z\" 형식의 문자열로 변환",
+    "inputs": {
+      "position": {
+        "name": "좌표",
+        "description": "변환할 좌표 {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "텍스트",
+        "description": "\"x y z\" 형식의 문자열"
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Vector3 분할",
+    "menuDisplayName": "Vec3 분할",
+    "description": "좌표 객체를 x, y, z 값으로 분리",
+    "inputs": {
+      "position": {
+        "name": "좌표",
+        "description": "분할할 좌표 {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "X 좌표"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y 좌표"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z 좌표"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "숫자 제한",
+    "menuDisplayName": "제한",
+    "description": "숫자를 최솟값과 최댓값 사이로 제한",
+    "inputs": {
+      "value": {
+        "name": "값",
+        "description": "제한할 숫자"
+      },
+      "min": {
+        "name": "최솟값",
+        "description": "하한"
+      },
+      "max": {
+        "name": "최댓값",
+        "description": "상한"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "결과",
+        "description": "제한된 값"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "영역 생성",
+    "menuDisplayName": "AABB 생성",
+    "description": "두 모서리 좌표로 축 정렬 경계 상자(AABB)를 생성",
+    "inputs": {
+      "corner_a": {
+        "name": "모서리 A",
+        "description": "영역 모서리 1 {x,y,z}(순서 무관)"
+      },
+      "corner_b": {
+        "name": "모서리 B",
+        "description": "영역 모서리 2 {x,y,z}(순서 무관)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "영역",
+        "description": "AABB 영역 객체 {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "영역 내 여부",
+    "menuDisplayName": "AABB 내부",
+    "description": "좌표가 AABB 영역 내부에 있는지 확인",
+    "inputs": {
+      "area": {
+        "name": "영역",
+        "description": "AABB 영역 {min, max}"
+      },
+      "position": {
+        "name": "좌표",
+        "description": "검사할 좌표 {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "결과",
+        "description": "좌표가 영역 내부면 true"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "플레이어 변환 시",
+    "menuDisplayName": "플레이어변환",
+    "description": "플레이어의 좌표나 회전이 바뀔 때 실행(고빈도)",
+    "inputs": {
+      "world": {
+        "name": "월드",
+        "description": "MinecraftConnect 노드의 World 출력"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "좌표",
+        "description": "플레이어 좌표 {x, y, z}"
+      },
+      "direction": {
+        "name": "방향",
+        "description": "플레이어가 바라보는 방향(Y축 회전)"
+      },
+      "player": {
+        "name": "플레이어",
+        "description": "WorldPlayer 객체 → 플레이어 정보 노드에 연결"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "에이전트 이동",
+    "menuDisplayName": "AgentMove",
+    "description": "에이전트를 {{direction}}(으)로 이동",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "direction": {
+        "name": "방향",
+        "description": "이동 방향",
+        "options": {
+          "forward": "앞",
+          "back": "뒤",
+          "left": "왼쪽",
+          "right": "오른쪽",
+          "up": "위",
+          "down": "아래"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "이동하면 true 출력"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "에이전트 회전",
+    "menuDisplayName": "AgentTurn",
+    "description": "에이전트를 {{direction}}(으)로 회전",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "direction": {
+        "name": "방향",
+        "description": "회전 방향",
+        "options": {
+          "left": "왼쪽",
+          "right": "오른쪽"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "회전하면 true 출력"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "에이전트 순간이동",
+    "menuDisplayName": "에이전트TP",
+    "description": "에이전트를 좌표로 순간이동(생략 시 플레이어 현재 위치 사용)",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "position": {
+        "name": "좌표",
+        "description": "목적지 좌표 {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "순간이동하면 true 출력"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "에이전트 동작",
+    "menuDisplayName": "AgentAction",
+    "description": "에이전트가 {{action}} 수행(방향: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "action": {
+        "name": "동작",
+        "description": "수행할 동작",
+        "options": {
+          "attack": "공격",
+          "destroyBlock": "파괴",
+          "till": "경작",
+          "dropAllItems": "모두 버리기"
+        }
+      },
+      "direction": {
+        "name": "방향",
+        "description": "동작 방향",
+        "options": {
+          "forward": "앞",
+          "back": "뒤",
+          "left": "왼쪽",
+          "right": "오른쪽",
+          "up": "위",
+          "down": "아래"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "완료되면 true 출력"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "에이전트 블록 설치",
+    "menuDisplayName": "에이전트설치",
+    "description": "슬롯 {{slot}}의 블록을 {{direction}}(으)로 설치",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "direction": {
+        "name": "방향",
+        "description": "설치 방향",
+        "options": {
+          "forward": "앞",
+          "back": "뒤",
+          "left": "왼쪽",
+          "right": "오른쪽",
+          "up": "위",
+          "down": "아래"
+        }
+      },
+      "slot": {
+        "name": "슬롯",
+        "description": "인벤토리 슬롯 번호(1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "설치하면 true 출력"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "에이전트 아이템 버리기",
+    "menuDisplayName": "에이전트버리기",
+    "description": "슬롯 {{slot}}의 아이템을 {{direction}}(으)로 버림",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "direction": {
+        "name": "방향",
+        "description": "버리는 방향",
+        "options": {
+          "forward": "앞",
+          "back": "뒤",
+          "left": "왼쪽",
+          "right": "오른쪽",
+          "up": "위",
+          "down": "아래"
+        }
+      },
+      "slot": {
+        "name": "슬롯",
+        "description": "인벤토리 슬롯 번호(1–27)"
+      },
+      "amount": {
+        "name": "수량",
+        "description": "버릴 아이템 수"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "버리면 true 출력"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "에이전트 아이템 이동",
+    "menuDisplayName": "에이전트아이템이동",
+    "description": "에이전트 인벤토리의 슬롯 간에 아이템 이동",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "from_slot": {
+        "name": "출발 슬롯",
+        "description": "출발 슬롯 번호(1–27)"
+      },
+      "to_slot": {
+        "name": "도착 슬롯",
+        "description": "도착 슬롯 번호(1–27)"
+      },
+      "amount": {
+        "name": "수량",
+        "description": "이동할 아이템 수"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "이동하면 true 출력"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "에이전트 아이템 설정",
+    "menuDisplayName": "에이전트아이템설정",
+    "description": "지정한 에이전트 인벤토리 슬롯에 아이템 설정",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "slot": {
+        "name": "슬롯",
+        "description": "설정할 슬롯 번호(1–27)"
+      },
+      "item_id": {
+        "name": "아이템 ID",
+        "description": "아이템 ID(예: minecraft:apple)"
+      },
+      "amount": {
+        "name": "수량",
+        "description": "설정할 아이템 수"
+      },
+      "data": {
+        "name": "데이터",
+        "description": "데이터 값(보통 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "설정하면 true 출력"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "에이전트 수집",
+    "menuDisplayName": "에이전트수집",
+    "description": "에이전트 주변에서 지정한 아이템 종류를 수집",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "item_id": {
+        "name": "아이템 ID",
+        "description": "수집할 아이템 ID"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "수집하면 true 출력"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "에이전트 감지",
+    "menuDisplayName": "에이전트감지",
+    "description": "{{direction}}의 {{type}} 감지",
+    "inputs": {
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      },
+      "type": {
+        "name": "종류",
+        "description": "감지할 대상",
+        "options": {
+          "block": "블록",
+          "redstone": "레드스톤"
+        }
+      },
+      "direction": {
+        "name": "방향",
+        "description": "감지 방향",
+        "options": {
+          "forward": "앞",
+          "back": "뒤",
+          "left": "왼쪽",
+          "right": "오른쪽",
+          "up": "위",
+          "down": "아래"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "감지됨",
+        "description": "무언가 감지되면 true"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Vector3 보간",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "두 좌표 사이를 선형 보간(t=0은 시작, t=1은 끝)",
+    "inputs": {
+      "pos_a": {
+        "name": "좌표 A",
+        "description": "시작 좌표 {x, y, z}"
+      },
+      "pos_b": {
+        "name": "좌표 B",
+        "description": "끝 좌표 {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "보간 계수(0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "결과",
+        "description": "보간된 좌표 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Vector3 정규화",
+    "menuDisplayName": "Vec3정규화",
+    "description": "벡터를 단위 길이로 정규화(길이 = 1)",
+    "inputs": {
+      "position": {
+        "name": "좌표",
+        "description": "정규화할 벡터 {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "결과",
+        "description": "길이가 1인 단위 벡터 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Vector3 내적",
+    "menuDisplayName": "Vec3내적",
+    "description": "두 벡터의 내적 계산",
+    "inputs": {
+      "pos_a": {
+        "name": "좌표 A",
+        "description": "벡터 A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "좌표 B",
+        "description": "벡터 B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "값",
+        "description": "내적(스칼라)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "AABB 이동",
+    "menuDisplayName": "AABB이동",
+    "description": "AABB 영역을 주어진 벡터만큼 이동",
+    "inputs": {
+      "area": {
+        "name": "영역",
+        "description": "이동할 영역 {min, max}"
+      },
+      "delta": {
+        "name": "변위",
+        "description": "이동 벡터 {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "영역",
+        "description": "이동된 영역 객체"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "AABB 교차",
+    "menuDisplayName": "AABB교차",
+    "description": "두 AABB 영역이 겹치는지 확인",
+    "inputs": {
+      "area_a": {
+        "name": "영역 A",
+        "description": "영역 A {min, max}"
+      },
+      "area_b": {
+        "name": "영역 B",
+        "description": "영역 B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "결과",
+        "description": "두 영역이 겹치면 true"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "단언",
+    "menuDisplayName": "단언",
+    "description": "실제값과 기댓값을 비교하고 PASS/FAIL을 기록. 연결을 위해 항상 done 출력.",
+    "inputs": {
+      "actual": {
+        "name": "실제값",
+        "description": "검사할 값"
+      },
+      "expected": {
+        "name": "기댓값",
+        "description": "기댓값"
+      },
+      "op": {
+        "name": "op",
+        "description": "비교 연산자",
+        "options": {
+          "eq": "같음(===)",
+          "neq": "다름(!==)",
+          "deep": "깊은 비교(JSON)",
+          "lt": "미만(<)",
+          "gt": "초과(>)",
+          "lte": "이하(≤)",
+          "gte": "이상(≥)",
+          "approx": "근사(±허용오차)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "테스트 케이스 ID(예: TC-111)"
+      },
+      "tolerance": {
+        "name": "허용오차",
+        "description": "근사 비교의 허용오차"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "완료",
+        "description": "항상 true 출력(연결용)"
+      },
+      "passed": {
+        "name": "통과",
+        "description": "테스트 통과 시 true 출력"
+      },
+      "failed": {
+        "name": "실패",
+        "description": "테스트 실패 시 실제값 출력"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Gemini AI에 텍스트를 보내고 응답을 받음",
+    "inputs": {
+      "apiKey": {
+        "name": "API 키",
+        "description": "Google AI Studio에서 발급한 API 키"
+      },
+      "model": {
+        "name": "모델",
+        "description": "사용할 Gemini 모델",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash(권장)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "프롬프트",
+        "description": "사용자 프롬프트 텍스트"
+      },
+      "systemInstruction": {
+        "name": "시스템 지시",
+        "description": "AI 역할/행동을 정의하는 시스템 프롬프트(선택)"
+      },
+      "temperature": {
+        "name": "온도",
+        "description": "무작위성 0.0–1.0(낮을수록 결정적)"
+      },
+      "trigger": {
+        "name": "트리거",
+        "description": "트리거(선택)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "응답",
+        "description": "Gemini가 생성한 텍스트"
+      }
+    }
+  }
+}

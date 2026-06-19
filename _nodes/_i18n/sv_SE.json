@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Anslut",
+    "description": "Startar en WebSocket-server och ansluter till Minecraft Education Edition",
+    "inputs": {
+      "port": {
+        "name": "port",
+        "description": "WebSocket-portnummer (standard: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-objekt (används internt; behöver inte anslutas till kommandonoder)"
+      },
+      "error": {
+        "name": "fel",
+        "description": "Information om anslutningsfel"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Koppla från",
+    "menuDisplayName": "MC Koppla från",
+    "description": "Kopplar från Minecraft och stänger av WebSocket-servern",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (t.ex. chatt 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Hämta agentposition",
+    "menuDisplayName": "Agentpos.",
+    "description": "Hämtar agentens nuvarande position",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "position",
+        "description": "Agentposition {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "Hämta PT-mål",
+    "menuDisplayName": "PT-mål",
+    "description": "Hämtar listan över alla poängtavlemål",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "mål",
+        "description": "Array av poängtavlemålobjekt"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "Hämta PT-mål",
+    "menuDisplayName": "PT-mål",
+    "description": "Hämtar ett poängtavlemål via dess ID",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Poängtavlemål-ID"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "mål",
+        "description": "Poängtavlemål → anslut till PT-mål-infonod"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "Lägg till PT-mål",
+    "menuDisplayName": "Lägg till PT-mål",
+    "description": "Lägger till ett nytt mål i poängtavlan",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Poängtavlemål-ID"
+      },
+      "display_name": {
+        "name": "visningsnamn",
+        "description": "Visningsnamn (valfritt)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "mål",
+        "description": "Tillagt mål → anslut till PT-mål-infonod"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "Ta bort PT-mål",
+    "menuDisplayName": "Ta bort PT-mål",
+    "description": "Tar bort ett poängtavlemål via dess ID",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Poängtavlemål-ID"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "Resultat av borttagning"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Hämta alla poäng",
+    "menuDisplayName": "Alla poäng",
+    "description": "Hämtar alla poäng för en spelare",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "player_name": {
+        "name": "spelarnamn",
+        "description": "Spelarnamn"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "poäng",
+        "description": "Array av alla poäng"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Hämta poäng",
+    "menuDisplayName": "Hämta poäng",
+    "description": "Hämtar en spelares poäng för ett specifikt mål",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "player_name": {
+        "name": "spelarnamn",
+        "description": "Spelarnamn"
+      },
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Poängtavlemål-ID"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "poäng",
+        "description": "Poängvärde (tal)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Poängoperation",
+    "menuDisplayName": "Poäng-op.",
+    "description": "Utför {{operation}} på en spelarpoäng",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "operation": {
+        "name": "operation",
+        "description": "Operationstyp",
+        "options": {
+          "add": "Addera",
+          "remove": "Subtrahera",
+          "set": "Ange"
+        }
+      },
+      "player_name": {
+        "name": "spelarnamn",
+        "description": "Spelarnamn"
+      },
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Poängtavlemål-ID"
+      },
+      "value": {
+        "name": "värde",
+        "description": "Värde att operera med"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Nytt poängvärde efter operationen"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "Vid spelarchatt",
+    "menuDisplayName": "Chatt",
+    "description": "Utlöses när en spelare skickar ett chattmeddelande",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "avsändare",
+        "description": "Namn på spelaren som skickade chatten"
+      },
+      "message": {
+        "name": "meddelande",
+        "description": "Innehåll i chattmeddelande"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "Vid spelaranslutning",
+    "menuDisplayName": "Anslut",
+    "description": "Utlöses när en spelare ansluter till världen",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "spelarnamn",
+        "description": "Namn på spelaren som anslöt"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "Vid spelaravgång",
+    "menuDisplayName": "Lämna",
+    "description": "Utlöses när en spelare lämnar världen",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "spelarnamn",
+        "description": "Namn på spelaren som lämnade"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "Vid spelarförflyttning",
+    "menuDisplayName": "Förflyttades",
+    "description": "Utlöses varje gång en spelare rör sig",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "avstånd",
+        "description": "Tillryggalagt avstånd (meter)"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      },
+      "underwater": {
+        "name": "under_vatten",
+        "description": "Om förflyttning sker under vatten (true/false)"
+      },
+      "biome": {
+        "name": "biom",
+        "description": "Namn på nuvarande biom"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Namn på förflyttningsmetod"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "Vid spelarteleportering",
+    "menuDisplayName": "Teleporterad",
+    "description": "Utlöses när en spelare teleporterar",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Namn på teleporteringsorsak"
+      },
+      "distance": {
+        "name": "avstånd",
+        "description": "Teleporteringsavstånd (meter)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "Vid spelartitel",
+    "menuDisplayName": "Titel",
+    "description": "Utlöses när en spelare får en titel",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "avsändare",
+        "description": "Namn på spelaren som skickade titeln"
+      },
+      "message": {
+        "name": "meddelande",
+        "description": "Innehåll i titelmeddelande"
+      },
+      "recipient": {
+        "name": "mottagare",
+        "description": "Namn på spelaren som fick titeln"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "Vid spelarmeddelande",
+    "menuDisplayName": "Meddelande",
+    "description": "Utlöses när en spelare skickar någon typ av meddelande",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "avsändare",
+        "description": "Namn på spelaren som skickade meddelandet"
+      },
+      "message": {
+        "name": "meddelande",
+        "description": "Meddelandeinnehåll"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Meddelandetyp (chat / tell osv.)"
+      },
+      "recipient": {
+        "name": "mottagare",
+        "description": "[nullable] Mottagarnamn. null för meddelanden som inte är tell"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "Vid spelarstuds",
+    "menuDisplayName": "Studsade",
+    "description": "Utlöses när en spelare studsar på ett slemblock eller liknande",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "höjd",
+        "description": "Studshöjd (block)"
+      },
+      "block": {
+        "name": "block",
+        "description": "BlockType-objekt (blocket som studsades på) → anslut till block-infonod"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "Vid blockbrytning",
+    "menuDisplayName": "Bryt block",
+    "description": "Utlöses när ett block bryts",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "block",
+        "description": "BlockType-objekt → anslut till block-infonod"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Namn på förstörelsemetod"
+      },
+      "item": {
+        "name": "föremål",
+        "description": "[nullable] Hållet föremål före brytning. null om med bara händer"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "Vid blockplacering",
+    "menuDisplayName": "Placera block",
+    "description": "Utlöses när ett block placeras",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "block",
+        "description": "BlockType-objekt → anslut till block-infonod"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      },
+      "underwater": {
+        "name": "under_vatten",
+        "description": "Om det placerades under vatten (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Namn på placeringsmetod"
+      },
+      "item": {
+        "name": "föremål",
+        "description": "Hållet föremål före placering → anslut till föremåls-infonod"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "Vid föremålsanvändning",
+    "menuDisplayName": "Föremål använt",
+    "description": "Utlöses när en spelare använder ett föremål",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "föremål",
+        "description": "[nullable] Hållet föremål. null om inget föremål"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Namn på föremålsanvändningsmetod"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "Vid föremålsförvärv",
+    "menuDisplayName": "Föremål förvärvat",
+    "description": "Utlöses när en spelare förvärvar ett föremål",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "antal",
+        "description": "Antal förvärvade föremål"
+      },
+      "item": {
+        "name": "föremål",
+        "description": "Föremålstyp → anslut till föremålstyp-infonod"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Namn på föremålsförvärvsmetod"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "Vid föremålstillverkning",
+    "menuDisplayName": "Tillverkad",
+    "description": "Utlöses när en spelare tillverkar ett föremål",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "föremål",
+        "description": "Föremålsstack (tillverkat föremål) → anslut till föremålsstack-infonod"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      },
+      "used_table": {
+        "name": "använde_bänk",
+        "description": "Om en arbetsbänk användes (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "Vid föremålsutrustning",
+    "menuDisplayName": "Utrustad",
+    "description": "Utlöses när en spelare utrustar ett föremål",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "föremål",
+        "description": "Föremålsstack → anslut till föremålsstack-infonod"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      },
+      "equip_slot": {
+        "name": "utrustnplats",
+        "description": "Namn på utrustningsplats"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "Vid föremålssmältning",
+    "menuDisplayName": "Smält",
+    "description": "Utlöses när en spelare smälter ett föremål",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "föremål",
+        "description": "Föremålstyp (smält) → anslut till föremålstyp-infonod"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      },
+      "fuel": {
+        "name": "bränsle",
+        "description": "Föremålstyp (bränsle) → anslut till föremålstyp-infonod"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "Vid föremålsbyte",
+    "menuDisplayName": "Bytt",
+    "description": "Utlöses när en spelare slutför ett byhandel med bybo",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "föremål",
+        "description": "Föremålsstack (mottaget föremål) → anslut till föremålsstack-infonod"
+      },
+      "villager": {
+        "name": "bybo",
+        "description": "WorldVillager-objekt → anslut till bybo-infonod"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      },
+      "payment_a": {
+        "name": "betalning_a",
+        "description": "Föremålstyp (betalning A) → anslut till föremålstyp-infonod"
+      },
+      "payment_b": {
+        "name": "betalning_b",
+        "description": "[nullable] Föremålstyp (betalning B). null om oanvänd"
+      },
+      "player_xp": {
+        "name": "spelare_smaragder",
+        "description": "Smaragder spelaren har efter handel"
+      },
+      "villager_xp": {
+        "name": "bybo_smaragder",
+        "description": "Smaragder bybon har efter handel"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "Vid mob-interaktion",
+    "menuDisplayName": "Mob-interakt.",
+    "description": "Utlöses när en spelare interagerar med en mob",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "mob",
+        "description": "WorldMob-objekt (mob som interagerats med)"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Namn på mob-interaktionstyp"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "Vid målträff",
+    "menuDisplayName": "Mål träffat",
+    "description": "Utlöses när ett målblock träffas",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "styrka",
+        "description": "Redstone-signalstyrka (0–15)"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Kör kommando",
+    "menuDisplayName": "Kör kmd.",
+    "description": "Kör vilket Minecraft-kommando som helst (utan inledande /)",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "command": {
+        "name": "kommando",
+        "description": "Minecraft-kommando att köra (utan inledande /)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar true när klart"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Hämta speltid",
+    "menuDisplayName": "Speltid",
+    "description": "Hämtar speltiden ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Tidstyp att fråga om",
+        "options": {
+          "time": "Tid (0–24000)",
+          "day": "Antal dagar",
+          "tick": "Antal ticks"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "värde",
+        "description": "Efterfrågat tidsvärde"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Är det dag",
+    "menuDisplayName": "Dag?",
+    "description": "Kontrollerar om det för närvarande är dag (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "är_dag",
+        "description": "true på dagen, false på natten"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Hämta väder",
+    "menuDisplayName": "Väder",
+    "description": "Hämtar det nuvarande vädret",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "väder",
+        "description": "Vädernamn (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Fyll med block",
+    "menuDisplayName": "Fyll",
+    "description": "Fyller ett område mellan två positioner med ett angivet block",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "from": {
+        "name": "från",
+        "description": "Starthörn {x, y, z}"
+      },
+      "to": {
+        "name": "till",
+        "description": "Sluthörn {x, y, z}"
+      },
+      "block_id": {
+        "name": "block_id",
+        "description": "Block-ID (t.ex. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar true när fyllningen är klar"
+      },
+      "count": {
+        "name": "antal",
+        "description": "Antal fyllda block"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Hämta markhöjd",
+    "menuDisplayName": "Mark",
+    "description": "Hämtar positionen och typen för det översta fasta blocket",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "position",
+        "description": "Markposition {x, y, z}"
+      },
+      "block_name": {
+        "name": "blocknamn",
+        "description": "Namn på det översta fasta blocket"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Världsfråga",
+    "menuDisplayName": "Världsfråga",
+    "description": "Frågar efter listan över {{type}} i världen",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Kategori att fråga om",
+        "options": {
+          "mob": "Entitet",
+          "block": "Block",
+          "item": "Föremål"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "lista",
+        "description": "Lista över frågeresultat"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Hämta spelarposition",
+    "menuDisplayName": "Spelarpos.",
+    "description": "Hämtar spelarens nuvarande position och blickriktning",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "position",
+        "description": "Spelarposition {x, y, z}"
+      },
+      "direction": {
+        "name": "riktning",
+        "description": "Spelarens blickriktning (Y-axelrotation)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Hämta spelarorientering",
+    "menuDisplayName": "Spelarriktn.",
+    "description": "Hämtar spelarens kameravinkel (pitch och yaw)",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "vinkel",
+        "description": "Spelarens blickvinkel {x, y} (grader)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Hämta spelartaggar",
+    "menuDisplayName": "Spelartaggar",
+    "description": "Hämtar alla taggar kopplade till spelaren",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "taggar",
+        "description": "Array av taggnamnsträngar"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "Spelare har tagg",
+    "menuDisplayName": "Har tagg?",
+    "description": "Kontrollerar om spelaren har en angiven tagg",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "tag": {
+        "name": "tagg",
+        "description": "Taggnamn att kontrollera"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "true om spelaren har taggen"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Hämta spelarnivå",
+    "menuDisplayName": "Spelarniv.",
+    "description": "Hämtar spelarens nuvarande erfarenhetsnivå",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "nivå",
+        "description": "Spelarnivå (tal)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Hämta spelläge",
+    "menuDisplayName": "Spelläge",
+    "description": "Hämtar spelarens nuvarande spelläge",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "spelläge",
+        "description": "Namn på spelläge (t.ex. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Hämta spelarförmågor",
+    "menuDisplayName": "Förmågor",
+    "description": "Hämtar spelarens nuvarande förmågeinställningar",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "förmågor",
+        "description": "Spelarförmågor-objekt"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Hämta spelare",
+    "menuDisplayName": "Spelare",
+    "description": "Hämtar en lista över alla spelare i världen",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "spelare",
+        "description": "Array av spelarobjekt"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Hämta lokal spelare",
+    "menuDisplayName": "Lokal spelare",
+    "description": "Hämtar det lokala (egna) spelarobjektet",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "spelare",
+        "description": "Lokalt spelarobjekt"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Hämta från entitet",
+    "menuDisplayName": "Entitetsinfo",
+    "description": "Extraherar position, riktning, dimension och andra fält från ett entitetsobjekt",
+    "inputs": {
+      "entity": {
+        "name": "entitet",
+        "description": "Spelar- eller byboobjekt (player / villager-utdata)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "position",
+        "description": "Entitetsposition (position)"
+      },
+      "direction": {
+        "name": "riktning",
+        "description": "Y-axelrotation (yRot)"
+      },
+      "dimension": {
+        "name": "dimension",
+        "description": "Dimensionsnummer (dimension)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Typsträng (type)"
+      },
+      "variant": {
+        "name": "variant",
+        "description": "Variantnummer (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Entitets-ID-nummer (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Hämta från spelare",
+    "menuDisplayName": "Spelarinfo",
+    "description": "Extraherar namn, färg och entitetsinfo från ett spelar-snapshotobjekt",
+    "inputs": {
+      "player": {
+        "name": "spelare",
+        "description": "Spelarobjekt från en händelsenods player-utdata"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "namn",
+        "description": "Spelarnamn (name)"
+      },
+      "color": {
+        "name": "färg",
+        "description": "Kartmarkörsfärg (color)"
+      },
+      "entity": {
+        "name": "entitet",
+        "description": "Anslut till entitets-infonod"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Hämta från föremålstyp",
+    "menuDisplayName": "Föremålstypinfo",
+    "description": "Extraherar föremåls-ID och datavärde från ett föremålstypobjekt",
+    "inputs": {
+      "item": {
+        "name": "föremål",
+        "description": "Föremålstyp (item-utdata från förvärvs-/smälthändelser)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "föremål_id",
+        "description": "Föremåls-ID-sträng (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Datavärde (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Hämta från föremålsstack",
+    "menuDisplayName": "Föremålsstackinfo",
+    "description": "Extraherar föremåls-ID, antal, max antal och datavärde från ett föremålsstackobjekt",
+    "inputs": {
+      "item": {
+        "name": "föremål",
+        "description": "Föremålsstack (item-utdata från använd-/utrusta-/tillverka-/byteshändelser)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "föremål_id",
+        "description": "Föremåls-ID-sträng (typeId)"
+      },
+      "count": {
+        "name": "antal",
+        "description": "Stackstorlek (amount)"
+      },
+      "max_count": {
+        "name": "max_antal",
+        "description": "Max stackstorlek (maxAmount)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Datavärde (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Hämta från blocktyp",
+    "menuDisplayName": "Blockinfo",
+    "description": "Extraherar block-ID och datavärde från ett blocktypobjekt",
+    "inputs": {
+      "block": {
+        "name": "block",
+        "description": "Blocktypobjekt (block-utdata från block-/bounce-händelser)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "block_id",
+        "description": "Block-ID-sträng (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Datavärde (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Hämta från PT-mål",
+    "menuDisplayName": "PT-mål-info",
+    "description": "Extraherar ID och visningsnamn från ett poängtavlemålobjekt",
+    "inputs": {
+      "objective": {
+        "name": "mål",
+        "description": "Mål från en lägg-till-/hämta-mål-nod"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "mål_id",
+        "description": "Mål-ID-sträng (id)"
+      },
+      "display_name": {
+        "name": "visningsnamn",
+        "description": "Visningsnamn (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Hämta från mob",
+    "menuDisplayName": "Mob-info",
+    "description": "Extraherar typ-, färg- och variantnummer från ett mobobjekt",
+    "inputs": {
+      "mob": {
+        "name": "mob",
+        "description": "Mobobjekt (mob-utdata från mob-interaktionshändelse)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "typ",
+        "description": "Mobtypnummer (type)"
+      },
+      "color": {
+        "name": "färg",
+        "description": "Färgnummer (color)"
+      },
+      "variant": {
+        "name": "variant",
+        "description": "Variantnummer (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Hämta från bybo",
+    "menuDisplayName": "Byboinfo",
+    "description": "Extraherar namn, rang och entitetsinfo från ett byboobjekt",
+    "inputs": {
+      "villager": {
+        "name": "bybo",
+        "description": "Byboobjekt (villager-utdata från byteshändelse)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "namn",
+        "description": "Bybonamn (trader.name)"
+      },
+      "rank": {
+        "name": "rang",
+        "description": "Handelsrang (trader.tier)"
+      },
+      "entity": {
+        "name": "entitet",
+        "description": "Anslut till entitets-infonod"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Väljare",
+    "menuDisplayName": "Väljare",
+    "description": "Väljer från {{type}}-listan",
+    "inputs": {
+      "type": {
+        "name": "typ",
+        "description": "Kategori att välja",
+        "options": {
+          "block": "🧱 Block",
+          "item": "🎒 Föremål",
+          "mob": "🐾 Mob",
+          "TravelMethod": "🚶 Förflyttningsmetod",
+          "TeleportCause": "✨ Teleporteringsorsak",
+          "MobInteraction": "🐄 Mob-interaktion",
+          "ItemUseMethod": "🤚 Föremålsanvändningsmetod",
+          "ItemAcqMethod": "📦 Förvärvsmetod",
+          "EquipSlot": "🪖 Utrustningsplats",
+          "BlockBreakMethod": "⛏️ Brytningsmetod",
+          "BlockPlaceMethod": "🏗️ Placeringsmetod"
+        }
+      },
+      "block": {
+        "name": "block",
+        "description": "Block-ID"
+      },
+      "item": {
+        "name": "föremål",
+        "description": "Föremåls-ID"
+      },
+      "mob": {
+        "name": "mob",
+        "description": "Mob-(entitets-)ID"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Förflyttningsmetod"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Teleporteringsorsak"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Mob-interaktionstyp"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Föremålsanvändningsmetod"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Föremålsförvärvsmetod"
+      },
+      "EquipSlot": {
+        "name": "utrustnplats",
+        "description": "Utrustningsplats"
+      },
+      "BlockBreakMethod": {
+        "name": "brytningsmetod",
+        "description": "Blockbrytningsmetod"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Blockplaceringsmetod"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "värde",
+        "description": "Valt ID eller enum-värde"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Lokaliserat namn",
+    "menuDisplayName": "Lokaliserat namn",
+    "description": "Konverterar {{type}} till lokaliserat namn",
+    "inputs": {
+      "value": {
+        "name": "värde",
+        "description": "Minecraft-ID (t.ex. \"minecraft:stone\") eller händelsevärde (t.ex. \"Walk\")"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Kategori att konvertera",
+        "options": {
+          "block": "Block-ID",
+          "item": "Föremåls-ID",
+          "mob": "Mob-ID",
+          "TravelMethod": "Förflyttningsmetod",
+          "TeleportCause": "Teleporteringsorsak",
+          "MobInteraction": "Mob-interaktion",
+          "ItemUseMethod": "Föremålsanvändningsmetod",
+          "ItemAcqMethod": "Förvärvsmetod",
+          "EquipSlot": "Utrustningsplats",
+          "BlockBreakMethod": "Blockbrytningsmetod",
+          "BlockPlaceMethod": "Blockplaceringsmetod"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "namn",
+        "description": "Lokaliserat namn (returnerar indatavärdet om det inte hittas)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Vector3-operation",
+    "menuDisplayName": "Vec3-op.",
+    "description": "Utför {{op}} på en 3D-position",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Operationstyp",
+        "options": {
+          "assemble": "🔧 Montera",
+          "add": "➕ Addera",
+          "subtract": "➖ Subtrahera",
+          "scale": "✖️ Skala",
+          "floor": "⬇️ Avrunda nedåt",
+          "ceil": "⬆️ Avrunda uppåt",
+          "fill_y": "📐 Fyll Y"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "X-koordinat"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y-koordinat"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z-koordinat"
+      },
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Basposition {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Annan position {x,y,z}"
+      },
+      "position": {
+        "name": "position",
+        "description": "Position {x,y,z}"
+      },
+      "scale": {
+        "name": "skala",
+        "description": "Skalär multiplikator (t.ex. 2 för dubbel)"
+      },
+      "pos_xz": {
+        "name": "pos_xz",
+        "description": "2D-position {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Y-koordinatvärde"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "Resulterande position {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Vector3-avstånd",
+    "menuDisplayName": "Avstånd",
+    "description": "Beräknar det euklidiska avståndet mellan två 3D-positioner",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Startposition {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Slutposition {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "avstånd",
+        "description": "Avstånd mellan de två punkterna (meter)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 till sträng",
+    "menuDisplayName": "Vec3→Sträng",
+    "description": "Konverterar ett positionsobjekt till en sträng i formatet \"x y z\"",
+    "inputs": {
+      "position": {
+        "name": "position",
+        "description": "Position att konvertera {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "text",
+        "description": "Sträng i formatet \"x y z\""
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Dela upp Vector3",
+    "menuDisplayName": "Dela Vec3",
+    "description": "Delar upp ett positionsobjekt i separata x-, y- och z-värden",
+    "inputs": {
+      "position": {
+        "name": "position",
+        "description": "Position att dela {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "X-koordinat"
+      },
+      "y": {
+        "name": "y",
+        "description": "Y-koordinat"
+      },
+      "z": {
+        "name": "z",
+        "description": "Z-koordinat"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Begränsa tal",
+    "menuDisplayName": "Begränsa",
+    "description": "Begränsar ett tal mellan ett minimi- och maximivärde",
+    "inputs": {
+      "value": {
+        "name": "värde",
+        "description": "Tal att begränsa"
+      },
+      "min": {
+        "name": "min",
+        "description": "Undre gräns"
+      },
+      "max": {
+        "name": "max",
+        "description": "Övre gräns"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "Begränsat värde"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Skapa område",
+    "menuDisplayName": "Skapa AABB",
+    "description": "Skapar en axeljusterad begränsningsbox (AABB) från två hörn",
+    "inputs": {
+      "corner_a": {
+        "name": "hörn_a",
+        "description": "Områdeshörn 1 {x,y,z} (ordningen spelar ingen roll)"
+      },
+      "corner_b": {
+        "name": "hörn_b",
+        "description": "Områdeshörn 2 {x,y,z} (ordningen spelar ingen roll)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "område",
+        "description": "AABB-områdesobjekt {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Är i område",
+    "menuDisplayName": "Inuti AABB",
+    "description": "Kontrollerar om en position är inuti ett AABB-område",
+    "inputs": {
+      "area": {
+        "name": "område",
+        "description": "AABB-område {min, max}"
+      },
+      "position": {
+        "name": "position",
+        "description": "Position att testa {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "true om positionen är inuti området"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "Vid spelartransformation",
+    "menuDisplayName": "SpelarTransf",
+    "description": "Utlöses när en spelares position eller rotation ändras (hög frekvens)",
+    "inputs": {
+      "world": {
+        "name": "värld",
+        "description": "World-utdata från MinecraftConnect-noden"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "position",
+        "description": "Spelarposition {x, y, z}"
+      },
+      "direction": {
+        "name": "riktning",
+        "description": "Spelarens blickriktning (Y-axelrotation)"
+      },
+      "player": {
+        "name": "spelare",
+        "description": "WorldPlayer-objekt → anslut till spelar-infonod"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Flytta agent",
+    "menuDisplayName": "AgentMove",
+    "description": "Flyttar agenten {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "direction": {
+        "name": "riktning",
+        "description": "Förflyttningsriktning",
+        "options": {
+          "forward": "Framåt",
+          "back": "Bakåt",
+          "left": "Vänster",
+          "right": "Höger",
+          "up": "Upp",
+          "down": "Ned"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar true efter förflyttning"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Vänd agent",
+    "menuDisplayName": "AgentTurn",
+    "description": "Vänder agenten {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "direction": {
+        "name": "riktning",
+        "description": "Vändriktning",
+        "options": {
+          "left": "Vänster",
+          "right": "Höger"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar true efter vändning"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Teleportera agent",
+    "menuDisplayName": "AgentTP",
+    "description": "Teleporterar agenten till en position (utelämna för att använda spelarens nuvarande plats)",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "position": {
+        "name": "position",
+        "description": "Destinationsposition {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar true efter teleportering"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Agentåtgärd",
+    "menuDisplayName": "AgentAction",
+    "description": "Agenten utför {{action}} (riktning: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "action": {
+        "name": "åtgärd",
+        "description": "Åtgärd att utföra",
+        "options": {
+          "attack": "Attackera",
+          "destroyBlock": "Förstör",
+          "till": "Plöj",
+          "dropAllItems": "Släpp allt"
+        }
+      },
+      "direction": {
+        "name": "riktning",
+        "description": "Åtgärdsriktning",
+        "options": {
+          "forward": "Framåt",
+          "back": "Bakåt",
+          "left": "Vänster",
+          "right": "Höger",
+          "up": "Upp",
+          "down": "Ned"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar true när klart"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Agent placerar block",
+    "menuDisplayName": "AgentPlacera",
+    "description": "Placerar block från plats {{slot}} mot {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "direction": {
+        "name": "riktning",
+        "description": "Placeringsriktning",
+        "options": {
+          "forward": "Framåt",
+          "back": "Bakåt",
+          "left": "Vänster",
+          "right": "Höger",
+          "up": "Upp",
+          "down": "Ned"
+        }
+      },
+      "slot": {
+        "name": "plats",
+        "description": "Inventarieplatsnummer (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar true efter placering"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Agent släpper föremål",
+    "menuDisplayName": "AgentSläpp",
+    "description": "Släpper föremål från plats {{slot}} mot {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "direction": {
+        "name": "riktning",
+        "description": "Släppriktning",
+        "options": {
+          "forward": "Framåt",
+          "back": "Bakåt",
+          "left": "Vänster",
+          "right": "Höger",
+          "up": "Upp",
+          "down": "Ned"
+        }
+      },
+      "slot": {
+        "name": "plats",
+        "description": "Inventarieplatsnummer (1–27)"
+      },
+      "amount": {
+        "name": "mängd",
+        "description": "Antal föremål att släppa"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar true efter släpp"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Agent flyttar föremål",
+    "menuDisplayName": "AgentFlyttFörem",
+    "description": "Flyttar föremål mellan platser i agentens inventarie",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "from_slot": {
+        "name": "käll_plats",
+        "description": "Källplatsnummer (1–27)"
+      },
+      "to_slot": {
+        "name": "mål_plats",
+        "description": "Målplatsnummer (1–27)"
+      },
+      "amount": {
+        "name": "mängd",
+        "description": "Antal föremål att flytta"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar true efter förflyttning"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Agent anger föremål",
+    "menuDisplayName": "AgentAngeFörem",
+    "description": "Anger ett föremål i den angivna agentinventarieplatsen",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "slot": {
+        "name": "plats",
+        "description": "Platsnummer att ange (1–27)"
+      },
+      "item_id": {
+        "name": "föremål_id",
+        "description": "Föremåls-ID (t.ex. minecraft:apple)"
+      },
+      "amount": {
+        "name": "mängd",
+        "description": "Antal föremål att ange"
+      },
+      "data": {
+        "name": "data",
+        "description": "Datavärde (vanligtvis 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar true efter angivelse"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Agent samlar",
+    "menuDisplayName": "AgentSamla",
+    "description": "Samlar en angiven föremålstyp runt agenten",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "item_id": {
+        "name": "föremål_id",
+        "description": "Föremåls-ID att samla"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar true efter insamling"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Agent upptäcker",
+    "menuDisplayName": "AG Upptäck",
+    "description": "Upptäcker {{type}} {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "utlösare",
+        "description": "Utlösare (valfri)"
+      },
+      "type": {
+        "name": "typ",
+        "description": "Vad som ska upptäckas",
+        "options": {
+          "block": "Block",
+          "redstone": "Redstone"
+        }
+      },
+      "direction": {
+        "name": "riktning",
+        "description": "Upptäckningsriktning",
+        "options": {
+          "forward": "Framåt",
+          "back": "Bakåt",
+          "left": "Vänster",
+          "right": "Höger",
+          "up": "Upp",
+          "down": "Ned"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "upptäckt",
+        "description": "true om något upptäcks"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Vector3-interpolation",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Interpolerar linjärt mellan två positioner (t=0 är start, t=1 är slut)",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Startposition {x, y, z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Slutposition {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Interpolationsfaktor (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "Interpolerad position {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Vector3-normalisering",
+    "menuDisplayName": "Vec3Norm",
+    "description": "Normaliserar en vektor till enhetslängd (längd = 1)",
+    "inputs": {
+      "position": {
+        "name": "position",
+        "description": "Vektor att normalisera {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "Enhetsvektor med längd 1 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Vector3-skalärprodukt",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Beräknar skalärprodukten av två vektorer",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Vektor A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Vektor B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "värde",
+        "description": "Skalärprodukt (skalär)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "Förskjut AABB",
+    "menuDisplayName": "AABBFörskjut",
+    "description": "Förskjuter ett AABB-område med en given vektor",
+    "inputs": {
+      "area": {
+        "name": "område",
+        "description": "Område att förskjuta {min, max}"
+      },
+      "delta": {
+        "name": "delta",
+        "description": "Förskjutningsvektor {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "område",
+        "description": "Förskjutet områdesobjekt"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "AABB-skärning",
+    "menuDisplayName": "AABBSkär",
+    "description": "Kontrollerar om två AABB-områden överlappar",
+    "inputs": {
+      "area_a": {
+        "name": "område_a",
+        "description": "Område A {min, max}"
+      },
+      "area_b": {
+        "name": "område_b",
+        "description": "Område B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "resultat",
+        "description": "true om de två områdena överlappar"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Assert",
+    "menuDisplayName": "Assert",
+    "description": "Jämför faktiskt mot förväntat och loggar PASS/FAIL. Skickar alltid done för kedjning.",
+    "inputs": {
+      "actual": {
+        "name": "faktiskt",
+        "description": "Värde att testa"
+      },
+      "expected": {
+        "name": "förväntat",
+        "description": "Förväntat värde"
+      },
+      "op": {
+        "name": "op",
+        "description": "Jämförelseoperator",
+        "options": {
+          "eq": "Lika (===)",
+          "neq": "Inte lika (!==)",
+          "deep": "Djup likhet (JSON)",
+          "lt": "Mindre än (<)",
+          "gt": "Större än (>)",
+          "lte": "Mindre eller lika (≤)",
+          "gte": "Större eller lika (≥)",
+          "approx": "Ungefär (±tolerans)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "Testfall-ID (t.ex. TC-111)"
+      },
+      "tolerance": {
+        "name": "tolerans",
+        "description": "Tolerans för ungefärlig jämförelse"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "klar",
+        "description": "Skickar alltid true (för kedjning)"
+      },
+      "passed": {
+        "name": "godkänt",
+        "description": "Skickar true när testet godkänns"
+      },
+      "failed": {
+        "name": "misslyckades",
+        "description": "Skickar faktiskt värde när testet misslyckas"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Skickar text till Gemini AI och får ett svar",
+    "inputs": {
+      "apiKey": {
+        "name": "API-nyckel",
+        "description": "API-nyckel från Google AI Studio"
+      },
+      "model": {
+        "name": "Modell",
+        "description": "Gemini-modell att använda",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (rekommenderas)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Prompt",
+        "description": "Användarprompttext"
+      },
+      "systemInstruction": {
+        "name": "Systeminstruktion",
+        "description": "Systemprompt som definierar AI-roll/beteende (valfritt)"
+      },
+      "temperature": {
+        "name": "Temperatur",
+        "description": "Slumpmässighet 0.0–1.0 (lägre = mer deterministisk)"
+      },
+      "trigger": {
+        "name": "Utlösare",
+        "description": "Utlösare (valfri)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Svar",
+        "description": "Text genererad av Gemini"
+      }
+    }
+  }
+}

@@ -568,14 +568,14 @@ node:
       to:
         insId: say-097-name
         pinId: v
-  id: TestItemEvents
+  id: ManualItemEvents
   inputs: {}
   outputs: {}
   inputsPosition: {}
   outputsPosition: {}
   completionOutputs: []
   description: |
-    アイテムイベント系テスト（TC-031〜036, TC-094, TC-095, TC-097）手動操作で各イベントを発火させる
+    手動テスト（アイテムイベント系 TC-031〜036, TC-094, TC-095, TC-097）手動操作で各イベントを発火させる
     TC-031: アイテムを右クリック使用 → MCチャットに使用方法が表示
     TC-032: アイテムを拾う → Assert(個数 > 0) → ログでPASS確認
     TC-033: アイテムをクラフト → GetFromItemStack.アイテムID が空でないことを Assert (TC-095)

@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Підключити",
+    "description": "Запускає сервер WebSocket і підключається до Minecraft Education Edition",
+    "inputs": {
+      "port": {
+        "name": "порт",
+        "description": "Номер порту WebSocket (за замовчуванням: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "світ",
+        "description": "Об'єкт World (для внутрішнього використання; підключати до командних вузлів не потрібно)"
+      },
+      "error": {
+        "name": "помилка",
+        "description": "Відомості про помилку підключення"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Відключити",
+    "menuDisplayName": "MC Відключити",
+    "description": "Відключається від Minecraft і зупиняє сервер WebSocket",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (напр. у чаті 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Отримати позицію агента",
+    "menuDisplayName": "Поз. агента",
+    "description": "Отримує поточну позицію агента",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "позиція",
+        "description": "Позиція агента {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "Отримати цілі ТР",
+    "menuDisplayName": "Цілі ТР",
+    "description": "Отримує список усіх цілей таблиці результатів",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "цілі",
+        "description": "Масив об'єктів цілей таблиці результатів"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "Отримати ціль ТР",
+    "menuDisplayName": "Ціль ТР",
+    "description": "Отримує ціль таблиці результатів за її ID",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "objective_id": {
+        "name": "id_цілі",
+        "description": "ID цілі таблиці результатів"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "ціль",
+        "description": "Ціль таблиці результатів → підключіть до вузла відомостей про ціль ТР"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "Додати ціль ТР",
+    "menuDisplayName": "Дод. ціль ТР",
+    "description": "Додає нову ціль до таблиці результатів",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "objective_id": {
+        "name": "id_цілі",
+        "description": "ID цілі таблиці результатів"
+      },
+      "display_name": {
+        "name": "відображуване_ім'я",
+        "description": "Відображуване ім'я (необов'язково)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "ціль",
+        "description": "Додана ціль → підключіть до вузла відомостей про ціль ТР"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "Видалити ціль ТР",
+    "menuDisplayName": "Вид. ціль ТР",
+    "description": "Видаляє ціль таблиці результатів за її ID",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "objective_id": {
+        "name": "id_цілі",
+        "description": "ID цілі таблиці результатів"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "Результат видалення"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Отримати всі очки",
+    "menuDisplayName": "Усі очки",
+    "description": "Отримує всі очки гравця",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "player_name": {
+        "name": "ім'я_гравця",
+        "description": "Ім'я гравця"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "очки",
+        "description": "Масив усіх очок"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Отримати очки",
+    "menuDisplayName": "Отримати очки",
+    "description": "Отримує очки гравця для конкретної цілі",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "player_name": {
+        "name": "ім'я_гравця",
+        "description": "Ім'я гравця"
+      },
+      "objective_id": {
+        "name": "id_цілі",
+        "description": "ID цілі таблиці результатів"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "очки",
+        "description": "Значення очок (число)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Операція з очками",
+    "menuDisplayName": "Опер. очок",
+    "description": "Виконує {{operation}} над очками гравця",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "operation": {
+        "name": "операція",
+        "description": "Тип операції",
+        "options": {
+          "add": "Додати",
+          "remove": "Відняти",
+          "set": "Встановити"
+        }
+      },
+      "player_name": {
+        "name": "ім'я_гравця",
+        "description": "Ім'я гравця"
+      },
+      "objective_id": {
+        "name": "id_цілі",
+        "description": "ID цілі таблиці результатів"
+      },
+      "value": {
+        "name": "значення",
+        "description": "Значення для операції"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Нове значення очок після операції"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "При повідомленні гравця",
+    "menuDisplayName": "Чат",
+    "description": "Спрацьовує, коли гравець надсилає повідомлення в чат",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "відправник",
+        "description": "Ім'я гравця, який надіслав повідомлення"
+      },
+      "message": {
+        "name": "повідомлення",
+        "description": "Вміст повідомлення чату"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "При вході гравця",
+    "menuDisplayName": "Вхід",
+    "description": "Спрацьовує, коли гравець заходить у світ",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "ім'я_гравця",
+        "description": "Ім'я гравця, який зайшов"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "При виході гравця",
+    "menuDisplayName": "Вихід",
+    "description": "Спрацьовує, коли гравець покидає світ",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "ім'я_гравця",
+        "description": "Ім'я гравця, який вийшов"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "При переміщенні гравця",
+    "menuDisplayName": "Перемістився",
+    "description": "Спрацьовує щоразу під час руху гравця",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "відстань",
+        "description": "Пройдена відстань (метри)"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      },
+      "underwater": {
+        "name": "під_водою",
+        "description": "Чи відбувається переміщення під водою (true/false)"
+      },
+      "biome": {
+        "name": "біом",
+        "description": "Назва поточного біому"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Назва способу переміщення"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "При телепортації гравця",
+    "menuDisplayName": "Телепортовано",
+    "description": "Спрацьовує, коли гравець телепортується",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Назва причини телепортації"
+      },
+      "distance": {
+        "name": "відстань",
+        "description": "Відстань телепортації (метри)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "При отриманні титулу",
+    "menuDisplayName": "Титул",
+    "description": "Спрацьовує, коли гравець отримує титул",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "відправник",
+        "description": "Ім'я гравця, який надіслав титул"
+      },
+      "message": {
+        "name": "повідомлення",
+        "description": "Вміст повідомлення титулу"
+      },
+      "recipient": {
+        "name": "одержувач",
+        "description": "Ім'я гравця, який отримав титул"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "При повідомленні гравця (будь-якому)",
+    "menuDisplayName": "Повідомлення",
+    "description": "Спрацьовує, коли гравець надсилає будь-яке повідомлення",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "відправник",
+        "description": "Ім'я гравця, який надіслав повідомлення"
+      },
+      "message": {
+        "name": "повідомлення",
+        "description": "Вміст повідомлення"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Тип повідомлення (chat / tell тощо)"
+      },
+      "recipient": {
+        "name": "одержувач",
+        "description": "[nullable] Ім'я одержувача. null для повідомлень, окрім tell"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "При відскоку гравця",
+    "menuDisplayName": "Відскік",
+    "description": "Спрацьовує, коли гравець відскакує від блоку слизу тощо",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "висота",
+        "description": "Висота відскоку (блоки)"
+      },
+      "block": {
+        "name": "блок",
+        "description": "Об'єкт BlockType (блок відскоку) → підключіть до вузла відомостей про блок"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "При руйнуванні блоку",
+    "menuDisplayName": "Руйнув. блоку",
+    "description": "Спрацьовує, коли блок руйнується",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "блок",
+        "description": "Об'єкт BlockType → підключіть до вузла відомостей про блок"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Назва способу руйнування"
+      },
+      "item": {
+        "name": "предмет",
+        "description": "[nullable] Предмет у руці до руйнування. null, якщо голіруч"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "При встановленні блоку",
+    "menuDisplayName": "Встан. блоку",
+    "description": "Спрацьовує, коли блок встановлюється",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "блок",
+        "description": "Об'єкт BlockType → підключіть до вузла відомостей про блок"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      },
+      "underwater": {
+        "name": "під_водою",
+        "description": "Чи встановлено під водою (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Назва способу встановлення"
+      },
+      "item": {
+        "name": "предмет",
+        "description": "Предмет у руці до встановлення → підключіть до вузла відомостей про предмет"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "При використанні предмета",
+    "menuDisplayName": "Предмет вик.",
+    "description": "Спрацьовує, коли гравець використовує предмет",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "предмет",
+        "description": "[nullable] Предмет у руці. null, якщо предмета немає"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Назва способу використання предмета"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "При отриманні предмета",
+    "menuDisplayName": "Предмет отрим.",
+    "description": "Спрацьовує, коли гравець отримує предмет",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "кількість",
+        "description": "Кількість отриманих предметів"
+      },
+      "item": {
+        "name": "предмет",
+        "description": "Тип предмета → підключіть до вузла відомостей про тип предмета"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Назва способу отримання предмета"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "При виготовленні предмета",
+    "menuDisplayName": "Виготовлено",
+    "description": "Спрацьовує, коли гравець виготовляє предмет",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Стак предметів (виготовлений предмет) → підключіть до вузла відомостей про стак предметів"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      },
+      "used_table": {
+        "name": "вик_верстак",
+        "description": "Чи використовувався верстак (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "При екіпіруванні предмета",
+    "menuDisplayName": "Екіпіровано",
+    "description": "Спрацьовує, коли гравець екіпірує предмет",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Стак предметів → підключіть до вузла відомостей про стак предметів"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      },
+      "equip_slot": {
+        "name": "слот_екіп",
+        "description": "Назва слота екіпірування"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "При переплавленні предмета",
+    "menuDisplayName": "Переплавлено",
+    "description": "Спрацьовує, коли гравець переплавляє предмет",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Тип предмета (переплавлений) → підключіть до вузла відомостей про тип предмета"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      },
+      "fuel": {
+        "name": "паливо",
+        "description": "Тип предмета (паливо) → підключіть до вузла відомостей про тип предмета"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "При обміні предмета",
+    "menuDisplayName": "Обміняно",
+    "description": "Спрацьовує, коли гравець завершує обмін із селянином",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Стак предметів (отриманий предмет) → підключіть до вузла відомостей про стак предметів"
+      },
+      "villager": {
+        "name": "селянин",
+        "description": "Об'єкт WorldVillager → підключіть до вузла відомостей про селянина"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      },
+      "payment_a": {
+        "name": "оплата_a",
+        "description": "Тип предмета (оплата A) → підключіть до вузла відомостей про тип предмета"
+      },
+      "payment_b": {
+        "name": "оплата_b",
+        "description": "[nullable] Тип предмета (оплата B). null, якщо не використовується"
+      },
+      "player_xp": {
+        "name": "смарагди_гравця",
+        "description": "Смарагди у гравця після обміну"
+      },
+      "villager_xp": {
+        "name": "смарагди_селянина",
+        "description": "Смарагди у селянина після обміну"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "При взаємодії з мобом",
+    "menuDisplayName": "Взаємод. моб",
+    "description": "Спрацьовує, коли гравець взаємодіє з мобом",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "моб",
+        "description": "Об'єкт WorldMob (моб взаємодії)"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Назва типу взаємодії з мобом"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "При влучанні в мішень",
+    "menuDisplayName": "Влучання",
+    "description": "Спрацьовує, коли уражено блок-мішень",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "сила",
+        "description": "Сила сигналу редстоуну (0–15)"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Виконати команду",
+    "menuDisplayName": "Вик. команду",
+    "description": "Виконує будь-яку команду Minecraft (без початкового /)",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "command": {
+        "name": "команда",
+        "description": "Команда Minecraft для виконання (без початкового /)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Видає true після завершення"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Отримати ігровий час",
+    "menuDisplayName": "Ігр. час",
+    "description": "Отримує ігровий час ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Тип запитуваного часу",
+        "options": {
+          "time": "Час (0–24000)",
+          "day": "Кількість днів",
+          "tick": "Кількість тіків"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "значення",
+        "description": "Запитане значення часу"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Зараз день",
+    "menuDisplayName": "День?",
+    "description": "Перевіряє, чи зараз день (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "день",
+        "description": "true вдень, false вночі"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Отримати погоду",
+    "menuDisplayName": "Погода",
+    "description": "Отримує поточну погоду",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "погода",
+        "description": "Назва погоди (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Заповнити блоками",
+    "menuDisplayName": "Заповнити",
+    "description": "Заповнює область між двома позиціями вказаним блоком",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "from": {
+        "name": "від",
+        "description": "Початковий кут {x, y, z}"
+      },
+      "to": {
+        "name": "до",
+        "description": "Кінцевий кут {x, y, z}"
+      },
+      "block_id": {
+        "name": "id_блоку",
+        "description": "ID блоку (напр. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Видає true після завершення заповнення"
+      },
+      "count": {
+        "name": "кількість",
+        "description": "Кількість заповнених блоків"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Отримати висоту землі",
+    "menuDisplayName": "Земля",
+    "description": "Отримує позицію та тип найвищого твердого блоку",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "позиція",
+        "description": "Позиція землі {x, y, z}"
+      },
+      "block_name": {
+        "name": "ім'я_блоку",
+        "description": "Назва найвищого твердого блоку"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Запит світу",
+    "menuDisplayName": "Запит світу",
+    "description": "Запитує список {{type}} у світі",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Категорія запиту",
+        "options": {
+          "mob": "Сутність",
+          "block": "Блок",
+          "item": "Предмет"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "список",
+        "description": "Список результатів запиту"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Отримати позицію гравця",
+    "menuDisplayName": "Поз. гравця",
+    "description": "Отримує поточну позицію та напрямок погляду гравця",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "позиція",
+        "description": "Позиція гравця {x, y, z}"
+      },
+      "direction": {
+        "name": "напрямок",
+        "description": "Напрямок погляду гравця (поворот по осі Y)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Отримати орієнтацію гравця",
+    "menuDisplayName": "Напр. гравця",
+    "description": "Отримує кут камери гравця (тангаж і рискання)",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "кут",
+        "description": "Кут погляду гравця {x, y} (градуси)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Отримати теги гравця",
+    "menuDisplayName": "Теги гравця",
+    "description": "Отримує всі теги, призначені гравцю",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "теги",
+        "description": "Масив рядків з іменами тегів"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "У гравця є тег",
+    "menuDisplayName": "Є тег?",
+    "description": "Перевіряє, чи має гравець вказаний тег",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "tag": {
+        "name": "тег",
+        "description": "Ім'я тега для перевірки"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "true, якщо гравець має тег"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Отримати рівень гравця",
+    "menuDisplayName": "Рів. гравця",
+    "description": "Отримує поточний рівень досвіду гравця",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "рівень",
+        "description": "Рівень гравця (число)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Отримати режим гри",
+    "menuDisplayName": "Режим гри",
+    "description": "Отримує поточний режим гри гравця",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "режим_гри",
+        "description": "Назва режиму гри (напр. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Отримати здібності гравця",
+    "menuDisplayName": "Здібності",
+    "description": "Отримує поточні налаштування здібностей гравця",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "здібності",
+        "description": "Об'єкт здібностей гравця"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Отримати гравців",
+    "menuDisplayName": "Гравці",
+    "description": "Отримує список усіх гравців у світі",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "гравці",
+        "description": "Масив об'єктів гравців"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Отримати локального гравця",
+    "menuDisplayName": "Лок. гравець",
+    "description": "Отримує об'єкт локального гравця (себе)",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт локального гравця"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Витягти із сутності",
+    "menuDisplayName": "Інфо сутності",
+    "description": "Витягує позицію, напрямок, вимір та інші поля з об'єкта сутності",
+    "inputs": {
+      "entity": {
+        "name": "сутність",
+        "description": "Об'єкт гравця або селянина (вихід player / villager)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "позиція",
+        "description": "Позиція сутності (position)"
+      },
+      "direction": {
+        "name": "напрямок",
+        "description": "Поворот по осі Y (yRot)"
+      },
+      "dimension": {
+        "name": "вимір",
+        "description": "Номер виміру (dimension)"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Рядок типу (type)"
+      },
+      "variant": {
+        "name": "варіант",
+        "description": "Номер варіанта (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Номер ID сутності (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Витягти з гравця",
+    "menuDisplayName": "Інфо гравця",
+    "description": "Витягує ім'я, колір та відомості про сутність з об'єкта знімка гравця",
+    "inputs": {
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт гравця з виходу player вузла події"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "ім'я",
+        "description": "Ім'я гравця (name)"
+      },
+      "color": {
+        "name": "колір",
+        "description": "Колір позначки на карті (color)"
+      },
+      "entity": {
+        "name": "сутність",
+        "description": "Підключіть до вузла відомостей про сутність"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Витягти з типу предмета",
+    "menuDisplayName": "Інфо типу предмета",
+    "description": "Витягує ID предмета та значення даних з об'єкта типу предмета",
+    "inputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Тип предмета (вихід item з подій отримання / переплавлення)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_предмета",
+        "description": "Рядок ID предмета (id)"
+      },
+      "data": {
+        "name": "дані",
+        "description": "Значення даних (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Витягти зі стака предметів",
+    "menuDisplayName": "Інфо стака",
+    "description": "Витягує ID предмета, кількість, макс. кількість та значення даних з об'єкта стака предметів",
+    "inputs": {
+      "item": {
+        "name": "предмет",
+        "description": "Стак предметів (вихід item з подій використання / екіпірування / виготовлення / обміну)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_предмета",
+        "description": "Рядок ID предмета (typeId)"
+      },
+      "count": {
+        "name": "кількість",
+        "description": "Розмір стака (amount)"
+      },
+      "max_count": {
+        "name": "макс_кількість",
+        "description": "Макс. розмір стака (maxAmount)"
+      },
+      "data": {
+        "name": "дані",
+        "description": "Значення даних (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Витягти з типу блоку",
+    "menuDisplayName": "Інфо блоку",
+    "description": "Витягує ID блоку та значення даних з об'єкта типу блоку",
+    "inputs": {
+      "block": {
+        "name": "блок",
+        "description": "Об'єкт типу блоку (вихід block з подій block / bounce)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "id_блоку",
+        "description": "Рядок ID блоку (id)"
+      },
+      "data": {
+        "name": "дані",
+        "description": "Значення даних (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Витягти з цілі ТР",
+    "menuDisplayName": "Інфо цілі ТР",
+    "description": "Витягує ID та відображуване ім'я з об'єкта цілі таблиці результатів",
+    "inputs": {
+      "objective": {
+        "name": "ціль",
+        "description": "Ціль із вузла додавання / отримання цілі"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "id_цілі",
+        "description": "Рядок ID цілі (id)"
+      },
+      "display_name": {
+        "name": "відображуване_ім'я",
+        "description": "Відображуване ім'я (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Витягти з моба",
+    "menuDisplayName": "Інфо моба",
+    "description": "Витягує номери типу, кольору та варіанта з об'єкта моба",
+    "inputs": {
+      "mob": {
+        "name": "моб",
+        "description": "Об'єкт моба (вихід mob з події взаємодії з мобом)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "тип",
+        "description": "Номер типу моба (type)"
+      },
+      "color": {
+        "name": "колір",
+        "description": "Номер кольору (color)"
+      },
+      "variant": {
+        "name": "варіант",
+        "description": "Номер варіанта (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Витягти із селянина",
+    "menuDisplayName": "Інфо селянина",
+    "description": "Витягує ім'я, ранг та відомості про сутність з об'єкта селянина",
+    "inputs": {
+      "villager": {
+        "name": "селянин",
+        "description": "Об'єкт селянина (вихід villager з події обміну)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "ім'я",
+        "description": "Ім'я селянина (trader.name)"
+      },
+      "rank": {
+        "name": "ранг",
+        "description": "Ранг торгівлі (trader.tier)"
+      },
+      "entity": {
+        "name": "сутність",
+        "description": "Підключіть до вузла відомостей про сутність"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Селектор",
+    "menuDisplayName": "Селектор",
+    "description": "Вибір зі списку {{type}}",
+    "inputs": {
+      "type": {
+        "name": "тип",
+        "description": "Категорія для вибору",
+        "options": {
+          "block": "🧱 Блок",
+          "item": "🎒 Предмет",
+          "mob": "🐾 Моб",
+          "TravelMethod": "🚶 Спосіб переміщення",
+          "TeleportCause": "✨ Причина телепортації",
+          "MobInteraction": "🐄 Взаємодія з мобом",
+          "ItemUseMethod": "🤚 Спосіб використання предмета",
+          "ItemAcqMethod": "📦 Спосіб отримання",
+          "EquipSlot": "🪖 Слот екіпірування",
+          "BlockBreakMethod": "⛏️ Спосіб руйнування",
+          "BlockPlaceMethod": "🏗️ Спосіб встановлення"
+        }
+      },
+      "block": {
+        "name": "блок",
+        "description": "ID блоку"
+      },
+      "item": {
+        "name": "предмет",
+        "description": "ID предмета"
+      },
+      "mob": {
+        "name": "моб",
+        "description": "ID моба (сутності)"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Спосіб переміщення"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Причина телепортації"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Тип взаємодії з мобом"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Спосіб використання предмета"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Спосіб отримання предмета"
+      },
+      "EquipSlot": {
+        "name": "слот_екіп",
+        "description": "Слот екіпірування"
+      },
+      "BlockBreakMethod": {
+        "name": "спосіб_руйн",
+        "description": "Спосіб руйнування блоку"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Спосіб встановлення блоку"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "значення",
+        "description": "Вибраний ID або значення переліку"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Локалізоване ім'я",
+    "menuDisplayName": "Локалізоване ім'я",
+    "description": "Перетворює {{type}} на локалізоване ім'я",
+    "inputs": {
+      "value": {
+        "name": "значення",
+        "description": "ID Minecraft (напр. \"minecraft:stone\") або значення події (напр. \"Walk\")"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Категорія для перетворення",
+        "options": {
+          "block": "ID блоку",
+          "item": "ID предмета",
+          "mob": "ID моба",
+          "TravelMethod": "Спосіб переміщення",
+          "TeleportCause": "Причина телепортації",
+          "MobInteraction": "Взаємодія з мобом",
+          "ItemUseMethod": "Спосіб використання предмета",
+          "ItemAcqMethod": "Спосіб отримання",
+          "EquipSlot": "Слот екіпірування",
+          "BlockBreakMethod": "Спосіб руйнування блоку",
+          "BlockPlaceMethod": "Спосіб встановлення блоку"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "ім'я",
+        "description": "Локалізоване ім'я (повертає вхідне значення, якщо не знайдено)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Операція Vector3",
+    "menuDisplayName": "Опер. Vec3",
+    "description": "Виконує {{op}} над 3D-позицією",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Тип операції",
+        "options": {
+          "assemble": "🔧 Зібрати",
+          "add": "➕ Додати",
+          "subtract": "➖ Відняти",
+          "scale": "✖️ Масштаб",
+          "floor": "⬇️ Округл. вниз",
+          "ceil": "⬆️ Округл. вгору",
+          "fill_y": "📐 Заповнити Y"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "Координата X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Координата Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Координата Z"
+      },
+      "pos_a": {
+        "name": "поз_a",
+        "description": "Базова позиція {x,y,z}"
+      },
+      "pos_b": {
+        "name": "поз_b",
+        "description": "Інша позиція {x,y,z}"
+      },
+      "position": {
+        "name": "позиція",
+        "description": "Позиція {x,y,z}"
+      },
+      "scale": {
+        "name": "масштаб",
+        "description": "Скалярний множник (напр. 2 для подвоєння)"
+      },
+      "pos_xz": {
+        "name": "поз_xz",
+        "description": "2D-позиція {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Значення координати Y"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "Результуюча позиція {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Відстань Vector3",
+    "menuDisplayName": "Відстань",
+    "description": "Обчислює евклідову відстань між двома 3D-позиціями",
+    "inputs": {
+      "pos_a": {
+        "name": "поз_a",
+        "description": "Початкова позиція {x,y,z}"
+      },
+      "pos_b": {
+        "name": "поз_b",
+        "description": "Кінцева позиція {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "відстань",
+        "description": "Відстань між двома точками (метри)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 у рядок",
+    "menuDisplayName": "Vec3→Рядок",
+    "description": "Перетворює об'єкт позиції на рядок у форматі \"x y z\"",
+    "inputs": {
+      "position": {
+        "name": "позиція",
+        "description": "Позиція для перетворення {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "текст",
+        "description": "Рядок у форматі \"x y z\""
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Розділити Vector3",
+    "menuDisplayName": "Розд. Vec3",
+    "description": "Розділяє об'єкт позиції на окремі значення x, y та z",
+    "inputs": {
+      "position": {
+        "name": "позиція",
+        "description": "Позиція для розділення {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "Координата X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Координата Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Координата Z"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Обмежити число",
+    "menuDisplayName": "Обмежити",
+    "description": "Обмежує число між мінімальним і максимальним значенням",
+    "inputs": {
+      "value": {
+        "name": "значення",
+        "description": "Число для обмеження"
+      },
+      "min": {
+        "name": "мін",
+        "description": "Нижня межа"
+      },
+      "max": {
+        "name": "макс",
+        "description": "Верхня межа"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "Обмежене значення"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Створити область",
+    "menuDisplayName": "Створити AABB",
+    "description": "Створює вирівняний за осями обмежувальний паралелепіпед (AABB) з двох кутів",
+    "inputs": {
+      "corner_a": {
+        "name": "кут_a",
+        "description": "Кут 1 області {x,y,z} (порядок не важливий)"
+      },
+      "corner_b": {
+        "name": "кут_b",
+        "description": "Кут 2 області {x,y,z} (порядок не важливий)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "область",
+        "description": "Об'єкт області AABB {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Усередині області",
+    "menuDisplayName": "Усередині AABB",
+    "description": "Перевіряє, чи позиція всередині області AABB",
+    "inputs": {
+      "area": {
+        "name": "область",
+        "description": "Область AABB {min, max}"
+      },
+      "position": {
+        "name": "позиція",
+        "description": "Позиція для перевірки {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "true, якщо позиція всередині області"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "При зміні положення гравця",
+    "menuDisplayName": "ТрансфГравця",
+    "description": "Спрацьовує при зміні позиції або повороту гравця (висока частота)",
+    "inputs": {
+      "world": {
+        "name": "світ",
+        "description": "Вихід World вузла MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "позиція",
+        "description": "Позиція гравця {x, y, z}"
+      },
+      "direction": {
+        "name": "напрямок",
+        "description": "Напрямок погляду гравця (поворот по осі Y)"
+      },
+      "player": {
+        "name": "гравець",
+        "description": "Об'єкт WorldPlayer → підключіть до вузла відомостей про гравця"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Рух агента",
+    "menuDisplayName": "AgentMove",
+    "description": "Переміщує агента {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "direction": {
+        "name": "напрямок",
+        "description": "Напрямок руху",
+        "options": {
+          "forward": "Уперед",
+          "back": "Назад",
+          "left": "Ліворуч",
+          "right": "Праворуч",
+          "up": "Угору",
+          "down": "Униз"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Видає true після переміщення"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Поворот агента",
+    "menuDisplayName": "AgentTurn",
+    "description": "Повертає агента {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "direction": {
+        "name": "напрямок",
+        "description": "Напрямок повороту",
+        "options": {
+          "left": "Ліворуч",
+          "right": "Праворуч"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Видає true після повороту"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Телепорт агента",
+    "menuDisplayName": "АгентТП",
+    "description": "Телепортує агента в позицію (пропустіть, щоб використати поточне положення гравця)",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "position": {
+        "name": "позиція",
+        "description": "Позиція призначення {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Видає true після телепортації"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Дія агента",
+    "menuDisplayName": "AgentAction",
+    "description": "Агент виконує {{action}} (напрямок: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "action": {
+        "name": "дія",
+        "description": "Дія для виконання",
+        "options": {
+          "attack": "Атакувати",
+          "destroyBlock": "Зруйнувати",
+          "till": "Зорати",
+          "dropAllItems": "Викинути все"
+        }
+      },
+      "direction": {
+        "name": "напрямок",
+        "description": "Напрямок дії",
+        "options": {
+          "forward": "Уперед",
+          "back": "Назад",
+          "left": "Ліворуч",
+          "right": "Праворуч",
+          "up": "Угору",
+          "down": "Униз"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Видає true після завершення"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Агент ставить блок",
+    "menuDisplayName": "АгентСтавить",
+    "description": "Ставить блок зі слота {{slot}} у напрямку {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "direction": {
+        "name": "напрямок",
+        "description": "Напрямок встановлення",
+        "options": {
+          "forward": "Уперед",
+          "back": "Назад",
+          "left": "Ліворуч",
+          "right": "Праворуч",
+          "up": "Угору",
+          "down": "Униз"
+        }
+      },
+      "slot": {
+        "name": "слот",
+        "description": "Номер слота інвентарю (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Видає true після встановлення"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Агент викидає предмет",
+    "menuDisplayName": "АгентВикидає",
+    "description": "Викидає предмет зі слота {{slot}} у напрямку {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "direction": {
+        "name": "напрямок",
+        "description": "Напрямок викидання",
+        "options": {
+          "forward": "Уперед",
+          "back": "Назад",
+          "left": "Ліворуч",
+          "right": "Праворуч",
+          "up": "Угору",
+          "down": "Униз"
+        }
+      },
+      "slot": {
+        "name": "слот",
+        "description": "Номер слота інвентарю (1–27)"
+      },
+      "amount": {
+        "name": "кількість",
+        "description": "Кількість предметів для викидання"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Видає true після викидання"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Агент переміщує предмет",
+    "menuDisplayName": "АгентПереміщПредм",
+    "description": "Переміщує предмети між слотами інвентарю агента",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "from_slot": {
+        "name": "слот_джерело",
+        "description": "Номер слота-джерела (1–27)"
+      },
+      "to_slot": {
+        "name": "слот_призначення",
+        "description": "Номер слота призначення (1–27)"
+      },
+      "amount": {
+        "name": "кількість",
+        "description": "Кількість предметів для переміщення"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Видає true після переміщення"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Агент задає предмет",
+    "menuDisplayName": "АгентЗадаєПредм",
+    "description": "Задає предмет у вказаному слоті інвентарю агента",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "slot": {
+        "name": "слот",
+        "description": "Номер слота для задання (1–27)"
+      },
+      "item_id": {
+        "name": "id_предмета",
+        "description": "ID предмета (напр. minecraft:apple)"
+      },
+      "amount": {
+        "name": "кількість",
+        "description": "Кількість предметів для задання"
+      },
+      "data": {
+        "name": "дані",
+        "description": "Значення даних (зазвичай 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Видає true після задання"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Агент збирає",
+    "menuDisplayName": "АгентЗбирає",
+    "description": "Збирає вказаний тип предмета навколо агента",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "item_id": {
+        "name": "id_предмета",
+        "description": "ID предмета для збору"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Видає true після збору"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Агент виявляє",
+    "menuDisplayName": "АГ Виявл",
+    "description": "Виявляє {{type}} {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "тригер",
+        "description": "Тригер (необов'язково)"
+      },
+      "type": {
+        "name": "тип",
+        "description": "Що виявляти",
+        "options": {
+          "block": "Блок",
+          "redstone": "Редстоун"
+        }
+      },
+      "direction": {
+        "name": "напрямок",
+        "description": "Напрямок виявлення",
+        "options": {
+          "forward": "Уперед",
+          "back": "Назад",
+          "left": "Ліворуч",
+          "right": "Праворуч",
+          "up": "Угору",
+          "down": "Униз"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "виявлено",
+        "description": "true, якщо щось виявлено"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Інтерполяція Vector3",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Лінійно інтерполює між двома позиціями (t=0 — початок, t=1 — кінець)",
+    "inputs": {
+      "pos_a": {
+        "name": "поз_a",
+        "description": "Початкова позиція {x, y, z}"
+      },
+      "pos_b": {
+        "name": "поз_b",
+        "description": "Кінцева позиція {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Коефіцієнт інтерполяції (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "Інтерпольована позиція {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Нормалізація Vector3",
+    "menuDisplayName": "Vec3Норм",
+    "description": "Нормалізує вектор до одиничної довжини (довжина = 1)",
+    "inputs": {
+      "position": {
+        "name": "позиція",
+        "description": "Вектор для нормалізації {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "Одиничний вектор довжиною 1 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Скалярний добуток Vector3",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Обчислює скалярний добуток двох векторів",
+    "inputs": {
+      "pos_a": {
+        "name": "поз_a",
+        "description": "Вектор A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "поз_b",
+        "description": "Вектор B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "значення",
+        "description": "Скалярний добуток (скаляр)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "Зсув AABB",
+    "menuDisplayName": "AABBЗсув",
+    "description": "Зсуває область AABB на заданий вектор",
+    "inputs": {
+      "area": {
+        "name": "область",
+        "description": "Область для зсуву {min, max}"
+      },
+      "delta": {
+        "name": "дельта",
+        "description": "Вектор зсуву {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "область",
+        "description": "Об'єкт зсунутої області"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "Перетин AABB",
+    "menuDisplayName": "AABBПеретин",
+    "description": "Перевіряє, чи перетинаються дві області AABB",
+    "inputs": {
+      "area_a": {
+        "name": "область_a",
+        "description": "Область A {min, max}"
+      },
+      "area_b": {
+        "name": "область_b",
+        "description": "Область B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "результат",
+        "description": "true, якщо дві області перетинаються"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Перевірка",
+    "menuDisplayName": "Перевірка",
+    "description": "Порівнює фактичне значення з очікуваним і записує PASS/FAIL. Завжди видає done для з'єднання.",
+    "inputs": {
+      "actual": {
+        "name": "фактичне",
+        "description": "Значення для перевірки"
+      },
+      "expected": {
+        "name": "очікуване",
+        "description": "Очікуване значення"
+      },
+      "op": {
+        "name": "op",
+        "description": "Оператор порівняння",
+        "options": {
+          "eq": "Дорівнює (===)",
+          "neq": "Не дорівнює (!==)",
+          "deep": "Глибока рівність (JSON)",
+          "lt": "Менше (<)",
+          "gt": "Більше (>)",
+          "lte": "Менше або дорівнює (≤)",
+          "gte": "Більше або дорівнює (≥)",
+          "approx": "Прибл. (±допуск)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "ID тест-кейсу (напр. TC-111)"
+      },
+      "tolerance": {
+        "name": "допуск",
+        "description": "Допуск для приблизного порівняння"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "готово",
+        "description": "Завжди видає true (для з'єднання)"
+      },
+      "passed": {
+        "name": "пройдено",
+        "description": "Видає true, коли тест проходить"
+      },
+      "failed": {
+        "name": "провалено",
+        "description": "Видає фактичне значення, коли тест провалюється"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Надсилає текст до Gemini AI та отримує відповідь",
+    "inputs": {
+      "apiKey": {
+        "name": "Ключ API",
+        "description": "Ключ API з Google AI Studio"
+      },
+      "model": {
+        "name": "Модель",
+        "description": "Модель Gemini для використання",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (рекомендовано)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Запит",
+        "description": "Текст запиту користувача"
+      },
+      "systemInstruction": {
+        "name": "Системна інструкція",
+        "description": "Системний запит, що визначає роль/поведінку ШІ (необов'язково)"
+      },
+      "temperature": {
+        "name": "Температура",
+        "description": "Випадковість 0.0–1.0 (нижче = детермінованіше)"
+      },
+      "trigger": {
+        "name": "Тригер",
+        "description": "Тригер (необов'язково)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Відповідь",
+        "description": "Текст, згенерований Gemini"
+      }
+    }
+  }
+}

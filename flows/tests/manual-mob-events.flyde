@@ -18,9 +18,9 @@ node:
     - pos:
         x: 50
         y: 300
-      id: on-block-broken
+      id: on-mob-interacted
       inputConfig: {}
-      nodeId: OnBlockBroken
+      nodeId: OnMobInteracted
       config:
         ワールド:
           type: dynamic
@@ -30,9 +30,9 @@ node:
         type: file
         data: ../../build/index.flyde.js
     - pos:
-        x: 350
-        y: 300
-      id: json-021-method
+        x: 316.47957611083984
+        y: 400.9077911376953
+      id: json-041-type
       inputConfig: {}
       nodeId: JSON Stringify
       config:
@@ -43,32 +43,32 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 557.3608818054199
-        y: 312.9578514099121
-      id: say-021-method
+        x: 542.1096153259277
+        y: 424.9110565185547
+      id: say-041-type
       inputConfig: {}
       nodeId: RunCommand
       config:
         コマンド:
           type: string
-          value: "say [TC-021 破壊方法] {{v}}"
+          value: say [TC-041 交流種別] {{v}}
         トリガー:
-          type: string
-          value: ""
+          type: boolean
+          value: true
       type: code
       source:
         type: file
         data: ../../build/index.flyde.js
     - pos:
-        x: 655.0688400268555
-        y: 142.92456245422363
-      id: get-from-block-021
+        x: 650
+        y: 300
+      id: get-from-mob-096
       inputConfig: {}
-      nodeId: GetFromBlockType
+      nodeId: GetFromMob
       config:
-        ﾌﾞﾛｯｸ:
+        ﾓﾌﾞ:
           type: dynamic
-          value: "{{ﾌﾞﾛｯｸ}}"
+          value: "{{ﾓﾌﾞ}}"
       type: code
       source:
         type: file
@@ -76,19 +76,19 @@ node:
     - pos:
         x: 950
         y: 300
-      id: assert-093
+      id: assert-096
       inputConfig: {}
       nodeId: Assert
       config:
         期待値:
-          type: string
-          value: ""
+          type: number
+          value: 0
         比較:
           type: select
-          value: neq
+          value: gte
         ID:
           type: string
-          value: TC-093
+          value: TC-096
         実際値:
           type: dynamic
           value: "{{実際値}}"
@@ -102,9 +102,9 @@ node:
     - pos:
         x: 50
         y: 600
-      id: on-block-placed
+      id: on-target-block-hit
       inputConfig: {}
-      nodeId: OnBlockPlaced
+      nodeId: OnTargetBlockHit
       config:
         ワールド:
           type: dynamic
@@ -116,37 +116,33 @@ node:
     - pos:
         x: 350
         y: 600
-      id: json-022-method
+      id: assert-042
       inputConfig: {}
-      nodeId: JSON Stringify
+      nodeId: Assert
       config:
-        object:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: gte
+        ID:
+          type: string
+          value: TC-042
+        実際値:
           type: dynamic
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 550
-        y: 600
-      id: say-022-method
-      inputConfig: {}
-      nodeId: RunCommand
-      config:
-        コマンド:
-          type: string
-          value: "say [TC-022 設置方法] {{v}}"
-        トリガー:
-          type: string
-          value: ""
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
       type: code
       source:
         type: file
         data: ../../build/index.flyde.js
     - pos:
-        x: 694.9487609863281
-        y: 499.2000427246094
-      id: json-022-block
+        x: 650
+        y: 600
+      id: json-042-strength
       inputConfig: {}
       nodeId: JSON Stringify
       config:
@@ -159,49 +155,51 @@ node:
     - pos:
         x: 850
         y: 600
-      id: say-022-block
+      id: say-042-strength
       inputConfig: {}
       nodeId: RunCommand
       config:
         コマンド:
           type: string
-          value: "say [TC-022 ブロック] {{v}}"
+          value: say [TC-042 強さ] {{v}}
         トリガー:
-          type: string
-          value: ""
+          type: boolean
+          value: true
       type: code
       source:
         type: file
         data: ../../build/index.flyde.js
     - pos:
-        x: 1250
-        y: 250
-      id: note-021
+        x: 1240.4493408203125
+        y: 161.9728240966797
+      id: note-041
       inputConfig: {}
       nodeId: Note
       config:
         content: |-
-          # TC-021: OnBlockBroken 目視確認
+          # TC-041: OnMobInteracted 目視確認 / TC-096: GetFromMob 自動テスト
           **操作手順:**
-          1. Minecraft でブロックを破壊する
-          2. **目視確認:** Minecraft チャットに破壊方法（例: `"player"`）が表示されること
-          3. TC-093 は自動: ブロックID が空でないことを Assert → ログで PASS 確認
+          1. Minecraft で動物（ウシ・ブタ等）に右クリックする
+          2. **目視確認 TC-041:** Minecraft チャットに交流種別（例: `"interact"`）が表示されること
+          3. **TC-096 自動:** GetFromMob.種別（数値） >= 0 を Assert → ログで PASS 確認
+          ※ WorldMob には ID/名前フィールドがないため、種別は数値のみ
       type: code
       source:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 1052.1445922851562
-        y: 579.2845458984375
-      id: note-022
+        x: 1092.1593322753906
+        y: 546.2836608886719
+      id: note-042
       inputConfig: {}
       nodeId: Note
       config:
         content: |-
-          # TC-022: OnBlockPlaced 目視確認
+          # TC-042: OnTargetBlockHit 自動テスト
           **操作手順:**
-          1. Minecraft でブロックを設置する
-          2. **目視確認:** Minecraft チャットに設置方法（例: `"player"`）とブロック情報が表示されること
+          1. Minecraft で的ブロック（Target Block）を矢で射つ
+          2. **TC-042 自動:** 強さ（0〜15） >= 0 を Assert → ログで PASS 確認
+          3. **目視確認:** Minecraft チャットに強さの値が表示されること
       type: code
       source:
         type: package
@@ -211,70 +209,65 @@ node:
         insId: mc-connect
         pinId: ワールド
       to:
-        insId: on-block-broken
+        insId: on-mob-interacted
         pinId: ワールド
     - from:
         insId: mc-connect
         pinId: ワールド
       to:
-        insId: on-block-placed
+        insId: on-target-block-hit
         pinId: ワールド
     - from:
-        insId: on-block-broken
-        pinId: 破壊方法
+        insId: on-mob-interacted
+        pinId: 交流種別
       to:
-        insId: json-021-method
+        insId: json-041-type
         pinId: object
     - from:
-        insId: json-021-method
+        insId: json-041-type
         pinId: json
       to:
-        insId: say-021-method
+        insId: say-041-type
         pinId: v
     - from:
-        insId: on-block-broken
-        pinId: ﾌﾞﾛｯｸ
+        insId: on-mob-interacted
+        pinId: ﾓﾌﾞ
       to:
-        insId: get-from-block-021
-        pinId: ﾌﾞﾛｯｸ
+        insId: get-from-mob-096
+        pinId: ﾓﾌﾞ
     - from:
-        insId: get-from-block-021
-        pinId: ブロックID
+        insId: get-from-mob-096
+        pinId: 種別
       to:
-        insId: assert-093
+        insId: assert-096
         pinId: 実際値
     - from:
-        insId: on-block-placed
-        pinId: 設置方法
+        insId: on-target-block-hit
+        pinId: 強さ
       to:
-        insId: json-022-method
+        insId: assert-042
+        pinId: 実際値
+    - from:
+        insId: on-target-block-hit
+        pinId: 強さ
+      to:
+        insId: json-042-strength
         pinId: object
     - from:
-        insId: json-022-method
+        insId: json-042-strength
         pinId: json
       to:
-        insId: say-022-method
+        insId: say-042-strength
         pinId: v
-    - from:
-        insId: on-block-placed
-        pinId: ﾌﾞﾛｯｸ
-      to:
-        insId: json-022-block
-        pinId: object
-    - from:
-        insId: json-022-block
-        pinId: json
-      to:
-        insId: say-022-block
-        pinId: v
-  id: TestBlockEvents
+  id: ManualMobEvents
   inputs: {}
   outputs: {}
   inputsPosition: {}
   outputsPosition: {}
   completionOutputs: []
   description: |
-    ブロックイベント系テスト（TC-021, TC-022, TC-093）手動操作で各イベントを発火させる
-    TC-021: ブロックを破壊 → MCチャットに破壊方法が表示される
-    TC-022: ブロックを設置 → MCチャットに設置方法とブロック名が表示される
-    TC-093: ブロック破壊 → GetFromBlockType.ブロックID が空でないことをAssert → ログでPASS確認
+    手動テスト（モブイベント系 TC-041, TC-042, TC-096）手動操作で各イベントを発火させる
+    TC-041: 動物（ウシ等）に右クリック → MCチャットに交流種別が表示
+    TC-096: モブ交流 → GetFromMob.種別(数値) >= 0 を Assert → ログでPASS確認
+    TC-042: 的ブロックを矢で射つ → Assert(強さ 0〜15) + MCチャットに強さが表示
+    ※ WorldMob には ID/名前フィールドがないため、種別(type)は数値のみ

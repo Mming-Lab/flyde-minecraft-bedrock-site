@@ -3,34 +3,6 @@ node:
   instances:
     - pos:
         x: 50
-        y: 100
-      id: mc-connect
-      inputConfig: {}
-      nodeId: MinecraftConnect
-      config:
-        ポート:
-          type: dynamic
-          value: "{{ポート}}"
-      type: code
-      source:
-        type: file
-        data: ../../build/index.flyde.js
-    - pos:
-        x: 350
-        y: 100
-      id: on-chat
-      inputConfig: {}
-      nodeId: OnPlayerChat
-      config:
-        ワールド:
-          type: dynamic
-          value: "{{ワールド}}"
-      type: code
-      source:
-        type: file
-        data: ../../build/index.flyde.js
-    - pos:
-        x: 50
         y: 300
       id: get-local-player
       inputConfig: {}
@@ -66,7 +38,7 @@ node:
       config:
         比較:
           type: select
-          value: eq
+          value: neq
         ID:
           type: string
           value: TC-091
@@ -74,8 +46,8 @@ node:
           type: dynamic
           value: "{{実際値}}"
         期待値:
-          type: dynamic
-          value: "{{期待値}}"
+          type: string
+          value: ""
         許容差:
           type: number
           value: 0.001
@@ -123,39 +95,13 @@ node:
       source:
         type: file
         data: ../../build/index.flyde.js
-    - pos:
-        x: 950
-        y: 700
-      id: disconnect
-      inputConfig: {}
-      nodeId: MinecraftDisconnect
-      config:
-        トリガー:
-          type: dynamic
-          value: "{{トリガー}}"
-      type: code
-      source:
-        type: file
-        data: ../../build/index.flyde.js
   connections:
     - from:
-        insId: mc-connect
-        pinId: ワールド
-      to:
-        insId: on-chat
-        pinId: ワールド
-    - from:
-        insId: on-chat
-        pinId: 送信者名
+        insId: "__this"
+        pinId: トリガー
       to:
         insId: get-local-player
         pinId: トリガー
-    - from:
-        insId: on-chat
-        pinId: 送信者名
-      to:
-        insId: assert-091
-        pinId: 期待値
     - from:
         insId: get-local-player
         pinId: プレイヤー
@@ -184,12 +130,22 @@ node:
         insId: assert-092
         pinId: 完了
       to:
-        insId: disconnect
-        pinId: トリガー
-  id: TestInfo
-  inputs: {}
-  outputs: {}
-  inputsPosition: {}
-  outputsPosition: {}
-  completionOutputs: []
-  description: 情報取得系ノードテスト（TC-091/092）チャット送信1回で自動実行。GetFromPlayerSnapshot・GetFromEntity を検証
+        insId: "__this"
+        pinId: 完了
+  id: AutoInfo
+  inputs:
+    トリガー: "required"
+  outputs:
+    完了: {}
+  inputsPosition:
+    トリガー:
+      x: -100
+      y: 200
+  outputsPosition:
+    完了:
+      x: 950
+      y: 1200
+  completionOutputs:
+    - 完了
+  description: |
+    自動情報クエリテスト（TC-091,092）

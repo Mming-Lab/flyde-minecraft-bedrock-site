@@ -1,0 +1,554 @@
+imports: {}
+node:
+  instances:
+    # --- test-12a: スコアボード操作 (TC-SB02〜TC-SB05) ---
+    - pos:
+        x: 50
+        y: 300
+      id: add-obj
+      inputConfig: {}
+      nodeId: AddScoreboardObjective
+      config:
+        目標ID:
+          type: string
+          value: mcflowtest
+        表示名:
+          type: string
+          value: テスト目標
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 96.99563598632812
+        y: 517.2204284667969
+      id: score-set
+      inputConfig: {}
+      nodeId: ScoreOperation
+      config:
+        操作:
+          type: select
+          value: set
+        目標ID:
+          type: string
+          value: mcflowtest
+        値:
+          type: number
+          value: 42
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+        プレイヤー名:
+          type: dynamic
+          value: "{{プレイヤー名}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 500
+      id: assert-sb02
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 42
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-SB02
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 700
+      id: get-score
+      inputConfig: {}
+      nodeId: GetScore
+      config:
+        目標ID:
+          type: string
+          value: mcflowtest
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+        プレイヤー名:
+          type: dynamic
+          value: "{{プレイヤー名}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 700
+      id: assert-sb03
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 42
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-SB03
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 900
+      id: score-add
+      inputConfig: {}
+      nodeId: ScoreOperation
+      config:
+        操作:
+          type: select
+          value: add
+        目標ID:
+          type: string
+          value: mcflowtest
+        値:
+          type: number
+          value: 8
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+        プレイヤー名:
+          type: dynamic
+          value: "{{プレイヤー名}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 900
+      id: assert-sb04
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 50
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-SB04
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 1100
+      id: remove-obj
+      inputConfig: {}
+      nodeId: RemoveScoreboardObjective
+      config:
+        目標ID:
+          type: string
+          value: mcflowtest
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 1100
+      id: assert-sb05
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-SB05
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    # --- test-12b: スコアボードクエリ (TC-151〜TC-155) ---
+    - pos:
+        x: 50
+        y: 1400
+      id: add-obj-2
+      inputConfig: {}
+      nodeId: AddScoreboardObjective
+      config:
+        目標ID:
+          type: string
+          value: mcflowtest2
+        表示名:
+          type: string
+          value: テスト目標2
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 1400
+      id: get-from-obj-151
+      inputConfig: {}
+      nodeId: GetFromScoreboardObjective
+      config:
+        目標:
+          type: dynamic
+          value: "{{目標}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 1400
+      id: assert-151
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: mcflowtest2
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-151
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 1600
+      id: get-obj
+      inputConfig: {}
+      nodeId: GetScoreboardObjective
+      config:
+        目標ID:
+          type: string
+          value: mcflowtest2
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 1600
+      id: get-from-obj-153
+      inputConfig: {}
+      nodeId: GetFromScoreboardObjective
+      config:
+        目標:
+          type: dynamic
+          value: "{{目標}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 650
+        y: 1600
+      id: assert-153
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: mcflowtest2
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-153
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 1800
+      id: get-objectives
+      inputConfig: {}
+      nodeId: GetScoreboardObjectives
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 1800
+      id: score-set-2
+      inputConfig: {}
+      nodeId: ScoreOperation
+      config:
+        操作:
+          type: select
+          value: set
+        目標ID:
+          type: string
+          value: mcflowtest2
+        値:
+          type: number
+          value: 99
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+        プレイヤー名:
+          type: dynamic
+          value: "{{プレイヤー名}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 50
+        y: 2000
+      id: get-scores
+      inputConfig: {}
+      nodeId: GetScores
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+        プレイヤー名:
+          type: dynamic
+          value: "{{プレイヤー名}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 350
+        y: 2000
+      id: remove-obj-2
+      inputConfig: {}
+      nodeId: RemoveScoreboardObjective
+      config:
+        目標ID:
+          type: string
+          value: mcflowtest2
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+  connections:
+    # フロー入力 → test-12a 最初のノード
+    - from:
+        insId: "__this"
+        pinId: トリガー
+      to:
+        insId: add-obj
+        pinId: トリガー
+    # test-12a 内部チェーン
+    - from:
+        insId: add-obj
+        pinId: 目標
+      to:
+        insId: score-set
+        pinId: トリガー
+    - from:
+        insId: score-set
+        pinId: 新スコア
+      to:
+        insId: assert-sb02
+        pinId: 実際値
+    - from:
+        insId: assert-sb02
+        pinId: 完了
+      to:
+        insId: get-score
+        pinId: トリガー
+    - from:
+        insId: get-score
+        pinId: スコア
+      to:
+        insId: assert-sb03
+        pinId: 実際値
+    - from:
+        insId: assert-sb03
+        pinId: 完了
+      to:
+        insId: score-add
+        pinId: トリガー
+    - from:
+        insId: score-add
+        pinId: 新スコア
+      to:
+        insId: assert-sb04
+        pinId: 実際値
+    - from:
+        insId: assert-sb04
+        pinId: 完了
+      to:
+        insId: remove-obj
+        pinId: トリガー
+    - from:
+        insId: remove-obj
+        pinId: 結果
+      to:
+        insId: assert-sb05
+        pinId: 実際値
+    # test-12a 最後の assert → test-12b 最初のノード
+    - from:
+        insId: assert-sb05
+        pinId: 完了
+      to:
+        insId: add-obj-2
+        pinId: トリガー
+    # test-12b 内部チェーン
+    - from:
+        insId: add-obj-2
+        pinId: 目標
+      to:
+        insId: get-from-obj-151
+        pinId: 目標
+    - from:
+        insId: get-from-obj-151
+        pinId: 目標ID
+      to:
+        insId: assert-151
+        pinId: 実際値
+    - from:
+        insId: assert-151
+        pinId: 完了
+      to:
+        insId: get-obj
+        pinId: トリガー
+    - from:
+        insId: get-obj
+        pinId: 目標
+      to:
+        insId: get-from-obj-153
+        pinId: 目標
+    - from:
+        insId: get-from-obj-153
+        pinId: 目標ID
+      to:
+        insId: assert-153
+        pinId: 実際値
+    - from:
+        insId: assert-153
+        pinId: 完了
+      to:
+        insId: get-objectives
+        pinId: トリガー
+    - from:
+        insId: get-objectives
+        pinId: 目標一覧
+      to:
+        insId: score-set-2
+        pinId: トリガー
+    - from:
+        insId: score-set-2
+        pinId: 新スコア
+      to:
+        insId: get-scores
+        pinId: トリガー
+    - from:
+        insId: get-scores
+        pinId: スコア一覧
+      to:
+        insId: remove-obj-2
+        pinId: トリガー
+    # test-12b 最後のノード → フロー出力
+    - from:
+        insId: remove-obj-2
+        pinId: 結果
+      to:
+        insId: "__this"
+        pinId: 完了
+  id: AutoScoreboard
+  inputs:
+    トリガー: "required"
+  outputs:
+    完了: {}
+  inputsPosition:
+    トリガー:
+      x: -100
+      y: 200
+  outputsPosition:
+    完了:
+      x: 950
+      y: 3000
+  completionOutputs:
+    - 完了
+  description: |
+    自動スコアボードテスト（TC-151〜157）
+    TC-151〜153: スコアボード作成・スコア設定・取得
+    TC-154〜157: スコアボードクエリ

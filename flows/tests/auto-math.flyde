@@ -1,0 +1,1480 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: 100
+        y: 100
+      id: vec3op-add
+      inputConfig: {}
+      nodeId: Vector3Op
+      config:
+        演算:
+          type: select
+          value: add
+        座標A:
+          type: json
+          value:
+            x: 1
+            y: 2
+            z: 3
+        座標B:
+          type: json
+          value:
+            x: 4
+            y: 5
+            z: 6
+        x:
+          type: number
+          value: 0
+        y:
+          type: number
+          value: 0
+        z:
+          type: number
+          value: 0
+        座標:
+          type: dynamic
+          value: "{{座標}}"
+        倍率:
+          type: number
+          value: 1
+        座標XZ:
+          type: dynamic
+          value: "{{座標XZ}}"
+        Y:
+          type: number
+          value: 64
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 400
+        y: 100
+      id: assert-111
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: json
+          value:
+            x: 5
+            y: 7
+            z: 9
+        比較:
+          type: select
+          value: deep
+        ID:
+          type: string
+          value: TC-111
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 750
+        y: 100
+      id: vec3op-sub
+      inputConfig: {}
+      nodeId: Vector3Op
+      config:
+        演算:
+          type: select
+          value: subtract
+        座標A:
+          type: json
+          value:
+            x: 5
+            y: 7
+            z: 9
+        座標B:
+          type: json
+          value:
+            x: 1
+            y: 2
+            z: 3
+        x:
+          type: number
+          value: 0
+        y:
+          type: number
+          value: 0
+        z:
+          type: number
+          value: 0
+        座標:
+          type: dynamic
+          value: "{{座標}}"
+        倍率:
+          type: number
+          value: 1
+        座標XZ:
+          type: dynamic
+          value: "{{座標XZ}}"
+        Y:
+          type: number
+          value: 64
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1050
+        y: 100
+      id: assert-112
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: json
+          value:
+            x: 4
+            y: 5
+            z: 6
+        比較:
+          type: select
+          value: deep
+        ID:
+          type: string
+          value: TC-112
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1400
+        y: 100
+      id: vec3op-scale
+      inputConfig: {}
+      nodeId: Vector3Op
+      config:
+        演算:
+          type: select
+          value: scale
+        座標:
+          type: json
+          value:
+            x: 2
+            y: 4
+            z: 6
+        倍率:
+          type: number
+          value: 3
+        x:
+          type: number
+          value: 0
+        y:
+          type: number
+          value: 0
+        z:
+          type: number
+          value: 0
+        座標A:
+          type: dynamic
+          value: "{{座標A}}"
+        座標B:
+          type: dynamic
+          value: "{{座標B}}"
+        座標XZ:
+          type: dynamic
+          value: "{{座標XZ}}"
+        Y:
+          type: number
+          value: 64
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1700
+        y: 100
+      id: assert-113
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: json
+          value:
+            x: 6
+            y: 12
+            z: 18
+        比較:
+          type: select
+          value: deep
+        ID:
+          type: string
+          value: TC-113
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 100
+        y: 350
+      id: vec3op-assemble
+      inputConfig: {}
+      nodeId: Vector3Op
+      config:
+        演算:
+          type: select
+          value: assemble
+        x:
+          type: number
+          value: 10
+        y:
+          type: number
+          value: 20
+        z:
+          type: number
+          value: 30
+        座標A:
+          type: dynamic
+          value: "{{座標A}}"
+        座標B:
+          type: dynamic
+          value: "{{座標B}}"
+        座標:
+          type: dynamic
+          value: "{{座標}}"
+        倍率:
+          type: number
+          value: 1
+        座標XZ:
+          type: dynamic
+          value: "{{座標XZ}}"
+        Y:
+          type: number
+          value: 64
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 400
+        y: 350
+      id: assert-114
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: json
+          value:
+            x: 10
+            y: 20
+            z: 30
+        比較:
+          type: select
+          value: deep
+        ID:
+          type: string
+          value: TC-114
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 750
+        y: 350
+      id: vec3op-floor
+      inputConfig: {}
+      nodeId: Vector3Op
+      config:
+        演算:
+          type: select
+          value: floor
+        座標:
+          type: json
+          value:
+            x: 1.7
+            y: 2.3
+            z: 3.9
+        x:
+          type: number
+          value: 0
+        y:
+          type: number
+          value: 0
+        z:
+          type: number
+          value: 0
+        座標A:
+          type: dynamic
+          value: "{{座標A}}"
+        座標B:
+          type: dynamic
+          value: "{{座標B}}"
+        倍率:
+          type: number
+          value: 1
+        座標XZ:
+          type: dynamic
+          value: "{{座標XZ}}"
+        Y:
+          type: number
+          value: 64
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1050
+        y: 350
+      id: assert-115
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: json
+          value:
+            x: 1
+            y: 2
+            z: 3
+        比較:
+          type: select
+          value: deep
+        ID:
+          type: string
+          value: TC-115
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1400
+        y: 350
+      id: vec3op-filly
+      inputConfig: {}
+      nodeId: Vector3Op
+      config:
+        演算:
+          type: select
+          value: fill_y
+        座標XZ:
+          type: json
+          value:
+            x: 5
+            z: 10
+        Y:
+          type: number
+          value: 64
+        x:
+          type: number
+          value: 0
+        y:
+          type: number
+          value: 0
+        z:
+          type: number
+          value: 0
+        座標A:
+          type: dynamic
+          value: "{{座標A}}"
+        座標B:
+          type: dynamic
+          value: "{{座標B}}"
+        座標:
+          type: dynamic
+          value: "{{座標}}"
+        倍率:
+          type: number
+          value: 1
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1700
+        y: 350
+      id: assert-116
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: json
+          value:
+            x: 5
+            y: 64
+            z: 10
+        比較:
+          type: select
+          value: deep
+        ID:
+          type: string
+          value: TC-116
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 100
+        y: 600
+      id: vec3dist
+      inputConfig: {}
+      nodeId: Vector3Distance
+      config:
+        座標A:
+          type: json
+          value:
+            x: 0
+            y: 0
+            z: 0
+        座標B:
+          type: json
+          value:
+            x: 3
+            y: 4
+            z: 0
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 400
+        y: 600
+      id: assert-117
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 5
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-117
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 750
+        y: 600
+      id: vec3tostr
+      inputConfig: {}
+      nodeId: Vector3ToString
+      config:
+        座標:
+          type: json
+          value:
+            x: 1
+            y: 64
+            z: -3
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1050
+        y: 600
+      id: assert-118
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: string
+          value: 1 64 -3
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-118
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1400
+        y: 620
+      id: vec3split
+      inputConfig: {}
+      nodeId: Vector3Split
+      config:
+        座標:
+          type: json
+          value:
+            x: 10
+            y: 20
+            z: 30
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1700
+        y: 550
+      id: assert-119x
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 10
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-119-x
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1700
+        y: 650
+      id: assert-119y
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 20
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-119-y
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1700
+        y: 750
+      id: assert-119z
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 30
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-119-z
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 100
+        y: 950
+      id: clamp-hi
+      inputConfig: {}
+      nodeId: ClampNumber
+      config:
+        値:
+          type: number
+          value: 150
+        最小:
+          type: number
+          value: 0
+        最大:
+          type: number
+          value: 100
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 400
+        y: 950
+      id: assert-120a
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 100
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-120a
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 750
+        y: 950
+      id: clamp-lo
+      inputConfig: {}
+      nodeId: ClampNumber
+      config:
+        値:
+          type: number
+          value: -10
+        最小:
+          type: number
+          value: 0
+        最大:
+          type: number
+          value: 100
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1050
+        y: 950
+      id: assert-120b
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-120b
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1400
+        y: 950
+      id: clamp-in
+      inputConfig: {}
+      nodeId: ClampNumber
+      config:
+        値:
+          type: number
+          value: 50
+        最小:
+          type: number
+          value: 0
+        最大:
+          type: number
+          value: 100
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1700
+        y: 950
+      id: assert-120c
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 50
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-120c
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 100
+        y: 1200
+      id: aabb-create
+      inputConfig: {}
+      nodeId: AABBCreate
+      config:
+        角座標A:
+          type: json
+          value:
+            x: 0
+            y: 0
+            z: 0
+        角座標B:
+          type: json
+          value:
+            x: 5
+            y: 5
+            z: 5
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 400
+        y: 1200
+      id: assert-121
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: json
+          value:
+            min:
+              x: 0
+              y: 0
+              z: 0
+            max:
+              x: 5
+              y: 5
+              z: 5
+        比較:
+          type: select
+          value: deep
+        ID:
+          type: string
+          value: TC-121
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 750
+        y: 1200
+      id: aabb-in-yes
+      inputConfig: {}
+      nodeId: AABBIsInside
+      config:
+        エリア:
+          type: json
+          value:
+            min:
+              x: 0
+              y: 0
+              z: 0
+            max:
+              x: 5
+              y: 5
+              z: 5
+        座標:
+          type: json
+          value:
+            x: 2
+            y: 2
+            z: 2
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1050
+        y: 1200
+      id: assert-122a
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-122a
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1400
+        y: 1200
+      id: aabb-in-no
+      inputConfig: {}
+      nodeId: AABBIsInside
+      config:
+        エリア:
+          type: json
+          value:
+            min:
+              x: 0
+              y: 0
+              z: 0
+            max:
+              x: 5
+              y: 5
+              z: 5
+        座標:
+          type: json
+          value:
+            x: 10
+            y: 10
+            z: 10
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1700
+        y: 1200
+      id: assert-122b
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: false
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-122b
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 100
+        y: 1450
+      id: aabb-translate
+      inputConfig: {}
+      nodeId: AABBTranslate
+      config:
+        エリア:
+          type: json
+          value:
+            min:
+              x: 0
+              y: 0
+              z: 0
+            max:
+              x: 5
+              y: 5
+              z: 5
+        移動量:
+          type: json
+          value:
+            x: 5
+            y: 0
+            z: 0
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 400
+        y: 1450
+      id: assert-123
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: json
+          value:
+            min:
+              x: 5
+              y: 0
+              z: 0
+            max:
+              x: 10
+              y: 5
+              z: 5
+        比較:
+          type: select
+          value: deep
+        ID:
+          type: string
+          value: TC-123
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 750
+        y: 1450
+      id: aabb-int-yes
+      inputConfig: {}
+      nodeId: AABBIntersects
+      config:
+        エリアA:
+          type: json
+          value:
+            min:
+              x: 0
+              y: 0
+              z: 0
+            max:
+              x: 5
+              y: 5
+              z: 5
+        エリアB:
+          type: json
+          value:
+            min:
+              x: 3
+              y: 3
+              z: 3
+            max:
+              x: 8
+              y: 8
+              z: 8
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1050
+        y: 1450
+      id: assert-124a
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: true
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-124a
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1400
+        y: 1450
+      id: aabb-int-no
+      inputConfig: {}
+      nodeId: AABBIntersects
+      config:
+        エリアA:
+          type: json
+          value:
+            min:
+              x: 0
+              y: 0
+              z: 0
+            max:
+              x: 3
+              y: 3
+              z: 3
+        エリアB:
+          type: json
+          value:
+            min:
+              x: 5
+              y: 5
+              z: 5
+            max:
+              x: 8
+              y: 8
+              z: 8
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1700
+        y: 1450
+      id: assert-124b
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: boolean
+          value: false
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-124b
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 100
+        y: 1700
+      id: vec3lerp
+      inputConfig: {}
+      nodeId: Vector3Lerp
+      config:
+        座標A:
+          type: json
+          value:
+            x: 0
+            y: 0
+            z: 0
+        座標B:
+          type: json
+          value:
+            x: 10
+            y: 0
+            z: 0
+        補間値:
+          type: number
+          value: 0.5
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 400
+        y: 1700
+      id: assert-125
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: json
+          value:
+            x: 5
+            y: 0
+            z: 0
+        比較:
+          type: select
+          value: deep
+        ID:
+          type: string
+          value: TC-125
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 750
+        y: 1700
+      id: vec3norm
+      inputConfig: {}
+      nodeId: Vector3Normalize
+      config:
+        座標:
+          type: json
+          value:
+            x: 3
+            y: 0
+            z: 0
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1050
+        y: 1700
+      id: assert-126
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: json
+          value:
+            x: 1
+            y: 0
+            z: 0
+        比較:
+          type: select
+          value: deep
+        ID:
+          type: string
+          value: TC-126
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1400
+        y: 1700
+      id: vec3dot-ortho
+      inputConfig: {}
+      nodeId: Vector3Dot
+      config:
+        座標A:
+          type: json
+          value:
+            x: 1
+            y: 0
+            z: 0
+        座標B:
+          type: json
+          value:
+            x: 0
+            y: 1
+            z: 0
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 1700
+        y: 1700
+      id: assert-127a
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 0
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-127a
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 100
+        y: 1950
+      id: vec3dot-para
+      inputConfig: {}
+      nodeId: Vector3Dot
+      config:
+        座標A:
+          type: json
+          value:
+            x: 1
+            y: 0
+            z: 0
+        座標B:
+          type: json
+          value:
+            x: 1
+            y: 0
+            z: 0
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+    - pos:
+        x: 400
+        y: 1950
+      id: assert-127b
+      inputConfig: {}
+      nodeId: Assert
+      config:
+        期待値:
+          type: number
+          value: 1
+        比較:
+          type: select
+          value: eq
+        ID:
+          type: string
+          value: TC-127b
+        実際値:
+          type: dynamic
+          value: "{{実際値}}"
+        許容差:
+          type: number
+          value: 0.001
+      type: code
+      source:
+        type: file
+        data: ../../build/index.flyde.js
+  connections:
+    - from:
+        insId: vec3op-add
+        pinId: 座標
+      to:
+        insId: assert-111
+        pinId: 実際値
+    - from:
+        insId: vec3op-sub
+        pinId: 座標
+      to:
+        insId: assert-112
+        pinId: 実際値
+    - from:
+        insId: vec3op-scale
+        pinId: 座標
+      to:
+        insId: assert-113
+        pinId: 実際値
+    - from:
+        insId: vec3op-assemble
+        pinId: 座標
+      to:
+        insId: assert-114
+        pinId: 実際値
+    - from:
+        insId: vec3op-floor
+        pinId: 座標
+      to:
+        insId: assert-115
+        pinId: 実際値
+    - from:
+        insId: vec3op-filly
+        pinId: 座標
+      to:
+        insId: assert-116
+        pinId: 実際値
+    - from:
+        insId: vec3dist
+        pinId: 距離
+      to:
+        insId: assert-117
+        pinId: 実際値
+    - from:
+        insId: vec3tostr
+        pinId: 文字列
+      to:
+        insId: assert-118
+        pinId: 実際値
+    - from:
+        insId: vec3split
+        pinId: x
+      to:
+        insId: assert-119x
+        pinId: 実際値
+    - from:
+        insId: vec3split
+        pinId: y
+      to:
+        insId: assert-119y
+        pinId: 実際値
+    - from:
+        insId: vec3split
+        pinId: z
+      to:
+        insId: assert-119z
+        pinId: 実際値
+    - from:
+        insId: clamp-hi
+        pinId: 結果
+      to:
+        insId: assert-120a
+        pinId: 実際値
+    - from:
+        insId: clamp-lo
+        pinId: 結果
+      to:
+        insId: assert-120b
+        pinId: 実際値
+    - from:
+        insId: clamp-in
+        pinId: 結果
+      to:
+        insId: assert-120c
+        pinId: 実際値
+    - from:
+        insId: aabb-create
+        pinId: エリア
+      to:
+        insId: assert-121
+        pinId: 実際値
+    - from:
+        insId: aabb-in-yes
+        pinId: 結果
+      to:
+        insId: assert-122a
+        pinId: 実際値
+    - from:
+        insId: aabb-in-no
+        pinId: 結果
+      to:
+        insId: assert-122b
+        pinId: 実際値
+    - from:
+        insId: aabb-translate
+        pinId: エリア
+      to:
+        insId: assert-123
+        pinId: 実際値
+    - from:
+        insId: aabb-int-yes
+        pinId: 結果
+      to:
+        insId: assert-124a
+        pinId: 実際値
+    - from:
+        insId: aabb-int-no
+        pinId: 結果
+      to:
+        insId: assert-124b
+        pinId: 実際値
+    - from:
+        insId: vec3lerp
+        pinId: 結果
+      to:
+        insId: assert-125
+        pinId: 実際値
+    - from:
+        insId: vec3norm
+        pinId: 結果
+      to:
+        insId: assert-126
+        pinId: 実際値
+    - from:
+        insId: vec3dot-ortho
+        pinId: 値
+      to:
+        insId: assert-127a
+        pinId: 実際値
+    - from:
+        insId: vec3dot-para
+        pinId: 値
+      to:
+        insId: assert-127b
+        pinId: 実際値
+    - from:
+        insId: assert-127b
+        pinId: 完了
+      to:
+        insId: __this
+        pinId: 完了
+  id: AutoMath
+  inputs:
+    トリガー: required
+  outputs:
+    完了: {}
+  inputsPosition:
+    トリガー:
+      x: -100
+      y: 200
+  outputsPosition:
+    完了:
+      x: 950
+      y: 5000
+  completionOutputs:
+    - 完了
+  description: |
+    自動数学ユーティリティテスト（TC-111〜127）

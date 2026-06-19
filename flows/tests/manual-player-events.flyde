@@ -30,66 +30,6 @@ node:
         type: file
         data: ../../build/index.flyde.js
     - pos:
-        x: 350
-        y: 300
-      id: json-011-sender
-      inputConfig: {}
-      nodeId: JSON Stringify
-      config:
-        object:
-          type: dynamic
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 565.1019649505615
-        y: 284.76285552978516
-      id: say-011-sender
-      inputConfig: {}
-      nodeId: RunCommand
-      config:
-        コマンド:
-          type: string
-          value: "say [TC-011 送信者名] {{v}}"
-        トリガー:
-          type: string
-          value: ""
-      type: code
-      source:
-        type: file
-        data: ../../build/index.flyde.js
-    - pos:
-        x: 578.3245134353638
-        y: 426.7331008911133
-      id: json-011-msg
-      inputConfig: {}
-      nodeId: JSON Stringify
-      config:
-        object:
-          type: dynamic
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 780.882286131382
-        y: 443.761962890625
-      id: say-011-msg
-      inputConfig: {}
-      nodeId: RunCommand
-      config:
-        コマンド:
-          type: string
-          value: "say [TC-011 メッセージ] {{v}}"
-        トリガー:
-          type: string
-          value: ""
-      type: code
-      source:
-        type: file
-        data: ../../build/index.flyde.js
-    - pos:
         x: 50
         y: 500
       id: on-travelled
@@ -241,36 +181,6 @@ node:
         type: file
         data: ../../build/index.flyde.js
     - pos:
-        x: 350
-        y: 1100
-      id: json-015
-      inputConfig: {}
-      nodeId: JSON Stringify
-      config:
-        object:
-          type: dynamic
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 550
-        y: 1100
-      id: say-015
-      inputConfig: {}
-      nodeId: RunCommand
-      config:
-        コマンド:
-          type: string
-          value: "say [TC-015 参加者名] {{v}}"
-        トリガー:
-          type: string
-          value: ""
-      type: code
-      source:
-        type: file
-        data: ../../build/index.flyde.js
-    - pos:
         x: 50
         y: 1300
       id: on-leave
@@ -280,36 +190,6 @@ node:
         ワールド:
           type: dynamic
           value: "{{ワールド}}"
-      type: code
-      source:
-        type: file
-        data: ../../build/index.flyde.js
-    - pos:
-        x: 350
-        y: 1300
-      id: json-016
-      inputConfig: {}
-      nodeId: JSON Stringify
-      config:
-        object:
-          type: dynamic
-      type: code
-      source:
-        type: package
-        data: "@flyde/nodes"
-    - pos:
-        x: 550
-        y: 1300
-      id: say-016
-      inputConfig: {}
-      nodeId: RunCommand
-      config:
-        コマンド:
-          type: string
-          value: "say [TC-016 退出者名] {{v}}"
-        トリガー:
-          type: string
-          value: ""
       type: code
       source:
         type: file
@@ -330,7 +210,7 @@ node:
         data: ../../build/index.flyde.js
     - pos:
         x: 350
-        y: 1500
+        y: 1460.6187744140625
       id: run-cmd-017
       inputConfig: {}
       nodeId: RunCommand
@@ -640,30 +520,6 @@ node:
         insId: on-transform
         pinId: ワールド
     - from:
-        insId: on-chat
-        pinId: 送信者名
-      to:
-        insId: json-011-sender
-        pinId: object
-    - from:
-        insId: json-011-sender
-        pinId: json
-      to:
-        insId: say-011-sender
-        pinId: v
-    - from:
-        insId: on-chat
-        pinId: メッセージ
-      to:
-        insId: json-011-msg
-        pinId: object
-    - from:
-        insId: json-011-msg
-        pinId: json
-      to:
-        insId: say-011-msg
-        pinId: v
-    - from:
         insId: on-travelled
         pinId: 移動距離
       to:
@@ -687,30 +543,6 @@ node:
       to:
         insId: assert-014
         pinId: 実際値
-    - from:
-        insId: on-join
-        pinId: ﾌﾟﾚｲﾔｰ名
-      to:
-        insId: json-015
-        pinId: object
-    - from:
-        insId: json-015
-        pinId: json
-      to:
-        insId: say-015
-        pinId: v
-    - from:
-        insId: on-leave
-        pinId: ﾌﾟﾚｲﾔｰ名
-      to:
-        insId: json-016
-        pinId: object
-    - from:
-        insId: json-016
-        pinId: json
-      to:
-        insId: say-016
-        pinId: v
     - from:
         insId: on-chat
         pinId: 送信者名
@@ -747,14 +579,14 @@ node:
       to:
         insId: assert-019
         pinId: 実際値
-  id: TestPlayerEvents
+  id: ManualPlayerEvents
   inputs: {}
   outputs: {}
   inputsPosition: {}
   outputsPosition: {}
   completionOutputs: []
   description: |
-    プレイヤーイベント系テスト（TC-011〜019）チャット1回で複数テストが自動実行
+    手動テスト（プレイヤーイベント系 TC-011〜019）チャット1回で複数テストが自動実行
     TC-011: チャット送信 → MCチャットに送信者名・内容が表示（目視確認）
     TC-012: 歩く → Assert(移動距離 > 0) → ログでPASS確認（自動）
     TC-013: チャット送信 → RunCommand(tp) → Assert(テレポート原因 neq "")（自動）

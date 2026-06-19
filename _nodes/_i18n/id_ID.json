@@ -1,0 +1,2044 @@
+{
+  "MinecraftConnect": {
+    "displayName": "Minecraft Connect",
+    "menuDisplayName": "MC Sambungkan",
+    "description": "Menjalankan server WebSocket dan menyambung ke Minecraft Education Edition",
+    "inputs": {
+      "port": {
+        "name": "port",
+        "description": "Nomor port WebSocket (default: 8080)"
+      }
+    },
+    "outputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Objek World (digunakan secara internal; tidak perlu disambungkan ke node perintah)"
+      },
+      "error": {
+        "name": "galat",
+        "description": "Info galat koneksi"
+      }
+    }
+  },
+  "MinecraftDisconnect": {
+    "displayName": "Minecraft Putuskan",
+    "menuDisplayName": "MC Putuskan",
+    "description": "Memutus koneksi dari Minecraft dan mematikan server WebSocket",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (mis. chat 'stop')"
+      }
+    },
+    "outputs": {}
+  },
+  "GetAgentLocation": {
+    "displayName": "Ambil Posisi Agen",
+    "menuDisplayName": "Posisi Agen",
+    "description": "Mengambil posisi agen saat ini",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "posisi",
+        "description": "Posisi agen {x, y, z}"
+      }
+    }
+  },
+  "GetScoreboardObjectives": {
+    "displayName": "Ambil Tujuan PS",
+    "menuDisplayName": "Tujuan PS",
+    "description": "Mengambil daftar semua tujuan papan skor",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "objectives": {
+        "name": "tujuan",
+        "description": "Larik objek tujuan papan skor"
+      }
+    }
+  },
+  "GetScoreboardObjective": {
+    "displayName": "Ambil Tujuan PS",
+    "menuDisplayName": "Tujuan PS",
+    "description": "Mengambil tujuan papan skor berdasarkan ID-nya",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "objective_id": {
+        "name": "id_tujuan",
+        "description": "ID tujuan papan skor"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "tujuan",
+        "description": "Tujuan papan skor → sambungkan ke node info tujuan PS"
+      }
+    }
+  },
+  "AddScoreboardObjective": {
+    "displayName": "Tambah Tujuan PS",
+    "menuDisplayName": "Tambah Tujuan PS",
+    "description": "Menambahkan tujuan baru ke papan skor",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "objective_id": {
+        "name": "id_tujuan",
+        "description": "ID tujuan papan skor"
+      },
+      "display_name": {
+        "name": "nama_tampilan",
+        "description": "Nama tampilan (opsional)"
+      }
+    },
+    "outputs": {
+      "objective": {
+        "name": "tujuan",
+        "description": "Tujuan yang ditambahkan → sambungkan ke node info tujuan PS"
+      }
+    }
+  },
+  "RemoveScoreboardObjective": {
+    "displayName": "Hapus Tujuan PS",
+    "menuDisplayName": "Hapus Tujuan PS",
+    "description": "Menghapus tujuan papan skor berdasarkan ID-nya",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "objective_id": {
+        "name": "id_tujuan",
+        "description": "ID tujuan papan skor"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "hasil",
+        "description": "Hasil penghapusan"
+      }
+    }
+  },
+  "GetScores": {
+    "displayName": "Ambil Semua Skor",
+    "menuDisplayName": "Semua Skor",
+    "description": "Mengambil semua skor untuk seorang pemain",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "player_name": {
+        "name": "nama_pemain",
+        "description": "Nama pemain"
+      }
+    },
+    "outputs": {
+      "scores": {
+        "name": "skor",
+        "description": "Larik semua skor"
+      }
+    }
+  },
+  "GetScore": {
+    "displayName": "Ambil Skor",
+    "menuDisplayName": "Ambil Skor",
+    "description": "Mengambil skor pemain untuk tujuan tertentu",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "player_name": {
+        "name": "nama_pemain",
+        "description": "Nama pemain"
+      },
+      "objective_id": {
+        "name": "id_tujuan",
+        "description": "ID tujuan papan skor"
+      }
+    },
+    "outputs": {
+      "score": {
+        "name": "skor",
+        "description": "Nilai skor (angka)"
+      }
+    }
+  },
+  "ScoreOperation": {
+    "displayName": "Operasi Skor",
+    "menuDisplayName": "Op. Skor",
+    "description": "Melakukan {{operation}} pada skor pemain",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "operation": {
+        "name": "operasi",
+        "description": "Jenis operasi",
+        "options": {
+          "add": "Tambah",
+          "remove": "Kurangi",
+          "set": "Atur"
+        }
+      },
+      "player_name": {
+        "name": "nama_pemain",
+        "description": "Nama pemain"
+      },
+      "objective_id": {
+        "name": "id_tujuan",
+        "description": "ID tujuan papan skor"
+      },
+      "value": {
+        "name": "nilai",
+        "description": "Nilai untuk operasi"
+      }
+    },
+    "outputs": {
+      "new_score": {
+        "name": "new_score",
+        "description": "Nilai skor baru setelah operasi"
+      }
+    }
+  },
+  "OnPlayerChat": {
+    "displayName": "Saat Pemain Chat",
+    "menuDisplayName": "Chat",
+    "description": "Terpicu saat pemain mengirim pesan chat",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "pengirim",
+        "description": "Nama pemain yang mengirim chat"
+      },
+      "message": {
+        "name": "pesan",
+        "description": "Isi pesan chat"
+      }
+    }
+  },
+  "OnPlayerJoin": {
+    "displayName": "Saat Pemain Bergabung",
+    "menuDisplayName": "Bergabung",
+    "description": "Terpicu saat pemain bergabung ke dunia",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "nama_pemain",
+        "description": "Nama pemain yang bergabung"
+      }
+    }
+  },
+  "OnPlayerLeave": {
+    "displayName": "Saat Pemain Keluar",
+    "menuDisplayName": "Keluar",
+    "description": "Terpicu saat pemain keluar dari dunia",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player_name": {
+        "name": "nama_pemain",
+        "description": "Nama pemain yang keluar"
+      }
+    }
+  },
+  "OnPlayerTravelled": {
+    "displayName": "Saat Pemain Bergerak",
+    "menuDisplayName": "Bergerak",
+    "description": "Terpicu setiap kali pemain bergerak",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "jarak",
+        "description": "Jarak yang ditempuh (meter)"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      },
+      "underwater": {
+        "name": "bawah_air",
+        "description": "Apakah bergerak di bawah air (true/false)"
+      },
+      "biome": {
+        "name": "bioma",
+        "description": "Nama bioma saat ini"
+      },
+      "travel_method": {
+        "name": "travel_method",
+        "description": "Nama metode pergerakan"
+      }
+    }
+  },
+  "OnPlayerTeleported": {
+    "displayName": "Saat Pemain Berteleport",
+    "menuDisplayName": "Berteleport",
+    "description": "Terpicu saat pemain berteleport",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      },
+      "teleport_cause": {
+        "name": "teleport_cause",
+        "description": "Nama penyebab teleportasi"
+      },
+      "distance": {
+        "name": "jarak",
+        "description": "Jarak teleportasi (meter)"
+      }
+    }
+  },
+  "OnPlayerTitle": {
+    "displayName": "Saat Pemain Dapat Judul",
+    "menuDisplayName": "Judul",
+    "description": "Terpicu saat pemain menerima judul",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "pengirim",
+        "description": "Nama pemain yang mengirim judul"
+      },
+      "message": {
+        "name": "pesan",
+        "description": "Isi pesan judul"
+      },
+      "recipient": {
+        "name": "penerima",
+        "description": "Nama pemain yang menerima judul"
+      }
+    }
+  },
+  "OnPlayerMessage": {
+    "displayName": "Saat Pemain Berpesan",
+    "menuDisplayName": "Pesan",
+    "description": "Terpicu saat pemain mengirim jenis pesan apa pun",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "sender": {
+        "name": "pengirim",
+        "description": "Nama pemain yang mengirim pesan"
+      },
+      "message": {
+        "name": "pesan",
+        "description": "Isi pesan"
+      },
+      "type": {
+        "name": "jenis",
+        "description": "Jenis pesan (chat / tell dll.)"
+      },
+      "recipient": {
+        "name": "penerima",
+        "description": "[nullable] Nama penerima. null untuk pesan selain tell"
+      }
+    }
+  },
+  "OnPlayerBounced": {
+    "displayName": "Saat Pemain Memantul",
+    "menuDisplayName": "Memantul",
+    "description": "Terpicu saat pemain memantul di blok lendir atau sejenisnya",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "height": {
+        "name": "tinggi",
+        "description": "Tinggi pantulan (blok)"
+      },
+      "block": {
+        "name": "blok",
+        "description": "Objek BlockType (blok yang dipantuli) → sambungkan ke node info blok"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      }
+    }
+  },
+  "OnBlockBroken": {
+    "displayName": "Saat Blok Dipecah",
+    "menuDisplayName": "Pecah Blok",
+    "description": "Terpicu saat blok dipecah",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blok",
+        "description": "Objek BlockType → sambungkan ke node info blok"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      },
+      "destroy_method": {
+        "name": "destroy_method",
+        "description": "Nama metode penghancuran"
+      },
+      "item": {
+        "name": "item",
+        "description": "[nullable] Item yang dipegang sebelum dipecah. null jika tangan kosong"
+      }
+    }
+  },
+  "OnBlockPlaced": {
+    "displayName": "Saat Blok Diletakkan",
+    "menuDisplayName": "Letakkan Blok",
+    "description": "Terpicu saat blok diletakkan",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "block": {
+        "name": "blok",
+        "description": "Objek BlockType → sambungkan ke node info blok"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      },
+      "underwater": {
+        "name": "bawah_air",
+        "description": "Apakah diletakkan di bawah air (true/false)"
+      },
+      "place_method": {
+        "name": "place_method",
+        "description": "Nama metode peletakan"
+      },
+      "item": {
+        "name": "item",
+        "description": "Item yang dipegang sebelum diletakkan → sambungkan ke node info item"
+      }
+    }
+  },
+  "OnItemInteracted": {
+    "displayName": "Saat Item Digunakan",
+    "menuDisplayName": "Item Digunakan",
+    "description": "Terpicu saat pemain menggunakan item",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "item",
+        "description": "[nullable] Item yang dipegang. null jika tidak ada item"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      },
+      "use_method": {
+        "name": "use_method",
+        "description": "Nama metode penggunaan item"
+      }
+    }
+  },
+  "OnItemAcquired": {
+    "displayName": "Saat Item Diperoleh",
+    "menuDisplayName": "Item Diperoleh",
+    "description": "Terpicu saat pemain memperoleh item",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "count": {
+        "name": "jumlah",
+        "description": "Jumlah item yang diperoleh"
+      },
+      "item": {
+        "name": "item",
+        "description": "Jenis item → sambungkan ke node info jenis item"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      },
+      "acq_method": {
+        "name": "acq_method",
+        "description": "Nama metode perolehan item"
+      }
+    }
+  },
+  "OnItemCrafted": {
+    "displayName": "Saat Item Dibuat",
+    "menuDisplayName": "Dibuat",
+    "description": "Terpicu saat pemain membuat item",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "item",
+        "description": "Tumpukan item (item yang dibuat) → sambungkan ke node info tumpukan item"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      },
+      "used_table": {
+        "name": "pakai_meja",
+        "description": "Apakah meja kerajinan digunakan (true/false)"
+      }
+    }
+  },
+  "OnItemEquipped": {
+    "displayName": "Saat Item Dipasang",
+    "menuDisplayName": "Dipasang",
+    "description": "Terpicu saat pemain memasang item",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "item",
+        "description": "Tumpukan item → sambungkan ke node info tumpukan item"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      },
+      "equip_slot": {
+        "name": "slot_pasang",
+        "description": "Nama slot perlengkapan"
+      }
+    }
+  },
+  "OnItemSmelted": {
+    "displayName": "Saat Item Dilebur",
+    "menuDisplayName": "Dilebur",
+    "description": "Terpicu saat pemain melebur item",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "item",
+        "description": "Jenis item (yang dilebur) → sambungkan ke node info jenis item"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      },
+      "fuel": {
+        "name": "bahan_bakar",
+        "description": "Jenis item (bahan bakar) → sambungkan ke node info jenis item"
+      }
+    }
+  },
+  "OnItemTraded": {
+    "displayName": "Saat Item Ditukar",
+    "menuDisplayName": "Ditukar",
+    "description": "Terpicu saat pemain menyelesaikan perdagangan dengan penduduk desa",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "item": {
+        "name": "item",
+        "description": "Tumpukan item (item yang diterima) → sambungkan ke node info tumpukan item"
+      },
+      "villager": {
+        "name": "penduduk_desa",
+        "description": "Objek WorldVillager → sambungkan ke node info penduduk desa"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      },
+      "payment_a": {
+        "name": "pembayaran_a",
+        "description": "Jenis item (pembayaran A) → sambungkan ke node info jenis item"
+      },
+      "payment_b": {
+        "name": "pembayaran_b",
+        "description": "[nullable] Jenis item (pembayaran B). null jika tidak digunakan"
+      },
+      "player_xp": {
+        "name": "zamrud_pemain",
+        "description": "Zamrud yang dimiliki pemain setelah perdagangan"
+      },
+      "villager_xp": {
+        "name": "zamrud_penduduk",
+        "description": "Zamrud yang dimiliki penduduk desa setelah perdagangan"
+      }
+    }
+  },
+  "OnMobInteracted": {
+    "displayName": "Saat Interaksi Mob",
+    "menuDisplayName": "Interaksi Mob",
+    "description": "Terpicu saat pemain berinteraksi dengan mob",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "mob": {
+        "name": "mob",
+        "description": "Objek WorldMob (mob yang diinteraksikan)"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      },
+      "interaction_type": {
+        "name": "interaction_type",
+        "description": "Nama jenis interaksi mob"
+      }
+    }
+  },
+  "OnTargetBlockHit": {
+    "displayName": "Saat Target Kena",
+    "menuDisplayName": "Target Kena",
+    "description": "Terpicu saat blok target terkena",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "strength": {
+        "name": "kekuatan",
+        "description": "Kekuatan sinyal redstone (0–15)"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      }
+    }
+  },
+  "RunCommand": {
+    "displayName": "Jalankan Perintah",
+    "menuDisplayName": "Jalankan Cmd",
+    "description": "Menjalankan perintah Minecraft apa pun (tanpa / di awal)",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "command": {
+        "name": "perintah",
+        "description": "Perintah Minecraft yang dijalankan (tanpa / di awal)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Mengirim true saat selesai"
+      }
+    }
+  },
+  "GetGameTime": {
+    "displayName": "Ambil Waktu Game",
+    "menuDisplayName": "Waktu Game",
+    "description": "Mengambil waktu game ({{type}})",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "type": {
+        "name": "jenis",
+        "description": "Jenis waktu untuk dikueri",
+        "options": {
+          "time": "Waktu (0–24000)",
+          "day": "Jumlah hari",
+          "tick": "Jumlah tick"
+        }
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "nilai",
+        "description": "Nilai waktu yang dikueri"
+      }
+    }
+  },
+  "IsDaytime": {
+    "displayName": "Apakah Siang",
+    "menuDisplayName": "Siang?",
+    "description": "Memeriksa apakah saat ini siang (time < 12000)",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "is_day": {
+        "name": "siang",
+        "description": "true jika siang, false jika malam"
+      }
+    }
+  },
+  "GetWeather": {
+    "displayName": "Ambil Cuaca",
+    "menuDisplayName": "Cuaca",
+    "description": "Mengambil cuaca saat ini",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "weather": {
+        "name": "cuaca",
+        "description": "Nama cuaca (\"Clear\" / \"Rain\" / \"Thunder\")"
+      }
+    }
+  },
+  "FillBlocks": {
+    "displayName": "Isi dengan Blok",
+    "menuDisplayName": "Isi",
+    "description": "Mengisi area antara dua posisi dengan blok tertentu",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "from": {
+        "name": "dari",
+        "description": "Sudut awal {x, y, z}"
+      },
+      "to": {
+        "name": "ke",
+        "description": "Sudut akhir {x, y, z}"
+      },
+      "block_id": {
+        "name": "id_blok",
+        "description": "ID blok (mis. minecraft:stone)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Mengirim true saat pengisian selesai"
+      },
+      "count": {
+        "name": "jumlah",
+        "description": "Jumlah blok yang diisi"
+      }
+    }
+  },
+  "GetTopSolidBlock": {
+    "displayName": "Ambil Tinggi Tanah",
+    "menuDisplayName": "Tanah",
+    "description": "Mengambil posisi dan jenis blok padat teratas",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "posisi",
+        "description": "Posisi tanah {x, y, z}"
+      },
+      "block_name": {
+        "name": "nama_blok",
+        "description": "Nama blok padat teratas"
+      }
+    }
+  },
+  "WorldQuery": {
+    "displayName": "Kueri Dunia",
+    "menuDisplayName": "Kueri Dunia",
+    "description": "Mengueri daftar {{type}} di dunia",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "type": {
+        "name": "jenis",
+        "description": "Kategori untuk dikueri",
+        "options": {
+          "mob": "Entitas",
+          "block": "Blok",
+          "item": "Item"
+        }
+      }
+    },
+    "outputs": {
+      "list": {
+        "name": "daftar",
+        "description": "Daftar hasil kueri"
+      }
+    }
+  },
+  "GetPlayerLocation": {
+    "displayName": "Ambil Posisi Pemain",
+    "menuDisplayName": "Posisi Pemain",
+    "description": "Mengambil posisi pemain saat ini dan arah hadapnya",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "posisi",
+        "description": "Posisi pemain {x, y, z}"
+      },
+      "direction": {
+        "name": "arah",
+        "description": "Arah hadap pemain (rotasi sumbu Y)"
+      }
+    }
+  },
+  "GetPlayerOrientation": {
+    "displayName": "Ambil Orientasi Pemain",
+    "menuDisplayName": "Arah Pemain",
+    "description": "Mengambil sudut kamera pemain (pitch dan yaw)",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "angle": {
+        "name": "sudut",
+        "description": "Sudut hadap pemain {x, y} (derajat)"
+      }
+    }
+  },
+  "GetPlayerTags": {
+    "displayName": "Ambil Tag Pemain",
+    "menuDisplayName": "Tag Pemain",
+    "description": "Mengambil semua tag yang terlampir pada pemain",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "tags": {
+        "name": "tag",
+        "description": "Larik string nama tag"
+      }
+    }
+  },
+  "PlayerHasTag": {
+    "displayName": "Pemain Punya Tag",
+    "menuDisplayName": "Punya Tag?",
+    "description": "Memeriksa apakah pemain memiliki tag tertentu",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "tag": {
+        "name": "tag",
+        "description": "Nama tag untuk diperiksa"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "hasil",
+        "description": "true jika pemain memiliki tag"
+      }
+    }
+  },
+  "GetPlayerLevel": {
+    "displayName": "Ambil Level Pemain",
+    "menuDisplayName": "Level Pemain",
+    "description": "Mengambil level pengalaman pemain saat ini",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "level": {
+        "name": "level",
+        "description": "Level pemain (angka)"
+      }
+    }
+  },
+  "GetGameMode": {
+    "displayName": "Ambil Mode Game",
+    "menuDisplayName": "Mode Game",
+    "description": "Mengambil mode game pemain saat ini",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "game_mode": {
+        "name": "mode_game",
+        "description": "Nama mode game (mis. \"Survival\")"
+      }
+    }
+  },
+  "GetPlayerAbilities": {
+    "displayName": "Ambil Kemampuan Pemain",
+    "menuDisplayName": "Kemampuan",
+    "description": "Mengambil pengaturan kemampuan pemain saat ini",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "abilities": {
+        "name": "kemampuan",
+        "description": "Objek kemampuan pemain"
+      }
+    }
+  },
+  "GetPlayers": {
+    "displayName": "Ambil Pemain",
+    "menuDisplayName": "Pemain",
+    "description": "Mengambil daftar semua pemain di dunia",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "players": {
+        "name": "pemain",
+        "description": "Larik objek pemain"
+      }
+    }
+  },
+  "GetLocalPlayer": {
+    "displayName": "Ambil Pemain Lokal",
+    "menuDisplayName": "Pemain Lokal",
+    "description": "Mengambil objek pemain lokal (diri sendiri)",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "player": {
+        "name": "pemain",
+        "description": "Objek pemain lokal"
+      }
+    }
+  },
+  "GetFromEntity": {
+    "displayName": "Ambil dari Entitas",
+    "menuDisplayName": "Info Entitas",
+    "description": "Mengekstrak posisi, arah, dimensi, dan bidang lain dari objek entitas",
+    "inputs": {
+      "entity": {
+        "name": "entitas",
+        "description": "Objek pemain atau penduduk desa (keluaran player / villager)"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "posisi",
+        "description": "Posisi entitas (position)"
+      },
+      "direction": {
+        "name": "arah",
+        "description": "Rotasi sumbu Y (yRot)"
+      },
+      "dimension": {
+        "name": "dimensi",
+        "description": "Nomor dimensi (dimension)"
+      },
+      "type": {
+        "name": "jenis",
+        "description": "String jenis (type)"
+      },
+      "variant": {
+        "name": "varian",
+        "description": "Nomor varian (variant)"
+      },
+      "ID": {
+        "name": "ID",
+        "description": "Nomor ID entitas (id)"
+      }
+    }
+  },
+  "GetFromPlayerSnapshot": {
+    "displayName": "Ambil dari Pemain",
+    "menuDisplayName": "Info Pemain",
+    "description": "Mengekstrak nama, warna, dan info entitas dari objek snapshot pemain",
+    "inputs": {
+      "player": {
+        "name": "pemain",
+        "description": "Objek pemain dari keluaran player node peristiwa"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nama",
+        "description": "Nama pemain (name)"
+      },
+      "color": {
+        "name": "warna",
+        "description": "Warna penanda peta (color)"
+      },
+      "entity": {
+        "name": "entitas",
+        "description": "Sambungkan ke node info entitas"
+      }
+    }
+  },
+  "GetFromItemType": {
+    "displayName": "Ambil dari Jenis Item",
+    "menuDisplayName": "Info Jenis Item",
+    "description": "Mengekstrak ID item dan nilai data dari objek jenis item",
+    "inputs": {
+      "item": {
+        "name": "item",
+        "description": "Jenis item (keluaran item dari peristiwa perolehan / peleburan)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_item",
+        "description": "String ID item (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Nilai data (data)"
+      }
+    }
+  },
+  "GetFromItemStack": {
+    "displayName": "Ambil dari Tumpukan Item",
+    "menuDisplayName": "Info Tumpukan Item",
+    "description": "Mengekstrak ID item, jumlah, jumlah maks, dan nilai data dari objek tumpukan item",
+    "inputs": {
+      "item": {
+        "name": "item",
+        "description": "Tumpukan item (keluaran item dari peristiwa penggunaan / pemasangan / pembuatan / perdagangan)"
+      }
+    },
+    "outputs": {
+      "item_id": {
+        "name": "id_item",
+        "description": "String ID item (typeId)"
+      },
+      "count": {
+        "name": "jumlah",
+        "description": "Ukuran tumpukan (amount)"
+      },
+      "max_count": {
+        "name": "jumlah_maks",
+        "description": "Ukuran tumpukan maks (maxAmount)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Nilai data (data)"
+      }
+    }
+  },
+  "GetFromBlockType": {
+    "displayName": "Ambil dari Jenis Blok",
+    "menuDisplayName": "Info Blok",
+    "description": "Mengekstrak ID blok dan nilai data dari objek jenis blok",
+    "inputs": {
+      "block": {
+        "name": "blok",
+        "description": "Objek jenis blok (keluaran block dari peristiwa block / bounce)"
+      }
+    },
+    "outputs": {
+      "block_id": {
+        "name": "id_blok",
+        "description": "String ID blok (id)"
+      },
+      "data": {
+        "name": "data",
+        "description": "Nilai data (data)"
+      }
+    }
+  },
+  "GetFromScoreboardObjective": {
+    "displayName": "Ambil dari Tujuan PS",
+    "menuDisplayName": "Info Tujuan PS",
+    "description": "Mengekstrak ID dan nama tampilan dari objek tujuan papan skor",
+    "inputs": {
+      "objective": {
+        "name": "tujuan",
+        "description": "Tujuan dari node tambah / ambil tujuan"
+      }
+    },
+    "outputs": {
+      "objective_id": {
+        "name": "id_tujuan",
+        "description": "String ID tujuan (id)"
+      },
+      "display_name": {
+        "name": "nama_tampilan",
+        "description": "Nama tampilan (displayName)"
+      }
+    }
+  },
+  "GetFromMob": {
+    "displayName": "Ambil dari Mob",
+    "menuDisplayName": "Info Mob",
+    "description": "Mengekstrak nomor jenis, warna, dan varian dari objek mob",
+    "inputs": {
+      "mob": {
+        "name": "mob",
+        "description": "Objek mob (keluaran mob dari peristiwa interaksi mob)"
+      }
+    },
+    "outputs": {
+      "type": {
+        "name": "jenis",
+        "description": "Nomor jenis mob (type)"
+      },
+      "color": {
+        "name": "warna",
+        "description": "Nomor warna (color)"
+      },
+      "variant": {
+        "name": "varian",
+        "description": "Nomor varian (variant)"
+      }
+    }
+  },
+  "GetFromVillager": {
+    "displayName": "Ambil dari Penduduk Desa",
+    "menuDisplayName": "Info Penduduk",
+    "description": "Mengekstrak nama, peringkat, dan info entitas dari objek penduduk desa",
+    "inputs": {
+      "villager": {
+        "name": "penduduk_desa",
+        "description": "Objek penduduk desa (keluaran villager dari peristiwa perdagangan)"
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nama",
+        "description": "Nama penduduk desa (trader.name)"
+      },
+      "rank": {
+        "name": "peringkat",
+        "description": "Peringkat dagang (trader.tier)"
+      },
+      "entity": {
+        "name": "entitas",
+        "description": "Sambungkan ke node info entitas"
+      }
+    }
+  },
+  "Selector": {
+    "displayName": "Pemilih",
+    "menuDisplayName": "Pemilih",
+    "description": "Memilih dari daftar {{type}}",
+    "inputs": {
+      "type": {
+        "name": "jenis",
+        "description": "Kategori untuk dipilih",
+        "options": {
+          "block": "🧱 Blok",
+          "item": "🎒 Item",
+          "mob": "🐾 Mob",
+          "TravelMethod": "🚶 Metode Pergerakan",
+          "TeleportCause": "✨ Penyebab Teleportasi",
+          "MobInteraction": "🐄 Interaksi Mob",
+          "ItemUseMethod": "🤚 Metode Penggunaan Item",
+          "ItemAcqMethod": "📦 Metode Perolehan",
+          "EquipSlot": "🪖 Slot Perlengkapan",
+          "BlockBreakMethod": "⛏️ Metode Pemecahan",
+          "BlockPlaceMethod": "🏗️ Metode Peletakan"
+        }
+      },
+      "block": {
+        "name": "blok",
+        "description": "ID blok"
+      },
+      "item": {
+        "name": "item",
+        "description": "ID item"
+      },
+      "mob": {
+        "name": "mob",
+        "description": "ID mob (entitas)"
+      },
+      "TravelMethod": {
+        "name": "travel",
+        "description": "Metode pergerakan"
+      },
+      "TeleportCause": {
+        "name": "tp_cause",
+        "description": "Penyebab teleportasi"
+      },
+      "MobInteraction": {
+        "name": "mob_interact",
+        "description": "Jenis interaksi mob"
+      },
+      "ItemUseMethod": {
+        "name": "item_use",
+        "description": "Metode penggunaan item"
+      },
+      "ItemAcqMethod": {
+        "name": "item_acq",
+        "description": "Metode perolehan item"
+      },
+      "EquipSlot": {
+        "name": "slot_pasang",
+        "description": "Slot perlengkapan"
+      },
+      "BlockBreakMethod": {
+        "name": "metode_pemecahan",
+        "description": "Metode pemecahan blok"
+      },
+      "BlockPlaceMethod": {
+        "name": "place_method",
+        "description": "Metode peletakan blok"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "nilai",
+        "description": "ID atau nilai enum yang dipilih"
+      }
+    }
+  },
+  "ToJa": {
+    "displayName": "Nama Lokal",
+    "menuDisplayName": "Nama Lokal",
+    "description": "Mengonversi {{type}} ke nama lokal",
+    "inputs": {
+      "value": {
+        "name": "nilai",
+        "description": "ID Minecraft (mis. \"minecraft:stone\") atau nilai peristiwa (mis. \"Walk\")"
+      },
+      "type": {
+        "name": "jenis",
+        "description": "Kategori untuk dikonversi",
+        "options": {
+          "block": "ID blok",
+          "item": "ID item",
+          "mob": "ID mob",
+          "TravelMethod": "Metode Pergerakan",
+          "TeleportCause": "Penyebab Teleportasi",
+          "MobInteraction": "Interaksi Mob",
+          "ItemUseMethod": "Metode Penggunaan Item",
+          "ItemAcqMethod": "Metode Perolehan",
+          "EquipSlot": "Slot Perlengkapan",
+          "BlockBreakMethod": "Metode Pemecahan Blok",
+          "BlockPlaceMethod": "Metode Peletakan Blok"
+        }
+      }
+    },
+    "outputs": {
+      "name": {
+        "name": "nama",
+        "description": "Nama terlokalisasi (mengembalikan nilai masukan jika tidak ditemukan)"
+      }
+    }
+  },
+  "Vector3Op": {
+    "displayName": "Operasi Vector3",
+    "menuDisplayName": "Op. Vec3",
+    "description": "Melakukan {{op}} pada posisi 3D",
+    "inputs": {
+      "op": {
+        "name": "op",
+        "description": "Jenis operasi",
+        "options": {
+          "assemble": "🔧 Rakit",
+          "add": "➕ Tambah",
+          "subtract": "➖ Kurangi",
+          "scale": "✖️ Skala",
+          "floor": "⬇️ Bulatkan Bawah",
+          "ceil": "⬆️ Bulatkan Atas",
+          "fill_y": "📐 Isi Y"
+        }
+      },
+      "x": {
+        "name": "x",
+        "description": "Koordinat X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Koordinat Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Koordinat Z"
+      },
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Posisi dasar {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Posisi lain {x,y,z}"
+      },
+      "position": {
+        "name": "posisi",
+        "description": "Posisi {x,y,z}"
+      },
+      "scale": {
+        "name": "skala",
+        "description": "Pengali skalar (mis. 2 untuk dua kali lipat)"
+      },
+      "pos_xz": {
+        "name": "pos_xz",
+        "description": "Posisi 2D {x,z}"
+      },
+      "Y": {
+        "name": "Y",
+        "description": "Nilai koordinat Y"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "hasil",
+        "description": "Posisi hasil {x,y,z}"
+      }
+    }
+  },
+  "Vector3Distance": {
+    "displayName": "Jarak Vector3",
+    "menuDisplayName": "Jarak",
+    "description": "Menghitung jarak Euklides antara dua posisi 3D",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Posisi awal {x,y,z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Posisi akhir {x,y,z}"
+      }
+    },
+    "outputs": {
+      "distance": {
+        "name": "jarak",
+        "description": "Jarak antara dua titik (meter)"
+      }
+    }
+  },
+  "Vector3ToString": {
+    "displayName": "Vector3 ke String",
+    "menuDisplayName": "Vec3→String",
+    "description": "Mengonversi objek posisi ke string berformat \"x y z\"",
+    "inputs": {
+      "position": {
+        "name": "posisi",
+        "description": "Posisi untuk dikonversi {x,y,z}"
+      }
+    },
+    "outputs": {
+      "text": {
+        "name": "teks",
+        "description": "String dalam format \"x y z\""
+      }
+    }
+  },
+  "Vector3Split": {
+    "displayName": "Pisah Vector3",
+    "menuDisplayName": "Pisah Vec3",
+    "description": "Memisahkan objek posisi menjadi nilai x, y, dan z terpisah",
+    "inputs": {
+      "position": {
+        "name": "posisi",
+        "description": "Posisi untuk dipisah {x,y,z}"
+      }
+    },
+    "outputs": {
+      "x": {
+        "name": "x",
+        "description": "Koordinat X"
+      },
+      "y": {
+        "name": "y",
+        "description": "Koordinat Y"
+      },
+      "z": {
+        "name": "z",
+        "description": "Koordinat Z"
+      }
+    }
+  },
+  "ClampNumber": {
+    "displayName": "Batasi Angka",
+    "menuDisplayName": "Batasi",
+    "description": "Membatasi angka antara nilai minimum dan maksimum",
+    "inputs": {
+      "value": {
+        "name": "nilai",
+        "description": "Angka untuk dibatasi"
+      },
+      "min": {
+        "name": "min",
+        "description": "Batas bawah"
+      },
+      "max": {
+        "name": "maks",
+        "description": "Batas atas"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "hasil",
+        "description": "Nilai yang dibatasi"
+      }
+    }
+  },
+  "AABBCreate": {
+    "displayName": "Buat Area",
+    "menuDisplayName": "Buat AABB",
+    "description": "Membuat kotak pembatas sejajar sumbu (AABB) dari dua posisi sudut",
+    "inputs": {
+      "corner_a": {
+        "name": "sudut_a",
+        "description": "Sudut area 1 {x,y,z} (urutan tidak penting)"
+      },
+      "corner_b": {
+        "name": "sudut_b",
+        "description": "Sudut area 2 {x,y,z} (urutan tidak penting)"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "area",
+        "description": "Objek area AABB {min, max}"
+      }
+    }
+  },
+  "AABBIsInside": {
+    "displayName": "Apakah di Area",
+    "menuDisplayName": "Dalam AABB",
+    "description": "Memeriksa apakah posisi berada di dalam area AABB",
+    "inputs": {
+      "area": {
+        "name": "area",
+        "description": "Area AABB {min, max}"
+      },
+      "position": {
+        "name": "posisi",
+        "description": "Posisi untuk diuji {x,y,z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "hasil",
+        "description": "true jika posisi berada di dalam area"
+      }
+    }
+  },
+  "OnPlayerTransform": {
+    "displayName": "Saat Transformasi Pemain",
+    "menuDisplayName": "TransfPemain",
+    "description": "Terpicu saat posisi atau rotasi pemain berubah (frekuensi tinggi)",
+    "inputs": {
+      "world": {
+        "name": "dunia",
+        "description": "Keluaran World dari node MinecraftConnect"
+      }
+    },
+    "outputs": {
+      "position": {
+        "name": "posisi",
+        "description": "Posisi pemain {x, y, z}"
+      },
+      "direction": {
+        "name": "arah",
+        "description": "Arah hadap pemain (rotasi sumbu Y)"
+      },
+      "player": {
+        "name": "pemain",
+        "description": "Objek WorldPlayer → sambungkan ke node info pemain"
+      }
+    }
+  },
+  "AgentMove": {
+    "displayName": "Gerakkan Agen",
+    "menuDisplayName": "AgentMove",
+    "description": "Menggerakkan agen {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "direction": {
+        "name": "arah",
+        "description": "Arah gerakan",
+        "options": {
+          "forward": "Maju",
+          "back": "Mundur",
+          "left": "Kiri",
+          "right": "Kanan",
+          "up": "Atas",
+          "down": "Bawah"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Mengirim true setelah bergerak"
+      }
+    }
+  },
+  "AgentTurn": {
+    "displayName": "Putar Agen",
+    "menuDisplayName": "AgentTurn",
+    "description": "Memutar agen {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "direction": {
+        "name": "arah",
+        "description": "Arah putaran",
+        "options": {
+          "left": "Kiri",
+          "right": "Kanan"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Mengirim true setelah berputar"
+      }
+    }
+  },
+  "AgentTeleport": {
+    "displayName": "Teleport Agen",
+    "menuDisplayName": "AgenTP",
+    "description": "Memteleportasi agen ke suatu posisi (kosongkan untuk menggunakan lokasi pemain saat ini)",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "position": {
+        "name": "posisi",
+        "description": "Posisi tujuan {x, y, z}"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Mengirim true setelah berteleport"
+      }
+    }
+  },
+  "AgentAction": {
+    "displayName": "Aksi Agen",
+    "menuDisplayName": "AgentAction",
+    "description": "Agen melakukan {{action}} (arah: {{direction}})",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "action": {
+        "name": "aksi",
+        "description": "Aksi untuk dilakukan",
+        "options": {
+          "attack": "Serang",
+          "destroyBlock": "Hancurkan",
+          "till": "Bajak",
+          "dropAllItems": "Jatuhkan Semua"
+        }
+      },
+      "direction": {
+        "name": "arah",
+        "description": "Arah aksi",
+        "options": {
+          "forward": "Maju",
+          "back": "Mundur",
+          "left": "Kiri",
+          "right": "Kanan",
+          "up": "Atas",
+          "down": "Bawah"
+        }
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Mengirim true saat selesai"
+      }
+    }
+  },
+  "AgentPlaceBlock": {
+    "displayName": "Agen Meletakkan Blok",
+    "menuDisplayName": "AgenLetak",
+    "description": "Meletakkan blok dari slot {{slot}} ke arah {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "direction": {
+        "name": "arah",
+        "description": "Arah peletakan",
+        "options": {
+          "forward": "Maju",
+          "back": "Mundur",
+          "left": "Kiri",
+          "right": "Kanan",
+          "up": "Atas",
+          "down": "Bawah"
+        }
+      },
+      "slot": {
+        "name": "slot",
+        "description": "Nomor slot inventaris (1–27)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Mengirim true setelah diletakkan"
+      }
+    }
+  },
+  "AgentDropItem": {
+    "displayName": "Agen Menjatuhkan Item",
+    "menuDisplayName": "AgenJatuh",
+    "description": "Menjatuhkan item dari slot {{slot}} ke arah {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "direction": {
+        "name": "arah",
+        "description": "Arah penjatuhan",
+        "options": {
+          "forward": "Maju",
+          "back": "Mundur",
+          "left": "Kiri",
+          "right": "Kanan",
+          "up": "Atas",
+          "down": "Bawah"
+        }
+      },
+      "slot": {
+        "name": "slot",
+        "description": "Nomor slot inventaris (1–27)"
+      },
+      "amount": {
+        "name": "jumlah",
+        "description": "Jumlah item untuk dijatuhkan"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Mengirim true setelah dijatuhkan"
+      }
+    }
+  },
+  "AgentMoveItem": {
+    "displayName": "Agen Memindahkan Item",
+    "menuDisplayName": "AgenPindahItem",
+    "description": "Memindahkan item antar slot di inventaris agen",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "from_slot": {
+        "name": "slot_sumber",
+        "description": "Nomor slot sumber (1–27)"
+      },
+      "to_slot": {
+        "name": "slot_tujuan",
+        "description": "Nomor slot tujuan (1–27)"
+      },
+      "amount": {
+        "name": "jumlah",
+        "description": "Jumlah item untuk dipindahkan"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Mengirim true setelah bergerak"
+      }
+    }
+  },
+  "AgentSetItem": {
+    "displayName": "Agen Mengatur Item",
+    "menuDisplayName": "AgenAturItem",
+    "description": "Mengatur item di slot inventaris agen yang ditentukan",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "slot": {
+        "name": "slot",
+        "description": "Nomor slot untuk diatur (1–27)"
+      },
+      "item_id": {
+        "name": "id_item",
+        "description": "ID item (mis. minecraft:apple)"
+      },
+      "amount": {
+        "name": "jumlah",
+        "description": "Jumlah item untuk diatur"
+      },
+      "data": {
+        "name": "data",
+        "description": "Nilai data (biasanya 0)"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Mengirim true setelah diatur"
+      }
+    }
+  },
+  "AgentCollect": {
+    "displayName": "Agen Mengumpulkan",
+    "menuDisplayName": "AgenKumpul",
+    "description": "Mengumpulkan jenis item tertentu di sekitar agen",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "item_id": {
+        "name": "id_item",
+        "description": "ID item untuk dikumpulkan"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Mengirim true setelah dikumpulkan"
+      }
+    }
+  },
+  "AgentDetect": {
+    "displayName": "Agen Mendeteksi",
+    "menuDisplayName": "AG Deteksi",
+    "description": "Mendeteksi {{type}} {{direction}}",
+    "inputs": {
+      "trigger": {
+        "name": "pemicu",
+        "description": "Pemicu (opsional)"
+      },
+      "type": {
+        "name": "jenis",
+        "description": "Apa yang dideteksi",
+        "options": {
+          "block": "Blok",
+          "redstone": "Redstone"
+        }
+      },
+      "direction": {
+        "name": "arah",
+        "description": "Arah deteksi",
+        "options": {
+          "forward": "Maju",
+          "back": "Mundur",
+          "left": "Kiri",
+          "right": "Kanan",
+          "up": "Atas",
+          "down": "Bawah"
+        }
+      }
+    },
+    "outputs": {
+      "detected": {
+        "name": "terdeteksi",
+        "description": "true jika sesuatu terdeteksi"
+      }
+    }
+  },
+  "Vector3Lerp": {
+    "displayName": "Interpolasi Vector3",
+    "menuDisplayName": "Vec3Lerp",
+    "description": "Menginterpolasi secara linear antara dua posisi (t=0 awal, t=1 akhir)",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Posisi awal {x, y, z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Posisi akhir {x, y, z}"
+      },
+      "t": {
+        "name": "t",
+        "description": "Faktor interpolasi (0.0–1.0)"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "hasil",
+        "description": "Posisi terinterpolasi {x, y, z}"
+      }
+    }
+  },
+  "Vector3Normalize": {
+    "displayName": "Normalisasi Vector3",
+    "menuDisplayName": "Vec3Norm",
+    "description": "Menormalkan vektor ke panjang satuan (panjang = 1)",
+    "inputs": {
+      "position": {
+        "name": "posisi",
+        "description": "Vektor untuk dinormalkan {x, y, z}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "hasil",
+        "description": "Vektor satuan dengan panjang 1 {x, y, z}"
+      }
+    }
+  },
+  "Vector3Dot": {
+    "displayName": "Hasil Kali Titik Vector3",
+    "menuDisplayName": "Vec3Dot",
+    "description": "Menghitung hasil kali titik dari dua vektor",
+    "inputs": {
+      "pos_a": {
+        "name": "pos_a",
+        "description": "Vektor A {x, y, z}"
+      },
+      "pos_b": {
+        "name": "pos_b",
+        "description": "Vektor B {x, y, z}"
+      }
+    },
+    "outputs": {
+      "value": {
+        "name": "nilai",
+        "description": "Hasil kali titik (skalar)"
+      }
+    }
+  },
+  "AABBTranslate": {
+    "displayName": "Geser AABB",
+    "menuDisplayName": "AABBGeser",
+    "description": "Menggeser area AABB dengan vektor tertentu",
+    "inputs": {
+      "area": {
+        "name": "area",
+        "description": "Area untuk digeser {min, max}"
+      },
+      "delta": {
+        "name": "delta",
+        "description": "Vektor geser {x, y, z}"
+      }
+    },
+    "outputs": {
+      "area": {
+        "name": "area",
+        "description": "Objek area yang digeser"
+      }
+    }
+  },
+  "AABBIntersects": {
+    "displayName": "Perpotongan AABB",
+    "menuDisplayName": "AABBPotong",
+    "description": "Memeriksa apakah dua area AABB tumpang tindih",
+    "inputs": {
+      "area_a": {
+        "name": "area_a",
+        "description": "Area A {min, max}"
+      },
+      "area_b": {
+        "name": "area_b",
+        "description": "Area B {min, max}"
+      }
+    },
+    "outputs": {
+      "result": {
+        "name": "hasil",
+        "description": "true jika dua area tumpang tindih"
+      }
+    }
+  },
+  "Assert": {
+    "displayName": "Assert",
+    "menuDisplayName": "Assert",
+    "description": "Membandingkan nilai aktual dengan yang diharapkan dan mencatat PASS/FAIL. Selalu mengirim done untuk perantaian.",
+    "inputs": {
+      "actual": {
+        "name": "aktual",
+        "description": "Nilai untuk diuji"
+      },
+      "expected": {
+        "name": "diharapkan",
+        "description": "Nilai yang diharapkan"
+      },
+      "op": {
+        "name": "op",
+        "description": "Operator perbandingan",
+        "options": {
+          "eq": "Sama (===)",
+          "neq": "Tidak sama (!==)",
+          "deep": "Sama mendalam (JSON)",
+          "lt": "Kurang dari (<)",
+          "gt": "Lebih dari (>)",
+          "lte": "Kurang dari atau sama (≤)",
+          "gte": "Lebih dari atau sama (≥)",
+          "approx": "Perkiraan (±toleransi)"
+        }
+      },
+      "testId": {
+        "name": "testId",
+        "description": "ID kasus uji (mis. TC-111)"
+      },
+      "tolerance": {
+        "name": "toleransi",
+        "description": "Toleransi untuk perbandingan perkiraan"
+      }
+    },
+    "outputs": {
+      "done": {
+        "name": "selesai",
+        "description": "Selalu mengirim true (untuk perantaian)"
+      },
+      "passed": {
+        "name": "lulus",
+        "description": "Mengirim true saat uji lulus"
+      },
+      "failed": {
+        "name": "gagal",
+        "description": "Mengirim nilai aktual saat uji gagal"
+      }
+    }
+  },
+  "Gemini": {
+    "displayName": "Gemini",
+    "menuDisplayName": "Gemini",
+    "description": "Mengirim teks ke Gemini AI dan mendapatkan respons",
+    "inputs": {
+      "apiKey": {
+        "name": "Kunci API",
+        "description": "Kunci API dari Google AI Studio"
+      },
+      "model": {
+        "name": "Model",
+        "description": "Model Gemini yang digunakan",
+        "options": {
+          "gemini-2.5-flash": "Gemini 2.5 Flash (disarankan)",
+          "gemini-2.5-pro": "Gemini 2.5 Pro",
+          "gemini-2.0-flash": "Gemini 2.0 Flash",
+          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
+        }
+      },
+      "prompt": {
+        "name": "Prompt",
+        "description": "Teks prompt pengguna"
+      },
+      "systemInstruction": {
+        "name": "Instruksi Sistem",
+        "description": "Prompt sistem yang menentukan peran/perilaku AI (opsional)"
+      },
+      "temperature": {
+        "name": "Suhu",
+        "description": "Keacakan 0.0–1.0 (lebih rendah = lebih deterministik)"
+      },
+      "trigger": {
+        "name": "Pemicu",
+        "description": "Pemicu (opsional)"
+      }
+    },
+    "outputs": {
+      "response": {
+        "name": "Respons",
+        "description": "Teks yang dihasilkan oleh Gemini"
+      }
+    }
+  }
+}

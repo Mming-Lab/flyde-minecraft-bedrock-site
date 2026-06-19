@@ -100,10 +100,26 @@ node:
       to:
         insId: assert-102
         pinId: 実際値
-  id: TestSelectors
-  inputs: {}
-  outputs: {}
-  inputsPosition: {}
-  outputsPosition: {}
-  completionOutputs: []
-  description: セレクター/コンバーター系テスト（TC-101/102）MC接続不要・フロー実行のみで自動テスト
+    - from:
+        insId: assert-102
+        pinId: 完了
+      to:
+        insId: "__this"
+        pinId: 完了
+  id: AutoSelector
+  inputs:
+    トリガー: "required"
+  outputs:
+    完了: {}
+  inputsPosition:
+    トリガー:
+      x: -100
+      y: 200
+  outputsPosition:
+    完了:
+      x: 950
+      y: 1200
+  completionOutputs:
+    - 完了
+  description: |
+    自動セレクターテスト（TC-101,102）
