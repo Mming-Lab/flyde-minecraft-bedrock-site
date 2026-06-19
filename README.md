@@ -2,7 +2,7 @@
 
 # flyde-minecraft-bedrock
 
-![screenshot](assets/images/screenshot.png)
+![screenshot](assets/images/screenshot_en.png)
 
 A collection of nodes for controlling Minecraft Education Edition / Bedrock Edition through visual flow-based programming ([Flyde](https://github.com/flydelabs/flyde)).
 

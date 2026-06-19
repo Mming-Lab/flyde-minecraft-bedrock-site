@@ -2,7 +2,7 @@
 
 # flyde-minecraft-bedrock
 
-![screenshot](assets/images/screenshot.png)
+![screenshot](assets/images/screenshot_ja.png)
 
 Minecraft Education Edition / Bedrock Edition を、ビジュアルフロープログラミング（[Flyde](https://github.com/flydelabs/flyde)）で操作するためのノード集です。
 

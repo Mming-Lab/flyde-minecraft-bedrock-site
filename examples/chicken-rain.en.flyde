@@ -2,8 +2,8 @@ imports: {}
 node:
   instances:
     - pos:
-        x: -954.8241577148438
-        y: -371.30517578125
+        x: -957.9490356445312
+        y: -375.428466796875
       id: MinecraftConnect-j3m1eoh3
       inputConfig: {}
       nodeId: MinecraftConnect
@@ -104,8 +104,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: 225.55584716796875
-        y: -483.41888427734375
+        x: 221.0167236328125
+        y: -484.6910400390625
       id: RunCommand-jch7o4h6
       inputConfig: {}
       nodeId: RunCommand
@@ -160,8 +160,8 @@ node:
         type: package
         data: "@flyde/nodes"
     - pos:
-        x: -944.5661425590514
-        y: -598.2873077392578
+        x: -966.9340624809264
+        y: -570.1247100830078
       id: Note-c0yoq4ve
       inputConfig: {}
       nodeId: Note
