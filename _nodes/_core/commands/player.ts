@@ -75,7 +75,13 @@ export const PlayerHasTag: CodeNode = {
   outputs: { result: { description: 'true if the player has the tag' } },
   run: async ({ tag }, { result }) => {
     const { player } = getCurrentContext()
-    result.next(await player.hasTag(String(tag)))
+    try {
+      result.next(await player.hasTag(String(tag)))
+    } catch (e) {
+      // socket-be の getTags() はタグ0件のとき match() が null を返し TypeError になる
+      if (e instanceof TypeError) result.next(false)
+      else throw e
+    }
   },
 }
 
@@ -139,7 +145,8 @@ export const GetPlayers: CodeNode = {
   outputs: { players: { description: 'Array of player name strings' } },
   run: async (_, { players }) => {
     const { world } = getCurrentContext()
-    players.next(await world.getPlayers())
+    const list = await world.getPlayers()
+    players.next(list.map((p: any) => p.rawName ?? p.name))
   },
 }
 
@@ -155,7 +162,9 @@ export const GetLocalPlayer: CodeNode = {
   outputs: { player: { description: 'WorldPlayer snapshot of the local player' } },
   run: async (_, { player }) => {
     const { world } = getCurrentContext()
-    player.next(await world.getLocalPlayer())
+    const localPlayer = await world.getLocalPlayer()
+    const snapshot = await localPlayer.query()
+    player.next({ ...snapshot, name: localPlayer.rawName })
   },
 }
 

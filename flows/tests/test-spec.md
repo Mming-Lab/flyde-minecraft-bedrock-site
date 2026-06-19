@@ -1,376 +1,245 @@
 # テスト仕様書
 
-対象：フル版（`index.flyde.ts`）全ノード  
-更新日：2026-06-15（TC-131〜145 全 PASS 反映、TC-139/140/141 を WS 経由数値取得不可の動作に更新）
+更新日: 2026-06-19
 
 ---
 
-## テスト環境
+## テストアーキテクチャ
 
-### 必要なもの
+### ファイル構成
 
-- Minecraft 統合版（Windows PC 推奨）
-- VSCode + Flyde 拡張機能
-- Creative モードのワールド（コマンド実行権限あり）
-- エージェント系テスト用：Education Edition モードを有効にしてエージェントを召喚しておく
+| ファイル | 種別 | テストケース |
+|---|---|---|
+| `run-auto-all.flyde` | 全自動マスター | 全自動テストを順番に一括実行 |
+| `auto-command.flyde` | 自動サブノード | TC-051〜064（コマンド・時刻・天気・ゲームモード） |
+| `auto-player-query.flyde` | 自動サブノード | TC-071〜083（プレイヤークエリ） |
+| `auto-info.flyde` | 自動サブノード | TC-091〜092（情報取得） |
+| `auto-selector.flyde` | 自動サブノード | TC-101〜102（セレクター・ロケール変換） |
+| `auto-math.flyde` | 自動サブノード | TC-111〜127（座標・ベクトル演算） |
+| `auto-scoreboard.flyde` | 自動サブノード | TC-SB02〜SB05, TC-151〜153（スコアボード） |
+| `manual-player-events.flyde` | 手動スタンドアローン | TC-012〜019（プレイヤーイベント） |
+| `manual-block-events.flyde` | 手動スタンドアローン | TC-093（ブロックイベント） |
+| `manual-item-events.flyde` | 手動スタンドアローン | TC-032, TC-094〜095（アイテムイベント） |
+| `manual-mob-events.flyde` | 手動スタンドアローン | TC-042, TC-096（モブイベント） |
+| `manual-player-misc.flyde` | 手動スタンドアローン | TC-078（プレイヤーその他） |
+| `manual-agents.flyde` | 手動スタンドアローン | TC-131〜146（エージェント） |
 
 ---
 
 ## テスト実行手順
 
-### A. リポジトリ直接テスト（推奨・日常の開発確認）
-
-`flyde-minecraft-bedrock` リポジトリ自体を VSCode で開いて確認する。`flows/tests/*.flyde` は `../build/index.flyde.js` を直接参照しており、`node_modules`／`dist` を含まないパスなのでローカルファイルスキャンで検出される。npm link 等は不要。
+### 事前準備
 
 ```bash
-# flyde-minecraft-bedrock リポジトリで実行
-npm run build:full   # build/index.flyde.js を生成
+npm run build:full   # 必須：テストフローは build/index.flyde.js を参照する
 ```
 
-```
-flyde-minecraft-bedrock/ を VSCode で開く（すでに開いていればそのまま）
-flows/tests/test-XX-*.flyde を開いてフロー実行
-```
+### 全自動テスト
 
-1. フローを実行（SocketBE が localhost:8080 で起動）
-2. Minecraft で `/connect localhost:8080`
-3. 接続メッセージを確認
-4. 自動テストの場合：チャットでメッセージ送信 → ログで PASS/FAIL 確認
-
----
-
-### B. zip配布シミュレーションテスト（リリース前最終確認）
-
-実際の配布物（zip展開後の構成）を再現してテストする。**`node_modules` 経由（npm依存）にすると Flyde 拡張のバグでノードメニューに表示されなくなるため、zipの中身をそのままワークスペースルートとして開く**のがポイント。
-
-```bash
-cd flyde-minecraft-bedrock
-npm run publish:all   # releases/flyde-minecraft-bedrock-full-ja-jp-v{version}.zip を生成
-```
-
-```bash
-# 別フォルダに展開して確認用フォルダにする
-mkdir flyde-mc-test
-cd flyde-mc-test
-# releases/flyde-minecraft-bedrock-full-ja-jp-v{version}.zip を展開
-#   → flyde-mc-test/flyde-minecraft-bedrock/ ができる
-
-cd flyde-minecraft-bedrock
-npm install            # package.json の dependencies（@flyde/core 等）をインストール
-mkdir -p flows/tests
-copy ..\..\flyde-minecraft-bedrock-source\flows\tests\*.flyde flows\tests\
-# ※ コピー元は開発リポジトリ側の flows/tests/
-```
+1. VSCode で `flows/tests/run-auto-all.flyde` を開く
+2. Flyde エディタでフローを実行
+3. Minecraft で `/connect localhost:8080`
+4. チャットに任意のメッセージを送信
+   - `OnPlayerChat` がトリガーされ、以下の順で自動実行される  
+     `AutoCommand → AutoPlayerQuery → AutoInfo → AutoSelector → AutoMath → AutoScoreboard`
+5. 終了後、ログファイルで結果を確認
 
 ```
-flyde-mc-test/flyde-minecraft-bedrock/ を VSCode のワークスペースルートとして開く
-flows/tests/test-XX-*.flyde を開いてフロー実行
+logs/flyde-mc-YYYY-MM-DD_HH-mm-ss_N.log
 ```
 
-ノードメニューに表示されない場合は、`flyde-minecraft-bedrock` フォルダ自体をワークスペースルートとして開いているか（一段上の `flyde-mc-test` を開いていないか）を確認する。
+各 Assert は `[PASS] TC-XXX` または `[FAIL] TC-XXX` として記録される。
+
+### 手動テスト
+
+各 `manual-*.flyde` を個別に開いて実行する。  
+それぞれのフローに記載された Note ノードの指示に従って Minecraft 内で操作する。
 
 ---
 
-### 自動テストの結果確認
+## 自動テストケース一覧
 
-`logs/flyde-mc-YYYY-MM-DD_HH-mm-ss_N.log` を確認：
+### コマンド系 / `auto-command.flyde`
 
-```
-[INFO] [[TC-052]] PASS
-[INFO] [[TC-056]] PASS
-[INFO] [[TC-057]] FAIL  ← 失敗の場合
-```
-
----
-
-### フロー表記の読み方
-
-```
-[ノードA] → [ノードB]          # ノードAの出力をノードBに接続
-[ノードA: 設定値]              # ノードAに値を設定
-[SendMessage: "{変数}"]       # 変数の内容をチャットに表示して確認
-```
-
----
-
-## 1. 接続系
-
-**テストフロー：** `flows/tests/test-01-connection.flyde` を開いてフロー実行 → 目視確認  
-
-| ID | ノード | フロー構成 | Minecraft での操作 | 確認内容 | 結果 |
-|---|---|---|---|---|---|
-| TC-001 | MinecraftConnect | test-01: MinecraftConnect 起動 | `/connect localhost:8080` | WSサーバー起動メッセージ / Minecraft 接続成功メッセージ（目視確認） | ✓ |
-| TC-002 | MinecraftDisconnect | test-01: チャット送信 → MinecraftDisconnect | チャットを送信 | MC との接続が切れる（目視確認） | ✓ |
-
----
-
-## 2. プレイヤーイベント系
-
-**テストフロー：** `flows/tests/test-02-player-events.flyde` を開いてフロー実行 → **チャット 1 回送信**で TC-013/017/018 も自動テスト  
-**TC-012/013/014/017/018/019 はログで PASS/FAIL を確認、TC-011/015/016 は MCチャットに結果が表示される**
-
-| ID | ノード | 操作 | 確認内容 | 結果 |
-|---|---|---|---|---|
-| TC-011 | OnPlayerChat（チャット受信時） | MC でチャットメッセージを送信 | 送信者名・内容が MCチャットに表示される（目視確認） | ✓ |
-| TC-012 | OnPlayerTravelled（プレイヤー移動時） | MC でプレイヤーを歩かせる | Assert(移動距離 > 0) → ログで PASS 確認 | ✓ |
-| TC-013 | OnPlayerTeleported（テレポート時） | チャット送信（RunCommand が自動で `/tp` 実行） | Assert(テレポート原因 neq "") → ログで PASS 確認 | ✓ |
-| TC-014 | OnPlayerBounced（バウンド時） | MC でスライムブロックの上でジャンプ | Assert(高さ >= 0) → ログで PASS 確認 | ✓ |
-| TC-015 | OnPlayerJoin（プレイヤー参加時） | 別のプレイヤーがワールドに参加 | プレイヤー名が MCチャットに表示される（目視確認） | □ |
-| TC-016 | OnPlayerLeave（プレイヤー退出時） | 別のプレイヤーがワールドを退出 | プレイヤー名が MCチャットに表示される（目視確認） | □ |
-| TC-017 | OnPlayerTitle（タイトル受信時） | チャット送信（RunCommand が自動で `/title` 実行） | Assert(メッセージ neq "") → ログで PASS 確認 | ✓ |
-| TC-018 | OnPlayerMessage（メッセージ受信時） | チャット送信（RunCommand が自動で `/tell` 実行） | Assert(メッセージ neq "") → ログで PASS 確認 | ✓ |
-| TC-019 | OnPlayerTransform（プレイヤー位置変化時） | MC でプレイヤーを移動させる | Assert(座標.y >= -64) → ログで PASS 確認 | ✓ |
-
----
-
-## 3. ブロックイベント系
-
-**テストフロー：** `flows/tests/test-03-block-events.flyde` を開いてフロー実行 → 各操作でイベントを発火させる  
-**TC-093 はログで PASS/FAIL を確認、他は MCチャットに結果が表示される**
-
-| ID | ノード | 操作 | 確認内容 | 結果 |
-|---|---|---|---|---|
-| TC-021 | OnBlockBroken（ブロック破壊時） | MC でブロックを壊す | 破壊方法が MCチャットに表示される | ✓ |
-| TC-022 | OnBlockPlaced（ブロック設置時） | MC でブロックを置く | 設置方法とブロック名が MCチャットに表示される | ✓ |
-
----
-
-## 4. アイテムイベント系
-
-**テストフロー：** `flows/tests/test-04-item-events.flyde` を開いてフロー実行 → 各操作でイベントを発火させる  
-**TC-032/094/095 はログで PASS/FAIL を確認、他は MCチャットに結果が表示される**
-
-| ID | ノード | 前提 | 操作 | 確認内容 | 結果 |
-|---|---|---|---|---|---|
-| TC-031 | OnItemInteracted（アイテム使用時） | 使えるアイテムを持つ | アイテムを右クリック | 使用方法が MCチャットに表示される | ✓ |
-| TC-032 | OnItemAcquired（アイテム取得時） | — | ブロックを壊してドロップを拾う | Assert(個数 > 0) → ログで PASS 確認 | ✓ |
-| TC-033 | OnItemCrafted（クラフト時） | 材料を持つ | クラフトテーブルでアイテムを作る | Assert(GetFromItemStack.アイテムID != "") → ログで PASS (TC-095) | ✓ |
-| TC-034 | OnItemEquipped（アイテム装備時） | 装備できるアイテムを持つ | 防具・ツールをホットバーに持つ | 装備スロットが MCチャットに表示される | □ |
-| TC-035 | OnItemSmelted（精錬時） | かまど + 精錬できる素材を持つ | かまどで精錬が完了する | 燃料が MCチャットに表示される | ✓ |
-| TC-036 | OnItemTraded（取引時） | 村人の近く | 村人と取引する | プレイヤーEM数・村人名が MCチャットに表示される | □ |
-
----
-
-## 5. モブイベント系
-
-**テストフロー：** `flows/tests/test-05-mob-events.flyde` を開いてフロー実行 → 各操作でイベントを発火させる  
-**TC-042/096 はログで PASS/FAIL を確認、TC-041 は MCチャットに結果が表示される**  
-**注意：** WorldMob にはIDや名前フィールドがないため、GetFromMob は種別番号（数値）のみ出力
-
-| ID | ノード | 前提 | 操作 | 確認内容 | 結果 |
-|---|---|---|---|---|---|
-| TC-041 | OnMobInteracted（モブ交流時） | 動物（ウシ・ニワトリ等）の近く | モブを右クリック | 交流種別が MCチャットに表示される | ✓ |
-| TC-042 | OnTargetBlockHit（的命中時） | 的ブロックを設置する | 矢を的に当てる | Assert(強さ 0〜15) → ログで PASS 確認 | ✓ |
-
----
-
-## 6. ゲームプレイコマンド系
-
-**共通前提：** MC に接続済み  
-**自動テスト（TC-052〜TC-059）：** `flows/tests/test-06-gameplay.flyde` を開いてフロー実行 → チャット送信1回で自動実行  
-**自動テスト（TC-051/060/064）：** `flows/tests/test-06b-gameplay2.flyde` を開いてフロー実行 → チャット送信1回で自動実行  
-**TC-054/061：** `flows/tests/test-06c-gameplay3.flyde` を開いてフロー実行 → チャット送信1回（TC-054は自動+目視、TC-061は目視確認）
-
-| ID | ノード | フロー構成 | 確認内容 | 結果 |
-|---|---|---|---|---|
-| TC-051 | RunCommand（コマンド実行） | 自動テスト：RunCommand("time set day") → 完了 = true を確認 | 完了が true で返る | ✓ |
-| TC-052 | GetGameTime | 自動テスト：RunCommand("time set 6000") → GetGameTime の戻り値 ≈ 6000 を確認（許容差500） | 設定した時刻が正しく取得できる | ✓ |
-| TC-053 | IsDaytime（昼判定） | 自動テスト：RunCommand("time set 6000") 後に IsDaytime = true を確認 | 昼時刻（6000）で true が返る | ✓ |
-| TC-054 | GetWeather（天気取得） | test-06c: チャット送信 → Assert(天気 neq "") + MCチャットに天気名を表示 | Assert(天気 neq "") → ログで PASS 確認 + 目視で天気名確認 | ✓ |
-| TC-056 | GetWeather（雨確認） | 自動テスト：RunCommand("weather rain") → GetWeather = "Rain" を確認 | 雨設定後すぐ天気が "Rain" になる | ✓ |
-| TC-057 | GetWeather（晴れ確認） | 自動テスト：RunCommand("weather clear") → GetWeather = "Clear" を確認 | Clear 設定後 "Clear" が返る | ✓ |
-| TC-058 | GetGameMode（Creative確認） | 自動テスト：RunCommand("gamemode creative") → GetGameMode = "Creative" を確認 | Creative 設定後 "Creative" が返る | ✓ |
-| TC-059 | GetGameMode（Survival確認） | 自動テスト：RunCommand("gamemode survival") → GetGameMode = "Survival" を確認 | Survival 設定後 "Survival" が返る | ✓ |
-| TC-060 | GetTopSolidBlock（最上部ブロック取得） | 自動テスト：GetTopSolidBlock → 座標.y >= -64 を確認 | y 座標が -64 以上（有効範囲内）で返る | ✓ |
-| TC-061 | WorldQuery（ワールド情報取得） | test-06c: チャット送信 → WorldQuery(mob/block/item) × 3 種別が例外なく完了する | ログに ERROR なし＋ OUT[一覧] にデータが返る（大量データのため say 表示なし） | ✓ |
-| TC-064 | FillBlocks（エリア塗りつぶし） | 自動テスト：setblock(0,30,0,dirt) → FillBlocks({0,30,0}〜{0,30,0}, air) → 個数 = 1 を確認 | fillCount が数値で返る | ✓ |
-
----
-
-## 7. プレイヤーコマンド系
-
-**自動テスト（TC-071,TC-072,TC-079）：** `flows/tests/test-07a-player-query.flyde` を開いてフロー実行 → チャット送信1回で自動実行  
-**自動テスト（TC-073,TC-078,TC-083）：** `flows/tests/test-07c-player-misc.flyde` を開いてフロー実行 → チャット送信1回で自動実行  
-**手動テスト（TC-077,TC-081）：** `flows/tests/test-07d-player-query3.flyde` を開いてフロー実行 → チャット送信でトリガー → MCチャットに結果表示（目視確認）
-
-| ID | ノード | フロー構成 | 確認内容 | 結果 |
-|---|---|---|---|---|
-| TC-071 | GetLocalPlayer（ローカルプレイヤー取得） | 自動テスト：GetLocalPlayer → GetFromPlayerSnapshot.name = チャット送信者名 を確認 | プレイヤー名が一致する | ✓ |
-| TC-072 | GetPlayerLocation（座標取得） | 自動テスト：GetPlayerLocation → 座標.y >= -64 を確認 | y 座標が有効範囲内で返る | ✓ |
-| TC-073 | GetPlayerOrientation（向き取得） | 自動テスト：GetPlayerOrientation → 角度 >= -180 を確認（数値で返ることを確認） | yaw 角度が -180 以上の数値で返る | ✓ |
-| TC-077 | GetPlayerTags（タグ取得） | — | test-07d: チャット送信 → タグ一覧が MCチャットに表示される | ✓ |
-| TC-078 | PlayerHasTag（タグ判定） | 自動テスト（test-07d）：tag add → PlayerHasTag("__flyde_test__") = true を Assert（正常系） | タグ付与後に true が返る | □ |
-| TC-079 | GetPlayerLevel（レベル取得） | 自動テスト：GetPlayerLevel → レベル >= 0 を確認 | レベルが 0 以上の数値で返る | ✓ |
-| TC-081 | GetPlayerAbilities（アビリティ取得） | — | test-07d: チャット送信 → アビリティオブジェクトが MCチャットに表示される | ✓ |
-| TC-083 | GetPlayers（プレイヤー一覧） | 自動テスト：GetPlayers → Assert(プレイヤー数 >= 0) を確認 | プレイヤー配列が例外なく返る | □ |
-
----
-
-## 8. 情報取得系（GetFrom*）
-
-**共通前提：** 対応するイベントノードから player / block / item / mob スナップショットを受け取る  
-**自動テスト（TC-091,TC-092）：** `flows/tests/test-08-info.flyde` を開いてフロー実行 → チャット送信1回で自動実行  
-**TC-093** は `test-03-block-events.flyde` の OnBlockBroken → GetFromBlockType → Assert でログ確認  
-**TC-094/095** は `test-04-item-events.flyde` の各イベント → GetFromItemType/Stack → Assert でログ確認  
-**TC-096** は `test-05-mob-events.flyde` の OnMobInteracted → GetFromMob → Assert でログ確認  
-**TC-097** は `test-04-item-events.flyde` の OnItemTraded → GetFromVillager → MCチャット表示（目視確認）
-
-| ID | ノード | テスト方法 | 確認内容 | 結果 |
-|---|---|---|---|---|
-| TC-091 | GetFromPlayerSnapshot | 自動テスト：GetLocalPlayer → GetFromPlayerSnapshot.name = チャット送信者名 を確認 | プレイヤー名が一致する | □ |
-| TC-092 | GetFromEntity | 自動テスト：GetLocalPlayer → GetFromPlayerSnapshot.entity → GetFromEntity.ID >= 0 を確認 | エンティティ ID が 0 以上の数値で返る | □ |
-| TC-093 | GetFromBlockType | test-03: OnBlockBroken → GetFromBlockType.ブロックID != "" を Assert | ブロック ID が空でない文字列で返る | ✓ |
-| TC-094 | GetFromItemType | test-04: OnItemAcquired → GetFromItemType.アイテムID != "" を Assert | アイテム ID が空でない文字列で返る | ✓ |
-| TC-095 | GetFromItemStack | test-04: OnItemCrafted → GetFromItemStack.アイテムID != "" を Assert | アイテム ID が空でない文字列で返る | ✓ |
-| TC-096 | GetFromMob | test-05: OnMobInteracted → GetFromMob.種別 >= 0 を Assert（WorldMob は数値のみ） | 種別番号が 0 以上の数値で返る | ✓ |
-| TC-097 | GetFromVillager | test-04: OnItemTraded → GetFromVillager.名前 → MCチャットに表示（目視確認） | 村人名が表示される | □ |
-| TC-098 | GetFromScoreboardObjective | スコアボード目標作成後、objective → GetFromScoreboardObjective で id を確認 | スコアボード名が表示（TC-151 で自動確認済み） | ✓ |
-
----
-
-## 9. セレクター / コンバーター系
-
-**自動テスト（TC-101,TC-102）：** `flows/tests/test-09-selectors.flyde` を開いてフロー実行 → MC 接続不要・ログで PASS/FAIL 確認
-
-| ID | ノード | フロー構成 | 確認内容 | 結果 |
-|---|---|---|---|---|
-| TC-101 | Selector（ID 選択） | 自動テスト：Selector(block, minecraft:grass_block) → 値 = "minecraft:grass_block" を確認 | 選択したブロック ID が正しく出力される | ✓ |
-| TC-102 | LocaleName（ロケール名変換） | 自動テスト：LocaleName("minecraft:grass_block", block) → 日本語名 = "草ブロック" を確認 | ブロック ID が日本語名に変換される | ✓ |
-
----
-
-## 10. 数学・座標系
-
-**共通前提：** MC への接続不要（純粋関数）  
-**自動テスト：** `flows/tests/test-10-math.flyde` を開いてフロー実行 → `logs/` のログで PASS/FAIL 確認
-
-| ID | ノード | 設定値 | 期待される出力 | 結果 |
-|---|---|---|---|---|
-| TC-111 | Vector3Op（add） | 座標A:`{1,2,3}` / 座標B:`{4,5,6}` / 演算:add | `{x:5,y:7,z:9}` | ✓ |
-| TC-112 | Vector3Op（subtract） | 座標A:`{5,7,9}` / 座標B:`{1,2,3}` / 演算:subtract | `{x:4,y:5,z:6}` | ✓ |
-| TC-113 | Vector3Op（scale） | 座標:`{2,4,6}` / 倍率:3 / 演算:scale | `{x:6,y:12,z:18}` | ✓ |
-| TC-114 | Vector3Op（assemble） | x:10 / y:20 / z:30 / 演算:assemble | `{x:10,y:20,z:30}` | ✓ |
-| TC-115 | Vector3Op（floor） | 座標:`{1.7,2.3,3.9}` / 演算:floor | `{x:1,y:2,z:3}` | ✓ |
-| TC-116 | Vector3Op（fill_y） | 座標XZ:`{x:5,z:10}` / Y:64 / 演算:fill_y | `{x:5,y:64,z:10}` | ✓ |
-| TC-117 | Vector3Distance | 座標A:`{0,0,0}` / 座標B:`{3,4,0}` | `5`（3-4-5 三角形） | ✓ |
-| TC-118 | Vector3ToString | 座標:`{1,64,-3}` | `"1 64 -3"` | ✓ |
-| TC-119 | Vector3Split | 座標:`{10,20,30}` | x=10 / y=20 / z=30（3つ同時確認） | ✓ |
-| TC-120a | ClampNumber（上限超え） | 値:150 / 最小:0 / 最大:100 | `100` | ✓ |
-| TC-120b | ClampNumber（下限超え） | 値:-10 / 最小:0 / 最大:100 | `0` | ✓ |
-| TC-120c | ClampNumber（範囲内） | 値:50 / 最小:0 / 最大:100 | `50` | ✓ |
-| TC-121 | AABBCreate | 角座標A:`{0,0,0}` / 角座標B:`{5,5,5}` | `{min:{0,0,0},max:{5,5,5}}` | ✓ |
-| TC-122a | AABBIsInside（内部） | エリア:0-5 / 座標:`{2,2,2}` | `true` | ✓ |
-| TC-122b | AABBIsInside（外部） | エリア:0-5 / 座標:`{10,10,10}` | `false` | ✓ |
-| TC-123 | AABBTranslate | エリア:0-5 / 移動量:`{5,0,0}` | `{min:{5,0,0},max:{10,5,5}}` | ✓ |
-| TC-124a | AABBIntersects（重複あり） | エリアA:0-5 / エリアB:3-8 | `true` | ✓ |
-| TC-124b | AABBIntersects（重複なし） | エリアA:0-3 / エリアB:5-8 | `false` | ✓ |
-| TC-125 | Vector3Lerp | 座標A:`{0,0,0}` / 座標B:`{10,0,0}` / t:0.5 | `{x:5,y:0,z:0}` | ✓ |
-| TC-126 | Vector3Normalize | 座標:`{3,0,0}` | `{x:1,y:0,z:0}` | ✓ |
-| TC-127a | Vector3Dot（直交） | 座標A:`{1,0,0}` / 座標B:`{0,1,0}` | `0` | ✓ |
-| TC-127b | Vector3Dot（平行） | 座標A:`{1,0,0}` / 座標B:`{1,0,0}` | `1` | ✓ |
-
----
-
-## 11. エージェント系
-
-**テストフロー：** `flows/tests/test-11-agents.flyde` を開いて **2回実行**  
-**共通前提：** Education Edition モードを有効化（エージェントが存在しなければ自動作成される）  
-**1回目：** チャット送信 → TC-131/132 が自動実行（AgentTP → GetAgentLocation）  
-**2回目：** フロー再起動 → TC-133〜145 が起動時に自動実行（前回のコンテキストを process から再利用）  
-**TC-131〜135/138/142〜145 はログで PASS/FAIL を確認、TC-136 はMCチャットに表示**  
-**注：** TC-137（AgentInspect）/ TC-139（AgentGetItemCount）/ TC-140（AgentGetItemSpace）/ TC-141（AgentGetItemDetail）は削除。  
-WS 外部接続（/connect）では agent inspect・インベントリ値を取得できないため（MakeCode の内部接続 8766/pxsim とは別プロトコル）。
-
-| ID | ノード | 操作 | 確認内容 | 結果 |
-|---|---|---|---|---|
-| TC-131 | AgentTeleport（テレポート） | チャット送信でトリガー | Assert(完了 = true) → ログで PASS 確認 | ✓ |
-| TC-132 | GetAgentLocation（位置取得） | TC-131 の完了後に自動実行 | Assert(座標.y >= -64) → ログで PASS 確認 | ✓ |
-| TC-133 | AgentMove（移動） | TC-132 の完了後に自動実行 | Assert(完了 = true) → ログで PASS 確認 | ✓ |
-| TC-134 | AgentTurn（回転） | TC-133 の完了後に自動実行 | Assert(完了 = true) → ログで PASS 確認 | ✓ |
-| TC-135 | AgentAction（攻撃） | TC-134 の完了後に自動実行 | Assert(完了 = true) → ログで PASS 確認 | ✓ |
-| TC-136 | AgentDetect（障害物検知） | TC-135 の完了後に自動実行 | 検知結果（true/false）が MCチャットに表示（目視確認） | ✓ |
-| TC-138 | AgentSetItem（アイテムセット） | TC-136 の完了後に自動実行 | Assert(完了 = true)、スロット1に minecraft:stone 5個 | ✓ |
-| TC-142 | AgentMoveItem（アイテム移動） | TC-138 の完了後に自動実行 | Assert(完了 = true)、スロット1→2に移動 | ✓ |
-| TC-143 | AgentPlaceBlock（ブロック設置） | TC-142 の完了後に自動実行 | Assert(完了 = true)、スロット2のブロックを前に設置 | ✓ |
-| TC-144 | AgentDropItem（アイテムドロップ） | TC-143 の完了後に自動実行 | Assert(完了 = true)、スロット1から前にドロップ | ✓ |
-| TC-145 | AgentAction（ブロック破壊） | TC-144 の完了後に自動実行 | Assert(完了 = true) → ログで PASS 確認後 MinecraftDisconnect | ✓ |
-
----
-
-## 12. スコアボード系
-
-**共通前提：** MC に接続済み  
-**自動テスト（TC-154,TC-156,TC-157）：** `flows/tests/test-12a-scoreboard-ops.flyde` を開いてフロー実行 → チャット送信1回で自動実行（TC-SB02〜TC-SB05）  
-**自動テスト（TC-151,TC-153）：** `flows/tests/test-12b-scoreboard-query.flyde` を開いてフロー実行
-
-| ID | ノード | フロー構成 | 確認内容 | 結果 |
-|---|---|---|---|---|
-| TC-151 | AddScoreboardObjective（追加） | 自動テスト：AddScoreboardObjective("mcflowtest2") → GetFromScoreboardObjective → id = "mcflowtest2" を確認 | スコアボード目標を追加し、ID が正しく返る | ✓ |
-| TC-152 | GetScoreboardObjectives（一覧取得） | 自動テスト（test-scoreboard2.flyde）：目標追加後 GetScoreboardObjectives → 目標一覧が返る（implicit） | 例外なく一覧が取得できる | □ |
-| TC-153 | GetScoreboardObjective（単体取得） | 自動テスト：GetScoreboardObjective("mcflowtest2") → id = "mcflowtest2" を確認 | 指定IDの目標が取得できる | ✓ |
-| TC-154 | ScoreOperation（スコア操作） | 自動テスト（test-12a-scoreboard-ops.flyde）：set 42 → 新スコア=42（TC-SB02）、add 8 → 50（TC-SB04） | スコアの set/add が正しく動作する | ✓ |
-| TC-155 | GetScores（全スコア取得） | 自動テスト（test-12b-scoreboard-query.flyde）：スコア設定後 GetScores → スコア一覧が返る（implicit） | 例外なく一覧が取得できる | □ |
-| TC-156 | GetScore（単一取得） | 自動テスト（test-12a-scoreboard-ops.flyde）：set 42 後 GetScore → 42（TC-SB03） | スコアが正しく取得できる | ✓ |
-| TC-157 | RemoveScoreboardObjective（削除） | 自動テスト（test-12a-scoreboard-ops.flyde）：RemoveScoreboardObjective → true（TC-SB05） | スコアボード目標を削除できる | ✓ |
-
----
-
-## 13. ビルド・言語切替テスト
-
-MC との接続不要。ターミナルで実行。
-
-| ID | テスト内容 | 手順 | 確認内容 | 結果 |
-|---|---|---|---|---|
-| TC-161 | 型チェック | `npm run typecheck` | エラーなしで完了 | □ |
-| TC-162 | 無料版ビルド | `npm run build` | `build/index.free.flyde.js` が生成される | □ |
-| TC-163 | フル版ビルド | `node scripts/build.js --full` | `build/index.flyde.js` が生成される | □ |
-| TC-164 | 英語切替 | `npm run lang:en` | 3ファイルが en_US に書き換わる / Flyde リロード後ノード名が英語になる | □ |
-| TC-165 | 日本語切替 | `npm run lang:ja` | 3ファイルが ja_JP に書き換わる / Flyde リロード後ノード名が日本語になる | □ |
-
----
-
-## テスト結果サマリー
-
-| カテゴリ | 件数 | 自動テスト化(Assert) | 手動確認のみ |
+| TC ID | テスト対象ノード | テスト内容 | 期待値 |
 |---|---|---|---|
-| 1. 接続系 | 2 | 0 | 2 |
-| 2. プレイヤーイベント系 | 9 | 6（TC-012/013/014/017/018/019） | 3 |
-| 3. ブロックイベント系 | 2 | 0 | 2 |
-| 4. アイテムイベント系 | 6 | 1（TC-032） | 5 |
-| 5. モブイベント系 | 2 | 1（TC-042） | 1 |
-| 6. ゲームプレイコマンド系 | 11 | 10（+TC-054） | 1 |
-| 7. プレイヤーコマンド系 | 8 | 6 | 2 |
-| 8. 情報取得系 | 8 | 6（TC-091/092/093/094/095/096） | 2 |
-| 9. セレクター/コンバーター系 | 2 | 2 | 0 |
-| 10. 数学・座標系 | 22 | 22 | 0 |
-| 11. エージェント系 | 11 | 9（TC-131〜135/138/142〜145） | 2 |
-| 12. スコアボード系 | 7 | 7 | 0 |
-| 13. ビルド・言語切替 | 5 | 0 | 5 |
-| **合計** | **95** | **70（74%）** | **25** |
+| TC-051 | RunCommand | `time set day` 実行 | 完了 = true |
+| TC-052 | GetGameTime | ゲーム内時刻取得 | ≥ 6000 かつ ≤ 6500（昼）|
+| TC-053 | IsDaytime | 昼間判定 | true |
+| TC-054 | GetWeather | 天気取得（初期） | `""` 以外 |
+| TC-056 | GetWeather | `weather rain` 後の天気 | `"Rain"` |
+| TC-057 | GetWeather | `weather clear` 後の天気 | `"Clear"` |
+| TC-058 | GetGameMode | `gamemode creative` 後のゲームモード | `"Creative"` |
+| TC-059 | GetGameMode | `gamemode survival` 後のゲームモード | `"Survival"` |
+| TC-060 | GetTopSolidBlock → Vector3Split | 最上段ブロックの Y 座標 | ≥ -64 |
+| TC-064 | FillBlocks | ブロック塗りつぶし個数 | ≥ 0 |
 
-> **テストフロー一覧**
->
-> **自動テスト（Assert → ログで PASS/FAIL 確認）**
-> | フロー | テスト対象 |
-> |---|---|
-> | test-06-gameplay.flyde | TC-052/053/056/057/058/059 |
-> | test-06b-gameplay2.flyde | TC-051/060/064 |
-> | test-07a-player-query.flyde | TC-071/072/079 |
-> | test-07c-player-misc.flyde | TC-073/078/083 |
-> | test-08-info.flyde | TC-091/092 |
-> | test-09-selectors.flyde | TC-101/102（MC 接続不要） |
-> | test-10-math.flyde | TC-111〜127（MC 接続不要） |
-> | test-12a-scoreboard-ops.flyde | TC-SB02/SB03/SB04/SB05 |
-> | test-12b-scoreboard-query.flyde | TC-151/152/153/155 |
->
-> **手動イベントテスト（ユーザーがイベントを発火、一部 Assert あり）**
-> | フロー | テスト対象 |
-> |---|---|
-> | test-01-connection.flyde | TC-001/002（目視確認のみ、Note ノードに手順記載） |
-> | test-02-player-events.flyde | TC-011〜019（TC-012/013/014/017/018/019 は Assert、RunCommand で自動化） |
-> | test-03-block-events.flyde | TC-021/022/093（TC-093 は Assert） |
-> | test-04-item-events.flyde | TC-031〜036/094/095/097（TC-032/094/095 は Assert） |
-> | test-05-mob-events.flyde | TC-041/042/096（TC-042/096 は Assert） |
-> | test-06c-gameplay3.flyde | TC-054/061（TC-054 は Assert + 目視、TC-061 は目視確認） |
-> | test-07d-player-query3.flyde | TC-077/081（チャット送信、MCチャット目視確認） |
-> | test-11-agents.flyde | TC-131〜138/142〜145（2回実行、TC-131〜135/138/142〜145 は Assert） |
+### プレイヤークエリ系 / `auto-player-query.flyde`
+
+| TC ID | テスト対象ノード | テスト内容 | 期待値 |
+|---|---|---|---|
+| TC-071 | GetLocalPlayer → GetFromPlayerSnapshot | プレイヤー名取得 | `""` 以外 |
+| TC-072 | GetPlayerLocation → Vector3Split | プレイヤーの Y 座標 | ≥ -64 |
+| TC-073 | GetPlayerOrientation | 向き（角度） | ≥ -180 |
+| TC-078 | PlayerHasTag(`__flyde_test_tag__`) | 存在しないタグの判定 | false |
+| TC-079 | GetPlayerLevel | 経験値レベル | ≥ 0 |
+| TC-083 | GetPlayers | プレイヤー一覧取得 | null 以外 |
+
+### 情報取得系 / `auto-info.flyde`
+
+| TC ID | テスト対象ノード | テスト内容 | 期待値 |
+|---|---|---|---|
+| TC-091 | GetLocalPlayer → GetFromPlayerSnapshot | プレイヤー名 | `""` 以外 |
+| TC-092 | GetFromEntity | エンティティ ID | ≥ 0 ※Minecraft Education では負値（-4294967295）が返る場合あり |
+
+### セレクター系 / `auto-selector.flyde`
+
+| TC ID | テスト対象ノード | テスト内容 | 期待値 |
+|---|---|---|---|
+| TC-101 | Selector(block, minecraft:grass_block) | ブロック ID 選択 | `"minecraft:grass_block"` |
+| TC-102 | ToJa(minecraft:grass_block, block) | ブロック日本語名変換 | `"草ブロック"` |
+
+### 座標・ベクトル演算系 / `auto-math.flyde`
+
+| TC ID | テスト対象ノード | テスト内容 | 期待値 |
+|---|---|---|---|
+| TC-111 | Vector3Op(add) | (1,2,3) + (4,5,6) | `{x:5, y:7, z:9}` |
+| TC-112 | Vector3Op(subtract) | (5,7,9) - (1,2,3) | `{x:4, y:5, z:6}` |
+| TC-113 | Vector3Op(scale) | (1,2,3) × 6 | `{x:6, y:12, z:18}` |
+| TC-114 | Vector3Op(assemble) | x=10, y=20, z=30 で組み立て | `{x:10, y:20, z:30}` |
+| TC-115 | Vector3Op(floor) | (1.7, 2.9, 3.1) の切り捨て | `{x:1, y:2, z:3}` |
+| TC-116 | Vector3Op(fill_y) | Y を 64 に設定 | `{x:5, y:64, z:10}` |
+| TC-117 | Vector3Distance | (0,0,0) と (3,4,0) の距離 | 5 |
+| TC-118 | Vector3ToString | (1, 64, -3) → 文字列 | `"1 64 -3"` |
+| TC-119-x | Vector3Split | x 成分 | 10 |
+| TC-119-y | Vector3Split | y 成分 | 20 |
+| TC-119-z | Vector3Split | z 成分 | 30 |
+| TC-120a | ClampNumber | 150 を [0,100] にクランプ | 100 |
+| TC-120b | ClampNumber | -10 を [0,100] にクランプ | 0 |
+| TC-120c | ClampNumber | 50 を [0,100] にクランプ | 50 |
+| TC-121 | AABBCreate | (0,0,0)〜(5,5,5) の AABB 作成 | `{min:{x:0,y:0,z:0}, max:{x:5,y:5,z:5}}` |
+| TC-122a | AABBIsInside | (2,2,2) がエリア内 | true |
+| TC-122b | AABBIsInside | (10,10,10) がエリア外 | false |
+| TC-123 | AABBTranslate | AABB を (5,0,0) 移動 | `{min:{x:5,y:0,z:0}, max:{x:10,y:5,z:5}}` |
+| TC-124a | AABBIntersects | 重なるエリア | true |
+| TC-124b | AABBIntersects | 重ならないエリア | false |
+| TC-125 | Vector3Lerp | (0,0,0) → (10,0,0) の t=0.5 補間 | `{x:5, y:0, z:0}` |
+| TC-126 | Vector3Normalize | (5,0,0) の正規化 | `{x:1, y:0, z:0}` |
+| TC-127a | Vector3Dot | 直交ベクトルの内積 | 0 |
+| TC-127b | Vector3Dot | 平行ベクトルの内積 | 1 |
+
+### スコアボード系 / `auto-scoreboard.flyde`
+
+| TC ID | テスト対象ノード | テスト内容 | 期待値 |
+|---|---|---|---|
+| TC-SB02 | ScoreOperation(set, 42) | スコアを 42 に設定 | 新スコア = 42 |
+| TC-SB03 | GetScore | スコア取得 | 42 |
+| TC-SB04 | ScoreOperation(add, 8) | スコアに 8 加算 | 新スコア = 50 |
+| TC-SB05 | RemoveScoreboardObjective | 目標削除 | true |
+| TC-151 | AddScoreboardObjective → GetFromScoreboardObjective | 目標 ID 確認 | `"mcflowtest2"` |
+| TC-153 | GetScoreboardObjective → GetFromScoreboardObjective | 目標 ID 確認 | `"mcflowtest2"` |
+
+---
+
+## 手動テストケース一覧
+
+### プレイヤーイベント / `manual-player-events.flyde`
+
+**事前操作**: フロー実行後、Minecraft で各種操作を実施する
+
+| TC ID | テスト対象ノード | テスト内容 | 手動操作 |
+|---|---|---|---|
+| TC-012 | OnPlayerTravelled | 移動イベント | プレイヤーが歩く |
+| TC-013 | OnPlayerTeleported | テレポートイベント | `/tp` コマンドなどでテレポート |
+| TC-014 | OnPlayerBounced | バウンドイベント | スライムブロックなどでバウンド |
+| TC-017 | OnPlayerTitle | タイトル表示イベント | `/title` コマンド送信 |
+| TC-018 | OnPlayerMessage | メッセージイベント | チャット送信 |
+| TC-019 | OnPlayerTransform | 座標変換イベント | 移動・テレポートなど |
+
+### ブロックイベント / `manual-block-events.flyde`
+
+| TC ID | テスト対象ノード | テスト内容 | 手動操作 |
+|---|---|---|---|
+| TC-093 | OnBlockBroken → GetFromBlockType | ブロック破壊イベント・ブロック種別取得 | ブロックを破壊する |
+
+※ `OnBlockPlaced` は Assert なし（JSON 表示のみ確認）
+
+### アイテムイベント / `manual-item-events.flyde`
+
+| TC ID | テスト対象ノード | テスト内容 | 手動操作 |
+|---|---|---|---|
+| TC-032 | OnItemAcquired | アイテム取得イベント | アイテムを拾う |
+| TC-094 | OnItemAcquired → GetFromItemType | アイテム種別取得 | アイテムを拾う |
+| TC-095 | OnItemCrafted → GetFromItemStack | クラフトアイテムのスタック情報 | アイテムをクラフトする |
+
+※ `OnItemEquipped` / `OnItemSmelted` / `OnItemTraded` は Assert なし（JSON 表示のみ確認）
+
+### モブイベント / `manual-mob-events.flyde`
+
+| TC ID | テスト対象ノード | テスト内容 | 手動操作 |
+|---|---|---|---|
+| TC-042 | OnTargetBlockHit | ターゲットブロック被弾イベント | ターゲットブロックに矢を当てる |
+| TC-096 | OnMobInteracted → GetFromMob | モブ操作・モブ情報取得 | モブに対してインタラクト |
+
+### プレイヤーその他 / `manual-player-misc.flyde`
+
+| TC ID | テスト対象ノード | テスト内容 | 手動操作 |
+|---|---|---|---|
+| TC-078 | PlayerHasTag | タグ付与後の確認 | チャット送信 → フローがタグ操作を行う |
+
+### エージェント / `manual-agents.flyde`
+
+**前提**: Minecraft Education でエージェントが利用可能な環境
+
+| TC ID | テスト対象ノード | テスト内容 |
+|---|---|---|
+| TC-131 | AgentTeleport | エージェントテレポート完了 |
+| TC-132 | GetAgentLocation | エージェント位置取得（x） |
+| TC-133 | GetAgentLocation | エージェント位置取得（y） |
+| TC-134 | AgentMove | エージェント移動完了 |
+| TC-135 | AgentTurn | エージェント旋回完了 |
+| TC-138 | AgentAction | エージェントアクション完了 |
+| TC-142 | AgentDetect | エージェント検出 |
+| TC-143 | AgentDetect | エージェント検出（別軸） |
+| TC-144 | AgentDetect | エージェント検出（別軸） |
+| TC-145 | AgentSetItem | アイテムセット完了 |
+| TC-146 | AgentSetItem | アイテムセット（別スロット） |
+
+---
+
+## テスト結果記録
+
+### 自動テスト結果
+
+| 実行日時 | ログファイル | PASS | FAIL | 備考 |
+|---|---|---|---|---|
+| 2026-06-19 07:15 | flyde-mc-2026-06-19_07-15-09_1.log | 42 | 2 | TC-057: 天気が Clear にならなかった（環境依存）/ TC-092: entity ID が負値（-4294967295）/ スコアボード系は hasBinary エラーで未実行 |
+
+### 手動テスト結果
+
+| TC ID | 実行日 | 結果 | 備考 |
+|---|---|---|---|
+| TC-012 | | | |
+| TC-013 | | | |
+| TC-014 | | | |
+| TC-017 | | | |
+| TC-018 | | | |
+| TC-019 | | | |
+| TC-032 | | | |
+| TC-042 | | | |
+| TC-078 | | | |
+| TC-093 | | | |
+| TC-094 | | | |
+| TC-095 | | | |
+| TC-096 | | | |
+| TC-131 | | | |
+| TC-132 | | | |
+| TC-133 | | | |
+| TC-134 | | | |
+| TC-135 | | | |
+| TC-138 | | | |
+| TC-142 | | | |
+| TC-143 | | | |
+| TC-144 | | | |
+| TC-145 | | | |
+| TC-146 | | | |
