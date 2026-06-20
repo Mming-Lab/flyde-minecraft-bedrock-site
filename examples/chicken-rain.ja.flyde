@@ -1,0 +1,220 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: -948.5781860351562
+        y: -396.33154296875
+      id: MinecraftConnect-j3m1eoh3
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ../build/index.free.flyde.js
+    - pos:
+        x: -364.8629455566406
+        y: -371.4986267089844
+      id: MinecraftDisconnect-d6hnvbrg
+      inputConfig: {}
+      nodeId: MinecraftDisconnect
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ../build/index.free.flyde.js
+    - pos:
+        x: -728.9331665039062
+        y: -384.66552734375
+      id: OnPlayerChat-khug8o08
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ../build/index.free.flyde.js
+    - pos:
+        x: -535.975830078125
+        y: -458.93756103515625
+      id: Conditional-bo4aqxie
+      inputConfig: {}
+      nodeId: Conditional
+      config:
+        condition:
+          type: EQUAL
+        leftOperand:
+          type: string
+          value: "{{チャット}}"
+        rightOperand:
+          type: string
+          value: chicken
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: -362.3526611328125
+        y: -459.314453125
+      id: InlineValue-ch6ichir
+      inputConfig: {}
+      nodeId: InlineValue
+      config:
+        value:
+          type: string
+          value: summon chicken ~0 ~10 ~0
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: -148.06982421875
+        y: -458.9951171875
+      id: Repeat-h01dv7wm
+      inputConfig: {}
+      displayName: Repeat(100リスト化)
+      nodeId: Repeat
+      config:
+        value:
+          type: string
+          value: "{{コマンド}}"
+        times:
+          type: number
+          value: 100
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 208.12200927734375
+        y: -481.3953857421875
+      id: RunCommand-jch7o4h6
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        トリガー:
+          type: boolean
+          value: true
+        コマンド:
+          type: dynamic
+          value: "{{コマンド}}"
+      type: code
+      source:
+        type: file
+        data: ../build/index.free.flyde.js
+    - pos:
+        x: 31.4749755859375
+        y: -481.26275634765625
+      id: Loop List-a3cntpyc
+      inputConfig: {}
+      nodeId: Loop List
+      config:
+        list:
+          type: dynamic
+          value: "{{list}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: -538.0833522012439
+        y: -372.50230387282835
+      id: Conditional-c76qz07l
+      inputConfig: {}
+      nodeId: Conditional
+      config:
+        condition:
+          type: EQUAL
+        leftOperand:
+          type: string
+          value: "{{チャット}}"
+        rightOperand:
+          type: string
+          value: dis
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: -943.6540331840514
+        y: -571.3937530517578
+      id: Note-c0yoq4ve
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          プレイヤーの10ブロック上にニワトリを100羽召喚
+
+          チャットに「chicken」と入力すると実行します。
+          「dis」と入力すると切断します。
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: MinecraftConnect-j3m1eoh3
+        pinId: ワールド
+      to:
+        insId: OnPlayerChat-khug8o08
+        pinId: ワールド
+    - from:
+        insId: OnPlayerChat-khug8o08
+        pinId: メッセージ
+      to:
+        insId: Conditional-bo4aqxie
+        pinId: チャット
+    - from:
+        insId: Conditional-bo4aqxie
+        pinId: "true"
+      to:
+        insId: InlineValue-ch6ichir
+        pinId: __trigger
+    - from:
+        insId: InlineValue-ch6ichir
+        pinId: value
+      to:
+        insId: Repeat-h01dv7wm
+        pinId: コマンド
+    - from:
+        insId: Repeat-h01dv7wm
+        pinId: list
+      to:
+        insId: Loop List-a3cntpyc
+        pinId: list
+    - from:
+        insId: Loop List-a3cntpyc
+        pinId: item
+      to:
+        insId: RunCommand-jch7o4h6
+        pinId: コマンド
+    - from:
+        insId: OnPlayerChat-khug8o08
+        pinId: メッセージ
+      to:
+        insId: Conditional-c76qz07l
+        pinId: チャット
+    - from:
+        insId: Conditional-c76qz07l
+        pinId: "true"
+      to:
+        insId: MinecraftDisconnect-d6hnvbrg
+        pinId: トリガー
+  id: chicken-rain.ja
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition:
+    result:
+      x: -139.86431297552764
+      y: -54.28667965704415
+  completionOutputs: []

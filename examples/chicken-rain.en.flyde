@@ -1,0 +1,235 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: -957.9490356445312
+        y: -375.428466796875
+      id: MinecraftConnect-j3m1eoh3
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+        port:
+          type: dynamic
+          value: "{{port}}"
+      type: code
+      source:
+        type: file
+        data: ../build/index.free.flyde.js
+    - pos:
+        x: -353.6470031738281
+        y: -372.4899597167969
+      id: MinecraftDisconnect-d6hnvbrg
+      inputConfig: {}
+      nodeId: MinecraftDisconnect
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+        trigger:
+          type: dynamic
+          value: "{{trigger}}"
+      type: code
+      source:
+        type: file
+        data: ../build/index.free.flyde.js
+    - pos:
+        x: -732.0560913085938
+        y: -381.54248046875
+      id: OnPlayerChat-khug8o08
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+        world:
+          type: dynamic
+          value: "{{world}}"
+      type: code
+      source:
+        type: file
+        data: ../build/index.free.flyde.js
+    - pos:
+        x: -535.975830078125
+        y: -458.93756103515625
+      id: Conditional-bo4aqxie
+      inputConfig: {}
+      nodeId: Conditional
+      config:
+        condition:
+          type: EQUAL
+        leftOperand:
+          type: string
+          value: "{{chat}}"
+        rightOperand:
+          type: string
+          value: chicken
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: -358.231689453125
+        y: -460.3385009765625
+      id: InlineValue-ch6ichir
+      inputConfig: {}
+      nodeId: InlineValue
+      config:
+        value:
+          type: string
+          value: summon chicken ~0 ~10 ~0
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: -141.948974609375
+        y: -462.04266357421875
+      id: Repeat-h01dv7wm
+      inputConfig: {}
+      displayName: Repeat
+      nodeId: Repeat
+      config:
+        value:
+          type: string
+          value: "{{command}}"
+        times:
+          type: number
+          value: 100
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 221.0167236328125
+        y: -484.6910400390625
+      id: RunCommand-jch7o4h6
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        トリガー:
+          type: boolean
+          value: true
+        コマンド:
+          type: dynamic
+          value: "{{コマンド}}"
+        trigger:
+          type: boolean
+          value: true
+        command:
+          type: dynamic
+          value: "{{command}}"
+      type: code
+      source:
+        type: file
+        data: ../build/index.free.flyde.js
+    - pos:
+        x: 35.4984130859375
+        y: -483.31146240234375
+      id: Loop List-a3cntpyc
+      inputConfig: {}
+      nodeId: Loop List
+      config:
+        list:
+          type: dynamic
+          value: "{{list}}"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: -538.0833522012439
+        y: -372.50230387282835
+      id: Conditional-c76qz07l
+      inputConfig: {}
+      nodeId: Conditional
+      config:
+        condition:
+          type: EQUAL
+        leftOperand:
+          type: string
+          value: "{{chat}}"
+        rightOperand:
+          type: string
+          value: dis
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: -966.9340624809264
+        y: -570.1247100830078
+      id: Note-c0yoq4ve
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          Summon 100 chickens 10 blocks above the player
+
+          Type “chicken” in the chat to execute this command.
+          Type “dis” to disconnect.
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: Conditional-bo4aqxie
+        pinId: "true"
+      to:
+        insId: InlineValue-ch6ichir
+        pinId: __trigger
+    - from:
+        insId: Repeat-h01dv7wm
+        pinId: list
+      to:
+        insId: Loop List-a3cntpyc
+        pinId: list
+    - from:
+        insId: MinecraftConnect-j3m1eoh3
+        pinId: world
+      to:
+        insId: OnPlayerChat-khug8o08
+        pinId: world
+    - from:
+        insId: Conditional-c76qz07l
+        pinId: "true"
+      to:
+        insId: MinecraftDisconnect-d6hnvbrg
+        pinId: trigger
+    - from:
+        insId: OnPlayerChat-khug8o08
+        pinId: message
+      to:
+        insId: Conditional-c76qz07l
+        pinId: chat
+    - from:
+        insId: OnPlayerChat-khug8o08
+        pinId: message
+      to:
+        insId: Conditional-bo4aqxie
+        pinId: chat
+    - from:
+        insId: Loop List-a3cntpyc
+        pinId: item
+      to:
+        insId: RunCommand-jch7o4h6
+        pinId: command
+    - from:
+        insId: InlineValue-ch6ichir
+        pinId: value
+      to:
+        insId: Repeat-h01dv7wm
+        pinId: command
+  id: chicken-rain.ja
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition:
+    result:
+      x: -139.86431297552764
+      y: -54.28667965704415
+  completionOutputs: []

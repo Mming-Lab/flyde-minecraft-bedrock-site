@@ -1,0 +1,558 @@
+imports: {}
+node:
+  instances:
+    - pos:
+        x: -639
+        y: -168
+      id: MinecraftConnect-wffl9kr7
+      inputConfig: {}
+      nodeId: MinecraftConnect
+      config:
+        ポート:
+          type: dynamic
+          value: "{{ポート}}"
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: 34.60888671875
+        y: 270.450439453125
+      id: MinecraftDisconnect-d46parwh
+      inputConfig: {}
+      nodeId: MinecraftDisconnect
+      config:
+        トリガー:
+          type: dynamic
+          value: "{{トリガー}}"
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: -395
+        y: -147
+      id: OnBlockBroken-h4bsxg6f
+      inputConfig: {}
+      nodeId: OnBlockBroken
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: -388
+        y: -393
+      id: OnBlockPlaced-ukbbvjnt
+      inputConfig: {}
+      nodeId: OnBlockPlaced
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: -154.121337890625
+        y: -306.9751892089844
+      id: GetFromBlockType-tqjv3l0d
+      inputConfig: {}
+      nodeId: GetFromBlockType
+      config:
+        ﾌﾞﾛｯｸ:
+          type: dynamic
+          value: "{{ﾌﾞﾛｯｸ}}"
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: 13.5877685546875
+        y: -171.95431518554688
+      id: GetFromEntity-kvsb7wij
+      inputConfig: {}
+      nodeId: GetFromEntity
+      config:
+        ｴﾝﾃｨﾃｨ:
+          type: dynamic
+          value: "{{ｴﾝﾃｨﾃｨ}}"
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: -175.4747314453125
+        y: -175.9730224609375
+      id: GetFromPlayerSnapshot-oi0x9m1e
+      inputConfig: {}
+      nodeId: GetFromPlayerSnapshot
+      config:
+        ﾌﾟﾚｲﾔｰ:
+          type: dynamic
+          value: "{{ﾌﾟﾚｲﾔｰ}}"
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: -399.5
+        y: 244
+      id: OnPlayerChat-ngezql47
+      inputConfig: {}
+      nodeId: OnPlayerChat
+      config:
+        ワールド:
+          type: dynamic
+          value: "{{ワールド}}"
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: -192.5
+        y: 271
+      id: Conditional-y8o03civ
+      inputConfig: {}
+      nodeId: Conditional
+      config:
+        condition:
+          type: EQUAL
+        leftOperand:
+          type: string
+          value: "{{チャット}}"
+        rightOperand:
+          type: string
+          value: dis
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 44.15057373046875
+        y: -299.135986328125
+      id: ToJa-h83o0or0
+      inputConfig: {}
+      nodeId: ToJa
+      config:
+        値:
+          type: dynamic
+          value: "{{値}}"
+        種別:
+          type: select
+          value: block
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: -178.9708251953125
+        y: -23.953765869140625
+      id: GetFromItemStack-xpbvvmou
+      inputConfig: {}
+      nodeId: GetFromItemStack
+      config:
+        所持ｱｲﾃﾑ:
+          type: dynamic
+          value: "{{所持ｱｲﾃﾑ}}"
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: 12.93328857421875
+        y: 15.03399658203125
+      id: ToJa-s9moyyhg
+      inputConfig: {}
+      nodeId: ToJa
+      config:
+        値:
+          type: dynamic
+          value: "{{値}}"
+        種別:
+          type: select
+          value: item
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: 252.29458618164062
+        y: -160.78878784179688
+      id: Vector3Op-pqwhohwt
+      inputConfig: {}
+      nodeId: Vector3Op
+      config:
+        演算:
+          type: select
+          value: floor
+        x:
+          type: number
+          value: 0
+        y:
+          type: number
+          value: 0
+        z:
+          type: number
+          value: 0
+        座標A:
+          type: dynamic
+          value: "{{座標A}}"
+        座標B:
+          type: dynamic
+          value: "{{座標B}}"
+        座標:
+          type: dynamic
+          value: "{{座標}}"
+        倍率:
+          type: number
+          value: 1
+        座標XZ:
+          type: dynamic
+          value: "{{座標XZ}}"
+        Y:
+          type: number
+          value: 64
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: 618.2493896484375
+        y: -253.34661865234375
+      id: InlineValue-zmdmi7rx
+      inputConfig: {}
+      nodeId: InlineValue
+      config:
+        value:
+          type: string
+          value: "{{名前}}が{{座標}}の位置で"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: -202.5927734375
+        y: 118.60247802734375
+      id: Conditional-prgsazz0
+      inputConfig: {}
+      nodeId: Conditional
+      config:
+        condition:
+          type: EXISTS
+        leftOperand:
+          type: string
+          value: "{{value}}"
+        rightOperand:
+          type: string
+          value: Some value
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: -19.80279541015625
+        y: 132.92031860351562
+      id: InlineValue-ghsow2u7
+      inputConfig: {}
+      nodeId: InlineValue
+      config:
+        value:
+          type: string
+          value: 素手
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 235.5
+        y: 22
+      id: InlineValue-vorjfbe6
+      inputConfig: {}
+      nodeId: InlineValue
+      config:
+        value:
+          type: string
+          value: " {{アイテム}}を持って"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 820.9566345214844
+        y: -399.4762268066406
+      id: InlineValue-nfci1sfs
+      inputConfig: {}
+      nodeId: InlineValue
+      config:
+        value:
+          type: string
+          value: "{{名前が座標で}}{{ブロック}}を{{配置}}しました"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 818.9299011230469
+        y: -43.5467529296875
+      id: InlineValue-e8figoo4
+      inputConfig: {}
+      nodeId: InlineValue
+      config:
+        value:
+          type: string
+          value: "{{名前が座標で}}{{アイテムを使って}}{{ブロック}}を破壊しました。"
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 1034.405258178711
+        y: -132.98153686523438
+      id: RunCommand-l7frt1fy
+      inputConfig: {}
+      nodeId: RunCommand
+      config:
+        トリガー:
+          type: boolean
+          value: true
+        コマンド:
+          type: string
+          value: say {{メッセージ}}
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: -656.3648281176429
+        y: -533.1767524752762
+      id: Note-lg2rsyns
+      inputConfig: {}
+      nodeId: Note
+      config:
+        content: |-
+          ブロックの設置/破壊時の情報表示
+
+          「dis」と入力すると切断します。
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+    - pos:
+        x: 441.46024036012386
+        y: -159.87563820052873
+      id: Vector3ToString-susftz72
+      inputConfig: {}
+      nodeId: Vector3ToString
+      config:
+        座標:
+          type: dynamic
+          value: "{{座標}}"
+      type: code
+      source:
+        type: file
+        data: ..\build\index.free.flyde.js
+    - pos:
+        x: -158.54247570432926
+        y: -409.4217807786537
+      id: InlineValue-mdriult4
+      inputConfig: {}
+      nodeId: InlineValue
+      config:
+        value:
+          type: string
+          value: ""
+      type: code
+      source:
+        type: package
+        data: "@flyde/nodes"
+  connections:
+    - from:
+        insId: OnBlockBroken-h4bsxg6f
+        pinId: ﾌﾟﾚｲﾔｰ
+      to:
+        insId: GetFromPlayerSnapshot-oi0x9m1e
+        pinId: ﾌﾟﾚｲﾔｰ
+    - from:
+        insId: OnBlockPlaced-ukbbvjnt
+        pinId: ﾌﾟﾚｲﾔｰ
+      to:
+        insId: GetFromPlayerSnapshot-oi0x9m1e
+        pinId: ﾌﾟﾚｲﾔｰ
+    - from:
+        insId: OnBlockPlaced-ukbbvjnt
+        pinId: ﾌﾞﾛｯｸ
+      to:
+        insId: GetFromBlockType-tqjv3l0d
+        pinId: ﾌﾞﾛｯｸ
+    - from:
+        insId: MinecraftConnect-wffl9kr7
+        pinId: ワールド
+      to:
+        insId: OnBlockBroken-h4bsxg6f
+        pinId: ワールド
+    - from:
+        insId: MinecraftConnect-wffl9kr7
+        pinId: ワールド
+      to:
+        insId: OnBlockPlaced-ukbbvjnt
+        pinId: ワールド
+    - from:
+        insId: GetFromPlayerSnapshot-oi0x9m1e
+        pinId: ｴﾝﾃｨﾃｨ
+      to:
+        insId: GetFromEntity-kvsb7wij
+        pinId: ｴﾝﾃｨﾃｨ
+    - from:
+        insId: MinecraftConnect-wffl9kr7
+        pinId: ワールド
+      to:
+        insId: OnPlayerChat-ngezql47
+        pinId: ワールド
+    - from:
+        insId: OnPlayerChat-ngezql47
+        pinId: メッセージ
+      to:
+        insId: Conditional-y8o03civ
+        pinId: チャット
+    - from:
+        insId: Conditional-y8o03civ
+        pinId: "true"
+      to:
+        insId: MinecraftDisconnect-d46parwh
+        pinId: トリガー
+    - from:
+        insId: GetFromBlockType-tqjv3l0d
+        pinId: ブロックID
+      to:
+        insId: ToJa-h83o0or0
+        pinId: 値
+    - from:
+        insId: GetFromItemStack-xpbvvmou
+        pinId: アイテムID
+      to:
+        insId: ToJa-s9moyyhg
+        pinId: 値
+    - from:
+        insId: GetFromEntity-kvsb7wij
+        pinId: 座標
+      to:
+        insId: Vector3Op-pqwhohwt
+        pinId: 座標
+    - from:
+        insId: GetFromPlayerSnapshot-oi0x9m1e
+        pinId: 名前
+      to:
+        insId: InlineValue-zmdmi7rx
+        pinId: 名前
+    - from:
+        insId: OnBlockBroken-h4bsxg6f
+        pinId: 所持ｱｲﾃﾑ
+      to:
+        insId: Conditional-prgsazz0
+        pinId: value
+    - from:
+        insId: Conditional-prgsazz0
+        pinId: "false"
+      to:
+        insId: InlineValue-ghsow2u7
+        pinId: __trigger
+    - from:
+        insId: ToJa-s9moyyhg
+        pinId: 日本語名
+      to:
+        insId: InlineValue-vorjfbe6
+        pinId: アイテム
+    - from:
+        insId: InlineValue-ghsow2u7
+        pinId: value
+      to:
+        insId: InlineValue-vorjfbe6
+        pinId: アイテム
+    - from:
+        insId: InlineValue-zmdmi7rx
+        pinId: value
+      to:
+        insId: InlineValue-nfci1sfs
+        pinId: 名前が座標で
+    - from:
+        insId: ToJa-h83o0or0
+        pinId: 日本語名
+      to:
+        insId: InlineValue-nfci1sfs
+        pinId: ブロック
+    - from:
+        insId: InlineValue-vorjfbe6
+        pinId: value
+      to:
+        insId: InlineValue-e8figoo4
+        pinId: アイテムを使って
+    - from:
+        insId: InlineValue-zmdmi7rx
+        pinId: value
+      to:
+        insId: InlineValue-e8figoo4
+        pinId: 名前が座標で
+    - from:
+        insId: InlineValue-nfci1sfs
+        pinId: value
+      to:
+        insId: RunCommand-l7frt1fy
+        pinId: メッセージ
+    - from:
+        insId: InlineValue-e8figoo4
+        pinId: value
+      to:
+        insId: RunCommand-l7frt1fy
+        pinId: メッセージ
+    - from:
+        insId: Vector3Op-pqwhohwt
+        pinId: 座標
+      to:
+        insId: Vector3ToString-susftz72
+        pinId: 座標
+    - from:
+        insId: Vector3ToString-susftz72
+        pinId: 文字列
+      to:
+        insId: InlineValue-zmdmi7rx
+        pinId: 座標
+    - from:
+        insId: OnBlockBroken-h4bsxg6f
+        pinId: 所持ｱｲﾃﾑ
+      to:
+        insId: GetFromItemStack-xpbvvmou
+        pinId: 所持ｱｲﾃﾑ
+    - from:
+        insId: InlineValue-mdriult4
+        pinId: value
+      to:
+        insId: InlineValue-nfci1sfs
+        pinId: 配置
+    - from:
+        insId: OnBlockPlaced-ukbbvjnt
+        pinId: 水中
+      to:
+        insId: InlineValue-mdriult4
+        pinId: __trigger
+    - from:
+        insId: OnBlockBroken-h4bsxg6f
+        pinId: ﾌﾞﾛｯｸ
+      to:
+        insId: GetFromBlockType-tqjv3l0d
+        pinId: ﾌﾞﾛｯｸ
+    - from:
+        insId: ToJa-h83o0or0
+        pinId: 日本語名
+      to:
+        insId: InlineValue-e8figoo4
+        pinId: ブロック
+  id: block-info.ja
+  inputs: {}
+  outputs: {}
+  inputsPosition: {}
+  outputsPosition: {}
