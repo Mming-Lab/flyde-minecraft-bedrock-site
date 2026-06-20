@@ -1997,48 +1997,5 @@
         "description": "テスト不合格時に実際値を emit"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Gemini AI にテキストを送り、応答テキストを取得する",
-    "inputs": {
-      "apiKey": {
-        "name": "APIキー",
-        "description": "Google AI Studio で取得した API キー"
-      },
-      "model": {
-        "name": "モデル",
-        "description": "使用する Gemini モデル",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash（推奨）",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "プロンプト",
-        "description": "AI への質問・指示テキスト"
-      },
-      "systemInstruction": {
-        "name": "システム指示",
-        "description": "AI の役割・振る舞いを定義するシステムプロンプト（省略可）"
-      },
-      "temperature": {
-        "name": "温度",
-        "description": "ランダム性（0.0〜1.0、低いほど決定的）"
-      },
-      "trigger": {
-        "name": "トリガー",
-        "description": "トリガー（省略可）"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "応答",
-        "description": "Gemini が生成したテキスト"
-      }
-    }
   }
 }

@@ -1997,48 +1997,5 @@
         "description": "Изпраща действителната стойност, когато тестът се провали"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Изпраща текст до Gemini AI и получава отговор",
-    "inputs": {
-      "apiKey": {
-        "name": "API ключ",
-        "description": "API ключ от Google AI Studio"
-      },
-      "model": {
-        "name": "Модел",
-        "description": "Модел Gemini за използване",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash (препоръчително)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "Промпт",
-        "description": "Текст на потребителския промпт"
-      },
-      "systemInstruction": {
-        "name": "Системна инструкция",
-        "description": "Системен промпт, определящ ролята/поведението на ИИ (по избор)"
-      },
-      "temperature": {
-        "name": "Температура",
-        "description": "Случайност 0.0–1.0 (по-ниско = по-детерминистично)"
-      },
-      "trigger": {
-        "name": "Тригер",
-        "description": "Тригер (по избор)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "Отговор",
-        "description": "Текст, генериран от Gemini"
-      }
-    }
   }
 }

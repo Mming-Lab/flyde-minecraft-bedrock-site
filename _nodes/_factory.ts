@@ -2,14 +2,14 @@ import type { CodeNode, InputPin, OutputPin } from '@flyde/core'
 
 // ── 型定義 ────────────────────────────────────────────────────────
 
-export type InputI18n = {
+type InputI18n = {
   name: string
   description?: string
   /** editorType: 'select' の options label を英語value→ローカルラベルで上書き */
   options?: Record<string, string>
 }
 
-export type OutputI18n = {
+type OutputI18n = {
   name: string
   description?: string
 }

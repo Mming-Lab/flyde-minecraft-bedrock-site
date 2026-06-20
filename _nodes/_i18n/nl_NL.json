@@ -1997,48 +1997,5 @@
         "description": "Geeft de werkelijke waarde wanneer de test mislukt"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Stuurt tekst naar Gemini AI en krijgt een antwoord",
-    "inputs": {
-      "apiKey": {
-        "name": "API-sleutel",
-        "description": "API-sleutel van Google AI Studio"
-      },
-      "model": {
-        "name": "Model",
-        "description": "Te gebruiken Gemini-model",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash (aanbevolen)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "Prompt",
-        "description": "Tekst van de gebruikersprompt"
-      },
-      "systemInstruction": {
-        "name": "Systeeminstructie",
-        "description": "Systeemprompt die de rol/het gedrag van de AI definieert (optioneel)"
-      },
-      "temperature": {
-        "name": "Temperatuur",
-        "description": "Willekeur 0.0–1.0 (lager = deterministischer)"
-      },
-      "trigger": {
-        "name": "Trigger",
-        "description": "Trigger (optioneel)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "Antwoord",
-        "description": "Door Gemini gegenereerde tekst"
-      }
-    }
   }
 }

@@ -1997,48 +1997,5 @@
         "description": "Skickar faktiskt värde när testet misslyckas"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Skickar text till Gemini AI och får ett svar",
-    "inputs": {
-      "apiKey": {
-        "name": "API-nyckel",
-        "description": "API-nyckel från Google AI Studio"
-      },
-      "model": {
-        "name": "Modell",
-        "description": "Gemini-modell att använda",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash (rekommenderas)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "Prompt",
-        "description": "Användarprompttext"
-      },
-      "systemInstruction": {
-        "name": "Systeminstruktion",
-        "description": "Systemprompt som definierar AI-roll/beteende (valfritt)"
-      },
-      "temperature": {
-        "name": "Temperatur",
-        "description": "Slumpmässighet 0.0–1.0 (lägre = mer deterministisk)"
-      },
-      "trigger": {
-        "name": "Utlösare",
-        "description": "Utlösare (valfri)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "Svar",
-        "description": "Text genererad av Gemini"
-      }
-    }
   }
 }

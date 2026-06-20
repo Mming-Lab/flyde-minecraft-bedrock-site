@@ -1997,48 +1997,5 @@
         "description": "A tényleges értéket küldi, amikor a teszt sikertelen"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Szöveget küld a Gemini AI-nak, és választ kap",
-    "inputs": {
-      "apiKey": {
-        "name": "API-kulcs",
-        "description": "API-kulcs a Google AI Studióból"
-      },
-      "model": {
-        "name": "Modell",
-        "description": "Használandó Gemini-modell",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash (ajánlott)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "Prompt",
-        "description": "Felhasználói prompt szövege"
-      },
-      "systemInstruction": {
-        "name": "Rendszerutasítás",
-        "description": "Az AI szerepét/viselkedését meghatározó rendszerprompt (opcionális)"
-      },
-      "temperature": {
-        "name": "Hőmérséklet",
-        "description": "Véletlenszerűség 0.0–1.0 (alacsonyabb = determinisztikusabb)"
-      },
-      "trigger": {
-        "name": "Trigger",
-        "description": "Trigger (opcionális)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "Válasz",
-        "description": "A Gemini által generált szöveg"
-      }
-    }
   }
 }

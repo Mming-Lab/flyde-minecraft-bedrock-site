@@ -1997,48 +1997,5 @@
         "description": "Vyšle skutečnou hodnotu, když test selže"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Odešle text do Gemini AI a získá odpověď",
-    "inputs": {
-      "apiKey": {
-        "name": "Klíč API",
-        "description": "Klíč API z Google AI Studio"
-      },
-      "model": {
-        "name": "Model",
-        "description": "Model Gemini k použití",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash (doporučeno)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "Prompt",
-        "description": "Text promptu uživatele"
-      },
-      "systemInstruction": {
-        "name": "Systémová instrukce",
-        "description": "Systémový prompt definující roli/chování AI (volitelné)"
-      },
-      "temperature": {
-        "name": "Teplota",
-        "description": "Náhodnost 0.0–1.0 (nižší = deterministrovanější)"
-      },
-      "trigger": {
-        "name": "Spouštěč",
-        "description": "Spouštěč (volitelné)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "Odpověď",
-        "description": "Text vygenerovaný Gemini"
-      }
-    }
   }
 }

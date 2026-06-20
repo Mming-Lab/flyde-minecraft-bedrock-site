@@ -1997,48 +1997,5 @@
         "description": "Lähettää todellisen arvon, kun testi epäonnistuu"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Lähettää tekstiä Gemini AI:lle ja saa vastauksen",
-    "inputs": {
-      "apiKey": {
-        "name": "API-avain",
-        "description": "API-avain Google AI Studiosta"
-      },
-      "model": {
-        "name": "Malli",
-        "description": "Käytettävä Gemini-malli",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash (suositeltu)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "Kehote",
-        "description": "Käyttäjän kehotteen teksti"
-      },
-      "systemInstruction": {
-        "name": "Järjestelmäohje",
-        "description": "Järjestelmäkehote, joka määrittää tekoälyn roolin/käyttäytymisen (valinnainen)"
-      },
-      "temperature": {
-        "name": "Lämpötila",
-        "description": "Satunnaisuus 0.0–1.0 (pienempi = deterministisempi)"
-      },
-      "trigger": {
-        "name": "Liipaisin",
-        "description": "Liipaisin (valinnainen)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "Vastaus",
-        "description": "Geminin luoma teksti"
-      }
-    }
   }
 }

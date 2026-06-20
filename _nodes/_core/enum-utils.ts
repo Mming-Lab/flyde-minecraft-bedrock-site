@@ -1,8 +1,3 @@
-export function enumKeyName(enumObj: Record<string, string | number>, value: number): string {
-  const entry = Object.entries(enumObj).find(([, v]) => v === value)
-  return entry ? entry[0] : String(value)
-}
-
 const TRAVEL_METHOD: Record<number, string> = {
   0: 'Walk', 1: 'SwimWater', 2: 'Fall',   3: 'Climb',    4: 'SwimLava',
   5: 'Fly',  6: 'Riding',   7: 'Sneak',   8: 'Sprint',   9: 'Bounce',
@@ -35,7 +30,7 @@ const EQUIP_SLOT: Record<number, string> = {
   1: 'Offhand', 2: 'Head', 3: 'Chest', 4: 'Legs', 5: 'Feet',
 }
 
-export const DESTRUCTION_METHOD: Record<number, string> = {
+const DESTRUCTION_METHOD: Record<number, string> = {
   0: 'Player',
   1: 'Explosion',
   2: 'Mob',
@@ -43,12 +38,12 @@ export const DESTRUCTION_METHOD: Record<number, string> = {
   4: 'Other',
 }
 
-export const PLACEMENT_METHOD: Record<number, string> = {
+const PLACEMENT_METHOD: Record<number, string> = {
   0: 'Player',
   1: 'Other',
 }
 
-export const BIOME_NAMES: Record<number, string> = {
+const BIOME_NAMES: Record<number, string> = {
   0:   'Ocean',
   1:   'Plains',
   2:   'Desert',

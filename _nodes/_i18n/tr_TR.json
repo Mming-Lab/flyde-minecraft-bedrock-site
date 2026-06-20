@@ -1997,48 +1997,5 @@
         "description": "Test başarısız olduğunda gerçek değeri gönderir"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Gemini AI'ya metin gönderir ve yanıt alır",
-    "inputs": {
-      "apiKey": {
-        "name": "API Anahtarı",
-        "description": "Google AI Studio'dan API anahtarı"
-      },
-      "model": {
-        "name": "Model",
-        "description": "Kullanılacak Gemini modeli",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash (önerilen)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "İstem",
-        "description": "Kullanıcı istem metni"
-      },
-      "systemInstruction": {
-        "name": "Sistem Talimatı",
-        "description": "Yapay zeka rolünü/davranışını tanımlayan sistem istemi (isteğe bağlı)"
-      },
-      "temperature": {
-        "name": "Sıcaklık",
-        "description": "Rastgelelik 0.0–1.0 (daha düşük = daha belirleyici)"
-      },
-      "trigger": {
-        "name": "Tetikleyici",
-        "description": "Tetikleyici (isteğe bağlı)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "Yanıt",
-        "description": "Gemini tarafından üretilen metin"
-      }
-    }
   }
 }

@@ -1,6 +1,7 @@
 import { CodeNode } from '@flyde/core'
 import { ServerEvent } from 'socket-be'
 import { getServer, stopServer } from '../ws-server'
+import { clearCurrentContext } from '../context-manager'
 import { diagLog } from '../diag'
 
 const log = (msg: string) => diagLog('INFO',  'connection', msg)
@@ -61,6 +62,7 @@ export const MinecraftConnect: CodeNode = {
           server.remove(ServerEvent.WorldAdd, handler)
           server.remove(ServerEvent.WorldRemove, removeHandler)
           await stopServer()
+          clearCurrentContext()
           _mcConnectRunning = false
           resolve()
         })

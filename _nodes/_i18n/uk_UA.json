@@ -1997,48 +1997,5 @@
         "description": "Видає фактичне значення, коли тест провалюється"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Надсилає текст до Gemini AI та отримує відповідь",
-    "inputs": {
-      "apiKey": {
-        "name": "Ключ API",
-        "description": "Ключ API з Google AI Studio"
-      },
-      "model": {
-        "name": "Модель",
-        "description": "Модель Gemini для використання",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash (рекомендовано)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "Запит",
-        "description": "Текст запиту користувача"
-      },
-      "systemInstruction": {
-        "name": "Системна інструкція",
-        "description": "Системний запит, що визначає роль/поведінку ШІ (необов'язково)"
-      },
-      "temperature": {
-        "name": "Температура",
-        "description": "Випадковість 0.0–1.0 (нижче = детермінованіше)"
-      },
-      "trigger": {
-        "name": "Тригер",
-        "description": "Тригер (необов'язково)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "Відповідь",
-        "description": "Текст, згенерований Gemini"
-      }
-    }
   }
 }

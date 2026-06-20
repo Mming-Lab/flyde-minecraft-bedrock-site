@@ -1997,48 +1997,5 @@
         "description": "Sender faktisk værdi, når testen fejler"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Sender tekst til Gemini AI og får et svar",
-    "inputs": {
-      "apiKey": {
-        "name": "API-nøgle",
-        "description": "API-nøgle fra Google AI Studio"
-      },
-      "model": {
-        "name": "Model",
-        "description": "Gemini-model der skal bruges",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash (anbefalet)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "Prompt",
-        "description": "Brugerprompttekst"
-      },
-      "systemInstruction": {
-        "name": "Systeminstruktion",
-        "description": "Systemprompt der definerer AI-rolle/adfærd (valgfrit)"
-      },
-      "temperature": {
-        "name": "Temperatur",
-        "description": "Tilfældighed 0.0–1.0 (lavere = mere deterministisk)"
-      },
-      "trigger": {
-        "name": "Udløser",
-        "description": "Udløser (valgfri)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "Svar",
-        "description": "Tekst genereret af Gemini"
-      }
-    }
   }
 }

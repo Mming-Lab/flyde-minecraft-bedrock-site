@@ -35,23 +35,12 @@ export const MOB_ID_TO:   Record<string, string> = Object.fromEntries(MOB_ALL.ma
 // ── ENUM ─────────────────────────────────────────────────────────
 
 const ENUM: Record<string, Record<string, string>> = maps.ENUM ?? {}
-const ENUM_CAT: Record<string, string> = maps.ENUM_CAT ?? {}
 
 export function enumOpts(kind: string): SelectOption[] {
   return Object.entries(ENUM[kind] ?? {}).map(([en, local]) => ({ label: String(local), value: en }))
 }
 
-export const ENUM_CAT_OPTS: SelectOption[] = Object.entries(ENUM_CAT)
-  .map(([key, label]) => ({ value: key, label: String(label) }))
-
 /** イベント値（英語キー名）をロケール名に変換 */
 export function getEnumLabel(kind: string, value: string): string | undefined {
   return (ENUM[kind] ?? {})[value]
 }
-
-// ── 後方互換エクスポート（旧コードとの互換性） ────────────────────
-
-export const BLOCK_JA: Record<string, string> = maps.BLOCK ?? {}
-export const ITEM_JA:  Record<string, string> = maps.ITEM  ?? {}
-export const MOB_JA:   Record<string, string> = maps.MOB   ?? {}
-export const ENUM_JA:  Record<string, Record<string, string>> = ENUM

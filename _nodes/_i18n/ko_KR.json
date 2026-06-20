@@ -1997,48 +1997,5 @@
         "description": "테스트 실패 시 실제값 출력"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Gemini AI에 텍스트를 보내고 응답을 받음",
-    "inputs": {
-      "apiKey": {
-        "name": "API 키",
-        "description": "Google AI Studio에서 발급한 API 키"
-      },
-      "model": {
-        "name": "모델",
-        "description": "사용할 Gemini 모델",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash(권장)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "프롬프트",
-        "description": "사용자 프롬프트 텍스트"
-      },
-      "systemInstruction": {
-        "name": "시스템 지시",
-        "description": "AI 역할/행동을 정의하는 시스템 프롬프트(선택)"
-      },
-      "temperature": {
-        "name": "온도",
-        "description": "무작위성 0.0–1.0(낮을수록 결정적)"
-      },
-      "trigger": {
-        "name": "트리거",
-        "description": "트리거(선택)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "응답",
-        "description": "Gemini가 생성한 텍스트"
-      }
-    }
   }
 }

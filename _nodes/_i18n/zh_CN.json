@@ -1997,48 +1997,5 @@
         "description": "测试失败时输出实际值"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "向Gemini AI发送文本并获取响应",
-    "inputs": {
-      "apiKey": {
-        "name": "API密钥",
-        "description": "来自Google AI Studio的API密钥"
-      },
-      "model": {
-        "name": "模型",
-        "description": "要使用的Gemini模型",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash（推荐）",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "提示词",
-        "description": "用户提示词文本"
-      },
-      "systemInstruction": {
-        "name": "系统指令",
-        "description": "定义AI角色/行为的系统提示词（可选）"
-      },
-      "temperature": {
-        "name": "温度",
-        "description": "随机性 0.0–1.0（越低越确定）"
-      },
-      "trigger": {
-        "name": "触发",
-        "description": "触发（可选）"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "响应",
-        "description": "Gemini生成的文本"
-      }
-    }
   }
 }

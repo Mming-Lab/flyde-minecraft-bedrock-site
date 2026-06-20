@@ -1997,48 +1997,5 @@
         "description": "Mengirim nilai aktual saat uji gagal"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Mengirim teks ke Gemini AI dan mendapatkan respons",
-    "inputs": {
-      "apiKey": {
-        "name": "Kunci API",
-        "description": "Kunci API dari Google AI Studio"
-      },
-      "model": {
-        "name": "Model",
-        "description": "Model Gemini yang digunakan",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash (disarankan)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "Prompt",
-        "description": "Teks prompt pengguna"
-      },
-      "systemInstruction": {
-        "name": "Instruksi Sistem",
-        "description": "Prompt sistem yang menentukan peran/perilaku AI (opsional)"
-      },
-      "temperature": {
-        "name": "Suhu",
-        "description": "Keacakan 0.0–1.0 (lebih rendah = lebih deterministik)"
-      },
-      "trigger": {
-        "name": "Pemicu",
-        "description": "Pemicu (opsional)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "Respons",
-        "description": "Teks yang dihasilkan oleh Gemini"
-      }
-    }
   }
 }

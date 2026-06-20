@@ -1997,48 +1997,5 @@
         "description": "Στέλνει την πραγματική τιμή όταν η δοκιμή αποτυγχάνει"
       }
     }
-  },
-  "Gemini": {
-    "displayName": "Gemini",
-    "menuDisplayName": "Gemini",
-    "description": "Στέλνει κείμενο στο Gemini AI και λαμβάνει απάντηση",
-    "inputs": {
-      "apiKey": {
-        "name": "Κλειδί API",
-        "description": "Κλειδί API από το Google AI Studio"
-      },
-      "model": {
-        "name": "Μοντέλο",
-        "description": "Μοντέλο Gemini προς χρήση",
-        "options": {
-          "gemini-2.5-flash": "Gemini 2.5 Flash (συνιστάται)",
-          "gemini-2.5-pro": "Gemini 2.5 Pro",
-          "gemini-2.0-flash": "Gemini 2.0 Flash",
-          "gemini-2.0-flash-lite": "Gemini 2.0 Flash Lite"
-        }
-      },
-      "prompt": {
-        "name": "Προτροπή",
-        "description": "Κείμενο προτροπής χρήστη"
-      },
-      "systemInstruction": {
-        "name": "Οδηγία συστήματος",
-        "description": "Προτροπή συστήματος που ορίζει τον ρόλο/συμπεριφορά του AI (προαιρετικό)"
-      },
-      "temperature": {
-        "name": "Θερμοκρασία",
-        "description": "Τυχαιότητα 0.0–1.0 (χαμηλότερη = πιο ντετερμινιστική)"
-      },
-      "trigger": {
-        "name": "Έναυσμα",
-        "description": "Έναυσμα (προαιρετικό)"
-      }
-    },
-    "outputs": {
-      "response": {
-        "name": "Απάντηση",
-        "description": "Κείμενο που δημιουργήθηκε από το Gemini"
-      }
-    }
   }
 }

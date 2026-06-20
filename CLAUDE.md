@@ -32,7 +32,6 @@ flyde-minecraft-bedrock/
 │   ├── context-manager.ts     ← McContext シングルトン（内部用）
 │   ├── ws-server.ts           ← WebSocket サーバーシングルトン（内部用）
 │   ├── diag.ts                ← ファイルロガー（内部用）
-│   ├── enum-utils.ts          ← _core/enum-utils の再エクスポート（後方互換ラッパー）
 │   ├── _core/                 ← 処理ロジック（英語ポート名・言語非依存）
 │   │   ├── connection.ts      ← 接続系
 │   │   ├── agents.ts          ← エージェント系
