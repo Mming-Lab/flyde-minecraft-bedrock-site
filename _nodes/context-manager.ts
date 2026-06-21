@@ -21,7 +21,7 @@ export function setCurrentContext(world: World, player: Player): void {
 
 export function getCurrentContext(): McContext {
   if (!_ctx) _ctx = (process as any).__fmcContext ?? null
-  if (!_ctx) throw new Error('マインクラフトとの接続がありません。先に接続してください。')
+  if (!_ctx) throw new Error('Not connected to Minecraft. Please connect first.')
   return _ctx
 }
 

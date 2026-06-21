@@ -4,7 +4,7 @@ import { join } from 'path'
 import { Server, ServerEvent, type World } from 'socket-be'
 import { diagLog } from './diag'
 
-const log = (msg: string) => diagLog('INFO',  'socketbe', msg)
+const log = (msg: string) => diagLog('INFO',  'ws-server', msg)
 const dbg = (msg: string) => diagLog('DEBUG', 'flyde-mc',  msg)
 
 // Flyde がフロー再起動時にモジュールキャッシュをクリアして再 require することがある。
@@ -42,7 +42,7 @@ function killPreviousProcess(port: number): void {
     const pid = parseInt(readFileSync(file, 'utf8').trim(), 10)
     if (pid > 0 && pid !== process.pid) {
       process.kill(pid)
-      log(`⚠️ 前回の flyde-mc プロセス (PID: ${pid}) を終了しました`)
+      log(`⚠️ Terminated previous flyde-mc process (PID: ${pid})`)
     }
   } catch {
     // プロセスが既に終了済みなら無視
@@ -74,8 +74,8 @@ export function getServer(port: number = 8080, onError?: (msg: string) => void):
     // サーバーが実際に listen 開始したことを確認するログ
     _server.on(ServerEvent.Open, () => {
       dbg(`ServerEvent.Open fired`)
-      log(`✅ サーバー起動完了: ws://localhost:${port}`)
-      log(`   Minecraftで /connect localhost:${port} を実行してください`)
+      log(`✅ Server ready: ws://localhost:${port}`)
+      log(`   Run /connect localhost:${port} in Minecraft`)
     })
 
     // WorldAdd / WorldRemove をインスタンス直後から監視
@@ -98,7 +98,7 @@ export function getServer(port: number = 8080, onError?: (msg: string) => void):
     if (wss?.on) {
       wss.on('error', (err: Error) => {
         diagLog('WARN',  'flyde-mc',  `WSS error: ${err.message}`)
-        diagLog('ERROR', 'socketbe', `❌ サーバーエラー: ${err.message}`)
+        diagLog('ERROR', 'ws-server', `❌ Server error: ${err.message}`)
         _server = null
         syncToProcess()
         onError?.(err.message)
@@ -129,7 +129,7 @@ export function getServer(port: number = 8080, onError?: (msg: string) => void):
       })
     }
 
-    log(`サーバー起動中... ws://localhost:${port}`)
+    log(`Starting server... ws://localhost:${port}`)
   }
   return _server!
 }
@@ -145,7 +145,7 @@ export async function stopServer(): Promise<void> {
   deletePidFile(_port)
   try {
     await s.stop()
-    log('サーバーを停止しました')
+    log('Server stopped')
   } catch {
     // すでに閉じている場合などは無視
   }
