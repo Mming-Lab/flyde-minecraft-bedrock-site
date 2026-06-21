@@ -143,7 +143,11 @@ function remapOutputs(
  * 英語ポート名の _core ノードに i18n 情報を合成して、
  * ローカルポート名を持つ CodeNode を返す。
  */
-export function localizeNode(coreNode: CodeNode, nodeI18n: NodeI18n): CodeNode {
+export function localizeNode(coreNode: CodeNode, nodeI18n?: NodeI18n): CodeNode {
+  // 該当ロケールの_i18nにこのノードのエントリが無い場合、_core既定の英語表記のまま返す
+  // （1ノードの翻訳漏れで index.flyde.ts 全体の読み込みが落ちるのを防ぐ）
+  if (!nodeI18n) return coreNode
+
   const inEnToLocal  = buildInEnToLocal(nodeI18n)
   const outEnToLocal = buildOutEnToLocal(nodeI18n)
   const inLocalToEn  = invertMap(inEnToLocal)

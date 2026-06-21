@@ -10,7 +10,7 @@ Just by wiring nodes together, you can build flows that run Minecraft commands o
 
 ## Free and open source
 
-This repository publishes the full source code, the built nodes, and the usage guide — free for noncommercial use under the [PolyForm Noncommercial License](#license). There is no separate paid edition; all nodes (including agent control and scoreboard) are included here.
+This repository publishes the full source code and usage guide — free for noncommercial use under the [PolyForm Noncommercial License](#license).
 
 ## Installation
 

@@ -60,8 +60,7 @@ flyde-minecraft-bedrock/
 │           ├── en_US.json
 │           └── (他 27 言語 ...)
 ├── scripts/
-│   ├── set-lang.js            ← 言語切替（フルロケール指定: ja_JP, en_US ...）
-│   └── generate-maps.ts       ← _maps/ 生成スクリプト（.gitignore 対象）
+│   └── set-lang.js            ← 言語切替（フルロケール指定: ja_JP, en_US ...）
 ├── logs/                      ← セッションごとのログファイル（.gitignore 対象）
 ├── examples/                  ← 公開用サンプルflow（原本。ユーザーは flows/ にコピーして使う）
 ├── tests/                     ← QA用テストflow（test-spec.md 含む。開発者向け、ユーザー向けではない）
@@ -225,7 +224,7 @@ export const RunCommand = localizeNode(core.RunCommand, i18n.RunCommand)
 - `index.flyde.ts` の `import i18n from './_i18n/XX.json'`
 - `_catalog.ts` の `import maps from './_maps/XX.json'` と `const locale = 'XX'`
 
-フルロケール（`ja_JP`, `en_US`, `ko_KR` ...）を直接指定できる。`_i18n/` にファイルを追加すれば `publish-all.js` が自動で対象に含める。
+フルロケール（`ja_JP`, `en_US`, `ko_KR` ...）を直接指定できる。`_i18n/` にファイルを追加すれば対象ロケールとして使えるようになる。
 
 ### ノードの分類
 
@@ -399,7 +398,8 @@ icon: 'plug'             // 接続系
    - プレイヤー操作コマンド/クエリ → `_core/commands/player.ts`
    - エージェント操作 → `_core/agents.ts`
    - スコアボード → `_core/scoreboard.ts`
-2. `_i18n/ja_JP.json` と `_i18n/en_US.json` にノードエントリを追加する（ポート名・displayName・select ラベルの翻訳）
+2. `_i18n/` 配下の**全29ロケール**にノードエントリを追加する（ポート名・displayName・select ラベルの翻訳）
+   - あるロケールにエントリが無いノードは、そのロケールでは `_core` の英語表記のままフォールバックされる（`localizeNode()` の挙動。index.flyde.ts 全体は落ちない）
 3. `_nodes/index.flyde.ts` に `localizeNode()` 呼び出しを追加する
 4. `03_Flydeノード設計.md` のノード一覧テーブルを更新する
 

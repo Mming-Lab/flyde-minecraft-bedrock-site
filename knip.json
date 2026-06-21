@@ -1,8 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "entry": [
-    "_nodes/index.flyde.ts",
-    "scripts/generate-maps.ts"
+    "_nodes/index.flyde.ts"
   ],
   "project": ["_nodes/**/*.ts", "scripts/**/*.{ts,js}"]
 }

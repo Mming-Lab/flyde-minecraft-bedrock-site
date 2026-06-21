@@ -5,7 +5,6 @@
   "description": "Flyde nodes for Minecraft Bedrock / Education Edition via WebSocket",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "generate-maps": "cd scripts && npx ts-node --project tsconfig.json generate-maps.ts",
     "lang": "node scripts/set-lang.js",
     "lint:dead-code": "knip"
   },
@@ -20,7 +19,6 @@
     "@types/node": "^20.0.0",
     "knip": "^6.17.1",
     "socket-be": "*",
-    "ts-node": "^10.9.2",
     "typescript": "^5.0.0"
   },
   "keywords": [
