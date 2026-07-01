@@ -1,6 +1,6 @@
 import { localizeNode } from './_factory'
 import { withDiagLog } from './diag'
-import i18n from './_i18n/en_US.json'
+import i18n from './_i18n/ja_JP.json'
 import * as conn from './_core/connection'
 import * as evPlayer from './_core/events/player'
 import * as evBlock from './_core/events/block'

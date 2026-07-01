@@ -6,3 +6,4 @@ logs/
 scripts/rp/
 flows/*.flyde
 CLAUDE.md
+.claude/

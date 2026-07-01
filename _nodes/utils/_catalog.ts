@@ -1,11 +1,11 @@
 import { MinecraftBlockTypes, MinecraftItemTypes, MinecraftEntityTypes } from '@minecraft/vanilla-data'
-import maps from './_maps/en_US.json'  // set-lang.js で書き換え
+import maps from './_maps/ja_JP.json'  // set-lang.js で書き換え
 
 export type SelectOption = { value: string; label: string }
 
 // ── ロケール設定（set-lang.js が import 行と同時に書き換える）─────────────
 
-const locale = 'en_US'
+const locale = 'ja_JP'
 
 // ── 全ID一覧の生成 ────────────────────────────────────────────────
 
